@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_pickers/pickers.dart';
@@ -12,6 +13,7 @@ import 'package:mmc/utils/comfun.dart';
 import 'package:mmc/utils/http.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mmc/utils/project_init.dart';
 import 'package:provider/src/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -50,6 +52,13 @@ class _LoginPageState extends State<LoginPage> {
   _doSignIn() {
     login(context, account: _phoneNumberController.text.trim(), password: _passwordController.text.trim(), endHideLoading: false, result: (LoginInfoEntity info) async {
       await saveLoginInfo(context, info);
+      ///关联用户推送token
+      FirebaseMessaging.instance.getToken().then((value) {
+        if(value!=null){
+          setToken(context, token: value, result: (v){});
+        }
+      });
+
       // 登录成功，初始化用户及首页数据，初始化成功再认为是登录成功
       getUserDetailData(context, userId: info.id, silence: true, result: (PersonalProfileInfoEntity profileInfo) async {
         await savePersonalProfileInfo(context, info.id, profileInfo);

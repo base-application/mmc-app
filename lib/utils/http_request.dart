@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mmc/bean/event_data_item_info_entity.dart';
@@ -6,10 +8,12 @@ import 'package:mmc/bean/grade_level_info_entity.dart';
 import 'package:mmc/bean/group_item_entity.dart';
 import 'package:mmc/bean/group_item_info_entity.dart';
 import 'package:mmc/bean/home_index_info_entity.dart';
+import 'package:mmc/bean/image_vo_entity.dart';
 import 'package:mmc/bean/login_info_entity.dart';
 import 'package:mmc/bean/network_item_info_entity.dart';
 import 'package:mmc/bean/newest_item_info_entity.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
+import 'package:mmc/bean/referral_entity.dart';
 import 'package:mmc/bean/state_item_info_entity.dart';
 import 'package:mmc/screens/login.dart';
 
@@ -18,6 +22,15 @@ import 'http.dart';
 /// 用户登录
 login(BuildContext context, { required String account, required String password, bool endHideLoading = true, required Function(LoginInfoEntity info) result, Function? err }) {
   httpPost(context, url: 'login', queryParameters: { 'username': account, 'password': password }, endHideLoading: endHideLoading).then((value) {
+    result.call(LoginInfoEntity.fromJson(value!.data));
+  }).catchError((_) {
+    err?.call();
+  });
+}
+
+/// 用户设置token
+setToken(BuildContext context, { required String token,required Function(LoginInfoEntity info) result, Function? err }) {
+  httpPut(context, url: 'user/push/token',silence: true, queryParameters: { 'pushToken': token}).then((value) {
     result.call(LoginInfoEntity.fromJson(value!.data));
   }).catchError((_) {
     err?.call();
@@ -398,5 +411,77 @@ Future getNetworkListData(BuildContext context, { String? name, String? industry
     result.call(value!.data!.list.map((e) => NetworkItemInfoEntity.fromJson(e)).toList());
   }).catchError((_) {
     err?.call();
+  });
+}
+
+/// 获取Network列表数据
+Future getMyNetwork(BuildContext context, { String? name, String? industry, int? groupId ,int? countryId, int? cityId, bool silence = false, required Function(List<NetworkItemInfoEntity> list) result, Function? err }) async {
+  await httpGetPage(context, url: 'user/info/my/network', queryParameters: {
+    'page': 1,
+    'size': 0,
+    'name': name,
+    'industry': industry,
+    'countryId': countryId,
+    'cityId': cityId,
+    'groupId': groupId,
+  }, silence: silence).then((value) {
+    result.call(value!.data!.list.map((e) => NetworkItemInfoEntity.fromJson(e)).toList());
+  }).catchError((_) {
+    err?.call();
+  });
+}
+
+
+
+/// 发送推荐
+Future sendReferral(BuildContext context, { required String reason, required int receivedUser,required List<ImageVoEntity> images, bool silence = false, required Function(bool) result, Function? err }) async {
+  await httpPost(context, url: 'referral/send', data: {
+    'reason': reason,
+    'receivedUser': receivedUser,
+    'picture': images,
+  }, silence: silence).then((value) {
+    result.call(value!.code == 200);
+  }).catchError((_) {
+    err?.call();
+  });
+}
+
+
+/// 收到的推荐
+Future<List<ReferralEntity>> receivedList(BuildContext context) async {
+  BaseBean? res = await httpGet(context, url: 'referral/user/list');
+  if(res!=null){
+    List<ReferralEntity> resdata =res.data!['list'].map<ReferralEntity>((e) => ReferralEntity.fromJson(e)).toList();
+    return resdata;
+  }else{
+    return [];
+  }
+}
+
+
+/// 处理收到的推荐
+Future received(BuildContext context,
+    { required int referralId, required int status,String? failMessage, required Function(bool) result, Function? err }) async {
+  await httpPost(context, url: 'referral/received', queryParameters: {
+    'referralId': referralId,
+    'status': status,
+    'failMessage': failMessage,
+  }, silence: false).then((value) {
+    result.call(value!.code == 200);
+  }).catchError((_) {
+    err?.call();
+  });
+}
+
+
+/// 发送感谢
+Future thank(BuildContext context, { required String note, required String value,required List<ImageVoEntity> images,required int referralId, required Function(bool) result}) async {
+  await httpPost(context, url: '/thank/you/note/add', data: {
+    'note': note,
+    'value': value,
+    'picture': images,
+    'referralId':referralId
+  }, silence: false).then((value) {
+    result.call(value!.code == 200);
   });
 }

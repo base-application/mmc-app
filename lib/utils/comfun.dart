@@ -13,7 +13,6 @@ import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/widget/app_bar_home_default.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 
 import 'event_bus.dart';
 

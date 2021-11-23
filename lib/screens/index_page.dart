@@ -150,13 +150,6 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
         },
       ),
       MenuDoItem(
-        iconAssets: 'assets/icon/menu_send_thank_note.png',
-        label: AppLocalizations.of(context)!.homeIndexMenuSendThankNoteBtn,
-        onTap: () {
-          AutoRouter.of(context).push(const SendThankYouNoteRoute());
-        },
-      ),
-      MenuDoItem(
         iconAssets: 'assets/icon/menu_referral_received.png',
         label: AppLocalizations.of(context)!.homeIndexMenuReferralReceivedBtn,
         onTap: () {
@@ -492,7 +485,6 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                                   ),
                                   const SizedBox(width: 30,),
                                   SizedBox(
-                                    width: 80,
                                     height: 30,
                                     child: ElevatedButton(
                                       style: ButtonStyle(

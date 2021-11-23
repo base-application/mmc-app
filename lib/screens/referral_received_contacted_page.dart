@@ -1,12 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mmc/bean/referral_entity.dart';
+import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/utils/comfun.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mmc/utils/http_request.dart';
+import 'package:provider/src/provider.dart';
 
 class ReferralReceivedContactedPage extends StatefulWidget {
-  const ReferralReceivedContactedPage({Key? key}) : super(key: key);
+  final ReferralEntity referralEntity;
+  const ReferralReceivedContactedPage({Key? key, required this.referralEntity}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -16,7 +22,8 @@ class ReferralReceivedContactedPage extends StatefulWidget {
 
 class _ReferralReceivedContactedPageState extends State<ReferralReceivedContactedPage> {
   bool _confirmSend = false;
-  bool? _chooseSuccess;
+  int _chooseSuccess = 2;
+  final TextEditingController _fileMessage = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +42,7 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
                       color: const Color(0xFFFBB714),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Text('From Cecelia Tay', style: TextStyle(fontSize: 14, color: Color(0xFF013B7B), fontWeight: FontWeight.w400,),),
+                    child: Text('From '+ (widget.referralEntity.fromName??""), style: TextStyle(fontSize: 14, color: Color(0xFF013B7B), fontWeight: FontWeight.w400,),),
                   ),),
                 ],
               ),
@@ -44,12 +51,13 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
               const SizedBox(height: 8,),
               Container(
                 padding: const EdgeInsets.only(top: 12, bottom: 12, left: 16, right: 16,),
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(width: 0.6, color: Colors.grey.shade300,)
                 ),
-                child: Text('My friend want to have an app development. Hope you canprovide a great suggestion to him.My friend want to have an app development. Hope you canprovide a great suggestion to him.', style: TextStyle(fontSize: 13, color: Colors.black87.withAlpha(200), fontWeight: FontWeight.w500,),),
+                child: Text(widget.referralEntity.fromName??"", style: TextStyle(fontSize: 13, color: Colors.black87.withAlpha(200), fontWeight: FontWeight.w500,),),
               ),
               const SizedBox(height: 28,),
               Text('Name Card', style: TextStyle(fontSize: 14, color: Colors.black87.withAlpha(200), fontWeight: FontWeight.w500,),),
@@ -60,7 +68,7 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
                   behavior: CusBehavior(),
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 2,
+                    itemCount: widget.referralEntity.picture?.length??0,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         width: MediaQuery.of(context).size.width * 0.7,
@@ -71,7 +79,7 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
                           borderRadius: BorderRadius.circular(14),
                         ),
                         child: CachedNetworkImage(
-                          imageUrl: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fd%2F573aa9b6d9724.jpg%3Fdown&refer=http%3A%2F%2Fpic1.win4000.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638526693&t=acde07fe566d6893da2ae033ed1a78d7',
+                          imageUrl: context.read<SystemSetService>().baseUrl + widget.referralEntity.picture![index].url,
                           placeholder: (BuildContext context, String url,) {
                             return Container(color: Colors.grey.shade300,);
                           },
@@ -111,14 +119,14 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
                   ),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(_chooseSuccess == true ? Colors.deepOrange : Colors.white),
+                      backgroundColor: MaterialStateProperty.all(_chooseSuccess == 2 ? Colors.deepOrange : Colors.white),
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
                       elevation: MaterialStateProperty.all(0),
                     ),
-                    child: Text(AppLocalizations.of(context)!.btnSuccess, style: TextStyle(color: _chooseSuccess == true ? Colors.white : Colors.deepOrange, fontSize: 16, fontWeight: FontWeight.bold,),),
+                    child: Text(AppLocalizations.of(context)!.btnSuccess, style: TextStyle(color: _chooseSuccess == 2 ? Colors.white : Colors.deepOrange, fontSize: 16, fontWeight: FontWeight.bold,),),
                     onPressed: () async {
                       setState(() {
-                        _chooseSuccess = true;
+                        _chooseSuccess = 2;
                       });
                     },
                   ),
@@ -133,14 +141,14 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
                   ),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(_chooseSuccess == false ? Colors.indigo : Colors.white),
+                      backgroundColor: MaterialStateProperty.all(_chooseSuccess == 3 ? Colors.indigo : Colors.white),
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
                       elevation: MaterialStateProperty.all(0),
                     ),
-                    child: Text(AppLocalizations.of(context)!.btnFail, style: TextStyle(color: _chooseSuccess == false ? Colors.white : Colors.indigo, fontSize: 16, fontWeight: FontWeight.bold,),),
+                    child: Text(AppLocalizations.of(context)!.btnFail, style: TextStyle(color: _chooseSuccess == 3 ? Colors.white : Colors.indigo, fontSize: 16, fontWeight: FontWeight.bold,),),
                     onPressed: () async {
                       setState(() {
-                        _chooseSuccess = false;
+                        _chooseSuccess = 3;
                       });
                     },
                   ),
@@ -148,7 +156,7 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
               ],
             ),
             const SizedBox(height: 26,),
-            if (_chooseSuccess == false) Column(
+            if (_chooseSuccess == 3) Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('If fail, please fill in reason below:', style: TextStyle(fontSize: 14, color: Colors.deepOrange, fontWeight: FontWeight.bold,),),
@@ -163,14 +171,14 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
                       border: Border.all(width: 0.6, color: Colors.grey.shade300,)
                   ),
                   child: TextFormField(
-                    // controller: _sendReferralWhyDetailController,
+                    controller: _fileMessage,
                     keyboardType: TextInputType.text,
                     cursorColor: Colors.blueAccent,
                     maxLines: 4,
                     style: const TextStyle(textBaseline: TextBaseline.alphabetic),
-                    decoration: InputDecoration(
-                      hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
-                      contentPadding: const EdgeInsets.only(top: 12,),
+                    decoration: const InputDecoration(
+                      hintStyle: TextStyle(fontSize: 14, color: Colors.black38),
+                      contentPadding: EdgeInsets.only(top: 12,),
                       counterText: '',
                       isDense: true,
                       border: InputBorder.none,
@@ -211,7 +219,6 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
                 onPressed: () async {
                   setState(() {
                     _confirmSend = true;
-                    _chooseSuccess = null;
                   });
                 },
               ),
@@ -236,6 +243,16 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
                 ),
                 child: Text(AppLocalizations.of(context)!.btnSend, style: const TextStyle(color: Color(0xFF013B7B), fontSize: 16, fontWeight: FontWeight.bold,),),
                 onPressed: () async {
+                  if(_chooseSuccess == 3 && _fileMessage.text.isEmpty){
+                    ComFun.showToast(msg: "添加消息");
+                    return;
+                  }
+                  received(context, referralId: widget.referralEntity.referralId!, status: _chooseSuccess,failMessage: _fileMessage.text,result: (o) {
+                    if(o){
+                      widget.referralEntity.status = _chooseSuccess;
+                      AutoRouter.of(context).pop<ReferralEntity?>(widget.referralEntity);
+                    }
+                  });
                 },
               ),
             ),

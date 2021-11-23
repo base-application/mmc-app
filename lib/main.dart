@@ -11,6 +11,7 @@ import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
 import 'package:mmc/utils/event_bus.dart';
 import 'package:mmc/utils/http_request.dart';
+import 'package:mmc/utils/project_init.dart';
 import 'package:provider/provider.dart';
 import 'package:async/async.dart' show AsyncMemoizer;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -98,6 +99,8 @@ class _MyAppState extends State<MyApp> {
       _appLanguageChange = true;
       setState(() {});
     });
+    //绑定用户推送ID
+    ProjectInit.init(context);
   }
 
   @override

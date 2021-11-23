@@ -184,5 +184,10 @@
   "confirmDeleteCompany": "Are you sure to delete the company information？",
   "deleteCompanySuccessToast": "Company information has been deleted successfully",
   "confirmApplyFriend": "Are you sure to follow this user?",
-  "confirmUndoApplyFriend": "Are you sure to cancel following this user?"
+  "confirmUndoApplyFriend": "Are you sure to cancel following this user?",
+  "referralReason":"key you referral reason",
+  "referralReceivedUser":"choose referral received user",
+  "referralImage":"upload referral image",
+  "notHaveNetwork":"not have network",
+  "referralTitle": "Sending referral to someone who you feel can  help your friend or business partner"
 }

@@ -15,6 +15,8 @@ import 'package:mmc/bean/group_item_info_entity.dart';
 import 'package:mmc/generated/json/group_item_info_entity.g.dart';
 import 'package:mmc/bean/home_index_info_entity.dart';
 import 'package:mmc/generated/json/home_index_info_entity.g.dart';
+import 'package:mmc/bean/image_vo_entity.dart';
+import 'package:mmc/generated/json/image_vo_entity.g.dart';
 import 'package:mmc/bean/login_info_entity.dart';
 import 'package:mmc/generated/json/login_info_entity.g.dart';
 import 'package:mmc/bean/network_item_info_entity.dart';
@@ -23,6 +25,8 @@ import 'package:mmc/bean/newest_item_info_entity.dart';
 import 'package:mmc/generated/json/newest_item_info_entity.g.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/generated/json/personal_profile_info_entity.g.dart';
+import 'package:mmc/bean/referral_entity.dart';
+import 'package:mmc/generated/json/referral_entity.g.dart';
 import 'package:mmc/bean/state_item_info_entity.dart';
 import 'package:mmc/generated/json/state_item_info_entity.g.dart';
 
@@ -146,6 +150,9 @@ class JsonConvert {
 		if(type == (HomeIndexInfoSliderGrades).toString()){
 			return HomeIndexInfoSliderGrades.fromJson(json);
 		}
+		if(type == (ImageVoEntity).toString()){
+			return ImageVoEntity.fromJson(json);
+		}
 		if(type == (LoginInfoEntity).toString()){
 			return LoginInfoEntity.fromJson(json);
 		}
@@ -166,6 +173,9 @@ class JsonConvert {
 		}
 		if(type == (PersonalProfileInfoCompanyVosProducePictures).toString()){
 			return PersonalProfileInfoCompanyVosProducePictures.fromJson(json);
+		}
+		if(type == (ReferralEntity).toString()){
+			return ReferralEntity.fromJson(json);
 		}
 		if(type == (StateItemInfoEntity).toString()){
 			return StateItemInfoEntity.fromJson(json);
@@ -227,6 +237,9 @@ class JsonConvert {
 		if(<HomeIndexInfoSliderGrades>[] is M){
 			return data.map<HomeIndexInfoSliderGrades>((e) => HomeIndexInfoSliderGrades.fromJson(e)).toList() as M;
 		}
+		if(<ImageVoEntity>[] is M){
+			return data.map<ImageVoEntity>((e) => ImageVoEntity.fromJson(e)).toList() as M;
+		}
 		if(<LoginInfoEntity>[] is M){
 			return data.map<LoginInfoEntity>((e) => LoginInfoEntity.fromJson(e)).toList() as M;
 		}
@@ -247,6 +260,9 @@ class JsonConvert {
 		}
 		if(<PersonalProfileInfoCompanyVosProducePictures>[] is M){
 			return data.map<PersonalProfileInfoCompanyVosProducePictures>((e) => PersonalProfileInfoCompanyVosProducePictures.fromJson(e)).toList() as M;
+		}
+		if(<ReferralEntity>[] is M){
+			return data.map<ReferralEntity>((e) => ReferralEntity.fromJson(e)).toList() as M;
 		}
 		if(<StateItemInfoEntity>[] is M){
 			return data.map<StateItemInfoEntity>((e) => StateItemInfoEntity.fromJson(e)).toList() as M;

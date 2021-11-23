@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:mmc/bean/referral_entity.dart';
 import 'package:mmc/screens/business_profile_create_page.dart';
 import 'package:mmc/screens/business_profile_set_page.dart';
 import 'package:mmc/screens/change_password_page.dart';
@@ -51,8 +52,8 @@ import 'auth_guard.dart';
     AutoRoute<String>(page: EventListingPage, path: '/eventListing'),
     AutoRoute<String>(page: EventListingDetailPage, path: '/eventListingDetail'),
     AutoRoute<String>(page: ReferralReceivedPage, path: '/referralReceived'),
-    AutoRoute<String>(page: ReferralReceivedContactedPage, path: '/referralReceivedContacted'),
-    AutoRoute<String>(page: SendThankYouNotePage, path: '/sendThankYouNote'),
+    AutoRoute<ReferralEntity>(page: ReferralReceivedContactedPage, path: '/referralReceivedContacted'),
+    AutoRoute<bool>(page: SendThankYouNotePage, path: '/sendThankYouNote'),
     AutoRoute<String>(page: ThankYouNoteReceivedPage, path: '/thankYouNoteReceived'),
     AutoRoute<String>(page: ShiningBoardPage, path: '/shiningBoardPage'),
     AutoRoute<String>(page: ShiningBoardDetailPage, path: '/shiningBoardDetail'),

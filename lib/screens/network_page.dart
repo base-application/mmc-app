@@ -80,6 +80,9 @@ class _NetworkPageState extends State<NetworkPage> {
   @override
   Widget build(BuildContext context) {
     Widget _scrollMain = Container(
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height
+      ),
       color: Colors.white,
       child: pageList.isEmpty ? stateNoDate(inRef: true) : GridView.builder(
         controller: _pageScrollController,
@@ -267,7 +270,8 @@ class _NetworkPageState extends State<NetworkPage> {
               },
             ),
           ),
-          Expanded(child: NotificationListener(
+          Expanded(child:
+          NotificationListener(
             child: RefreshIndicator(
               displacement: 20,
               color: const Color.fromARGB(245, 44, 163, 184),
@@ -291,7 +295,7 @@ class _NetworkPageState extends State<NetworkPage> {
     if (notification is ScrollStartNotification) {
     }
     if (notification is ScrollUpdateNotification) {
-      if (_pageScrollController.position.userScrollDirection != ScrollDirection.idle) {
+      if (_pageScrollController.positions.isNotEmpty &&_pageScrollController.position.userScrollDirection != ScrollDirection.idle) {
         widget.pageScrollDirectionChange?.call(_pageScrollController.position.userScrollDirection);
       }
     }

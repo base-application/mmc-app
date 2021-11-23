@@ -92,37 +92,9 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                 ),
                 behavior: HitTestBehavior.opaque,
                 onTap: () async {
-                  final ImagePicker _picker = ImagePicker();
-                  final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-                  if (image != null) {
-                    File? croppedFile = await ImageCropper.cropImage(
-                        sourcePath: image.path,
-                        aspectRatioPresets: [
-                          CropAspectRatioPreset.original
-                        ],
-                        aspectRatio: const CropAspectRatio(ratioX: 60, ratioY: 81),
-                        androidUiSettings: const AndroidUiSettings(
-                          toolbarTitle: 'Cropper',
-                          toolbarColor: Colors.white,
-                          toolbarWidgetColor: Colors.black87,
-                          initAspectRatio: CropAspectRatioPreset.original,
-                          lockAspectRatio: true,
-                        ),
-                        iosUiSettings: const IOSUiSettings(
-                          minimumAspectRatio: 60 / 81,
-                          title: 'Cropper',
-                          aspectRatioLockEnabled: true,
-                          resetAspectRatioEnabled: false,
-                          rotateButtonsHidden: true,
-                          resetButtonHidden: false,
-                        )
-                    );
-                    if (croppedFile != null) {
-                      String uploadPath = await httpUpload(context, filePath: croppedFile.path,);
-                      _formUserHead = uploadPath;
-                      setState(() {});
-                    }
-                  }
+                  String uploadPath = await httpUpload(context);
+                  _formUserHead = uploadPath;
+                  setState(() {});
                 },
               ),
               const SizedBox(height: 30,),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/newest_item_info_entity.dart';
 import 'package:mmc/utils/comfun.dart';
 import 'package:mmc/utils/comm_widget.dart';
+import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
 
 class NewestDetailPage extends StatefulWidget {
@@ -20,15 +22,20 @@ class _NewestDetailPageState extends State<NewestDetailPage> {
   VideoPlayerController? _controller;
 
   int _imgBannerIndex = 0;
-
+  ChewieController? chewieController;
   @override
   void initState() {
     super.initState();
     if (widget.info.link != null) {
-      _controller = VideoPlayerController.network(widget.info.link!)
+      _controller = VideoPlayerController.network(widget.info.link!,videoPlayerOptions: VideoPlayerOptions())
         ..initialize().then((_) {
           setState(() {});
         });
+      chewieController = ChewieController(
+        videoPlayerController: _controller!,
+        autoPlay: true,
+        looping: true,
+      );
     }
   }
 
@@ -55,10 +62,16 @@ class _NewestDetailPageState extends State<NewestDetailPage> {
                   child: Stack(
                     children: [
                       Center(
-                        child: _controller!.value.isInitialized ? AspectRatio(
-                          aspectRatio: _controller!.value.aspectRatio,
-                          child: VideoPlayer(_controller!),
-                        ) : Container(),
+                        child: _controller!.value.isInitialized ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AspectRatio(
+                              aspectRatio: _controller!.value.aspectRatio,
+                              child: Chewie(controller: chewieController!,),
+                            ),
+                          ],
+                        ): Container(),
                       ),
                       if (!_controller!.value.isPlaying) Center(
                         child: Container(

@@ -10,6 +10,8 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mmc/router/auth_guard.dart';
 // import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
@@ -71,7 +73,11 @@ class DioHttpUtil {
                 eventBus.fire(LoginOutTimeEvent(statusCode: e.response!.statusCode!));
               }
             });
-          } else {
+          }
+          if(e.response?.data.containsKey("message")){
+            ComFun.showToast(msg: e.response?.data['message'], err: true);
+          }
+          else {
             if (!quietRequest.contains(e.requestOptions.path)) {
               switch (e.type) {
                 case DioErrorType.connectTimeout:
@@ -395,28 +401,58 @@ Future<BaseBean<PageBaseBean>?> httpPostPage(BuildContext context, { required St
 }
 
 /// 文件上传
-Future<String> httpUpload(BuildContext context, { required String filePath, String? loadingTip = '文件上传中...', bool endHideLoading = true, bool isShop = false }) async {
-  if (loadingTip != null) EasyLoading.show(status: loadingTip);
+Future<String> httpUpload(BuildContext context, {String? loadingTip = '文件上传中...', bool endHideLoading = true, bool isShop = false }) async {
+  late String filePath;
+  final ImagePicker _picker = ImagePicker();
+  final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+  if (image != null) {
+    File? croppedFile = await ImageCropper.cropImage(
+        sourcePath: image.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.ratio16x9
+        ],
+        aspectRatio: const CropAspectRatio(ratioX: 16, ratioY: 9),
+        androidUiSettings: const AndroidUiSettings(
+          toolbarTitle: 'Cropper',
+          toolbarColor: Colors.white,
+          toolbarWidgetColor: Colors.black87,
+          initAspectRatio: CropAspectRatioPreset.ratio16x9,
+          lockAspectRatio: true,
+        ),
+        iosUiSettings: const IOSUiSettings(
+          minimumAspectRatio: 16 / 9,
+          title: 'Cropper',
+          aspectRatioLockEnabled: true,
+          resetAspectRatioEnabled: false,
+          rotateButtonsHidden: true,
+          resetButtonHidden: false,
+        )
+    );
+    if (croppedFile != null) {
+      filePath = croppedFile.path;
+      try {
+        var formData = FormData.fromMap({
+          'file': await MultipartFile.fromFile(filePath, filename: filePath.substring(filePath.lastIndexOf('/') + 1)),
+        });
 
-  try {
-    var formData = FormData.fromMap({
-      'file': await MultipartFile.fromFile(filePath, filename: filePath.substring(filePath.lastIndexOf('/') + 1)),
-    });
+        if (loadingTip != null) EasyLoading.show(status: loadingTip);
+        var response = await DioHttpUtil(context)._dio!.post('img/upload', data: formData);
 
-    var response = await DioHttpUtil(context)._dio!.post('img/upload', data: formData);
+        if (response.statusCode == HttpStatus.ok) {
+          if (endHideLoading && loadingTip != null) dismissLoading();
+          Map<String, dynamic> result = response.data!;
+          return result['data'];
+        }
 
-    if (response.statusCode == HttpStatus.ok) {
-      if (endHideLoading && loadingTip != null) dismissLoading();
-      Map<String, dynamic> result = response.data!;
-      return result['data'];
+        if (loadingTip != null) dismissLoading();
+        return Future.error('error code ${response.statusCode}');
+      } catch (e) {
+        if (loadingTip != null) dismissLoading();
+        return Future.error(e);
+      }
     }
-
-    if (loadingTip != null) dismissLoading();
-    return Future.error('error code ${response.statusCode}');
-  } catch (e) {
-    if (loadingTip != null) dismissLoading();
-    return Future.error(e);
   }
+  return "";
 }
 
 Future requestAuthHead(BuildContext context, BaseOptions options, String path) async {

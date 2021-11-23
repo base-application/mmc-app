@@ -239,7 +239,7 @@ class _EventListingPageState extends State<EventListingPage> {
                         children: [
                           Image.asset('assets/icon/date.png', width: 15, height: 15, color: Colors.white,),
                           const SizedBox(width: 8,),
-                          Text(DateFormat('EEEE, d MMMM yyyy | h:mm a', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(DateTime.fromMillisecondsSinceEpoch(item.eventStartTime!)), style: TextStyle(fontSize: 13, color: Colors.white.withAlpha(180),),),
+                          Expanded(child: Text(DateFormat('EEEE, d MMMM yyyy | h:mm a', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(DateTime.fromMillisecondsSinceEpoch(item.eventStartTime!)), style: TextStyle(fontSize: 13, color: Colors.white.withAlpha(180),),)),
                         ],
                       ),
                       const SizedBox(height: 18,),

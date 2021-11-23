@@ -169,6 +169,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  chewie:
+    dependency: "direct main"
+    description:
+      name: chewie
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.2"
   cli_util:
     dependency: transitive
     description:
@@ -295,6 +302,48 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
+  firebase_core:
+    dependency: "direct main"
+    description:
+      name: firebase_core
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.10.0"
+  firebase_core_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_core_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.1.0"
+  firebase_core_web:
+    dependency: transitive
+    description:
+      name: firebase_core_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
+  firebase_messaging:
+    dependency: "direct main"
+    description:
+      name: firebase_messaging
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "11.1.0"
+  firebase_messaging_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_messaging_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.9"
+  firebase_messaging_web:
+    dependency: transitive
+    description:
+      name: firebase_messaging_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   fixnum:
     dependency: transitive
     description:
@@ -317,12 +366,10 @@ packages:
   flutter_app_badger:
     dependency: "direct main"
     description:
-      path: "."
-      ref: "feature/androidV2"
-      resolved-ref: "97f6daaed1a2685f9821d7736966632df90c8c0d"
-      url: "https://github.com/SuaMusica/flutter_app_badger.git"
-    source: git
-    version: "1.2.0"
+      name: flutter_app_badger
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.3.0"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -988,7 +1035,7 @@ packages:
     source: hosted
     version: "2.1.0"
   video_player:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: video_player
       url: "https://pub.dartlang.org"
@@ -1008,6 +1055,41 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.4"
+  wakelock:
+    dependency: transitive
+    description:
+      name: wakelock
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.6"
+  wakelock_macos:
+    dependency: transitive
+    description:
+      name: wakelock_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
+  wakelock_platform_interface:
+    dependency: transitive
+    description:
+      name: wakelock_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  wakelock_web:
+    dependency: transitive
+    description:
+      name: wakelock_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
+  wakelock_windows:
+    dependency: transitive
+    description:
+      name: wakelock_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   watcher:
     dependency: transitive
     description:

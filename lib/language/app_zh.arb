@@ -185,5 +185,10 @@
   "confirmDeleteCompany": "是否确认删除该公司信息？",
   "deleteCompanySuccessToast": "公司信息已成功删除",
   "confirmApplyFriend": "确定关注该用户吗？",
-  "confirmUndoApplyFriend": "确定取消关注该用户吗？"
+  "confirmUndoApplyFriend": "确定取消关注该用户吗？",
+  "referralReason":"请输入推荐原因",
+  "referralReceivedUser":"选择推荐人",
+  "referralImage":"上传推荐图片",
+  "notHaveNetwork":"没有关注用户",
+  "referralTitle": "Sending referral to someone who you feel can  help your friend or business partner"
 }

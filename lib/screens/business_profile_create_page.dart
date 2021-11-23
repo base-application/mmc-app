@@ -99,37 +99,9 @@ class _BusinessProfileCreatePageState extends State<BusinessProfileCreatePage> {
                         behavior: HitTestBehavior.opaque,
                         onTap: () async {
                           if (_isEdit) {
-                            final ImagePicker _picker = ImagePicker();
-                            final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-                            if (image != null) {
-                              File? croppedFile = await ImageCropper.cropImage(
-                                  sourcePath: image.path,
-                                  aspectRatioPresets: [
-                                    CropAspectRatioPreset.original
-                                  ],
-                                  aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-                                  androidUiSettings: const AndroidUiSettings(
-                                    toolbarTitle: 'Cropper',
-                                    toolbarColor: Colors.white,
-                                    toolbarWidgetColor: Colors.black87,
-                                    initAspectRatio: CropAspectRatioPreset.original,
-                                    lockAspectRatio: true,
-                                  ),
-                                  iosUiSettings: const IOSUiSettings(
-                                    minimumAspectRatio: 1,
-                                    title: 'Cropper',
-                                    aspectRatioLockEnabled: true,
-                                    resetAspectRatioEnabled: false,
-                                    rotateButtonsHidden: true,
-                                    resetButtonHidden: false,
-                                  )
-                              );
-                              if (croppedFile != null) {
-                                String uploadPath = await httpUpload(context, filePath: croppedFile.path,);
-                                _formCompanyLogo = uploadPath;
-                                setState(() {});
-                              }
-                            }
+                            String uploadPath = await httpUpload(context);
+                            _formCompanyLogo = uploadPath;
+                            setState(() {});
                           }
                         },
                       ),
@@ -880,37 +852,9 @@ class _BusinessProfileCreatePageState extends State<BusinessProfileCreatePage> {
                             ),
                             behavior: HitTestBehavior.opaque,
                             onTap: () async {
-                              final ImagePicker _picker = ImagePicker();
-                              final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-                              if (image != null) {
-                                File? croppedFile = await ImageCropper.cropImage(
-                                    sourcePath: image.path,
-                                    aspectRatioPresets: [
-                                      CropAspectRatioPreset.original
-                                    ],
-                                    aspectRatio: const CropAspectRatio(ratioX: 9, ratioY: 12),
-                                    androidUiSettings: const AndroidUiSettings(
-                                      toolbarTitle: 'Cropper',
-                                      toolbarColor: Colors.white,
-                                      toolbarWidgetColor: Colors.black87,
-                                      initAspectRatio: CropAspectRatioPreset.original,
-                                      lockAspectRatio: true,
-                                    ),
-                                    iosUiSettings: const IOSUiSettings(
-                                      minimumAspectRatio: 9 / 12,
-                                      title: 'Cropper',
-                                      aspectRatioLockEnabled: true,
-                                      resetAspectRatioEnabled: false,
-                                      rotateButtonsHidden: true,
-                                      resetButtonHidden: false,
-                                    )
-                                );
-                                if (croppedFile != null) {
-                                  String uploadPath = await httpUpload(context, filePath: croppedFile.path,);
-                                  _formProducts.add(uploadPath);
-                                  setState(() {});
-                                }
-                              }
+                              String uploadPath = await httpUpload(context);
+                              _formProducts.add(uploadPath);
+                              setState(() {});
                             },
                           );
                         },

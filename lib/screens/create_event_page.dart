@@ -609,37 +609,10 @@ class _CreateEventPageState extends State<CreateEventPage> {
                           ),
                           behavior: HitTestBehavior.opaque,
                           onTap: () async {
-                            final ImagePicker _picker = ImagePicker();
-                            final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-                            if (image != null) {
-                              File? croppedFile = await ImageCropper.cropImage(
-                                sourcePath: image.path,
-                                aspectRatioPresets: [
-                                  CropAspectRatioPreset.ratio16x9
-                                ],
-                                aspectRatio: const CropAspectRatio(ratioX: 16, ratioY: 9),
-                                androidUiSettings: const AndroidUiSettings(
-                                  toolbarTitle: 'Cropper',
-                                  toolbarColor: Colors.white,
-                                  toolbarWidgetColor: Colors.black87,
-                                  initAspectRatio: CropAspectRatioPreset.ratio16x9,
-                                  lockAspectRatio: true,
-                                ),
-                                iosUiSettings: const IOSUiSettings(
-                                  minimumAspectRatio: 16 / 9,
-                                  title: 'Cropper',
-                                  aspectRatioLockEnabled: true,
-                                  resetAspectRatioEnabled: false,
-                                  rotateButtonsHidden: true,
-                                  resetButtonHidden: false,
-                                )
-                              );
-                              if (croppedFile != null) {
-                                String uploadPath = await httpUpload(context, filePath: croppedFile.path,);
-                                _formPoster.add(uploadPath);
-                                setState(() {});
-                              }
-                            }
+
+                            String uploadPath = await httpUpload(context);
+                          _formPoster.add(uploadPath);
+                            setState(() {});
                           },
                         );
                       }, itemCount: _formPoster.length + 1, shrinkWrap: true, physics: const NeverScrollableScrollPhysics(),),

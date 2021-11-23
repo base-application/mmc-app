@@ -11,11 +11,12 @@
 import 'package:auto_route/auto_route.dart' as _i29;
 import 'package:flutter/material.dart' as _i30;
 
-import '../bean/event_data_item_info_entity.dart' as _i35;
-import '../bean/group_item_info_entity.dart' as _i32;
-import '../bean/network_item_info_entity.dart' as _i33;
-import '../bean/newest_item_info_entity.dart' as _i34;
-import '../bean/personal_profile_info_entity.dart' as _i36;
+import '../bean/event_data_item_info_entity.dart' as _i36;
+import '../bean/group_item_info_entity.dart' as _i33;
+import '../bean/network_item_info_entity.dart' as _i34;
+import '../bean/newest_item_info_entity.dart' as _i35;
+import '../bean/personal_profile_info_entity.dart' as _i37;
+import '../bean/referral_entity.dart' as _i32;
 import '../screens/business_profile_create_page.dart' as _i22;
 import '../screens/business_profile_set_page.dart' as _i21;
 import '../screens/change_password_page.dart' as _i23;
@@ -106,13 +107,18 @@ class AppRouter extends _i29.RootStackRouter {
           routeData: routeData, child: const _i10.ReferralReceivedPage());
     },
     ReferralReceivedContactedRoute.name: (routeData) {
-      return _i29.MaterialPageX<String>(
+      final args = routeData.argsAs<ReferralReceivedContactedRouteArgs>();
+      return _i29.MaterialPageX<_i32.ReferralEntity>(
           routeData: routeData,
-          child: const _i11.ReferralReceivedContactedPage());
+          child: _i11.ReferralReceivedContactedPage(
+              key: args.key, referralEntity: args.referralEntity));
     },
     SendThankYouNoteRoute.name: (routeData) {
-      return _i29.MaterialPageX<String>(
-          routeData: routeData, child: const _i12.SendThankYouNotePage());
+      final args = routeData.argsAs<SendThankYouNoteRouteArgs>();
+      return _i29.MaterialPageX<bool>(
+          routeData: routeData,
+          child: _i12.SendThankYouNotePage(
+              key: args.key, referralId: args.referralId));
     },
     ThankYouNoteReceivedRoute.name: (routeData) {
       return _i29.MaterialPageX<String>(
@@ -246,7 +252,7 @@ class GroupRoute extends _i29.PageRouteInfo<void> {
 
 /// generated route for [_i3.GroupDetailPage]
 class GroupDetailRoute extends _i29.PageRouteInfo<GroupDetailRouteArgs> {
-  GroupDetailRoute({_i30.Key? key, required _i32.GroupItemInfoEntity info})
+  GroupDetailRoute({_i30.Key? key, required _i33.GroupItemInfoEntity info})
       : super(name,
             path: '/groupDetail',
             args: GroupDetailRouteArgs(key: key, info: info));
@@ -259,7 +265,7 @@ class GroupDetailRouteArgs {
 
   final _i30.Key? key;
 
-  final _i32.GroupItemInfoEntity info;
+  final _i33.GroupItemInfoEntity info;
 }
 
 /// generated route for [_i4.SendingReferralPage]
@@ -272,7 +278,7 @@ class SendingReferralRoute extends _i29.PageRouteInfo<void> {
 /// generated route for [_i5.NetworkPersonPage]
 class NetworkPersonRoute extends _i29.PageRouteInfo<NetworkPersonRouteArgs> {
   NetworkPersonRoute(
-      {_i30.Key? key, required _i33.NetworkItemInfoEntity itemInfo})
+      {_i30.Key? key, required _i34.NetworkItemInfoEntity itemInfo})
       : super(name,
             path: '/networkPerson',
             args: NetworkPersonRouteArgs(key: key, itemInfo: itemInfo));
@@ -285,7 +291,7 @@ class NetworkPersonRouteArgs {
 
   final _i30.Key? key;
 
-  final _i33.NetworkItemInfoEntity itemInfo;
+  final _i34.NetworkItemInfoEntity itemInfo;
 }
 
 /// generated route for [_i6.TodayNewestPage]
@@ -297,7 +303,7 @@ class TodayNewestRoute extends _i29.PageRouteInfo<void> {
 
 /// generated route for [_i7.NewestDetailPage]
 class NewestDetailRoute extends _i29.PageRouteInfo<NewestDetailRouteArgs> {
-  NewestDetailRoute({_i30.Key? key, required _i34.NewestItemInfoEntity info})
+  NewestDetailRoute({_i30.Key? key, required _i35.NewestItemInfoEntity info})
       : super(name,
             path: '/newestDetail',
             args: NewestDetailRouteArgs(key: key, info: info));
@@ -310,7 +316,7 @@ class NewestDetailRouteArgs {
 
   final _i30.Key? key;
 
-  final _i34.NewestItemInfoEntity info;
+  final _i35.NewestItemInfoEntity info;
 }
 
 /// generated route for [_i8.EventListingPage]
@@ -324,7 +330,7 @@ class EventListingRoute extends _i29.PageRouteInfo<void> {
 class EventListingDetailRoute
     extends _i29.PageRouteInfo<EventListingDetailRouteArgs> {
   EventListingDetailRoute(
-      {_i30.Key? key, required _i35.EventDataItemInfoEntity eventInfo})
+      {_i30.Key? key, required _i36.EventDataItemInfoEntity eventInfo})
       : super(name,
             path: '/eventListingDetail',
             args: EventListingDetailRouteArgs(key: key, eventInfo: eventInfo));
@@ -337,7 +343,7 @@ class EventListingDetailRouteArgs {
 
   final _i30.Key? key;
 
-  final _i35.EventDataItemInfoEntity eventInfo;
+  final _i36.EventDataItemInfoEntity eventInfo;
 }
 
 /// generated route for [_i10.ReferralReceivedPage]
@@ -348,18 +354,44 @@ class ReferralReceivedRoute extends _i29.PageRouteInfo<void> {
 }
 
 /// generated route for [_i11.ReferralReceivedContactedPage]
-class ReferralReceivedContactedRoute extends _i29.PageRouteInfo<void> {
-  const ReferralReceivedContactedRoute()
-      : super(name, path: '/referralReceivedContacted');
+class ReferralReceivedContactedRoute
+    extends _i29.PageRouteInfo<ReferralReceivedContactedRouteArgs> {
+  ReferralReceivedContactedRoute(
+      {_i30.Key? key, required _i32.ReferralEntity referralEntity})
+      : super(name,
+            path: '/referralReceivedContacted',
+            args: ReferralReceivedContactedRouteArgs(
+                key: key, referralEntity: referralEntity));
 
   static const String name = 'ReferralReceivedContactedRoute';
 }
 
+class ReferralReceivedContactedRouteArgs {
+  const ReferralReceivedContactedRouteArgs(
+      {this.key, required this.referralEntity});
+
+  final _i30.Key? key;
+
+  final _i32.ReferralEntity referralEntity;
+}
+
 /// generated route for [_i12.SendThankYouNotePage]
-class SendThankYouNoteRoute extends _i29.PageRouteInfo<void> {
-  const SendThankYouNoteRoute() : super(name, path: '/sendThankYouNote');
+class SendThankYouNoteRoute
+    extends _i29.PageRouteInfo<SendThankYouNoteRouteArgs> {
+  SendThankYouNoteRoute({_i30.Key? key, required int referralId})
+      : super(name,
+            path: '/sendThankYouNote',
+            args: SendThankYouNoteRouteArgs(key: key, referralId: referralId));
 
   static const String name = 'SendThankYouNoteRoute';
+}
+
+class SendThankYouNoteRouteArgs {
+  const SendThankYouNoteRouteArgs({this.key, required this.referralId});
+
+  final _i30.Key? key;
+
+  final int referralId;
 }
 
 /// generated route for [_i13.ThankYouNoteReceivedPage]
@@ -442,7 +474,7 @@ class BusinessProfileSetRoute extends _i29.PageRouteInfo<void> {
 class BusinessProfileCreateRoute
     extends _i29.PageRouteInfo<BusinessProfileCreateRouteArgs> {
   BusinessProfileCreateRoute(
-      {_i30.Key? key, _i36.PersonalProfileInfoCompanyVos? info})
+      {_i30.Key? key, _i37.PersonalProfileInfoCompanyVos? info})
       : super(name,
             path: '/businessProfileCreate',
             args: BusinessProfileCreateRouteArgs(key: key, info: info));
@@ -455,7 +487,7 @@ class BusinessProfileCreateRouteArgs {
 
   final _i30.Key? key;
 
-  final _i36.PersonalProfileInfoCompanyVos? info;
+  final _i37.PersonalProfileInfoCompanyVos? info;
 }
 
 /// generated route for [_i23.ChangePasswordPage]

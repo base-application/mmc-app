@@ -1,11 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mmc/bean/image_vo_entity.dart';
+import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/utils/comfun.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mmc/utils/http.dart';
+import 'package:mmc/utils/http_request.dart';
+import 'package:provider/src/provider.dart';
 
 class SendThankYouNotePage extends StatefulWidget {
-  const SendThankYouNotePage({Key? key}) : super(key: key);
+  final int referralId;
+  const SendThankYouNotePage({Key? key, required this.referralId}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -14,7 +21,9 @@ class SendThankYouNotePage extends StatefulWidget {
 }
 
 class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
-  final List<String> _upload = [];
+  final List<ImageVoEntity> _upload = [];
+  final TextEditingController _noteController = TextEditingController();
+  final TextEditingController _valueController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +50,7 @@ class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
                     border: Border.all(width: 0.6, color: Colors.grey.shade300,)
                 ),
                 child: TextFormField(
-                  // controller: _sendReferralWhyDetailController,
+                  controller: _noteController,
                   keyboardType: TextInputType.text,
                   cursorColor: Colors.blueAccent,
                   maxLength: 100,
@@ -76,17 +85,20 @@ class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
                     border: Border.all(width: 0.6, color: Colors.grey.shade300,)
                 ),
                 child: TextFormField(
-                  // controller: _sendReferralWhyDetailController,
-                  keyboardType: TextInputType.text,
+                  controller: _valueController,
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
                   cursorColor: Colors.blueAccent,
-                  style: const TextStyle(textBaseline: TextBaseline.alphabetic),
-                  textAlign: TextAlign.end,
-                  decoration: InputDecoration(
-                    hintText: '输入答案',
-                    hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
-                    contentPadding: const EdgeInsets.only(top: 12,),
+                  decoration: const InputDecoration(
+                    hintStyle: TextStyle(fontSize: 14, color: Colors.black38),
+                    contentPadding: EdgeInsets.only(top: 12,),
                     counterText: '',
                     isDense: true,
+                    suffixIconConstraints: BoxConstraints(
+                      maxWidth: 40,
+                    ),
+                    suffixIcon:Center(
+                      child:  Text("MYR"),
+                    ),
                     border: InputBorder.none,
                   ),
                 ),
@@ -109,8 +121,8 @@ class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
                   return Container(
                     margin: const EdgeInsets.only(bottom: 18),
                     child: CachedNetworkImage(
-                      height: MediaQuery.of(context).size.width * 10 / 16,
-                      imageUrl: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2Fcf%2F31%2Fed%2Fcf31edf65aa254cf0024ae95b363a382.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638526975&t=196fd07be7d1dd48821b5fd9fdbc1a50',
+                      height: MediaQuery.of(context).size.width * 9 / 16,
+                      imageUrl: context.read<SystemSetService>().baseUrl  + _upload[index].url,
                       placeholder: (BuildContext context, String url,) {
                         return Container(color: Colors.grey.shade300,);
                       },
@@ -129,7 +141,12 @@ class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
                     child: Icon(Icons.add_circle_rounded, size: 30, color: Color(0xFF0544A6),),
                   ),
                   behavior: HitTestBehavior.opaque,
-                  onTap: () {
+                  onTap: () async {
+                    String uploadPath = await httpUpload(context);
+                    ImageVoEntity e = ImageVoEntity();
+                    e.url = uploadPath;
+                    _upload.add(e);
+                    setState(() {});
                   },
                 ),
               ),
@@ -145,6 +162,17 @@ class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
                   ),
                   child: Text(AppLocalizations.of(context)!.btnSend, style: const TextStyle(color: Color(0xFF013B7B), fontSize: 16, fontWeight: FontWeight.bold,),),
                   onPressed: () async {
+                    if(_valueController.text.isEmpty || _noteController.text.isEmpty){
+                      ComFun.showToast(msg: "请输入");
+                      return;
+                    }
+                    if(_upload.isEmpty){
+                      ComFun.showToast(msg: "请上传图片");
+                      return;
+                    }
+                    thank(context,note: _noteController.text, images: _upload, value: _valueController.text,referralId: widget.referralId,result: (o) {
+                      AutoRouter.of(context).pop(true);
+                    }, );
                   },
                 ),
               ),
