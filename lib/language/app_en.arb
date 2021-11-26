@@ -91,8 +91,10 @@
   "confirmUnJoin": "Confirm to Unjoin?",
   "back": "Back",
   "yes": "Yes",
+  "no": "NO",
   "cancel": "Cancel",
   "save": "Save",
+  "submit": "Submit",
   "loginOut": "Login Out",
   "delete": "Delete",
   "personalProfileFormYourName": "Your Name",
@@ -189,5 +191,6 @@
   "referralReceivedUser":"choose referral received user",
   "referralImage":"upload referral image",
   "notHaveNetwork":"not have network",
-  "referralTitle": "Sending referral to someone who you feel can  help your friend or business partner"
+  "referralTitle": "Sending referral to someone who you feel can  help your friend or business partner",
+  "toConfirmAttend": "To confirm attend"
 }

@@ -1,13 +1,13 @@
+
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:provider/src/provider.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -57,7 +57,7 @@ class _SettingPageState extends State<SettingPage> {
         iconAssets: 'assets/icon/set_about_us.png',
         label: 'About Us',
         onTap: () {
-          // AutoRouter.of(context).push(const GuidelineRoute());
+          AutoRouter.of(context).push(WebRoute(title: 'About Us', initUrl: 'https://mastermindcouncil.asia/'));
         },
       ),
       MenuDoItem(

@@ -3,6 +3,7 @@ import 'package:mmc/bean/referral_entity.dart';
 import 'package:mmc/screens/business_profile_create_page.dart';
 import 'package:mmc/screens/business_profile_set_page.dart';
 import 'package:mmc/screens/change_password_page.dart';
+import 'package:mmc/screens/check_history.dart';
 import 'package:mmc/screens/create_event_page.dart';
 import 'package:mmc/screens/event_listing_page.dart';
 import 'package:mmc/screens/event_listing_page_detail.dart';
@@ -27,7 +28,9 @@ import 'package:mmc/screens/shining_board_detail_page.dart';
 import 'package:mmc/screens/shining_board_page.dart';
 import 'package:mmc/screens/thank_you_note_received_page.dart';
 import 'package:mmc/screens/today_newest_page.dart';
+import 'package:mmc/screens/web_page.dart';
 import 'package:mmc/screens/your_pic_page.dart';
+import 'package:mmc/utils/qr_view.dart';
 
 import 'auth_guard.dart';
 
@@ -71,6 +74,9 @@ import 'auth_guard.dart';
     AutoRoute<String>(page: YourPicPage, path: '/yourPic'),
     // auth
     AutoRoute<String>(page: LoginPage, path: '/login'),
+    AutoRoute<String>(page: QrViewPage, path: '/qrview'),
+    AutoRoute(page: WebPage, path: '/webpage'),
+    AutoRoute(page: CheckHistoryPage, path: '/checkHistory'),
   ],
 )
 class $AppRouter {}

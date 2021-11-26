@@ -92,8 +92,10 @@
   "confirmUnJoin": "确认取消加入吗?",
   "back": "返回",
   "yes": "确定",
+  "no": "取消",
   "cancel": "取消",
   "save": "保存",
+  "submit": "提交",
   "loginOut": "退出登录",
   "delete": "删除",
   "personalProfileFormYourName": "Your Name",
@@ -190,5 +192,6 @@
   "referralReceivedUser":"选择推荐人",
   "referralImage":"上传推荐图片",
   "notHaveNetwork":"没有关注用户",
-  "referralTitle": "Sending referral to someone who you feel can  help your friend or business partner"
+  "referralTitle": "Sending referral to someone who you feel can  help your friend or business partner",
+  "toConfirmAttend": "确认出席"
 }

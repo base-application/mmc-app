@@ -20,12 +20,16 @@ class EventDataItemInfoEntity {
 	String? eventMapLink;
 	int? eventType;
 	int? createId;
+	int? checkInTime;
+	int? checkOutTime;
 	List<EventDataItemInfoEventPoster>? eventPoster;
 	List<EventDataItemInfoGroups>? groups;
 	List<EventDataItemInfoAttendance>? attendance;
 	double? attendanceProportion;
 	int? approveStatus;
 	bool? checkIn; // null 为未加入    true 已加入 已签到     false 已加入 未签到
+  bool? attend;
+  bool? join;
 }
 
 @JsonSerializable()

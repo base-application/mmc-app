@@ -4,6 +4,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_pickers/pickers.dart';
+import 'package:flutter_pickers/style/picker_style.dart';
 import 'package:mmc/bean/network_item_info_entity.dart';
 import 'package:mmc/bean/state_item_info_entity.dart';
 import 'package:mmc/router/router.gr.dart';
@@ -35,8 +37,9 @@ class _NetworkPageState extends State<NetworkPage> {
   final TextEditingController _nameSearchController = TextEditingController();
 
   String? _filterIndustry;
-  int? _filterCountry;
-  int? _filterCity;
+  CountryCodeInfo? _filterCountry;
+  StateItemInfoEntity? _filterCity;
+  List<StateItemInfoEntity> _aboutCity = [];
 
   /// 进行数据筛选
   Future<bool> doFilter({ bool isClear = false, String? industry, CountryCodeInfo? country, StateItemInfoEntity? city }) async {
@@ -46,8 +49,8 @@ class _NetworkPageState extends State<NetworkPage> {
       _filterCity = null;
     } else {
       _filterIndustry = industry;
-      _filterCountry = country?.id;
-      _filterCity = city?.id;
+      _filterCountry = country;
+      _filterCity = city;
     }
     _getPageData(name: _nameSearchController.text.trim());
     return !isClear;
@@ -242,6 +245,23 @@ class _NetworkPageState extends State<NetworkPage> {
     );
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        title: Text("NetWork",style: TextStyle(color: Colors.black),),
+        actions: [
+         Builder(builder: (BuildContext context) {
+           return IconButton(
+               color: Colors.black,
+               onPressed: (){
+                 Scaffold.of(context).openEndDrawer();
+               },
+               icon:ImageIcon( Image.asset('assets/icon/app_bar_filter.png', width: 20, height: 20,).image)
+           );
+         },)
+        ],
+      ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -288,6 +308,186 @@ class _NetworkPageState extends State<NetworkPage> {
           ),),
         ],
       ),
+      endDrawer: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.8,
+        child: Container(
+          margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          padding: const EdgeInsets.only(top: 20, left: 26, right: 26,),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(20)),
+          ),
+          child: Column(
+            children: [
+              Text(AppLocalizations.of(context)!.appHomeNetworkFilterTitle, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,),),
+              const SizedBox(height: 40,),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(AppLocalizations.of(context)!.filterNetworkIndustryLabel, style: TextStyle(fontSize: 14, color: Colors.black87.withAlpha(200),),),
+                      const SizedBox(height: 8,),
+                      GestureDetector(
+                        child: Container(
+                          width: double.infinity,
+                          height: 44,
+                          padding: const EdgeInsets.only(left: 14, right: 10,),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(width: 0.6, color: Colors.grey.shade300,)
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(_filterIndustry ?? AppLocalizations.of(context)!.filterNetworkIndustry, style: TextStyle(fontSize: 14, color: _filterIndustry == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
+                              ),
+                              const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
+                            ],
+                          ),
+                        ),
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          _chooseIndustry();
+                        },
+                      ),
+                    ],
+                  ),),
+                ],
+              ),
+              const SizedBox(height: 20,),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(AppLocalizations.of(context)!.filterNetworkCountryLabel, style: TextStyle(fontSize: 14, color: Colors.black87.withAlpha(200),),),
+                      const SizedBox(height: 8,),
+                      GestureDetector(
+                        child: Container(
+                          width: double.infinity,
+                          height: 44,
+                          padding: const EdgeInsets.only(left: 14, right: 10,),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(width: 0.6, color: Colors.grey.shade300,)
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(_filterCountry?.nativeName ?? AppLocalizations.of(context)!.filterNetworkCountry, style: TextStyle(fontSize: 14, color: _filterCountry == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
+                              ),
+                              const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
+                            ],
+                          ),
+                        ),
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          _chooseCountry();
+                        },
+                      ),
+                    ],
+                  ),),
+                ],
+              ),
+              const SizedBox(height: 20,),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(AppLocalizations.of(context)!.filterNetworkCityLabel, style: TextStyle(fontSize: 14, color: Colors.black87.withAlpha(200),),),
+                      const SizedBox(height: 8,),
+                      GestureDetector(
+                        child: Container(
+                          width: double.infinity,
+                          height: 44,
+                          padding: const EdgeInsets.only(left: 14, right: 10,),
+                          decoration: BoxDecoration(
+                              color: _aboutCity.isNotEmpty ? Colors.white : Colors.grey.shade50,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(width: 0.6, color: Colors.grey.shade300,)
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(_filterCity?.name ?? AppLocalizations.of(context)!.filterNetworkCity, style: TextStyle(fontSize: 14, color: _filterCity == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
+                              ),
+                              const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
+                            ],
+                          ),
+                        ),
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          _chooseState();
+                        },
+                      ),
+                    ],
+                  ),),
+                ],
+              ),
+              const SizedBox(height: 40,),
+              SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: 46,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                      elevation: MaterialStateProperty.all(0),
+                    ),
+                    child: Text(AppLocalizations.of(context)!.filterNetworkApplyFilterBtn, style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.w500,),),
+                    onPressed: () async {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      bool filterOk = await networkPageKey.currentState?.doFilter(
+                        industry: _filterIndustry,
+                        country: _filterCountry,
+                        city: _filterCity,
+                      ) ?? false;
+                      if (filterOk) {
+                        Navigator.of(context).pop();
+                      }
+                    },
+                  )
+              ),
+              GestureDetector(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Text(AppLocalizations.of(context)!.filterNetworkFilterClearBtn, style: const TextStyle(color: Color(
+                      0xFFE2A60A)),),
+                ),
+                behavior: HitTestBehavior.opaque,
+                onTap: () async {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  _filterCountry = null;
+                  _filterCity = null;
+                  _filterIndustry = null;
+                  setState(() {});
+                  bool filterOk = await networkPageKey.currentState?.doFilter(isClear: true) ?? false;
+                  if (filterOk) {
+                    Navigator.of(context).pop();
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      endDrawerEnableOpenDragGesture: false,
     );
   }
 
@@ -305,9 +505,82 @@ class _NetworkPageState extends State<NetworkPage> {
   }
 
   Future _getPageData({ String? name }) async {
-    return getNetworkListData(context, name: name, industry: _filterIndustry, countryId: _filterCountry, cityId: _filterCity, result: (List<NetworkItemInfoEntity> list) {
+    return getNetworkListData(context, name: name, industry: _filterIndustry, countryId: _filterCountry?.id, cityId: _filterCity?.id, result: (List<NetworkItemInfoEntity> list) {
       pageList = list;
       setState(() {});
+    });
+  }
+  /// 选择城市
+  _chooseState() {
+    if (_aboutCity.isNotEmpty) {
+      Pickers.showSinglePicker(context,
+        data: _aboutCity.map((e) => e.name).toList(),
+        selectData: _filterCity?.name,
+        pickerStyle: PickerStyle(
+          backgroundColor: Colors.white,
+          textColor: Colors.black87,
+          pickerHeight: MediaQuery.of(context).size.height * 0.4,
+          menuHeight: MediaQuery.of(context).size.height * 0.4,
+        ),
+        onConfirm: (res, position) {
+          setState(() {
+            _filterCity = _aboutCity[position];
+          });
+        },
+      );
+    }
+  }
+
+  /// 选择行业
+  _chooseIndustry() {
+    getIndustryData(context, silence: false, result: (List<String> industryList) {
+      Pickers.showSinglePicker(context,
+        data: industryList,
+        selectData: _filterIndustry,
+        pickerStyle: PickerStyle(
+          backgroundColor: Colors.white,
+          textColor: Colors.black87,
+          pickerHeight: MediaQuery.of(context).size.height * 0.4,
+          menuHeight: MediaQuery.of(context).size.height * 0.4,
+        ),
+        onConfirm: (res, position) {
+          setState(() {
+            _filterIndustry = res;
+          });
+        },
+      );
+    });
+  }
+
+
+  /// 选择国家
+  _chooseCountry() {
+    getCountryCodeData(context, silence: false, result: (List<CountryCodeInfo> list) {
+      Pickers.showSinglePicker(context,
+        data: list.map((e) => e.nativeName).toList(),
+        selectData: _filterCountry?.nativeName,
+        pickerStyle: PickerStyle(
+          showTitleBar: true,
+          backgroundColor: Colors.white,
+          textColor: Colors.black87,
+          pickerHeight: MediaQuery.of(context).size.height * 0.4,
+          menuHeight: MediaQuery.of(context).size.height * 0.4,
+        ),
+        onConfirm: (res, position) {
+          setState(() {
+            _filterCountry = list[position];
+            _filterCity = null;
+          });
+          _getStateData();
+        },
+      );
+    });
+  }
+  _getStateData() {
+    getStateDataByCountryCode(context, silence: true, countryCode: _filterCountry!.iso2, result: (List<StateItemInfoEntity> list) {
+      setState(() {
+        _aboutCity = list;
+      });
     });
   }
 }

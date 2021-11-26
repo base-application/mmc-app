@@ -47,7 +47,7 @@ class _EventListingPageState extends State<EventListingPage> {
       _data.forEach((key, value) {
         List<EventDataItemInfoEntity> find = value.where((element) => element.eventId == event.eventId).toList();
         if (find.isNotEmpty) {
-          find.first.checkIn = false;
+          find.first.join = true;
           find.first.attendance = event.list;
           setState(() {});
           return;
@@ -290,7 +290,7 @@ class _EventListingPageState extends State<EventListingPage> {
                           const SizedBox(width: 30,),
                           Row(
                             children: [
-                              if (item.checkIn != null) GestureDetector(
+                              if (item.join??false) GestureDetector(
                                 child: Padding(
                                   padding: const EdgeInsets.all(10).copyWith(top: 4, bottom: 4,),
                                   child: Text(AppLocalizations.of(context)!.unJoin, style: const TextStyle(fontSize: 14, color: Color(0xFFFDC12C), fontWeight: FontWeight.w500,),),
@@ -380,9 +380,9 @@ class _EventListingPageState extends State<EventListingPage> {
                                     elevation: MaterialStateProperty.all(0),
                                     padding: MaterialStateProperty.all(EdgeInsets.zero),
                                   ),
-                                  child: Text(item.checkIn != null ? AppLocalizations.of(context)!.joined : AppLocalizations.of(context)!.join, style: const TextStyle(color: Color(0xFF013B7B), fontSize: 15, fontWeight: FontWeight.w500,),),
+                                  child: Text(item.join==true ? AppLocalizations.of(context)!.joined : AppLocalizations.of(context)!.join, style: const TextStyle(color: Color(0xFF013B7B), fontSize: 15, fontWeight: FontWeight.w500,),),
                                   onPressed: () {
-                                    if (item.checkIn == null) {
+                                    if (item.join == false) {
                                       showDialog(
                                         context: context,
                                         barrierColor: Colors.black.withAlpha(180),
@@ -466,28 +466,59 @@ class _EventListingPageState extends State<EventListingPage> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text('Attendance: ${item.attendanceProportion.formatPercentage() ?? '0'}%', style: const TextStyle(fontSize: 13, color: Color(0xFFFDC12C), fontWeight: FontWeight.w500,),),
-                          Container(
-                            width: 50,
-                            height: 50,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(6),
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                  blurRadius: 1,
-                                  color: Colors.white.withAlpha(10),
-                                ),
-                              ],
+                          GestureDetector(
+                            onTap: (){
+                              showGeneralDialog(
+                                  barrierDismissible: true,
+                                  barrierLabel: "qr",
+                                  context: context,
+                                  pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+                                 return Center(
+                                   child: Material(
+                                     child: GestureDetector(
+                                       onTap: (){
+                                         Navigator.of(context).pop();
+                                       },
+                                       child: Container(
+                                         color: Colors.white,
+                                         height: MediaQuery.of(context).size.width,
+                                         width: MediaQuery.of(context).size.width,
+                                         child:QrImage(
+                                           data: "event:${item.eventId}",
+                                           version: QrVersions.auto,
+                                           size: 300,
+                                           gapless: false,
+                                           padding: const EdgeInsets.all(6),
+                                         ),
+                                       ),
+                                     )
+                                   ),
+                                 );
+                              });
+                            },
+                            child:  Container(
+                              width: 50,
+                              height: 50,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(6),
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    blurRadius: 1,
+                                    color: Colors.white.withAlpha(10),
+                                  ),
+                                ],
+                              ),
+                              child: QrImage(
+                                data: json.encode({ 'scene': 'mmc-eventQr', 'about': item.eventId }),
+                                version: QrVersions.auto,
+                                size: 300,
+                                gapless: false,
+                                padding: const EdgeInsets.all(6),
+                              ),
                             ),
-                            child: QrImage(
-                              data: json.encode({ 'scene': 'mmc-eventQr', 'about': item.eventId }),
-                              version: QrVersions.auto,
-                              size: 300,
-                              gapless: false,
-                              padding: const EdgeInsets.all(6),
-                            ),
-                          ),
+                          )
                         ],
                       ),
                     ],
@@ -637,7 +668,7 @@ class _EventListingPageState extends State<EventListingPage> {
   _doJoin(EventDataItemInfoEntity item) {
     doJoinEvent(context, eventId: item.eventId, result: (List<EventDataItemInfoAttendance> list) {
       ComFun.showToast(msg: 'Join event success');
-      item.checkIn = false;
+      item.join = true;
       item.attendance = list;
       setState(() {});
     });
@@ -647,7 +678,7 @@ class _EventListingPageState extends State<EventListingPage> {
   _doUnJoin(EventDataItemInfoEntity item) {
     doUnJoinEvent(context, eventId: item.eventId, result: (List<EventDataItemInfoAttendance> list) {
       ComFun.showToast(msg: 'Unjoin event success');
-      item.checkIn = null;
+      item.join = false;
       item.attendance = list;
       setState(() {});
     });

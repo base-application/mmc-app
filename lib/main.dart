@@ -142,12 +142,26 @@ class _MyAppState extends State<MyApp> {
     return FutureBuilder(
       future: _init(),
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (!_appLanguageChange && snapshot.connectionState == ConnectionState.waiting) {
-          return const MaterialApp(home: Splash(),);
-        }
+        // if (!_appLanguageChange && snapshot.connectionState == ConnectionState.waiting) {
+        //   return const MaterialApp(home: Splash(),);
+        // }
         _appLanguageChange = false;
         return MaterialApp.router(
-          theme: ThemeData.light(),
+          theme: ThemeData(
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.white,
+              systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarIconBrightness: Brightness.dark,
+                statusBarColor: Colors.transparent,
+              ),
+              centerTitle: true,
+              elevation: 0,
+              iconTheme: IconThemeData(
+                color: Color(0xff000000),
+              ),
+              titleTextStyle:TextStyle(fontSize: 20, color: Colors.black87, fontWeight: FontWeight.bold,),
+            ),
+          ),
           routerDelegate: _appRouter.delegate(),
           routeInformationProvider: _appRouter.routeInfoProvider(),
           routeInformationParser: _appRouter.defaultRouteParser(),
@@ -157,6 +171,7 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
             AppLocalizations.delegate,
           ],
+
           supportedLocales: const [
             Locale('en', ''),
             Locale('zh', ''),

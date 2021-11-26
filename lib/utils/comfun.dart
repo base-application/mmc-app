@@ -94,9 +94,11 @@ class ComFun {
   static Future outLogin(BuildContext context) async {
     await savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, null);
     await saveLoginInfo(context, null);
-    AutoRouter.of(context).replace(LoginRoute(onLoginSuccess: (ctx) {
-      AutoRouter.of(ctx).replace(const HomeRoute());
-    }));
+    AutoRouter.of(context).replaceAll([
+      LoginRoute(onLoginSuccess: (ctx) {
+        AutoRouter.of(ctx).replaceAll([const HomeRoute()]);
+      })
+    ]);
   }
 }
 

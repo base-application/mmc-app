@@ -39,6 +39,14 @@ EventDataItemInfoEntity $EventDataItemInfoEntityFromJson(Map<String, dynamic> js
 	if (createId != null) {
 		eventDataItemInfoEntity.createId = createId;
 	}
+	var checkInTime = jsonConvert.convert<int>(json['checkInTime']);
+	if (checkInTime != null) {
+		eventDataItemInfoEntity.checkInTime = checkInTime;
+	}
+	var checkOutTime = jsonConvert.convert<int>(json['checkOutTime']);
+	if (checkOutTime != null) {
+		eventDataItemInfoEntity.checkOutTime = checkOutTime;
+	}
 	var eventPoster = jsonConvert.convertListNotNull<EventDataItemInfoEventPoster>(json['eventPoster']);
 	if (eventPoster != null) {
 		eventDataItemInfoEntity.eventPoster = eventPoster;
@@ -63,6 +71,14 @@ EventDataItemInfoEntity $EventDataItemInfoEntityFromJson(Map<String, dynamic> js
 	if (checkIn != null) {
 		eventDataItemInfoEntity.checkIn = checkIn;
 	}
+	var attend = jsonConvert.convert<bool>(json['attend']);
+	if (attend != null) {
+		eventDataItemInfoEntity.attend = attend;
+	}
+	var join = jsonConvert.convert<bool>(json['join']);
+	if (join != null) {
+		eventDataItemInfoEntity.join = join;
+	}
 	return eventDataItemInfoEntity;
 }
 
@@ -77,12 +93,16 @@ Map<String, dynamic> $EventDataItemInfoEntityToJson(EventDataItemInfoEntity enti
 	data['eventMapLink'] = entity.eventMapLink;
 	data['eventType'] = entity.eventType;
 	data['createId'] = entity.createId;
+	data['checkInTime'] = entity.checkInTime;
+	data['checkOutTime'] = entity.checkOutTime;
 	data['eventPoster'] =  entity.eventPoster?.map((v) => v.toJson()).toList();
 	data['groups'] =  entity.groups?.map((v) => v.toJson()).toList();
 	data['attendance'] =  entity.attendance?.map((v) => v.toJson()).toList();
 	data['attendanceProportion'] = entity.attendanceProportion;
 	data['approveStatus'] = entity.approveStatus;
 	data['checkIn'] = entity.checkIn;
+	data['attend'] = entity.attend;
+	data['join'] = entity.join;
 	return data;
 }
 

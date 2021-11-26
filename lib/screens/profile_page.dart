@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
@@ -306,11 +307,45 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
 
-    return ScrollConfiguration(
-      behavior: CusBehavior(),
-      child: NotificationListener(
-        child: _scrollMain,
-        onNotification: (Notification notification) => _pageScrollNotification(notification),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        actions: [
+          Row(
+            children: [
+              GestureDetector(
+                child: Badge(
+                  animationType: BadgeAnimationType.fade,
+                  showBadge: true,
+                  position: const BadgePosition(top: -4, start: 12),
+                  padding: const EdgeInsets.all(5),
+                  child: Image.asset('assets/icon/app_bar_ring.png', width: 20, height: 20,),
+                ),
+                onTap: (){
+                  AutoRouter.of(context).push(const MyInboxRoute());
+                },
+              ),
+              GestureDetector(
+                onTap: (){
+                  AutoRouter.of(context).push(const SettingRoute());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16,left: 10),
+                  child: Image.asset('assets/icon/app_bar_set.png', width: 20, height: 20,),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+      body: ScrollConfiguration(
+        behavior: CusBehavior(),
+        child: NotificationListener(
+          child: _scrollMain,
+          onNotification: (Notification notification) => _pageScrollNotification(notification),
+        ),
       ),
     );
   }

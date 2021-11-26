@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/referral_entity.dart';
 import 'package:mmc/router/router.gr.dart';
@@ -19,59 +20,72 @@ class ReferralReceivedPage extends StatefulWidget {
 
 class _ReferralReceivedPageState extends State<ReferralReceivedPage> {
   late Future<List<ReferralEntity>> _future;
+  int _page = 2;
   @override
   void initState() {
-    _future = receivedList(context);
+    _future = receivedList(context,1);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     Widget _scroll() {
-      return SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.only(top: 10, left: 26, right: 26, bottom: 30,),
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.only(top: 12, bottom: 12, left: 14, right: 14,),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFBB714),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text('Referral received from our MMC network.Get ready to contact. WooHoo~~~', style: TextStyle(fontSize: 16, color: Color(0xFF013B7B)),),
+      return Container(
+        padding: const EdgeInsets.only(top: 10, left: 26, right: 26, bottom: 30,),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 12, bottom: 12, left: 14, right: 14,),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFBB714),
+                borderRadius: BorderRadius.circular(10),
               ),
-              const SizedBox(height: 14,),
-             FutureBuilder(
-               future: _future,
-               builder: (BuildContext context, AsyncSnapshot<List<ReferralEntity>> snapshot) {
-                 if(snapshot.connectionState == ConnectionState.done){
-                   if(!snapshot.hasData){
-                     return  Center(
-                         child: Image.asset('assets/image/no_data.png', height: 140,)
-                     );
-                   }
-                   return  ListView.builder(
-                     shrinkWrap: true,
-                     physics: const NeverScrollableScrollPhysics(),
-                     itemCount: snapshot.data!.length,
-                     itemBuilder: (BuildContext context, int index) {
-                       return ReferralCard(referralEntity: snapshot.data![index],
-                         onChange: (ReferralEntity v) {
-                          snapshot.data![index] = v;
-                          setState(() {});
-                         },);
-                     },
-                   );
-                 }else{
-                   return  Center(
-                     child: Image.asset('assets/image/no_data.png', height: 140,)
-                   );
-                 }
-
-               },)
-            ],
-          ),
+              child: Text('Referral received from our MMC network.Get ready to contact. WooHoo~~~', style: TextStyle(fontSize: 16, color: Color(0xFF013B7B)),),
+            ),
+            const SizedBox(height: 14,),
+            Expanded(
+                child: FutureBuilder(
+                future: _future,
+                builder: (BuildContext context, AsyncSnapshot<List<ReferralEntity>> snapshot) {
+                  if(snapshot.connectionState == ConnectionState.done){
+                    if(!snapshot.hasData||snapshot.data!.isEmpty){
+                      return  Center(
+                          child: Image.asset('assets/image/no_data.png', height: 140,)
+                      );
+                    }
+                    return EasyRefresh(
+                        onLoad: () async {
+                          receivedList(context,_page).then((value) {
+                            if(value.isNotEmpty){
+                              _page +=1;
+                              snapshot.data!.addAll(value);
+                              setState(() {});
+                            }
+                          });
+                        },
+                        footer: BezierBounceFooter(
+                            backgroundColor: const Color(0xFF095BD4)
+                        ),
+                      child:  ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ReferralCard(referralEntity: snapshot.data![index],
+                          onChange: (ReferralEntity v) {
+                            snapshot.data![index] = v;
+                            setState(() {});
+                          },);
+                      },
+                    )
+                    );
+                  }else{
+                    return  Center(
+                        child: Image.asset('assets/image/no_data.png', height: 140,)
+                    );
+                  }
+                },))
+          ],
         ),
       );
     }

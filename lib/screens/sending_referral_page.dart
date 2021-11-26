@@ -148,80 +148,7 @@ class _SendingReferralPageState extends State<SendingReferralPage> {
                             ),
                           ),
                           behavior: HitTestBehavior.opaque,
-                          onTap: () {
-                            getMyNetwork(context,groupId: _formToGroup?.groupId,result: (List<NetworkItemInfoEntity> list) {
-                              if(list.isEmpty){
-                                ComFun.showToast(msg: AppLocalizations.of(context)!.notHaveNetwork);
-                                return;
-                              }
-                              showModalBottomSheet(
-                                  isDismissible: false,
-                                  isScrollControlled: true,
-                                  context: context,
-                                  constraints: BoxConstraints(
-                                    maxHeight: MediaQuery.of(context).size.height/1.5,
-                                    minHeight: MediaQuery.of(context).size.height/3,
-                                  ),
-                                  builder: (BuildContext context) {
-                                    return Padding(
-                                      padding: EdgeInsets.only(left: 16,right: 16,bottom: MediaQuery.of(context).padding.bottom,top: 10),
-                                      child:  Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Expanded(child: TextFormField(
-                                                decoration: InputDecoration(
-                                                  hintText: AppLocalizations.of(context)!.sendReferralWhyDetailHint,
-                                                  hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
-                                                  contentPadding: const EdgeInsets.all(10),
-                                                  isDense: true,
-                                                  border: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.circular(8),
-                                                      borderSide: BorderSide(color: Colors.grey.shade300)
-                                                  ),
-                                                ),
-                                              )),
-                                              const SizedBox(width: 10,),
-                                              GestureDetector(
-                                                  onTap: (){
-                                                    AutoRouter.of(context).pop();
-                                                    },
-                                                  child: const Icon(CupertinoIcons.clear_circled))
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          Expanded(
-                                              child: ListView.separated(
-                                                itemCount: list.length,
-                                                itemBuilder: (BuildContext context, int index) {
-                                                  return GestureDetector(
-                                                    behavior: HitTestBehavior.translucent,
-                                                    onTap: (){
-                                                      _receivedUser =list[index];
-                                                      setState(() {});
-                                                      AutoRouter.of(context).pop();
-                                                    },
-                                                    child: Row(
-                                                      children: [
-                                                        netImgWrap(context, errorWidget: Image.asset('assets/image/personal_head_empty.png', fit: BoxFit.fitWidth,width: 40,height: 40),url: list[index].picture,width: 40,height: 40,radius: 30),
-                                                        const SizedBox(width: 20,),
-                                                        Text(list[index].name??"")
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
-                                                separatorBuilder: (BuildContext context, int index) {
-                                                  return const Divider();
-                                                },)
-                                          )
-                                        ],
-                                      ),
-                                    );
-                                  });
-                            });
-                          },
+                          onTap: _showNetWork,
                         ),
                       ],
                     ),),
@@ -363,6 +290,117 @@ class _SendingReferralPageState extends State<SendingReferralPage> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void _showNetWork() {
+    getMyNetwork(context,groupId: _formToGroup?.groupId,result: (List<NetworkItemInfoEntity> list) {
+      if(list.isEmpty){
+        ComFun.showToast(msg: AppLocalizations.of(context)!.notHaveNetwork);
+        return;
+      }
+      showModalBottomSheet(
+          isDismissible: false,
+          isScrollControlled: true,
+          context: context,
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height/1.5,
+            minHeight: MediaQuery.of(context).size.height/3,
+          ),
+          builder: (BuildContext context) {
+            return NetWorkSelect(list: list, onTap: (v) {
+              _receivedUser = v;
+              setState(() {});
+              AutoRouter.of(context).pop();
+            },);
+          });
+    });
+  }
+}
+
+
+
+class NetWorkSelect extends StatefulWidget {
+  final List<NetworkItemInfoEntity> list;
+  final Function(NetworkItemInfoEntity) onTap;
+  const NetWorkSelect({Key? key, required this.list, required this.onTap}) : super(key: key);
+
+  @override
+  _NetWorkSelectState createState() => _NetWorkSelectState();
+}
+
+class _NetWorkSelectState extends State<NetWorkSelect> {
+  List<NetworkItemInfoEntity> _list =[];
+  @override
+  void initState() {
+    _list = widget.list;
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: 16,right: 16,bottom: MediaQuery.of(context).padding.bottom,top: 10),
+      child:  Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      hintText: AppLocalizations.of(context)!.sendReferralWhyDetailHint,
+                      hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
+                      contentPadding: const EdgeInsets.all(10),
+                      isDense: true,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: Colors.grey.shade300)
+                      ),
+                    ),
+                    onChanged: (v){
+                      if(v.isEmpty){
+                        _list = widget.list;
+                      }else{
+                        _list = widget.list.where((element) => element.name!.toLowerCase().contains(v.toLowerCase())).toList();
+                      }
+                      setState((){});
+                    },
+                  )
+              ),
+              const SizedBox(width: 10,),
+              GestureDetector(
+                  onTap: (){
+                    AutoRouter.of(context).pop();
+                  },
+                  child: const Icon(CupertinoIcons.clear_circled))
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+              child: ListView.separated(
+                itemCount: _list.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: (){
+                      widget.onTap(_list[index]);
+                    },
+                    child: Row(
+                      children: [
+                        netImgWrap(context, errorWidget: Image.asset('assets/image/personal_head_empty.png', fit: BoxFit.fitWidth,width: 40,height: 40),url: _list[index].picture,width: 40,height: 40,radius: 30),
+                        const SizedBox(width: 20,),
+                        Text(_list[index].name??"")
+                      ],
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return const Divider();
+                },)
+          )
+        ],
       ),
     );
   }

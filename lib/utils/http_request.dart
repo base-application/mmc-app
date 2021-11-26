@@ -1,7 +1,7 @@
-import 'dart:convert';
 
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mmc/bean/check_log_entity.dart';
 import 'package:mmc/bean/event_data_item_info_entity.dart';
 import 'package:mmc/bean/event_detail_info_entity.dart';
 import 'package:mmc/bean/grade_level_info_entity.dart';
@@ -15,6 +15,7 @@ import 'package:mmc/bean/newest_item_info_entity.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/bean/referral_entity.dart';
 import 'package:mmc/bean/state_item_info_entity.dart';
+import 'package:mmc/bean/thank_note_entity.dart';
 import 'package:mmc/screens/login.dart';
 
 import 'http.dart';
@@ -448,8 +449,8 @@ Future sendReferral(BuildContext context, { required String reason, required int
 
 
 /// 收到的推荐
-Future<List<ReferralEntity>> receivedList(BuildContext context) async {
-  BaseBean? res = await httpGet(context, url: 'referral/user/list');
+Future<List<ReferralEntity>> receivedList(BuildContext context,int page) async {
+  BaseBean? res = await httpGet(context, url: 'referral/user/list',queryParameters: {"page":page});
   if(res!=null){
     List<ReferralEntity> resdata =res.data!['list'].map<ReferralEntity>((e) => ReferralEntity.fromJson(e)).toList();
     return resdata;
@@ -484,4 +485,79 @@ Future thank(BuildContext context, { required String note, required String value
   }, silence: false).then((value) {
     result.call(value!.code == 200);
   });
+}
+
+/// 发送感谢
+Future<List<ThankNoteEntity>> receivedThank(BuildContext context,int page) async {
+  BaseBean? res = await httpGet(context, url: '/thank/you/note/user/list',queryParameters: {"page": page});
+  if(res!=null){
+    List<ThankNoteEntity> resdata =res.data!['list'].map<ThankNoteEntity>((e) => ThankNoteEntity.fromJson(e)).toList();
+    return resdata;
+  }else{
+    return [];
+  }
+}
+
+
+
+
+/// 用户加入的活动
+Future<List<EventDataItemInfoEntity>> joinEventList(BuildContext context,int page) async {
+  BaseBean? res = await httpGet(context, url: '/event/join/list',queryParameters: {"page": page});
+  if(res!=null){
+    List<EventDataItemInfoEntity> resdata =res.data!['list'].map<EventDataItemInfoEntity>((e) => EventDataItemInfoEntity.fromJson(e)).toList();
+    return resdata;
+  }else{
+    return [];
+  }
+}
+
+
+
+/// 用户确认出席
+Future<bool> confirmAttend(BuildContext context,int eventId,int userId , {String? agent, String? agentRole, String? absentReason}) async {
+  BaseBean? res = await httpPut(context,
+      url: '/event/confirm/attend',
+      queryParameters: {"eventId": eventId,"userId":userId,"agent":agent,"agentRole":agentRole,"absentReason":absentReason});
+  if(res!=null){
+    return res.code == 200;
+  }else{
+    return false;
+  }
+}
+
+
+/// 用户签到
+Future<bool> checkIn(BuildContext context,int eventId) async {
+  BaseBean? res = await httpPut(context,
+      url: '/event/checkin',
+      queryParameters: {"eventId": eventId});
+  if(res!=null){
+    return res.code == 200;
+  }else{
+    return false;
+  }
+}
+
+/// 用户签到
+Future<bool> checkOut(BuildContext context,int eventId) async {
+  BaseBean? res = await httpPut(context,
+      url: '/event/checkout',
+      queryParameters: {"eventId": eventId});
+  if(res!=null){
+    return res.code == 200;
+  }else{
+    return false;
+  }
+}
+
+/// 用户签到历史
+Future<List<CheckLogEntity>> checkHistory(BuildContext context,int page) async {
+  BaseBean? res = await httpGet(context, url: '/event/check/history',queryParameters: {"page": page});
+  if(res!=null){
+    List<CheckLogEntity> resdata =res.data!['list'].map<CheckLogEntity>((e) => CheckLogEntity.fromJson(e)).toList();
+    return resdata;
+  }else{
+    return [];
+  }
 }
