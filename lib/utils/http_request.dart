@@ -588,3 +588,17 @@ Future<bool> notificationDelete(BuildContext context,List<int> ids) async {
     return false;
   }
 }
+
+
+/// 用户已读通知
+Future<bool> readNotification(BuildContext context,int notificationId) async {
+  BaseBean? res = await httpPut(context,
+      url: '/notification/read',
+      queryParameters: {"notificationId":notificationId},
+      silence: true);
+  if(res!=null){
+    return res.code == 200;
+  }else{
+    return false;
+  }
+}

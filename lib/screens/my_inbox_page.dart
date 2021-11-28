@@ -5,6 +5,7 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/notification_entity.dart';
+import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http_request.dart';
 
@@ -108,22 +109,6 @@ class _MyInboxPageState extends State<MyInboxPage> {
      },);
 
   }
-
-  ///有5种选项 - Loan genie, Property deal, News, Updates, System
-  getIcon(int notificationType) {
-    if(notificationType == 1){
-      return  Image.asset("assets/icon/notic_mony.png", width: 40, height: 40,);
-    }else if(notificationType == 2){
-      return  Image.asset("assets/icon/notic_home.png", width: 40, height: 40,);
-    }else if(notificationType == 3){
-      return  Image.asset("assets/icon/notic_new.png", width: 40, height: 40,);
-    }else if(notificationType == 4){
-      return  Image.asset("assets/icon/notic_message.png", width: 40, height: 40,);
-    }else{
-      return Image.asset("assets/icon/notic_system.png", width: 40, height: 40,);
-    }
-  }
-
   getBody(AsyncSnapshot<List<NotificationEntity>> snapshot) {
     if(snapshot.connectionState == ConnectionState.done){
       return EasyRefresh(
@@ -146,8 +131,12 @@ class _MyInboxPageState extends State<MyInboxPage> {
         itemBuilder: (ctx, index) {
           return GestureDetector(
             onTap: (){
-              snapshot.data![index].check = !(snapshot.data![index].check??false);
-              setState(() {});
+              if(_isEdit){
+                snapshot.data![index].check = !(snapshot.data![index].check??false);
+                setState(() {});
+              }else{
+                AutoRouter.of(context).push(InboxDetailRoute(notification: snapshot.data![index]));
+              }
             },
             child: Container(
               padding: const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 8,),
@@ -217,5 +206,20 @@ class _MyInboxPageState extends State<MyInboxPage> {
           child: stateNoDate(inRef: true)
       );
     }
+  }
+}
+
+///有5种选项 - Loan genie, Property deal, News, Updates, System
+getIcon(int notificationType) {
+  if(notificationType == 1){
+    return  Image.asset("assets/icon/notic_mony.png", width: 40, height: 40,);
+  }else if(notificationType == 2){
+    return  Image.asset("assets/icon/notic_home.png", width: 40, height: 40,);
+  }else if(notificationType == 3){
+    return  Image.asset("assets/icon/notic_new.png", width: 40, height: 40,);
+  }else if(notificationType == 4){
+    return  Image.asset("assets/icon/notic_message.png", width: 40, height: 40,);
+  }else{
+    return Image.asset("assets/icon/notic_system.png", width: 40, height: 40,);
   }
 }
