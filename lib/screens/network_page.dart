@@ -19,9 +19,9 @@ import 'package:mmc/utils/http_request.dart';
 
 import 'login.dart';
 
-GlobalKey<_NetworkPageState> networkPageKey = GlobalKey();
 class NetworkPage extends StatefulWidget {
-  const NetworkPage({Key? key, this.pageScrollDirectionChange}) : super(key: key);
+  final bool onlyMy;
+  const NetworkPage({Key? key, this.pageScrollDirectionChange, required this.onlyMy}) : super(key: key);
 
   final Function(ScrollDirection scrollDirection)? pageScrollDirectionChange;
 
@@ -453,11 +453,11 @@ class _NetworkPageState extends State<NetworkPage> {
                     child: Text(AppLocalizations.of(context)!.filterNetworkApplyFilterBtn, style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.w500,),),
                     onPressed: () async {
                       FocusScope.of(context).requestFocus(FocusNode());
-                      bool filterOk = await networkPageKey.currentState?.doFilter(
+                      bool filterOk = await doFilter(
                         industry: _filterIndustry,
                         country: _filterCountry,
                         city: _filterCity,
-                      ) ?? false;
+                      );
                       if (filterOk) {
                         Navigator.of(context).pop();
                       }
@@ -477,7 +477,7 @@ class _NetworkPageState extends State<NetworkPage> {
                   _filterCity = null;
                   _filterIndustry = null;
                   setState(() {});
-                  bool filterOk = await networkPageKey.currentState?.doFilter(isClear: true) ?? false;
+                  bool filterOk = await doFilter(isClear: true);
                   if (filterOk) {
                     Navigator.of(context).pop();
                   }
@@ -505,10 +505,17 @@ class _NetworkPageState extends State<NetworkPage> {
   }
 
   Future _getPageData({ String? name }) async {
-    return getNetworkListData(context, name: name, industry: _filterIndustry, countryId: _filterCountry?.id, cityId: _filterCity?.id, result: (List<NetworkItemInfoEntity> list) {
-      pageList = list;
-      setState(() {});
-    });
+    if(widget.onlyMy){
+      return getMyNetwork(context, name: name, industry: _filterIndustry, countryId: _filterCountry?.id, cityId: _filterCity?.id, result: (List<NetworkItemInfoEntity> list) {
+        pageList = list;
+        setState(() {});
+      });
+    }else{
+      return getNetworkListData(context, name: name, industry: _filterIndustry, countryId: _filterCountry?.id, cityId: _filterCity?.id, result: (List<NetworkItemInfoEntity> list) {
+        pageList = list;
+        setState(() {});
+      });
+    }
   }
   /// 选择城市
   _chooseState() {

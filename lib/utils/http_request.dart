@@ -12,6 +12,7 @@ import 'package:mmc/bean/image_vo_entity.dart';
 import 'package:mmc/bean/login_info_entity.dart';
 import 'package:mmc/bean/network_item_info_entity.dart';
 import 'package:mmc/bean/newest_item_info_entity.dart';
+import 'package:mmc/bean/notification_entity.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/bean/referral_entity.dart';
 import 'package:mmc/bean/state_item_info_entity.dart';
@@ -559,5 +560,31 @@ Future<List<CheckLogEntity>> checkHistory(BuildContext context,int page) async {
     return resdata;
   }else{
     return [];
+  }
+}
+
+
+
+/// 用户收到的通知
+Future<List<NotificationEntity>> notificationList(BuildContext context,int page) async {
+  BaseBean? res = await httpGet(context, url: '/notification/user/list',queryParameters: {"page": page});
+  if(res!=null){
+    List<NotificationEntity> resdata =res.data!['list'].map<NotificationEntity>((e) => NotificationEntity.fromJson(e)).toList();
+    return resdata;
+  }else{
+    return [];
+  }
+}
+
+
+/// 用户删除通知
+Future<bool> notificationDelete(BuildContext context,List<int> ids) async {
+  BaseBean? res = await httpPut(context,
+      url: '/notification/user/delete',
+      data: ids);
+  if(res!=null){
+    return res.code == 200;
+  }else{
+    return false;
   }
 }

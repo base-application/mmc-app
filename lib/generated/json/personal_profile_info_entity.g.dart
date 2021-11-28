@@ -1,5 +1,7 @@
 import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
+import 'package:mmc/bean/achievement_entity.dart';
+
 
 PersonalProfileInfoEntity $PersonalProfileInfoEntityFromJson(Map<String, dynamic> json) {
 	PersonalProfileInfoEntity personalProfileInfoEntity = PersonalProfileInfoEntity();
@@ -79,6 +81,10 @@ PersonalProfileInfoEntity $PersonalProfileInfoEntityFromJson(Map<String, dynamic
 	if (groupName != null) {
 		personalProfileInfoEntity.groupName = groupName;
 	}
+	var email = jsonConvert.convert<String>(json['email']);
+	if (email != null) {
+		personalProfileInfoEntity.email = email;
+	}
 	var attendance = jsonConvert.convert<int>(json['attendance']);
 	if (attendance != null) {
 		personalProfileInfoEntity.attendance = attendance;
@@ -115,7 +121,7 @@ PersonalProfileInfoEntity $PersonalProfileInfoEntityFromJson(Map<String, dynamic
 	if (companyVos != null) {
 		personalProfileInfoEntity.companyVos = companyVos;
 	}
-	var achievement = jsonConvert.convert<dynamic>(json['achievement']);
+	var achievement = jsonConvert.convert<AchievementEntity>(json['achievement']);
 	if (achievement != null) {
 		personalProfileInfoEntity.achievement = achievement;
 	}
@@ -147,6 +153,7 @@ Map<String, dynamic> $PersonalProfileInfoEntityToJson(PersonalProfileInfoEntity 
 	data['gradeName'] = entity.gradeName;
 	data['groupId'] = entity.groupId;
 	data['groupName'] = entity.groupName;
+	data['email'] = entity.email;
 	data['attendance'] = entity.attendance;
 	data['referralSend'] = entity.referralSend;
 	data['referralReceived'] = entity.referralReceived;
@@ -156,7 +163,7 @@ Map<String, dynamic> $PersonalProfileInfoEntityToJson(PersonalProfileInfoEntity 
 	data['positionName'] = entity.positionName;
 	data['member'] = entity.member;
 	data['companyVos'] =  entity.companyVos.map((v) => v.toJson()).toList();
-	data['achievement'] = entity.achievement;
+	data['achievement'] = entity.achievement.toJson();
 	data['friend'] = entity.friend;
 	return data;
 }

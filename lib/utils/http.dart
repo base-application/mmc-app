@@ -216,7 +216,7 @@ Future<BaseBean?> httpDelete(BuildContext context, { required String url, Map<St
 }
 
 /// put 请求
-Future<BaseBean?> httpPut(BuildContext context, { required String url, Map<String, dynamic>? data, Map<String, dynamic>? queryParameters, bool silence = false, String loadingTip = '请求中..', bool endHideLoading = true, bool successButErrShowTip = true, bool isShop = false }) async {
+Future<BaseBean?> httpPut(BuildContext context, { required String url, dynamic data, Map<String, dynamic>? queryParameters, bool silence = false, String loadingTip = '请求中..', bool endHideLoading = true, bool successButErrShowTip = true, bool isShop = false }) async {
   if (!silence) EasyLoading.show(status: loadingTip);
 
   await requestAuthHead(context, DioHttpUtil(context)._dio!.options, url);

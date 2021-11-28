@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:mmc/bean/achievement_entity.dart';
 import 'package:mmc/generated/json/base/json_field.dart';
 import 'package:mmc/generated/json/personal_profile_info_entity.g.dart';
 
@@ -24,6 +25,7 @@ class PersonalProfileInfoEntity {
 	String? gradeName;
 	int? groupId;
 	String? groupName;
+	String? email;
 	int? attendance;
 	int? referralSend;
 	int? referralReceived;
@@ -33,7 +35,7 @@ class PersonalProfileInfoEntity {
 	String? positionName;
 	dynamic member;
 	late List<PersonalProfileInfoCompanyVos> companyVos;
-	dynamic achievement;
+	late AchievementEntity achievement;
 	dynamic friend;
   
   PersonalProfileInfoEntity();

@@ -177,6 +177,11 @@ flutter:
    - assets/icon/upcoming_item_ic.png
    - assets/icon/check_in_log.png
    - assets/icon/check_out.png
+   - assets/icon/notic_home.png
+   - assets/icon/notic_message.png
+   - assets/icon/notic_mony.png
+   - assets/icon/notic_new.png
+   - assets/icon/notic_system.png
    # lottie动画
    - assets/lottie/loading.json
    # json

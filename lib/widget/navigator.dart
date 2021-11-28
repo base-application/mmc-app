@@ -53,7 +53,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
           }
         }
       },),
-      NetworkPage(key: networkPageKey, pageScrollDirectionChange: (ScrollDirection scrollDirection) {
+      NetworkPage(onlyMy: false,pageScrollDirectionChange: (ScrollDirection scrollDirection) {
         if (scrollDirection == ScrollDirection.forward) {
           if (_bottomNavigatorAnimControl != CustomAnimationControl.playReverse) {
             setState(() {
