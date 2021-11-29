@@ -142,9 +142,9 @@ class _MyAppState extends State<MyApp> {
     return FutureBuilder(
       future: _init(),
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        // if (!_appLanguageChange && snapshot.connectionState == ConnectionState.waiting) {
-        //   return const MaterialApp(home: Splash(),);
-        // }
+        if (!_appLanguageChange && snapshot.connectionState == ConnectionState.waiting) {
+          return const MaterialApp(home: Splash(),);
+        }
         _appLanguageChange = false;
         return MaterialApp.router(
           theme: ThemeData(
@@ -176,7 +176,7 @@ class _MyAppState extends State<MyApp> {
             Locale('en', ''),
             Locale('zh', ''),
           ],
-          locale: Locale.fromSubtags(languageCode: context.read<SystemSetService>().appLanguage),
+          locale: Locale.fromSubtags(languageCode: context.watch<SystemSetService>().appLanguage),
           builder: (_, router) {
             return FlutterEasyLoading(child: Scaffold(
               backgroundColor: const Color(0xFFEAEAEA),

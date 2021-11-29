@@ -85,7 +85,7 @@ class _SettingPageState extends State<SettingPage> {
         iconAssets: 'assets/icon/set_language.png',
         label: 'Language',
         onTap: () {
-          // AutoRouter.of(context).push(const GuidelineRoute());
+          AutoRouter.of(context).push(const LanguageSetRoute());
         },
       ),
     ]);

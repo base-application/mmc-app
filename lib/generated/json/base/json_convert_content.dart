@@ -17,6 +17,8 @@ import 'package:mmc/bean/group_item_entity.dart';
 import 'package:mmc/generated/json/group_item_entity.g.dart';
 import 'package:mmc/bean/group_item_info_entity.dart';
 import 'package:mmc/generated/json/group_item_info_entity.g.dart';
+import 'package:mmc/bean/guide_line_entity.dart';
+import 'package:mmc/generated/json/guide_line_entity.g.dart';
 import 'package:mmc/bean/home_index_info_entity.dart';
 import 'package:mmc/generated/json/home_index_info_entity.g.dart';
 import 'package:mmc/bean/image_vo_entity.dart';
@@ -152,6 +154,9 @@ class JsonConvert {
 		if(type == (GroupItemInfoUserInfoVosCompanyVosProducePictures).toString()){
 			return GroupItemInfoUserInfoVosCompanyVosProducePictures.fromJson(json);
 		}
+		if(type == (GuideLineEntity).toString()){
+			return GuideLineEntity.fromJson(json);
+		}
 		if(type == (HomeIndexInfoEntity).toString()){
 			return HomeIndexInfoEntity.fromJson(json);
 		}
@@ -250,6 +255,9 @@ class JsonConvert {
 		}
 		if(<GroupItemInfoUserInfoVosCompanyVosProducePictures>[] is M){
 			return data.map<GroupItemInfoUserInfoVosCompanyVosProducePictures>((e) => GroupItemInfoUserInfoVosCompanyVosProducePictures.fromJson(e)).toList() as M;
+		}
+		if(<GuideLineEntity>[] is M){
+			return data.map<GuideLineEntity>((e) => GuideLineEntity.fromJson(e)).toList() as M;
 		}
 		if(<HomeIndexInfoEntity>[] is M){
 			return data.map<HomeIndexInfoEntity>((e) => HomeIndexInfoEntity.fromJson(e)).toList() as M;

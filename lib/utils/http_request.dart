@@ -7,6 +7,7 @@ import 'package:mmc/bean/event_detail_info_entity.dart';
 import 'package:mmc/bean/grade_level_info_entity.dart';
 import 'package:mmc/bean/group_item_entity.dart';
 import 'package:mmc/bean/group_item_info_entity.dart';
+import 'package:mmc/bean/guide_line_entity.dart';
 import 'package:mmc/bean/home_index_info_entity.dart';
 import 'package:mmc/bean/image_vo_entity.dart';
 import 'package:mmc/bean/login_info_entity.dart';
@@ -146,6 +147,22 @@ Future getGroupListUserData(BuildContext context, { String? groupName, bool sile
   }).catchError((_) {
     err?.call();
   });
+}
+
+
+/// 我的group数据
+Future<GroupItemInfoEntity?> groupDetail(BuildContext context,int? groupId) async {
+  if(groupId == null){
+    return null;
+  }
+  BaseBean? res = await httpGet(context,
+      url: 'group/detail',
+      queryParameters: {"groupId":groupId}, silence: false);
+  if(res?.code == 200){
+    return GroupItemInfoEntity.fromJson(res!.data);
+  }else{
+    return null;
+  }
 }
 
 /// grade数据
@@ -434,6 +451,16 @@ Future getMyNetwork(BuildContext context, { String? name, String? industry, int?
 }
 
 
+/// 用户修改密码
+Future updatePassword(BuildContext context, String oldPassword, String  password) async {
+  BaseBean? bean = await httpPut(context, url: 'user/info/update/password', queryParameters: {
+    'oldPassword': oldPassword,
+    'password': password
+  }, silence: false);
+  return bean?.code == 200;
+}
+
+
 
 /// 发送推荐
 Future sendReferral(BuildContext context, { required String reason, required int receivedUser,required List<ImageVoEntity> images, bool silence = false, required Function(bool) result, Function? err }) async {
@@ -600,5 +627,17 @@ Future<bool> readNotification(BuildContext context,int notificationId) async {
     return res.code == 200;
   }else{
     return false;
+  }
+}
+
+
+
+/// 用户已读通知
+Future<List<GuideLineEntity>> guideLine(BuildContext context) async {
+  BaseBean? res = await httpGet(context, url: '/guide/line/list', silence: false);
+  if(res!=null){
+    return res.data.map<GuideLineEntity>((e) => GuideLineEntity.fromJson(e)).toList();
+  }else{
+    return [];
   }
 }

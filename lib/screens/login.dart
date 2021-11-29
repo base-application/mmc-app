@@ -319,7 +319,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       child: TextFormField(
                         controller: _passwordController,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.multiline,
                         maxLength: 20,
                         cursorColor: Colors.blueAccent,
                         style: const TextStyle(textBaseline: TextBaseline.alphabetic),

@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mmc/utils/comfun.dart';
+import 'package:mmc/bean/guide_line_entity.dart';
+import 'package:mmc/router/auth_guard.dart';
+import 'package:provider/src/provider.dart';
 
 class GuidelineDetailPage extends StatefulWidget {
-  const GuidelineDetailPage({Key? key}) : super(key: key);
+  final GuideLineEntity guideLineEntity;
+  const GuidelineDetailPage({Key? key, required this.guideLineEntity}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -14,24 +18,16 @@ class _GuidelineDetailPageState extends State<GuidelineDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget _scroll() {
-      return SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.only(top: 10, left: 26, right: 26, bottom: 30,),
-          child: Column(
-            children: [
-            ],
-          ),
-        ),
-      );
-    }
-
-    return PageContainer(
-      title: 'Guideline',
-      body: ScrollConfiguration(
-        behavior: CusBehavior(),
-        child: _scroll(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.guideLineEntity.guideLineTitle),
       ),
+      body: Image.network(
+        context.read<SystemSetService>().baseUrl + widget.guideLineEntity.guideLineImage,
+        width: MediaQuery.of(context).size.width,
+        fit: BoxFit.fitWidth,
+      ),
+
     );
   }
 }

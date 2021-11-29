@@ -145,22 +145,34 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Flexible(child: Column(
-                    children: [
-                      Container(
-                        width: 60,
-                        height: 60,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFDEE4EB),
-                          borderRadius: BorderRadius.circular(16),
+                  Flexible(child: GestureDetector(
+                    onTap: (){
+                      groupDetail(context,context.read<PersonalProfileService>().getPersonalProfileInfo?.groupId).then((group) {
+                        if(group != null){
+                          AutoRouter.of(context).push(GroupDetailRoute(info: group));
+                        }else{
+                          ComFun.showToast(msg: "没有获取到分组信息");
+                        }
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 60,
+                          height: 60,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFDEE4EB),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Image.asset('assets/icon/profile_my_group.png', width: 34, height: 34,),
                         ),
-                        child: Image.asset('assets/icon/profile_my_group.png', width: 34, height: 34,),
-                      ),
-                      const SizedBox(height: 6,),
-                      const Text('My group', style: TextStyle(fontSize: 14),),
-                    ],
-                  ),),
+                        const SizedBox(height: 6,),
+                        const Text('My group', style: TextStyle(fontSize: 14),),
+                      ],
+                    ),
+                  )
+                  ),
                   Flexible(child:
                   GestureDetector(
                     onTap: (){

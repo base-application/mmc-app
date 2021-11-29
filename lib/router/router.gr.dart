@@ -9,14 +9,16 @@
 // **************************************************************************
 
 import 'package:auto_route/auto_route.dart' as _i33;
+import 'package:flutter/cupertino.dart' as _i37;
 import 'package:flutter/material.dart' as _i34;
 
-import '../bean/event_data_item_info_entity.dart' as _i40;
-import '../bean/group_item_info_entity.dart' as _i37;
-import '../bean/network_item_info_entity.dart' as _i38;
-import '../bean/newest_item_info_entity.dart' as _i39;
-import '../bean/notification_entity.dart' as _i42;
-import '../bean/personal_profile_info_entity.dart' as _i41;
+import '../bean/event_data_item_info_entity.dart' as _i41;
+import '../bean/group_item_info_entity.dart' as _i38;
+import '../bean/guide_line_entity.dart' as _i43;
+import '../bean/network_item_info_entity.dart' as _i39;
+import '../bean/newest_item_info_entity.dart' as _i40;
+import '../bean/notification_entity.dart' as _i44;
+import '../bean/personal_profile_info_entity.dart' as _i42;
 import '../bean/referral_entity.dart' as _i36;
 import '../screens/business_profile_create_page.dart' as _i22;
 import '../screens/business_profile_set_page.dart' as _i21;
@@ -180,8 +182,11 @@ class AppRouter extends _i33.RootStackRouter {
           routeData: routeData, child: const _i24.GuidelinePage());
     },
     GuidelineDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<GuidelineDetailRouteArgs>();
       return _i33.MaterialPageX<String>(
-          routeData: routeData, child: const _i25.GuidelineDetailPage());
+          routeData: routeData,
+          child: _i25.GuidelineDetailPage(
+              key: args.key, guideLineEntity: args.guideLineEntity));
     },
     LanguageSetRoute.name: (routeData) {
       return _i33.MaterialPageX<String>(
@@ -285,7 +290,7 @@ class GroupRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for [_i3.GroupDetailPage]
 class GroupDetailRoute extends _i33.PageRouteInfo<GroupDetailRouteArgs> {
-  GroupDetailRoute({_i34.Key? key, required _i37.GroupItemInfoEntity info})
+  GroupDetailRoute({_i37.Key? key, required _i38.GroupItemInfoEntity info})
       : super(name,
             path: '/groupDetail',
             args: GroupDetailRouteArgs(key: key, info: info));
@@ -296,9 +301,9 @@ class GroupDetailRoute extends _i33.PageRouteInfo<GroupDetailRouteArgs> {
 class GroupDetailRouteArgs {
   const GroupDetailRouteArgs({this.key, required this.info});
 
-  final _i34.Key? key;
+  final _i37.Key? key;
 
-  final _i37.GroupItemInfoEntity info;
+  final _i38.GroupItemInfoEntity info;
 }
 
 /// generated route for [_i4.SendingReferralPage]
@@ -311,7 +316,7 @@ class SendingReferralRoute extends _i33.PageRouteInfo<void> {
 /// generated route for [_i5.NetworkPersonPage]
 class NetworkPersonRoute extends _i33.PageRouteInfo<NetworkPersonRouteArgs> {
   NetworkPersonRoute(
-      {_i34.Key? key, required _i38.NetworkItemInfoEntity itemInfo})
+      {_i37.Key? key, required _i39.NetworkItemInfoEntity itemInfo})
       : super(name,
             path: '/networkPerson',
             args: NetworkPersonRouteArgs(key: key, itemInfo: itemInfo));
@@ -322,9 +327,9 @@ class NetworkPersonRoute extends _i33.PageRouteInfo<NetworkPersonRouteArgs> {
 class NetworkPersonRouteArgs {
   const NetworkPersonRouteArgs({this.key, required this.itemInfo});
 
-  final _i34.Key? key;
+  final _i37.Key? key;
 
-  final _i38.NetworkItemInfoEntity itemInfo;
+  final _i39.NetworkItemInfoEntity itemInfo;
 }
 
 /// generated route for [_i6.TodayNewestPage]
@@ -336,7 +341,7 @@ class TodayNewestRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for [_i7.NewestDetailPage]
 class NewestDetailRoute extends _i33.PageRouteInfo<NewestDetailRouteArgs> {
-  NewestDetailRoute({_i34.Key? key, required _i39.NewestItemInfoEntity info})
+  NewestDetailRoute({_i37.Key? key, required _i40.NewestItemInfoEntity info})
       : super(name,
             path: '/newestDetail',
             args: NewestDetailRouteArgs(key: key, info: info));
@@ -347,9 +352,9 @@ class NewestDetailRoute extends _i33.PageRouteInfo<NewestDetailRouteArgs> {
 class NewestDetailRouteArgs {
   const NewestDetailRouteArgs({this.key, required this.info});
 
-  final _i34.Key? key;
+  final _i37.Key? key;
 
-  final _i39.NewestItemInfoEntity info;
+  final _i40.NewestItemInfoEntity info;
 }
 
 /// generated route for [_i8.EventListingPage]
@@ -363,7 +368,7 @@ class EventListingRoute extends _i33.PageRouteInfo<void> {
 class EventListingDetailRoute
     extends _i33.PageRouteInfo<EventListingDetailRouteArgs> {
   EventListingDetailRoute(
-      {_i34.Key? key, required _i40.EventDataItemInfoEntity eventInfo})
+      {_i37.Key? key, required _i41.EventDataItemInfoEntity eventInfo})
       : super(name,
             path: '/eventListingDetail',
             args: EventListingDetailRouteArgs(key: key, eventInfo: eventInfo));
@@ -374,9 +379,9 @@ class EventListingDetailRoute
 class EventListingDetailRouteArgs {
   const EventListingDetailRouteArgs({this.key, required this.eventInfo});
 
-  final _i34.Key? key;
+  final _i37.Key? key;
 
-  final _i40.EventDataItemInfoEntity eventInfo;
+  final _i41.EventDataItemInfoEntity eventInfo;
 }
 
 /// generated route for [_i10.ReferralReceivedPage]
@@ -390,7 +395,7 @@ class ReferralReceivedRoute extends _i33.PageRouteInfo<void> {
 class ReferralReceivedContactedRoute
     extends _i33.PageRouteInfo<ReferralReceivedContactedRouteArgs> {
   ReferralReceivedContactedRoute(
-      {_i34.Key? key, required _i36.ReferralEntity referralEntity})
+      {_i37.Key? key, required _i36.ReferralEntity referralEntity})
       : super(name,
             path: '/referralReceivedContacted',
             args: ReferralReceivedContactedRouteArgs(
@@ -403,7 +408,7 @@ class ReferralReceivedContactedRouteArgs {
   const ReferralReceivedContactedRouteArgs(
       {this.key, required this.referralEntity});
 
-  final _i34.Key? key;
+  final _i37.Key? key;
 
   final _i36.ReferralEntity referralEntity;
 }
@@ -411,7 +416,7 @@ class ReferralReceivedContactedRouteArgs {
 /// generated route for [_i12.SendThankYouNotePage]
 class SendThankYouNoteRoute
     extends _i33.PageRouteInfo<SendThankYouNoteRouteArgs> {
-  SendThankYouNoteRoute({_i34.Key? key, required int referralId})
+  SendThankYouNoteRoute({_i37.Key? key, required int referralId})
       : super(name,
             path: '/sendThankYouNote',
             args: SendThankYouNoteRouteArgs(key: key, referralId: referralId));
@@ -422,7 +427,7 @@ class SendThankYouNoteRoute
 class SendThankYouNoteRouteArgs {
   const SendThankYouNoteRouteArgs({this.key, required this.referralId});
 
-  final _i34.Key? key;
+  final _i37.Key? key;
 
   final int referralId;
 }
@@ -445,7 +450,7 @@ class ShiningBoardRoute extends _i33.PageRouteInfo<void> {
 /// generated route for [_i15.ShiningBoardDetailPage]
 class ShiningBoardDetailRoute
     extends _i33.PageRouteInfo<ShiningBoardDetailRouteArgs> {
-  ShiningBoardDetailRoute({_i34.Key? key, required _i14.ShiningBoardInfo about})
+  ShiningBoardDetailRoute({_i37.Key? key, required _i14.ShiningBoardInfo about})
       : super(name,
             path: '/shiningBoardDetail',
             args: ShiningBoardDetailRouteArgs(key: key, about: about));
@@ -456,7 +461,7 @@ class ShiningBoardDetailRoute
 class ShiningBoardDetailRouteArgs {
   const ShiningBoardDetailRouteArgs({this.key, required this.about});
 
-  final _i34.Key? key;
+  final _i37.Key? key;
 
   final _i14.ShiningBoardInfo about;
 }
@@ -507,7 +512,7 @@ class BusinessProfileSetRoute extends _i33.PageRouteInfo<void> {
 class BusinessProfileCreateRoute
     extends _i33.PageRouteInfo<BusinessProfileCreateRouteArgs> {
   BusinessProfileCreateRoute(
-      {_i34.Key? key, _i41.PersonalProfileInfoCompanyVos? info})
+      {_i37.Key? key, _i42.PersonalProfileInfoCompanyVos? info})
       : super(name,
             path: '/businessProfileCreate',
             args: BusinessProfileCreateRouteArgs(key: key, info: info));
@@ -518,9 +523,9 @@ class BusinessProfileCreateRoute
 class BusinessProfileCreateRouteArgs {
   const BusinessProfileCreateRouteArgs({this.key, this.info});
 
-  final _i34.Key? key;
+  final _i37.Key? key;
 
-  final _i41.PersonalProfileInfoCompanyVos? info;
+  final _i42.PersonalProfileInfoCompanyVos? info;
 }
 
 /// generated route for [_i23.ChangePasswordPage]
@@ -538,10 +543,24 @@ class GuidelineRoute extends _i33.PageRouteInfo<void> {
 }
 
 /// generated route for [_i25.GuidelineDetailPage]
-class GuidelineDetailRoute extends _i33.PageRouteInfo<void> {
-  const GuidelineDetailRoute() : super(name, path: '/guidelineDetail');
+class GuidelineDetailRoute
+    extends _i33.PageRouteInfo<GuidelineDetailRouteArgs> {
+  GuidelineDetailRoute(
+      {_i37.Key? key, required _i43.GuideLineEntity guideLineEntity})
+      : super(name,
+            path: '/guidelineDetail',
+            args: GuidelineDetailRouteArgs(
+                key: key, guideLineEntity: guideLineEntity));
 
   static const String name = 'GuidelineDetailRoute';
+}
+
+class GuidelineDetailRouteArgs {
+  const GuidelineDetailRouteArgs({this.key, required this.guideLineEntity});
+
+  final _i37.Key? key;
+
+  final _i43.GuideLineEntity guideLineEntity;
 }
 
 /// generated route for [_i26.LanguageSetPage]
@@ -560,7 +579,7 @@ class YourPicRoute extends _i33.PageRouteInfo<void> {
 
 /// generated route for [_i28.LoginPage]
 class LoginRoute extends _i33.PageRouteInfo<LoginRouteArgs> {
-  LoginRoute({_i34.Key? key, void Function(_i34.BuildContext)? onLoginSuccess})
+  LoginRoute({_i37.Key? key, void Function(_i37.BuildContext)? onLoginSuccess})
       : super(name,
             path: '/login',
             args: LoginRouteArgs(key: key, onLoginSuccess: onLoginSuccess));
@@ -571,14 +590,14 @@ class LoginRoute extends _i33.PageRouteInfo<LoginRouteArgs> {
 class LoginRouteArgs {
   const LoginRouteArgs({this.key, this.onLoginSuccess});
 
-  final _i34.Key? key;
+  final _i37.Key? key;
 
-  final void Function(_i34.BuildContext)? onLoginSuccess;
+  final void Function(_i37.BuildContext)? onLoginSuccess;
 }
 
 /// generated route for [_i29.QrViewPage]
 class QrViewRoute extends _i33.PageRouteInfo<QrViewRouteArgs> {
-  QrViewRoute({_i34.Key? key, required int type})
+  QrViewRoute({_i37.Key? key, required int type})
       : super(name,
             path: '/qrview', args: QrViewRouteArgs(key: key, type: type));
 
@@ -588,14 +607,14 @@ class QrViewRoute extends _i33.PageRouteInfo<QrViewRouteArgs> {
 class QrViewRouteArgs {
   const QrViewRouteArgs({this.key, required this.type});
 
-  final _i34.Key? key;
+  final _i37.Key? key;
 
   final int type;
 }
 
 /// generated route for [_i30.WebPage]
 class WebRoute extends _i33.PageRouteInfo<WebRouteArgs> {
-  WebRoute({_i34.Key? key, required String title, required String initUrl})
+  WebRoute({_i37.Key? key, required String title, required String initUrl})
       : super(name,
             path: '/webpage',
             args: WebRouteArgs(key: key, title: title, initUrl: initUrl));
@@ -606,7 +625,7 @@ class WebRoute extends _i33.PageRouteInfo<WebRouteArgs> {
 class WebRouteArgs {
   const WebRouteArgs({this.key, required this.title, required this.initUrl});
 
-  final _i34.Key? key;
+  final _i37.Key? key;
 
   final String title;
 
@@ -623,7 +642,7 @@ class CheckHistoryRoute extends _i33.PageRouteInfo<void> {
 /// generated route for [_i32.InboxDetailPage]
 class InboxDetailRoute extends _i33.PageRouteInfo<InboxDetailRouteArgs> {
   InboxDetailRoute(
-      {_i34.Key? key, required _i42.NotificationEntity notification})
+      {_i37.Key? key, required _i44.NotificationEntity notification})
       : super(name,
             path: '/inboxDetail',
             args: InboxDetailRouteArgs(key: key, notification: notification));
@@ -634,7 +653,7 @@ class InboxDetailRoute extends _i33.PageRouteInfo<InboxDetailRouteArgs> {
 class InboxDetailRouteArgs {
   const InboxDetailRouteArgs({this.key, required this.notification});
 
-  final _i34.Key? key;
+  final _i37.Key? key;
 
-  final _i42.NotificationEntity notification;
+  final _i44.NotificationEntity notification;
 }

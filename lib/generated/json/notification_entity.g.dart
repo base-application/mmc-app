@@ -35,7 +35,7 @@ NotificationEntity $NotificationEntityFromJson(Map<String, dynamic> json) {
 	if (notificationType != null) {
 		notificationEntity.notificationType = notificationType;
 	}
-	var linkId = jsonConvert.convert<dynamic>(json['linkId']);
+	var linkId = jsonConvert.convert<int>(json['linkId']);
 	if (linkId != null) {
 		notificationEntity.linkId = linkId;
 	}
@@ -46,6 +46,10 @@ NotificationEntity $NotificationEntityFromJson(Map<String, dynamic> json) {
 	var status = jsonConvert.convert<int>(json['status']);
 	if (status != null) {
 		notificationEntity.status = status;
+	}
+	var check = jsonConvert.convert<bool>(json['check']);
+	if (check != null) {
+		notificationEntity.check = check;
 	}
 	return notificationEntity;
 }
@@ -63,5 +67,6 @@ Map<String, dynamic> $NotificationEntityToJson(NotificationEntity entity) {
 	data['linkId'] = entity.linkId;
 	data['linkType'] = entity.linkType;
 	data['status'] = entity.status;
+	data['check'] = entity.check;
 	return data;
 }
