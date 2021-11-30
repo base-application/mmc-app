@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -91,6 +94,9 @@ class _MyAppState extends State<MyApp> {
 
   bool _appLanguageChange = false;
 
+
+  FirebaseAnalytics analytics = FirebaseAnalytics();
+
   @override
   void initState() {
     ComFun.statusBar(isLight: false);
@@ -162,9 +168,13 @@ class _MyAppState extends State<MyApp> {
               titleTextStyle:TextStyle(fontSize: 20, color: Colors.black87, fontWeight: FontWeight.bold,),
             ),
           ),
-          routerDelegate: _appRouter.delegate(),
+          routerDelegate: AutoRouterDelegate(
+            _appRouter,
+            navigatorObservers: ()=>[FirebaseAnalyticsObserver(analytics: analytics,nameExtractor : ( RouteSettings settings){return settings.name;})]
+          ),
           routeInformationProvider: _appRouter.routeInfoProvider(),
           routeInformationParser: _appRouter.defaultRouteParser(),
+
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

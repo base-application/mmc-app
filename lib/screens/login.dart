@@ -404,7 +404,7 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         GestureDetector(
                           child: Container(
-                            width: 140,
+                            width: 100,
                             height: 50,
                             padding: const EdgeInsets.only(left: 14, right: 10,),
                             decoration: BoxDecoration(
@@ -416,7 +416,9 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
-                                  child: Text(_registerCountryCode ?? AppLocalizations.of(context)!.hintLoginCountryCode, style: TextStyle(fontSize: 14, color: _registerCountryCode == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
+                                  child: Text(_registerCountryCode ?? AppLocalizations.of(context)!.hintLoginCountryCode,
+                                    style: TextStyle(fontSize: 14, color: _registerCountryCode == null ? Colors.black38 : Colors.black87,),
+                                    overflow: TextOverflow.ellipsis,),
                                 ),
                                 const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
                               ],
@@ -656,7 +658,7 @@ class _LoginPageState extends State<LoginPage> {
                             }
                             if (_canToNext) {
                               if (_signUpStep == 0) {
-                                sendSmsCode(context, phoneNumber: _registerPhoneNumberController.text.trim(), type: _pageType == 'up' ? 1 : 2, result: () {
+                                sendSmsCode(context, phoneNumber: _registerPhoneNumberController.text.trim(),countryCode: _registerCountryCode!.trim() , type: _pageType == 'up' ? 1 : 2, result: () {
                                   ComFun.showToast(msg: AppLocalizations.of(context)!.inputLoginSmsCodeSendSuccessTip);
                                   setState(() {
                                     _signUpStep += 1;
@@ -699,7 +701,7 @@ class _LoginPageState extends State<LoginPage> {
                       behavior: HitTestBehavior.opaque,
                       onTap: () {
                         FocusScope.of(context).requestFocus(FocusNode());
-                        sendSmsCode(context, phoneNumber: _registerPhoneNumberController.text.trim(), type: _pageType == 'up' ? 1 : 2, result: () {
+                        sendSmsCode(context, phoneNumber: _registerPhoneNumberController.text.trim(),countryCode: _registerCountryCode!, type: _pageType == 'up' ? 1 : 2, result: () {
                           ComFun.showToast(msg: AppLocalizations.of(context)!.inputLoginSmsCodeSendSuccessTip);
                           setState(() {
                             _registerSmsCodeController.clear();

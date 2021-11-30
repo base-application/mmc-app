@@ -69,9 +69,10 @@ forgotPassword(BuildContext context, { required String phoneNumber, required Str
 
 /// 发送短信验证码
 /// type 1 注册   2 忘记密码
-sendSmsCode(BuildContext context, { required String phoneNumber, required int type, required Function() result, Function? err }) {
+sendSmsCode(BuildContext context, { required String phoneNumber, required String countryCode, required int type, required Function() result, Function? err }) {
   httpPost(context, url: 'user/info/send/verification', queryParameters: {
     'phoneNumber': phoneNumber,
+    'countryCode': countryCode,
     'type': type,
   }, loadingTip: '短信验证码发送中').then((value) {
     result.call();
