@@ -59,7 +59,7 @@ class _GuidelinePageState extends State<GuidelinePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(snapshot.data![index].guideLineTitle,style: const TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),),
+                        Expanded(child: Text(snapshot.data![index].guideLineTitle,style: const TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis,)),
                         const Icon(CupertinoIcons.right_chevron,color: Colors.white,)
                       ],
                     ),

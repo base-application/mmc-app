@@ -14,26 +14,20 @@ import 'package:mmc/utils/comfun.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/dialog.dart';
-import 'package:mmc/utils/event_bus.dart';
 import 'package:mmc/utils/http_request.dart';
 
 import 'login.dart';
 
-class NetworkPage extends StatefulWidget {
-  final bool onlyMy;
-  const NetworkPage({Key? key, this.pageScrollDirectionChange, required this.onlyMy, required this.title}) : super(key: key);
+class MyNetworkPage extends StatefulWidget {
+  const MyNetworkPage({Key? key}) : super(key: key);
 
-  final Function(ScrollDirection scrollDirection)? pageScrollDirectionChange;
-  final String title;
   @override
   State<StatefulWidget> createState() {
-    return _NetworkPageState();
+    return _MyNetworkPageState();
   }
 }
 
-class _NetworkPageState extends State<NetworkPage> {
-  final ScrollController _pageScrollController = ScrollController();
-
+class _MyNetworkPageState extends State<MyNetworkPage> {
   final TextEditingController _nameSearchController = TextEditingController();
 
   String? _filterIndustry;
@@ -58,25 +52,16 @@ class _NetworkPageState extends State<NetworkPage> {
 
   List<NetworkItemInfoEntity> pageList = [];
 
-  late StreamSubscription _followUserStateChangeEvent;
 
   @override
   void initState() {
-    super.initState();
-    _followUserStateChangeEvent = eventBus.on<FollowUserStateChangeEvent>().listen((event) async {
-      List<NetworkItemInfoEntity> n = pageList.where((element) => element.userId == event.userId).toList();
-      if (n.isNotEmpty) {
-        setState(() {
-          n.first.isFriend = event.isFollow;
-        });
-      }
-    });
     _getPageData();
+
+    super.initState();
   }
 
   @override
   void dispose() {
-    _followUserStateChangeEvent.cancel();
     super.dispose();
   }
 
@@ -88,7 +73,6 @@ class _NetworkPageState extends State<NetworkPage> {
       ),
       color: Colors.white,
       child: pageList.isEmpty ? stateNoDate(inRef: true) : GridView.builder(
-        controller: _pageScrollController,
         padding: EdgeInsets.zero.copyWith(top: 16, bottom: 30, left: 22, right: 22,),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -246,16 +230,10 @@ class _NetworkPageState extends State<NetworkPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: widget.onlyMy ? IconButton(
-          icon: const Icon(CupertinoIcons.left_chevron),
-          onPressed: () {
-            AutoRouter.of(context).pop();
-          },
-        ) : null,
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        title: Text(widget.title,style: const TextStyle(color: Colors.black),),
+        title: Text(AppLocalizations.of(context)!.myNetwork,style: const TextStyle(color: Colors.black),),
         actions: [
          Builder(builder: (BuildContext context) {
            return IconButton(
@@ -280,7 +258,7 @@ class _NetworkPageState extends State<NetworkPage> {
                 filled: true,
                 fillColor: const Color(0xffFBB714),
                 floatingLabelBehavior: FloatingLabelBehavior.never,
-                label: Center(child: Text(AppLocalizations.of(context)!.pageNetworkHeadSearchTip,textAlign: TextAlign.center,style: TextStyle(fontSize: 14,color: Color(0xff002A67)),),),
+                label: Center(child: Text(AppLocalizations.of(context)!.pageNetworkHeadSearchTip,textAlign: TextAlign.center,style: const TextStyle(fontSize: 14,color: Color(0xff002A67)),),),
                 contentPadding: const EdgeInsets.only(left: 16),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),
@@ -298,20 +276,17 @@ class _NetworkPageState extends State<NetworkPage> {
             ),
           ),
           Expanded(child:
-          NotificationListener(
-            child: RefreshIndicator(
-              displacement: 20,
-              color: const Color.fromARGB(245, 44, 163, 184),
-              backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-              child: ScrollConfiguration(
-                behavior: CusBehavior(),
-                child: _scrollMain,
-              ),
-              onRefresh: () async {
-                _getPageData();
-              },
+          RefreshIndicator(
+            displacement: 20,
+            color: const Color.fromARGB(245, 44, 163, 184),
+            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+            child: ScrollConfiguration(
+              behavior: CusBehavior(),
+              child: _scrollMain,
             ),
-            onNotification: (Notification notification) => _pageScrollNotification(notification),
+            onRefresh: () async {
+              _getPageData();
+            },
           ),),
         ],
       ),
@@ -498,21 +473,9 @@ class _NetworkPageState extends State<NetworkPage> {
     );
   }
 
-  bool _pageScrollNotification(Notification notification) {
-    if (notification is ScrollStartNotification) {
-    }
-    if (notification is ScrollUpdateNotification) {
-      if (_pageScrollController.positions.isNotEmpty &&_pageScrollController.position.userScrollDirection != ScrollDirection.idle) {
-        widget.pageScrollDirectionChange?.call(_pageScrollController.position.userScrollDirection);
-      }
-    }
-    if (notification is ScrollEndNotification) {
-    }
-    return true;
-  }
 
   Future _getPageData({ String? name }) async {
-    return getNetworkListData(context, name: name, industry: _filterIndustry, countryId: _filterCountry?.id, cityId: _filterCity?.id, result: (List<NetworkItemInfoEntity> list) {
+    return getMyNetwork(context, name: name, industry: _filterIndustry, countryId: _filterCountry?.id, cityId: _filterCity?.id, result: (List<NetworkItemInfoEntity> list) {
       pageList = list;
       setState(() {});
     });

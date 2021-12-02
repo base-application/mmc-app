@@ -67,7 +67,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
             });
           }
         }
-      },),
+      }, title: AppLocalizations.of(context)!.netWork,),
       CheckInPage(pageScrollDirectionChange: (ScrollDirection scrollDirection) {
         if (scrollDirection == ScrollDirection.forward) {
           if (_bottomNavigatorAnimControl != CustomAnimationControl.playReverse) {

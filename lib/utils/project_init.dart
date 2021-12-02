@@ -35,7 +35,7 @@ class ProjectInit{
       }
     });
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-    await FirebaseMessaging.instance.subscribeToTopic('weather');
+    await FirebaseMessaging.instance.subscribeToTopic('mmc');
 
   }
 }

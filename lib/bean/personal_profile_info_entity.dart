@@ -33,7 +33,7 @@ class PersonalProfileInfoEntity {
 	late bool enable;
 	int? positionId;
 	String? positionName;
-	dynamic member;
+	String? member;
 	late List<PersonalProfileInfoCompanyVos> companyVos;
 	late AchievementEntity achievement;
 	dynamic friend;

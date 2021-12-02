@@ -73,10 +73,11 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                   child: Row(
                     children: [
                       netImgWrap(context,
-                        width: 100,
+                        width: 120,
+                        height: 162,
                         radius: 14,
                         url: _formUserHead ?? context.watch<AuthService>().getLoginInfo?.avatar,
-                        errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 100, fit: BoxFit.fitWidth,),
+                        errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 100, fit: BoxFit.cover,),
                       ),
                       const SizedBox(width: 12,),
                       Column(
@@ -92,8 +93,10 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                 ),
                 behavior: HitTestBehavior.opaque,
                 onTap: () async {
-                  String uploadPath = await httpUpload(context);
-                  _formUserHead = uploadPath;
+                  String uploadPath = await httpUpload(context,x: 3,y: 4);
+                  if(uploadPath.isNotEmpty){
+                    _formUserHead = uploadPath;
+                  }
                   setState(() {});
                 },
               ),

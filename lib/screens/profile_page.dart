@@ -14,6 +14,7 @@ import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:provider/src/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'network_page.dart';
 
@@ -168,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Image.asset('assets/icon/profile_my_group.png', width: 34, height: 34,),
                         ),
                         const SizedBox(height: 6,),
-                        const Text('My group', style: TextStyle(fontSize: 14),),
+                        Text(AppLocalizations.of(context)!.myGroup, style: TextStyle(fontSize: 14),),
                       ],
                     ),
                   )
@@ -176,7 +177,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Flexible(child:
                   GestureDetector(
                     onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => NetworkPage(onlyMy: true,)));
+                      AutoRouter.of(context).push(MyNetworkRoute());
                     },
                     child: Column(
                       children: [
@@ -191,7 +192,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Image.asset('assets/icon/profile_my_network.png', width: 34, height: 34,),
                         ),
                         const SizedBox(height: 6,),
-                        const Text('My network', style: TextStyle(fontSize: 14),),
+                        Text(AppLocalizations.of(context)!.myNetwork, style: TextStyle(fontSize: 14),),
                       ],
                     ),
                   )
@@ -214,7 +215,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Image.asset('assets/icon/profile_your_pic.png', width: 34, height: 34,),
                         ),
                         const SizedBox(height: 6,),
-                        const Text('Your PIC', style: TextStyle(fontSize: 14),),
+                        Text(AppLocalizations.of(context)!.yourPIC, style: TextStyle(fontSize: 14),),
                       ],
                     ),
                   )
@@ -248,14 +249,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 26),
-                    child: Text('My achievements', style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 18),),
+                    child: Text(AppLocalizations.of(context)!.myAchievements, style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 18),),
                   ),
                   Row(
                     children: [
                       GestureDetector(
                         child: Padding(
                           padding: const EdgeInsets.all(10).copyWith(right: 6),
-                          child: Text('Monthly', style: TextStyle(color: _achievementIndex == 0 ? Colors.blue.shade800 : Colors.black87, fontWeight: _achievementIndex == 0 ? FontWeight.bold : FontWeight.w400,),),
+                          child: Text(AppLocalizations.of(context)!.monthly, style: TextStyle(color: _achievementIndex == 0 ? Colors.blue.shade800 : Colors.black87, fontWeight: _achievementIndex == 0 ? FontWeight.bold : FontWeight.w400,),),
                         ),
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
@@ -266,7 +267,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       GestureDetector(
                         child: Padding(
                           padding: const EdgeInsets.all(10).copyWith(left: 6),
-                          child: Text('Lifetime', style: TextStyle(color: _achievementIndex == 1 ? Colors.blue.shade800 : Colors.black87, fontWeight: _achievementIndex == 1 ? FontWeight.bold : FontWeight.w400,),),
+                          child: Text(AppLocalizations.of(context)!.lifetime, style: TextStyle(color: _achievementIndex == 1 ? Colors.blue.shade800 : Colors.black87, fontWeight: _achievementIndex == 1 ? FontWeight.bold : FontWeight.w400,),),
                         ),
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
@@ -420,9 +421,9 @@ class MonthlyAchievement extends StatelessWidget {
               Text("Joined event", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteSend.toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteSend??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
-                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteSend.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteSend)),
+                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteSend?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteSend??0)??0),
                 ],
               ),
             ],
@@ -441,9 +442,9 @@ class MonthlyAchievement extends StatelessWidget {
               Text("Referral sent", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralSend.toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralSend??0).toString(), style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
-                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralSend.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevReferralSend)),
+                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralSend?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevReferralSend??0)??0),
                 ],
               ),
             ],
@@ -462,9 +463,9 @@ class MonthlyAchievement extends StatelessWidget {
               Text("Referral received", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralReceived.toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralReceived??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
-                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralReceived.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevReferralReceived)),
+                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralReceived?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevReferralReceived??0)??0),
                 ],
               ),
             ],
@@ -483,9 +484,9 @@ class MonthlyAchievement extends StatelessWidget {
               Text("Thank you note", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteReceived.toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteReceived??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
-                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteReceived.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevThankYouNoteReceived))
+                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteReceived?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevThankYouNoteReceived??0)??0)
                 ],
               ),
             ],
@@ -528,7 +529,7 @@ class LifetimeAchievement extends StatelessWidget {
               Text("Joined event", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteSendCount.toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteSendCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                 ],
               ),
             ],
@@ -547,7 +548,7 @@ class LifetimeAchievement extends StatelessWidget {
               Text("Referral sent", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralSendCount.toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralSendCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                 ],
               ),
             ],
@@ -566,7 +567,7 @@ class LifetimeAchievement extends StatelessWidget {
               Text("Referral received", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralReceivedCount.toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralReceivedCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                 ],
               ),
             ],
@@ -585,7 +586,7 @@ class LifetimeAchievement extends StatelessWidget {
               Text("Thank you note", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteReceivedCount.toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteReceivedCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                 ],
               ),
             ],

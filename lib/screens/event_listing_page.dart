@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -103,7 +102,7 @@ class _EventListingPageState extends State<EventListingPage> {
                                 contentExtend: TableCalendar(
                                   locale: Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN',
                                   firstDay: DateTime.utc(2021, 1, 1),
-                                  lastDay: DateTime.now(),
+                                  lastDay: DateTime.now().add(const Duration(days: 365)),
                                   focusedDay: _focusedDay,
                                   daysOfWeekHeight: 20,
                                   daysOfWeekStyle: const DaysOfWeekStyle(
@@ -535,18 +534,21 @@ class _EventListingPageState extends State<EventListingPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(width: 4,),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(DateFormat('MMM', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(itemDate), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87,),),
-                        const SizedBox(width: 4,),
-                        Text(DateFormat('d', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(itemDate), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87,),),
-                      ],
-                    ),
-                    Text(DateFormat('EEE', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(itemDate), style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black87,),),
-                  ],
+                Container(
+                  width: 55,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(DateFormat('MMM', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(itemDate), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87,),),
+                          const SizedBox(width: 4,),
+                          Text(DateFormat('d', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(itemDate), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87,),),
+                        ],
+                      ),
+                      Text(DateFormat('EEE', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(itemDate), style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black87,),),
+                    ],
+                  ),
                 ),
                 const SizedBox(width: 14,),
                 Expanded(child: ListView.builder(

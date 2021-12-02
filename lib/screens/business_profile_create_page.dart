@@ -95,9 +95,11 @@ class _BusinessProfileCreatePageState extends State<BusinessProfileCreatePage> {
                         behavior: HitTestBehavior.opaque,
                         onTap: () async {
                           if (_isEdit) {
-                            String uploadPath = await httpUpload(context);
-                            _formCompanyLogo = uploadPath;
-                            setState(() {});
+                            String uploadPath = await httpUpload(context,x: 1,y: 1);
+                            if(uploadPath.isNotEmpty){
+                              _formCompanyLogo = uploadPath;
+                              setState(() {});
+                            }
                           }
                         },
                       ),
@@ -810,13 +812,18 @@ class _BusinessProfileCreatePageState extends State<BusinessProfileCreatePage> {
                               child: Stack(
                                 clipBehavior: Clip.none,
                                 children: [
-                                  netImgWrap(context,
-                                    url: _formProducts[index],
-                                    radius: 14,
-                                    errorWidget: Container(
-                                      alignment: Alignment.center,
-                                      decoration: const BoxDecoration(
-                                        color: Color(0xFFDFE5ED),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xFFDFE5ED),
+                                    ),
+                                    child: netImgWrap(context,
+                                      url: _formProducts[index],
+                                      errorWidget: Container(
+                                        alignment: Alignment.center,
+                                        decoration: const BoxDecoration(
+                                          color: Color(0xFFDFE5ED),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -835,22 +842,21 @@ class _BusinessProfileCreatePageState extends State<BusinessProfileCreatePage> {
                             );
                           }
                           return GestureDetector(
-                            child: netImgWrap(context,
-                              url: null,
-                              radius: 14,
-                              errorWidget: Container(
-                                alignment: Alignment.center,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFFDFE5ED),
-                                ),
-                                child: const Icon(Icons.add_circle_rounded, size: 36, color: Color(0xFF013B7B),),
+                            child: Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFDFE5ED),
+                                borderRadius: BorderRadius.circular(14)
                               ),
+                              child: const Icon(Icons.add_circle_rounded, size: 36, color: Color(0xFF013B7B),),
                             ),
                             behavior: HitTestBehavior.opaque,
                             onTap: () async {
                               String uploadPath = await httpUpload(context);
-                              _formProducts.add(uploadPath);
-                              setState(() {});
+                              if(uploadPath.isNotEmpty){
+                                _formProducts.add(uploadPath);
+                                setState(() {});
+                              }
                             },
                           );
                         },
@@ -884,7 +890,7 @@ class _BusinessProfileCreatePageState extends State<BusinessProfileCreatePage> {
     }
 
     return PageContainer(
-      title: 'Personal Profile',
+      title: AppLocalizations.of(context)!.businessProfileTitle,
       resizeToAvoidBottomInset: true,
       body: ScrollConfiguration(
         behavior: CusBehavior(),

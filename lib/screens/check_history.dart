@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:mmc/bean/check_log_entity.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http_request.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CheckHistoryPage extends StatefulWidget {
   const CheckHistoryPage({Key? key}) : super(key: key);
@@ -29,7 +31,7 @@ class _CheckHistoryPageState extends State<CheckHistoryPage> with SingleTickerPr
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("签到/签退历史"),
+        title: Text(AppLocalizations.of(context)!.checkInHistoryTitle),
       ),
       body: FutureBuilder(
         future: _future,

@@ -35,8 +35,8 @@ class _YourPicPageState extends State<YourPicPage> {
                 children: [
                   netImgWrap(context,
                     width: 64,
+                    height: 64,
                     radius: 50,
-                    height: double.infinity,
                     url: context.watch<AuthService>().getLoginInfo?.avatar,
                     errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 64,height: 64, fit: BoxFit.fitWidth,),
                   ),

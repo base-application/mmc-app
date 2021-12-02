@@ -46,18 +46,13 @@ class _HomeAppBarState extends State<HomeAppBar> {
               Text(context.watch<PersonalProfileService>().getPersonalProfileInfo?.name ?? '-', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black87,),),
             ],
           ),
-          GestureDetector(
-            onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) { return St(); }));
-            },
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: netImgWrap(context,
-                width: 50,
-                height: 50,
-                url: context.watch<AuthService>().getLoginInfo?.avatar,
-                errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 50, height: 50, fit: BoxFit.fitWidth,),
-              ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: netImgWrap(context,
+              width: 50,
+              height: 50,
+              url: context.watch<AuthService>().getLoginInfo?.avatar,
+              errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 50, height: 50, fit: BoxFit.fitWidth,),
             ),
           )
         ],

@@ -238,54 +238,6 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        // GestureDetector(
-                        //   child: Container(
-                        //     width: 140,
-                        //     height: 50,
-                        //     padding: const EdgeInsets.only(left: 14, right: 10,),
-                        //     decoration: BoxDecoration(
-                        //       color: Colors.white,
-                        //       borderRadius: BorderRadius.circular(10),
-                        //     ),
-                        //     child: Row(
-                        //       mainAxisSize: MainAxisSize.max,
-                        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //       children: [
-                        //         Expanded(
-                        //           child: Text(_countryCode ?? 'Country Code', style: TextStyle(fontSize: 14, color: _countryCode == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
-                        //         ),
-                        //         const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
-                        //       ],
-                        //     ),
-                        //   ),
-                        //   behavior: HitTestBehavior.opaque,
-                        //   onTap: () {
-                        //     FocusScope.of(context).requestFocus(FocusNode());
-                        //     if (_countryCode == null && countryCodeDataList.isNotEmpty) {
-                        //       setState(() {
-                        //         _countryCode = countryCodeDataList[0].phonecode;
-                        //       });
-                        //     }
-                        //     List<CountryCodeInfo> curr = countryCodeDataList.where((element) => element.phonecode == _countryCode).toList();
-                        //     Pickers.showSinglePicker(context,
-                        //       data: countryCodeDataList.map((e) => '${e.phonecode} (${e.nativeName})').toList(),
-                        //       selectData: _countryCode != null && curr.isNotEmpty ? '${curr[0].phonecode} (${curr[0].nativeName})' : '',
-                        //       pickerStyle: PickerStyle(
-                        //         showTitleBar: false,
-                        //         backgroundColor: const Color(0xFF0859D2),
-                        //         textColor: Colors.white,
-                        //         pickerHeight: MediaQuery.of(context).size.height * 0.6,
-                        //       ),
-                        //       overlapTabBar: true,
-                        //       onChanged: (p, index) {
-                        //         setState(() {
-                        //           _countryCode = countryCodeDataList[index].phonecode;
-                        //         });
-                        //       },
-                        //     );
-                        //   },
-                        // ),
-                        // const SizedBox(width: 8,),
                         Expanded(child: Container(
                           height: 50,
                           decoration: BoxDecoration(

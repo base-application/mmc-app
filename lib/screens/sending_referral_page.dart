@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:mmc/bean/group_item_entity.dart';
 import 'package:mmc/bean/image_vo_entity.dart';
 import 'package:mmc/bean/network_item_info_entity.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http.dart';
 import 'package:mmc/utils/http_request.dart';
+import 'package:mmc/widget/post_image_view.dart';
 
 class SendingReferralPage extends StatefulWidget {
   const SendingReferralPage({Key? key}) : super(key: key);
@@ -98,6 +100,7 @@ class _SendingReferralPageState extends State<SendingReferralPage> {
                                         return GestureDetector(
                                           onTap: (){
                                             _formToGroup = list[index];
+                                            _receivedUser = null;
                                             setState(() {});
                                             Navigator.of(context).pop();
                                           },
@@ -221,17 +224,22 @@ class _SendingReferralPageState extends State<SendingReferralPage> {
                           itemCount: _formUpload.length + 1,
                           itemBuilder: (BuildContext context, int index) {
                             if (index < _formUpload.length) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFDEE5ED),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: netImgWrap(context,
-                                  url: _formUpload[index].url,
-                                  radius: 12,
-                                  fit: BoxFit.fitHeight,
-                                  errorWidget: Container(color: Colors.grey.shade300,),
-                              ));
+                              return GestureDetector(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => PosterView(images: _formUpload,)));
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFDEE5ED),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: netImgWrap(context,
+                                      url: _formUpload[index].url,
+                                      radius: 12,
+                                      fit: BoxFit.fitHeight,
+                                      errorWidget: Container(color: Colors.grey.shade300,),
+                                    )),
+                              );
                             }
                             return GestureDetector(
                               child: Container(
@@ -280,6 +288,7 @@ class _SendingReferralPageState extends State<SendingReferralPage> {
                         ComFun.showToast(msg:AppLocalizations.of(context)!.referralReceivedUser);
                         return;
                       }
+                      EasyLoading.show();
                       sendReferral(context, reason: _sendReferralWhyDetailController.text, images: _formUpload,receivedUser: _receivedUser!.userId, result: (v) {
                         AutoRouter.of(context).pop();
                       });
@@ -295,7 +304,7 @@ class _SendingReferralPageState extends State<SendingReferralPage> {
   }
 
   void _showNetWork() {
-    getMyNetwork(context,groupId: _formToGroup?.groupId,result: (List<NetworkItemInfoEntity> list) {
+    getNetworkListData(context,groupId: _formToGroup?.groupId,result: (List<NetworkItemInfoEntity> list) {
       if(list.isEmpty){
         ComFun.showToast(msg: AppLocalizations.of(context)!.notHaveNetwork);
         return;
@@ -361,7 +370,7 @@ class _NetWorkSelectState extends State<NetWorkSelect> {
                       if(v.isEmpty){
                         _list = widget.list;
                       }else{
-                        _list = widget.list.where((element) => element.name!.toLowerCase().contains(v.toLowerCase())).toList();
+                        _list = widget.list.where((element) => (element.name??"").toLowerCase().contains(v.toLowerCase())).toList();
                       }
                       setState((){});
                     },

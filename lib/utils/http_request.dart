@@ -419,7 +419,7 @@ Future getNewestListData(BuildContext context, { String? title, int? startDate, 
 }
 
 /// 获取Network列表数据
-Future getNetworkListData(BuildContext context, { String? name, String? industry, int? countryId, int? cityId, bool silence = false, required Function(List<NetworkItemInfoEntity> list) result, Function? err }) async {
+Future getNetworkListData(BuildContext context, { String? name, int? groupId , String? industry, int? countryId, int? cityId, bool silence = false, required Function(List<NetworkItemInfoEntity> list) result, Function? err }) async {
   await httpGetPage(context, url: 'user/info/network', queryParameters: {
     'page': 1,
     'size': 0,
@@ -427,6 +427,7 @@ Future getNetworkListData(BuildContext context, { String? name, String? industry
     'industry': industry,
     'countryId': countryId,
     'cityId': cityId,
+    'groupId': groupId
   }, silence: silence).then((value) {
     result.call(value!.data!.list.map((e) => NetworkItemInfoEntity.fromJson(e)).toList());
   }).catchError((_) {
@@ -447,6 +448,7 @@ Future getMyNetwork(BuildContext context, { String? name, String? industry, int?
   }, silence: silence).then((value) {
     result.call(value!.data!.list.map((e) => NetworkItemInfoEntity.fromJson(e)).toList());
   }).catchError((_) {
+    print(err);
     err?.call();
   });
 }

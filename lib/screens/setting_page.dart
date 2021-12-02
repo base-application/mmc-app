@@ -27,63 +27,63 @@ class _SettingPageState extends State<SettingPage> {
     _menus.addAll([
       MenuDoItem(
         iconAssets: 'assets/icon/set_personal_profile.png',
-        label: 'Personal Profile',
+        label: AppLocalizations.of(context)!.personalProfileTitle,
         onTap: () {
           AutoRouter.of(context).push(const PersonalProfileSetRoute());
         },
       ),
       MenuDoItem(
         iconAssets: 'assets/icon/set_business_profile.png',
-        label: 'Business Profile',
+        label: AppLocalizations.of(context)!.businessProfileTitle,
         onTap: () {
           AutoRouter.of(context).push(const BusinessProfileSetRoute());
         },
       ),
       MenuDoItem(
         iconAssets: 'assets/icon/set_change_password.png',
-        label: 'Change Password',
+        label: AppLocalizations.of(context)!.changePassword,
         onTap: () {
           AutoRouter.of(context).push(const ChangePasswordRoute());
         },
       ),
       MenuDoItem(
         iconAssets: 'assets/icon/set_guideline.png',
-        label: 'Guideline',
+        label:  AppLocalizations.of(context)!.guideline,
         onTap: () {
           AutoRouter.of(context).push(const GuidelineRoute());
         },
       ),
       MenuDoItem(
         iconAssets: 'assets/icon/set_about_us.png',
-        label: 'About Us',
+        label: AppLocalizations.of(context)!.aboutUs,
         onTap: () {
           AutoRouter.of(context).push(WebRoute(title: 'About Us', initUrl: 'https://mastermindcouncil.asia/'));
         },
       ),
       MenuDoItem(
         iconAssets: 'assets/icon/set_new_user_tour.png',
-        label: 'New User Tour',
+        label: AppLocalizations.of(context)!.userTour,
         onTap: () {
           // AutoRouter.of(context).push(const GuidelineRoute());
         },
       ),
       MenuDoItem(
         iconAssets: 'assets/icon/set_privacy_policy.png',
-        label: 'Privacy Policy',
+        label: AppLocalizations.of(context)!.privacyPolicy,
         onTap: () {
           // AutoRouter.of(context).push(const GuidelineRoute());
         },
       ),
       MenuDoItem(
         iconAssets: 'assets/icon/set_term_of_service.png',
-        label: 'Term of Service',
+        label:AppLocalizations.of(context)!.termService,
         onTap: () {
           // AutoRouter.of(context).push(const GuidelineRoute());
         },
       ),
       MenuDoItem(
         iconAssets: 'assets/icon/set_language.png',
-        label: 'Language',
+        label: AppLocalizations.of(context)!.language,
         onTap: () {
           AutoRouter.of(context).push(const LanguageSetRoute());
         },
@@ -175,7 +175,7 @@ class _SettingPageState extends State<SettingPage> {
     }
 
     return PageContainer(
-      title: 'Setting',
+      title: AppLocalizations.of(context)!.setting,
       pageBg: Colors.white,
       body: ScrollConfiguration(
         behavior: CusBehavior(),

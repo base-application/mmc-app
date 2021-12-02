@@ -71,9 +71,8 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
 
     _currentNotes.clear();
     _currentNotes.addAll([
-      'Lorem ipsum dolor sit amet, consectetu...',
-      'Lorem ipsum dolor sit amet, consectetus,sd sdasds ddsvs dvdsfds dfsfsdfds dsvfdfsd...',
-      'Lorem ipsum dolor sit amet, consectetu...'
+      'MMC has lot of events to attend, view more ',
+      'events in our event listing'
     ]);
 
     tipController.reset();
@@ -399,7 +398,8 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                   height: 150,
                   child: ScrollConfiguration(
                     behavior: CusBehavior(),
-                    child: ListView.builder(
+                    child: context.watch<HomeIndexDataService>().getHomeIndexInfo!.upcoming.isNotEmpty ?
+                    ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: context.watch<HomeIndexDataService>().getHomeIndexInfo!.upcoming.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -583,7 +583,11 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                           },
                         );
                       },
-                    ),
+                    ):
+                    Center(
+                      child: Image.asset('assets/image/no_data.png', height: 120,),
+                    )
+                    ,
                   ),
                 ),
                 const SizedBox(height: 120,),

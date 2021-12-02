@@ -5,18 +5,18 @@ import 'package:mmc/generated/json/achievement_entity.g.dart';
 @JsonSerializable()
 class AchievementEntity {
 
-	late int referralSend;
-	late int referralReceived;
-	late int thankYouNoteSend;
-	late int thankYouNoteReceived;
-	late int prevReferralSend;
-	late int prevReferralReceived;
-	late int prevThankYouNoteSend;
-	late int prevThankYouNoteReceived;
-	late int referralSendCount;
-	late int referralReceivedCount;
-	late int thankYouNoteSendCount;
-	late int thankYouNoteReceivedCount;
+	int? referralSend;
+	int? referralReceived;
+	int? thankYouNoteSend;
+	int? thankYouNoteReceived;
+	int? prevReferralSend;
+	int? prevReferralReceived;
+	int? prevThankYouNoteSend;
+	int? prevThankYouNoteReceived;
+	int? referralSendCount;
+	int? referralReceivedCount;
+	int? thankYouNoteSendCount;
+	int? thankYouNoteReceivedCount;
   
   AchievementEntity();
 

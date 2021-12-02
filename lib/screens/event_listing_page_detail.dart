@@ -107,9 +107,9 @@ class _EventListingDetailPageState extends State<EventListingDetailPage> {
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
                         elevation: MaterialStateProperty.all(0),
                       ),
-                      child: Text(widget.eventInfo.checkIn == null ? AppLocalizations.of(context)!.join : AppLocalizations.of(context)!.joined, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
+                      child: Text(widget.eventInfo.join !=true ? AppLocalizations.of(context)!.join : AppLocalizations.of(context)!.joined, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
                       onPressed: () {
-                        if (widget.eventInfo.checkIn == null) {
+                        if (widget.eventInfo.join != true) {
                           showDialog(
                             context: context,
                             barrierColor: Colors.black.withAlpha(180),

@@ -11,8 +11,11 @@ import 'package:mmc/bean/login_info_entity.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/router/router.gr.dart';
+import 'package:mmc/utils/dialog.dart';
 import 'package:mmc/widget/app_bar_home_default.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'event_bus.dart';
 
@@ -99,6 +102,80 @@ class ComFun {
         AutoRouter.of(ctx).replaceAll([const HomeRoute()]);
       })
     ]);
+  }
+
+
+  static void confirm(BuildContext context,Function() confirm,String text){
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withAlpha(180),
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return DialogWidget(
+          title: '',
+          content: '',
+          slideMargin: 4,
+          showTitle: false,
+          showBottomDo: false,
+          borderRadius: 14,
+          outTapDismiss: true,
+          contentExtend: Row(
+            children: [
+              Expanded(child: Column(
+                children: [
+                  const SizedBox(height: 30,),
+                  Text(text, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600,), textAlign: TextAlign.center,),
+                  const SizedBox(height: 50,),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 130,
+                        height: 48,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
+                            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                            elevation: MaterialStateProperty.all(0),
+                          ),
+                          child: Text(AppLocalizations.of(context)!.yes, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            confirm();
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 20,),
+                      Container(
+                        width: 130,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: const Color(0xFF346295)),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(Colors.white),
+                            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                            elevation: MaterialStateProperty.all(0),
+                          ),
+                          child: Text(AppLocalizations.of(context)!.cancel, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 40,),
+                ],
+              )),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
 

@@ -8,6 +8,7 @@ import 'package:mmc/bean/notification_entity.dart';
 import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http_request.dart';
+import 'package:mmc/widget/bottom_button.dart';
 
 class MyInboxPage extends StatefulWidget {
   const MyInboxPage({Key? key}) : super(key: key);
@@ -35,7 +36,7 @@ class _MyInboxPageState extends State<MyInboxPage> {
      builder: (BuildContext context, AsyncSnapshot<List<NotificationEntity>> snapshot) {
        return  Scaffold(
          appBar: AppBar(
-           title: Text("My Inbox"),
+           title: Text(AppLocalizations.of(context)!.inbox),
            leading: _isEdit ?
            TextButton(
                onPressed: (){
@@ -45,7 +46,7 @@ class _MyInboxPageState extends State<MyInboxPage> {
                    element.check = false;
                  });
                  },
-               child: const Text("完成",style: TextStyle(color: Color(0xFF013B7B)),
+               child: Text(AppLocalizations.of(context)!.done,style: TextStyle(color: Color(0xFF013B7B)),
                )
            ) :
            IconButton(
@@ -71,7 +72,7 @@ class _MyInboxPageState extends State<MyInboxPage> {
                  duration: const Duration(milliseconds: 200),
                  child: Padding(
                    padding: const EdgeInsets.all(10),
-                   child: _isEdit ? Text('Select All', style: TextStyle(fontSize: 12, color: Colors.grey.shade700, fontWeight: FontWeight.w500,),)
+                   child: _isEdit ? Text(AppLocalizations.of(context)!.selectAll, style: TextStyle(fontSize: 12, color: Colors.grey.shade700, fontWeight: FontWeight.w500,),)
                        : const Icon(Icons.create_rounded, size: 22,),
                  ) ,
                ),
@@ -79,7 +80,7 @@ class _MyInboxPageState extends State<MyInboxPage> {
            ],
          ),
          body: getBody(snapshot),
-         bottomNavigationBar: _isEdit ? SafeArea(
+         bottomNavigationBar: _isEdit ? BottomButton(
            child: Container(
              width: MediaQuery.of(context).size.width,
              height: 50,

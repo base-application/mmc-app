@@ -13,8 +13,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mmc/router/auth_guard.dart';
-// import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+
 
 import 'comfun.dart';
 import 'event_bus.dart';
@@ -126,8 +126,8 @@ void dismissLoading() {
 }
 
 /// get 请求
-Future<BaseBean?> httpGet(BuildContext context, { required String url, Map<String, dynamic>? queryParameters, bool silence = false, String loadingTip = '请求中..', bool endHideLoading = true, bool successButErrShowTip = true, bool isShop = false }) async {
-  if (!silence) EasyLoading.show(status: loadingTip);
+Future<BaseBean?> httpGet(BuildContext context, { required String url, Map<String, dynamic>? queryParameters, bool silence = false, String loadingTip ="", bool endHideLoading = true, bool successButErrShowTip = true, bool isShop = false }) async {
+  if (!silence) EasyLoading.show();
 
   await requestAuthHead(context, DioHttpUtil(context)._dio!.options, url);
 
@@ -157,7 +157,7 @@ Future<BaseBean?> httpGet(BuildContext context, { required String url, Map<Strin
 
 /// post 请求
 Future<BaseBean?> httpPost(BuildContext context, { required String url, Map<String, dynamic>? data, Map<String, dynamic>? queryParameters, bool silence = false, String loadingTip = '请求中..', bool endHideLoading = true, bool successButErrShowTip = true, bool isShop = false }) async {
-  if (!silence) EasyLoading.show(status: loadingTip);
+  if (!silence) EasyLoading.show();
 
   await requestAuthHead(context, DioHttpUtil(context)._dio!.options, url);
 
@@ -187,7 +187,7 @@ Future<BaseBean?> httpPost(BuildContext context, { required String url, Map<Stri
 
 /// delete 请求
 Future<BaseBean?> httpDelete(BuildContext context, { required String url, Map<String, dynamic>? data, Map<String, dynamic>? queryParameters, bool silence = false, String loadingTip = '请求中..', bool endHideLoading = true, bool successButErrShowTip = true, bool isShop = false }) async {
-  if (!silence) EasyLoading.show(status: loadingTip);
+  if (!silence) EasyLoading.show();
 
   await requestAuthHead(context, DioHttpUtil(context)._dio!.options, url);
 
@@ -217,7 +217,7 @@ Future<BaseBean?> httpDelete(BuildContext context, { required String url, Map<St
 
 /// put 请求
 Future<BaseBean?> httpPut(BuildContext context, { required String url, dynamic data, Map<String, dynamic>? queryParameters, bool silence = false, String loadingTip = '请求中..', bool endHideLoading = true, bool successButErrShowTip = true, bool isShop = false }) async {
-  if (!silence) EasyLoading.show(status: loadingTip);
+  if (!silence) EasyLoading.show();
 
   await requestAuthHead(context, DioHttpUtil(context)._dio!.options, url);
 
@@ -247,7 +247,7 @@ Future<BaseBean?> httpPut(BuildContext context, { required String url, dynamic d
 
 /// put list数据请求
 Future<BaseBean<List>?> httpPutList(BuildContext context, { required String url, Map<String, dynamic>? data, Map<String, dynamic>? queryParameters, bool silence = false, String loadingTip = '请求中..', bool endHideLoading = true, bool successButErrShowTip = true, bool isShop = false }) async {
-  if (!silence) EasyLoading.show(status: loadingTip);
+  if (!silence) EasyLoading.show();
 
   await requestAuthHead(context, DioHttpUtil(context)._dio!.options, url);
 
@@ -279,7 +279,7 @@ Future<BaseBean<List>?> httpPutList(BuildContext context, { required String url,
 
 /// get list数据请求
 Future<BaseBean<List>?> httpGetList(BuildContext context, { required String url, Map<String, dynamic>? queryParameters, bool silence = false, String loadingTip = '请求中..', bool endHideLoading = true, bool successButErrShowTip = true, bool isShop = false }) async {
-  if (!silence) EasyLoading.show(status: loadingTip);
+  if (!silence) EasyLoading.show();
 
   await requestAuthHead(context, DioHttpUtil(context)._dio!.options, url);
 
@@ -310,7 +310,7 @@ Future<BaseBean<List>?> httpGetList(BuildContext context, { required String url,
 }
 /// post list数据请求
 Future<BaseBean<List>?> httpPostList(BuildContext context, { required String url, Map<String, dynamic>? queryParameters, bool silence = false, String loadingTip = '请求中..', bool endHideLoading = true, bool successButErrShowTip = true, bool isShop = false }) async {
-  if (!silence) EasyLoading.show(status: loadingTip);
+  if (!silence) EasyLoading.show();
 
   await requestAuthHead(context, DioHttpUtil(context)._dio!.options, url);
 
@@ -341,7 +341,7 @@ Future<BaseBean<List>?> httpPostList(BuildContext context, { required String url
 }
 /// get 分页请求
 Future<BaseBean<PageBaseBean>?> httpGetPage(BuildContext context, { required String url, Map<String, dynamic>? queryParameters, bool silence = false, String loadingTip = '请求中..', bool endHideLoading = true, bool successButErrShowTip = true, bool isShop = false }) async {
-  if (!silence) EasyLoading.show(status: loadingTip);
+  if (!silence) EasyLoading.show();
 
   await requestAuthHead(context, DioHttpUtil(context)._dio!.options, url);
 
@@ -371,7 +371,7 @@ Future<BaseBean<PageBaseBean>?> httpGetPage(BuildContext context, { required Str
 }
 /// post 分页请求
 Future<BaseBean<PageBaseBean>?> httpPostPage(BuildContext context, { required String url, Map<String, dynamic>? queryParameters, bool silence = false, String loadingTip = '请求中..', bool endHideLoading = true, bool successButErrShowTip = true, bool isShop = false }) async {
-  if (!silence) EasyLoading.show(status: loadingTip);
+  if (!silence) EasyLoading.show();
 
   await requestAuthHead(context, DioHttpUtil(context)._dio!.options, url);
 
@@ -401,7 +401,7 @@ Future<BaseBean<PageBaseBean>?> httpPostPage(BuildContext context, { required St
 }
 
 /// 文件上传
-Future<String> httpUpload(BuildContext context, {String? loadingTip = '文件上传中...', bool endHideLoading = true, bool isShop = false }) async {
+Future<String> httpUpload(BuildContext context, {String? loadingTip = '文件上传中...', bool endHideLoading = true, bool isShop = false,double? x,double? y }) async {
   late String filePath;
   final ImagePicker _picker = ImagePicker();
   final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -411,7 +411,7 @@ Future<String> httpUpload(BuildContext context, {String? loadingTip = '文件上
         aspectRatioPresets: [
           CropAspectRatioPreset.ratio16x9
         ],
-        aspectRatio: const CropAspectRatio(ratioX: 16, ratioY: 9),
+        aspectRatio: CropAspectRatio(ratioX: x??16, ratioY: y??9),
         androidUiSettings: const AndroidUiSettings(
           toolbarTitle: 'Cropper',
           toolbarColor: Colors.white,
@@ -435,7 +435,7 @@ Future<String> httpUpload(BuildContext context, {String? loadingTip = '文件上
           'file': await MultipartFile.fromFile(filePath, filename: filePath.substring(filePath.lastIndexOf('/') + 1)),
         });
 
-        if (loadingTip != null) EasyLoading.show(status: loadingTip);
+        if (loadingTip != null) EasyLoading.show();
         var response = await DioHttpUtil(context)._dio!.post('img/upload', data: formData);
 
         if (response.statusCode == HttpStatus.ok) {
@@ -544,7 +544,7 @@ requestFullPath(String authority, String unencodedPath,
       Function(Map data)? success,
     }
 ) async {
-  if (loadingTip != null) EasyLoading.show(status: loadingTip);
+  if (loadingTip != null) EasyLoading.show();
 
   var httpClient = HttpClient();
   var uri = isHttps ? Uri.https(authority, unencodedPath, queryParameters) : Uri.http(authority, unencodedPath, queryParameters);

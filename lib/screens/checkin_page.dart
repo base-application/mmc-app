@@ -12,6 +12,8 @@ import 'package:mmc/utils/comfun.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:provider/src/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class CheckInPage extends StatefulWidget {
   const CheckInPage({Key? key, this.pageScrollDirectionChange}) : super(key: key);
 
@@ -78,7 +80,7 @@ class _CheckInPageState extends State<CheckInPage> {
                 GestureDetector(
                   child: Padding(
                     padding: const EdgeInsets.all(10).copyWith(right: 0, bottom: 14),
-                    child: const Text('History', style: TextStyle(fontSize: 13, color: Colors.black87, fontWeight: FontWeight.w500),),
+                    child: Text(AppLocalizations.of(context)!.history, style: const TextStyle(fontSize: 13, color: Colors.black87, fontWeight: FontWeight.w500),),
                   ),
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
@@ -111,7 +113,7 @@ class _CheckInPageState extends State<CheckInPage> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text("Check In",overflow: TextOverflow.ellipsis,),
+        title: Text(AppLocalizations.of(context)!.appNavigatorCheckIn,overflow: TextOverflow.ellipsis,),
         actions: [
           IconButton(
             onPressed: (){

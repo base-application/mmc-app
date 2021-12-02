@@ -17,6 +17,8 @@ import 'package:mmc/screens/login.dart';
 import 'package:mmc/screens/most_referral_sent_page.dart';
 import 'package:mmc/screens/my_inbox_detail_page.dart';
 import 'package:mmc/screens/my_inbox_page.dart';
+import 'package:mmc/screens/my_network_page.dart';
+import 'package:mmc/screens/network_page.dart';
 import 'package:mmc/screens/network_person_page.dart';
 import 'package:mmc/screens/newest_detail_page.dart';
 import 'package:mmc/screens/personal_profile_set_page.dart';
@@ -79,6 +81,8 @@ import 'auth_guard.dart';
     AutoRoute(page: WebPage, path: '/webpage'),
     AutoRoute(page: CheckHistoryPage, path: '/checkHistory'),
     AutoRoute(page: InboxDetailPage, path: '/inboxDetail'),
+    AutoRoute(page: NetworkPage, path: '/network'),
+    AutoRoute(page: MyNetworkPage, path: '/myNetwork'),
   ],
 )
 class $AppRouter {}

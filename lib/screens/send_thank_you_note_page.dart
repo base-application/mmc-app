@@ -40,29 +40,31 @@ class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
               const SizedBox(height: 6,),
               Text('You can write your own word here and he/she will know.', style: TextStyle(fontSize: 14, color: Colors.black45),),
               const SizedBox(height: 8,),
-              Container(
-                width: double.infinity,
-                height: 110,
-                padding: const EdgeInsets.only(left: 10, right: 10,),
-                decoration: BoxDecoration(
-                    color: Colors.white,
+              TextFormField(
+                controller: _noteController,
+                keyboardType: TextInputType.text,
+                cursorColor: Colors.blueAccent,
+                maxLength: 100,
+                maxLines: 4,
+                style: const TextStyle(textBaseline: TextBaseline.alphabetic),
+                decoration: InputDecoration(
+                  fillColor:Colors.white,
+                  filled: true,
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  label: Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text("输入答案",style: TextStyle(fontSize: 14, color: Colors.black38),),
+                  ),
+                  contentPadding: EdgeInsets.only(left: 16,top: 10,bottom: 10,right: 16),
+                  counterText: '',
+                  isDense: true,
+                  enabledBorder:  OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(width: 0.6, color: Colors.grey.shade300,)
-                ),
-                child: TextFormField(
-                  controller: _noteController,
-                  keyboardType: TextInputType.text,
-                  cursorColor: Colors.blueAccent,
-                  maxLength: 100,
-                  maxLines: 4,
-                  style: const TextStyle(textBaseline: TextBaseline.alphabetic),
-                  decoration: InputDecoration(
-                    hintText: '输入答案',
-                    hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
-                    contentPadding: const EdgeInsets.only(top: 12,),
-                    counterText: '',
-                    isDense: true,
-                    border: InputBorder.none,
+                  borderSide: BorderSide(width: 0.6, color: Colors.grey.shade300,),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(width: 0.6, color: Colors.grey.shade300,),
                   ),
                 ),
               ),
@@ -170,9 +172,9 @@ class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
                       ComFun.showToast(msg: "请上传图片");
                       return;
                     }
-                    thank(context,note: _noteController.text, images: _upload, value: _valueController.text,referralId: widget.referralId,result: (o) {
+                    ComFun.confirm(context, () => thank(context,note: _noteController.text, images: _upload, value: _valueController.text,referralId: widget.referralId,result: (o) {
                       AutoRouter.of(context).pop(true);
-                    }, );
+                    }, ), AppLocalizations.of(context)!.confirmSend);
                   },
                 ),
               ),

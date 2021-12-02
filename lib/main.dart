@@ -153,6 +153,7 @@ class _MyAppState extends State<MyApp> {
         }
         _appLanguageChange = false;
         return MaterialApp.router(
+          title: "MMC",
           theme: ThemeData(
             appBarTheme: const AppBarTheme(
               backgroundColor: Colors.white,

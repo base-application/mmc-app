@@ -262,7 +262,7 @@ class _BusinessProfileSetPageState extends State<BusinessProfileSetPage> {
     }
 
     return PageContainer(
-      title: 'Business Profile',
+      title: AppLocalizations.of(context)!.businessProfileTitle,
       titleBarBgColor: Colors.white,
       body: _scroll(),
       onRefresh: () async {

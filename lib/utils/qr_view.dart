@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -32,6 +33,15 @@ class _QrViewPageState extends State<QrViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        elevation: 0,
+        backgroundColor: Colors.white24,
+        child: const Icon(CupertinoIcons.left_chevron),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       body: Column(
         children: <Widget>[
           Expanded(
