@@ -5,6 +5,7 @@ import 'package:mmc/bean/newest_item_info_entity.dart';
 import 'package:mmc/utils/comfun.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:chewie/chewie.dart';
+import 'package:mmc/utils/http_request.dart';
 import 'package:video_player/video_player.dart';
 
 class NewestDetailPage extends StatefulWidget {
@@ -25,6 +26,7 @@ class _NewestDetailPageState extends State<NewestDetailPage> {
   ChewieController? chewieController;
   @override
   void initState() {
+    newestRead(context,widget.info.storyId);
     super.initState();
     if (widget.info.link != null) {
       _controller = VideoPlayerController.network(widget.info.link!,videoPlayerOptions: VideoPlayerOptions())

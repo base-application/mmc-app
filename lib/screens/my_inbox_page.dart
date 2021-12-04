@@ -84,7 +84,7 @@ class _MyInboxPageState extends State<MyInboxPage> {
            child: Container(
              width: MediaQuery.of(context).size.width,
              height: 50,
-             margin: const EdgeInsets.only(left: 20, right: 20,),
+             margin: const EdgeInsets.only(left: 20, right: 20),
              child: ElevatedButton(
                style: ButtonStyle(
                  backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
@@ -113,6 +113,7 @@ class _MyInboxPageState extends State<MyInboxPage> {
   getBody(AsyncSnapshot<List<NotificationEntity>> snapshot) {
     if(snapshot.connectionState == ConnectionState.done){
       return EasyRefresh(
+        emptyWidget: snapshot.data!.isEmpty ? stateNoDate():null,
         onLoad: () async {
           notificationList(context,_page).then((value) {
             if(value.isNotEmpty){

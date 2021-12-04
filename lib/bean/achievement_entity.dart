@@ -17,7 +17,10 @@ class AchievementEntity {
 	int? referralReceivedCount;
 	int? thankYouNoteSendCount;
 	int? thankYouNoteReceivedCount;
-  
+	int? joinEvent;
+	int? joinEventCount;
+	int? joinEventPre;
+
   AchievementEntity();
 
   factory AchievementEntity.fromJson(Map<String, dynamic> json) => $AchievementEntityFromJson(json);

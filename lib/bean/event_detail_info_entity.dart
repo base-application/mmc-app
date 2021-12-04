@@ -16,8 +16,8 @@ class EventDetailInfoEntity {
 	late String eventDescription;
 	late int eventStartTime;
 	late int eventEndTime;
-	late String eventLocation;
-	late String eventMapLink;
+	String? eventLocation;
+	String? eventMapLink;
 	int? eventType;
 	int? createId;
 	List<EventDetailInfoEventPoster>? eventPoster;

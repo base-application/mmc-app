@@ -11,6 +11,7 @@ class WebPage extends StatefulWidget {
 }
 
 class _WebPageState extends State<WebPage> {
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,20 @@ class _WebPageState extends State<WebPage> {
         backgroundColor: Colors.white,
         title: Text(widget.title),
       ),
-      body: WebView(
-        initialUrl: widget.initUrl
+      body: Stack(
+        children: [
+          Offstage(
+            offstage: loading,
+            child: const Center(child: CircularProgressIndicator()),
+          ),
+          WebView(
+            initialUrl: widget.initUrl,
+            onPageFinished: (_){
+              loading = true;
+              setState(() {});
+            },
+          ),
+        ],
       ),
     );
   }

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "382700842265",
+    "project_id": "mastermind-3360d",
+    "storage_bucket": "mastermind-3360d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382700842265:android:85b64dfee0c3ab5f7b2988",
+        "android_client_info": {
+          "package_name": "com.mmc.mmcapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382700842265-q7q048li4tfroj071aisjmjl4vsgv0id.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mmc.mmcapp",
+            "certificate_hash": "285deb966bc2bd28a110536b43f75159e45aae30"
+          }
+        },
+        {
+          "client_id": "382700842265-65ebpon834f8ea7umrck89tu9j394llk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhtG_JBu-Y6ZXuTXAcrDVE1Gebkx8SFlU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382700842265-65ebpon834f8ea7umrck89tu9j394llk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

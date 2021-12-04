@@ -51,6 +51,18 @@ AchievementEntity $AchievementEntityFromJson(Map<String, dynamic> json) {
 	if (thankYouNoteReceivedCount != null) {
 		achievementEntity.thankYouNoteReceivedCount = thankYouNoteReceivedCount;
 	}
+	var joinEvent = jsonConvert.convert<int>(json['joinEvent']);
+	if (joinEvent != null) {
+		achievementEntity.joinEvent = joinEvent;
+	}
+	var joinEventCount = jsonConvert.convert<int>(json['joinEventCount']);
+	if (joinEventCount != null) {
+		achievementEntity.joinEventCount = joinEventCount;
+	}
+	var joinEventPre = jsonConvert.convert<int>(json['joinEventPre']);
+	if (joinEventPre != null) {
+		achievementEntity.joinEventPre = joinEventPre;
+	}
 	return achievementEntity;
 }
 
@@ -68,5 +80,8 @@ Map<String, dynamic> $AchievementEntityToJson(AchievementEntity entity) {
 	data['referralReceivedCount'] = entity.referralReceivedCount;
 	data['thankYouNoteSendCount'] = entity.thankYouNoteSendCount;
 	data['thankYouNoteReceivedCount'] = entity.thankYouNoteReceivedCount;
+	data['joinEvent'] = entity.joinEvent;
+	data['joinEventCount'] = entity.joinEventCount;
+	data['joinEventPre'] = entity.joinEventPre;
 	return data;
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:mmc/bean/message_no_read_entity.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/router/router.gr.dart';
@@ -32,6 +33,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final ScrollController _pageScrollController = ScrollController();
   final PageController _pageController = PageController();
+  MessageNoReadEntity? _messageNoReadEntity;
 
   final Map<String, String> _groupZ = {
     'Crystal': 'assets/image/profile_z.png',
@@ -56,6 +58,15 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   int _achievementIndex = 0;
+
+  @override
+  void initState() {
+    noReadMessage(context).then((value) {
+      _messageNoReadEntity = value;
+      setState(() {});
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         if(group != null){
                           AutoRouter.of(context).push(GroupDetailRoute(info: group));
                         }else{
-                          ComFun.showToast(msg: "没有获取到分组信息");
+                          ComFun.showToast(msg: AppLocalizations.of(context)!.noGroup);
                         }
                       });
                     },
@@ -220,26 +231,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   )
                     ,),
-                  Flexible(child: GestureDetector(
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 60,
-                          height: 60,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFDEE4EB),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                        ),
-                        const SizedBox(height: 6,),
-                        const Text('', style: TextStyle(fontSize: 14),),
-                      ],
-                    ),
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () {
-                    },
-                  ),),
                 ],
               ),
               const SizedBox(height: 30,),
@@ -351,9 +342,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   padding: const EdgeInsets.all(16),
                   child: Badge(
                     animationType: BadgeAnimationType.fade,
-                    showBadge: true,
-                    position: const BadgePosition(top: -4, start: 12),
+                    elevation: 0,
+                    badgeColor: (_messageNoReadEntity?.notification??0)>0 ? Colors.red : Colors.transparent,
+                    position: const BadgePosition(bottom: 6, start: 12),
                     padding: const EdgeInsets.all(5),
+                    badgeContent: Text((_messageNoReadEntity?.notification??0).toString(),style: TextStyle(fontSize: 12,color: (_messageNoReadEntity?.notification??0)>0 ? Colors.white : Colors.transparent),),
                     child: Image.asset('assets/icon/app_bar_ring.png', width: 20, height: 20,),
                   ),
                 ),
@@ -421,9 +414,9 @@ class MonthlyAchievement extends StatelessWidget {
               Text("Joined event", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteSend??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.joinEvent??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
-                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteSend?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteSend??0)??0),
+                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.joinEvent?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.joinEventPre??0)??0),
                 ],
               ),
             ],
@@ -529,7 +522,7 @@ class LifetimeAchievement extends StatelessWidget {
               Text("Joined event", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteSendCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.joinEvent??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                 ],
               ),
             ],

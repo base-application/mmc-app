@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mmc/screens/shining_board_page.dart';
 import 'package:mmc/utils/comfun.dart';
+import 'package:mmc/utils/comm_widget.dart';
 
 class ShiningBoardDetailPage extends StatefulWidget {
   const ShiningBoardDetailPage({Key? key, required this.about}) : super(key: key);
@@ -349,7 +350,7 @@ class _ShiningBoardDetailPageState extends State<ShiningBoardDetailPage> with Ti
       );
     }
 
-    return PageContainer(
+     PageContainer(
       title: widget.about.label.replaceAll('\n', ' '),
       pageBg: const Color(0xFFEBEEF3),
       titleBarBgColor: Colors.white,
@@ -377,6 +378,12 @@ class _ShiningBoardDetailPageState extends State<ShiningBoardDetailPage> with Ti
           },
         ),
       ),
+    );
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.about.label.replaceAll("\n"," " )),
+      ),
+      body: stateNoDate(),
     );
   }
 }

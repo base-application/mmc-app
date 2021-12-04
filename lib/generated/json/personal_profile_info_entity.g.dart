@@ -113,7 +113,7 @@ PersonalProfileInfoEntity $PersonalProfileInfoEntityFromJson(Map<String, dynamic
 	if (positionName != null) {
 		personalProfileInfoEntity.positionName = positionName;
 	}
-	var member = jsonConvert.convert<dynamic>(json['member']);
+	var member = jsonConvert.convert<String>(json['member']);
 	if (member != null) {
 		personalProfileInfoEntity.member = member;
 	}

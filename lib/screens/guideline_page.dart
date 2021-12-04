@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:mmc/bean/guide_line_entity.dart';
 import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
+import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http_request.dart';
 
 class GuidelinePage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _GuidelinePageState extends State<GuidelinePage> {
       body: FutureBuilder(
         future: _future,
         builder: (BuildContext context, AsyncSnapshot<List<GuideLineEntity>> snapshot) {
-          if(snapshot.connectionState == ConnectionState.done){
+          if(snapshot.connectionState == ConnectionState.done && snapshot.data!.isNotEmpty){
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (BuildContext context, int index) {
@@ -68,9 +69,7 @@ class _GuidelinePageState extends State<GuidelinePage> {
               },
             );
           }else{
-            return Center(
-                child: Image.asset('assets/image/no_data.png', height: 140,)
-            );
+            return stateNoDate();
           }
         },
       ),

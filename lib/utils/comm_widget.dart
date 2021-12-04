@@ -53,6 +53,7 @@ Widget stateNoDate({ bool inRef = false }) {
   }
   return Center(
     child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset('assets/image/no_data.png', height: 140,),
         Text('No data now', style: TextStyle(fontSize: 13, color: Colors.grey.shade400),),

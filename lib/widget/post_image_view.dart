@@ -10,17 +10,24 @@ import 'package:provider/src/provider.dart';
 
 class PosterView extends StatefulWidget {
   final List<ImageVoEntity> images;
-  const PosterView({Key? key, required this.images}) : super(key: key);
+  final int? currIndex;
+  const PosterView({Key? key, required this.images, this.currIndex}) : super(key: key);
 
   @override
   _PosterViewState createState() => _PosterViewState();
 }
 
 class _PosterViewState extends State<PosterView> {
-  int index = 0;
+  late PageController _pageController;
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+    _pageController = PageController(initialPage: widget.currIndex??0);
     return Scaffold(
+      backgroundColor: Colors.black,
       floatingActionButton: FloatingActionButton(
         elevation: 0,
         backgroundColor: Colors.white24,
@@ -36,6 +43,7 @@ class _PosterViewState extends State<PosterView> {
         },
         child:  Container(
             child: PhotoViewGallery.builder(
+              pageController: _pageController,
               scrollPhysics: const BouncingScrollPhysics(),
               builder: (BuildContext context, int index) {
                 return PhotoViewGalleryPageOptions(

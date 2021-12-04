@@ -36,7 +36,7 @@ class _CheckHistoryPageState extends State<CheckHistoryPage> with SingleTickerPr
       body: FutureBuilder(
         future: _future,
         builder: (BuildContext context, AsyncSnapshot<List<CheckLogEntity>> snapshot) {
-          if(snapshot.connectionState == ConnectionState.done){
+          if(snapshot.connectionState == ConnectionState.done && snapshot.hasData && snapshot.data!.isNotEmpty){
             return  ListView.builder(
               padding: EdgeInsets.all(16),
               itemCount: snapshot.data!.length,

@@ -216,5 +216,7 @@
   "confirmSend":"Confirm Send ?",
   "selectAll":"Select All",
   "done": "done",
-  "inbox": "My Inbox"
+  "inbox": "My Inbox",
+  "noGroup": "no Group",
+  "exit": "again exit"
 }

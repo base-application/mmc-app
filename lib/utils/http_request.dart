@@ -11,6 +11,7 @@ import 'package:mmc/bean/guide_line_entity.dart';
 import 'package:mmc/bean/home_index_info_entity.dart';
 import 'package:mmc/bean/image_vo_entity.dart';
 import 'package:mmc/bean/login_info_entity.dart';
+import 'package:mmc/bean/message_no_read_entity.dart';
 import 'package:mmc/bean/network_item_info_entity.dart';
 import 'package:mmc/bean/newest_item_info_entity.dart';
 import 'package:mmc/bean/notification_entity.dart';
@@ -79,6 +80,15 @@ sendSmsCode(BuildContext context, { required String phoneNumber, required String
   }).catchError((_) {
     err?.call();
   });
+}
+
+
+
+/// 发送短信验证码
+/// type 1 注册   2 忘记密码
+Future<MessageNoReadEntity> noReadMessage(BuildContext context) async {
+  BaseBean? bean = await httpGet(context, url: 'user/info/message',silence: true);
+  return MessageNoReadEntity.fromJson(bean!.data);
 }
 
 /// 获取国家code值
@@ -416,6 +426,14 @@ Future getNewestListData(BuildContext context, { String? title, int? startDate, 
   }).catchError((_) {
     err?.call();
   });
+}
+
+
+/// 已读新闻
+Future newestRead(BuildContext context, int newId) async {
+  await httpGetPage(context, url: 'newest/story/detail', queryParameters: {
+    'id': newId,
+  }, silence: true);
 }
 
 /// 获取Network列表数据

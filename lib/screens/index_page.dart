@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/event_data_item_info_entity.dart';
+import 'package:mmc/bean/message_no_read_entity.dart';
 import 'package:mmc/bean/newest_item_info_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/router/router.gr.dart';
@@ -41,9 +43,14 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
   final List<MenuDoItem> _menus = [];
 
   final List<String> _currentNotes = []; // 通知消息的数组
+  MessageNoReadEntity? _messageNoReadEntity;
 
   @override
   void initState() {
+    noReadMessage(context).then((value) {
+      _messageNoReadEntity = value;
+      setState(() {});
+    });
     super.initState();
     _tipController = PageController(
         initialPage: 0,
@@ -130,8 +137,14 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
       MenuDoItem(
         iconAssets: 'assets/icon/menu_event.png',
         label: AppLocalizations.of(context)!.homeIndexMenuEventBtn,
+        showBadge: true,
         onTap: () {
-          AutoRouter.of(context).push(const EventListingRoute());
+          AutoRouter.of(context).push(const EventListingRoute()).then((value) {
+            noReadMessage(context).then((value) {
+              _messageNoReadEntity = value;
+              setState(() {});
+            });
+          });
         },
       ),
       MenuDoItem(
@@ -212,34 +225,63 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-              child: ScrollConfiguration(
+              child: ScrollConfiguration( 
                 behavior: CusBehavior(),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: _menus.length,
                   itemBuilder: (BuildContext context, int index) {
                     MenuDoItem menuItem = _menus[index];
-                    return GestureDetector(
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.only(left: 14, right: 14,),
-                        constraints: const BoxConstraints(
-                          minWidth: 80,
+                    if(menuItem.showBadge??false){
+                      return GestureDetector(
+                        child: Container(
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.only(left: 14, right: 14,),
+                          constraints: const BoxConstraints(
+                            minWidth: 80,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Badge(
+                                elevation: 0,
+                                badgeColor: (_messageNoReadEntity?.event??0) > 0 ? Colors.red : Colors.transparent,
+                                badgeContent:Text((_messageNoReadEntity?.event??0).toString(),style: TextStyle(color: (_messageNoReadEntity?.event??0) > 0 ? Colors.white : Colors.transparent,fontSize: 12),),
+                                child: Image.asset(menuItem.iconAssets, width: 24, height: 24,)
+                              ),
+                              const SizedBox(height: 4,),
+                              Text(menuItem.label, style: const TextStyle(fontSize: 12, color: Colors.white,),),
+                            ],
+                          ),
                         ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Image.asset(menuItem.iconAssets, width: 24, height: 24,),
-                            const SizedBox(height: 4,),
-                            Text(menuItem.label, style: const TextStyle(fontSize: 12, color: Colors.white,),),
-                          ],
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          menuItem.onTap?.call();
+                        },
+                      );
+                    }else{
+                      return GestureDetector(
+                        child: Container(
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.only(left: 14, right: 14,),
+                          constraints: const BoxConstraints(
+                            minWidth: 80,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Image.asset(menuItem.iconAssets, width: 24, height: 24,),
+                              const SizedBox(height: 4,),
+                              Text(menuItem.label, style: const TextStyle(fontSize: 12, color: Colors.white,),),
+                            ],
+                          ),
                         ),
-                      ),
-                      behavior: HitTestBehavior.opaque,
-                      onTap: () {
-                        menuItem.onTap?.call();
-                      },
-                    );
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          menuItem.onTap?.call();
+                        },
+                      );
+                    }
                   },
                 ),
               ),

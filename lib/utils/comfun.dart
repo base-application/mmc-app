@@ -252,8 +252,9 @@ class MenuDoItem {
   final String iconAssets;
   final String label;
   final Function? onTap;
+  final bool? showBadge;
 
-  const MenuDoItem({ required this.iconAssets, required this.label, this.onTap });
+  const MenuDoItem({ required this.iconAssets, required this.label, this.onTap ,this.showBadge});
 }
 
 class PageContainer extends StatelessWidget {

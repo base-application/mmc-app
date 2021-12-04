@@ -239,7 +239,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
           }
           if (_lastPressedAt == null || DateTime.now().difference(_lastPressedAt!) > const Duration(seconds: 3)) {
             _lastPressedAt = DateTime.now();
-            ComFun.showToast(msg: '再按一次退出');
+            ComFun.showToast(msg: AppLocalizations.of(context)!.exit);
             return Future.value(false);
           }
           return Future.value(true);

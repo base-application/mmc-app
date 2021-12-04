@@ -286,7 +286,7 @@ class _EventListingPageState extends State<EventListingPage> {
                               ],
                             ),
                           ),
-                          const SizedBox(width: 30,),
+                          const SizedBox(width: 10,),
                           Row(
                             children: [
                               if (item.join??false) GestureDetector(
@@ -535,7 +535,7 @@ class _EventListingPageState extends State<EventListingPage> {
               children: [
                 const SizedBox(width: 4,),
                 Container(
-                  width: 55,
+                  width: 50,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

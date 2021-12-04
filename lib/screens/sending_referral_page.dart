@@ -11,6 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http.dart';
 import 'package:mmc/utils/http_request.dart';
+import 'package:mmc/widget/bottom_button.dart';
 import 'package:mmc/widget/post_image_view.dart';
 
 class SendingReferralPage extends StatefulWidget {
@@ -30,8 +31,10 @@ class _SendingReferralPageState extends State<SendingReferralPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageContainer(
-      title: AppLocalizations.of(context)!.pageSendReferralTitle,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.pageSendReferralTitle),
+      ),
       body: ScrollConfiguration(
         behavior: CusBehavior(),
         child: SingleChildScrollView(
@@ -226,7 +229,7 @@ class _SendingReferralPageState extends State<SendingReferralPage> {
                             if (index < _formUpload.length) {
                               return GestureDetector(
                                 onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => PosterView(images: _formUpload,)));
+                                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => PosterView(images: _formUpload,currIndex: index,)));
                                 },
                                 child: Container(
                                     decoration: BoxDecoration(
@@ -252,10 +255,12 @@ class _SendingReferralPageState extends State<SendingReferralPage> {
                               behavior: HitTestBehavior.opaque,
                               onTap: () async {
                                 String uploadPath = await httpUpload(context);
-                                ImageVoEntity e = ImageVoEntity();
-                                e.url = uploadPath;
-                                _formUpload.add(e);
-                                setState(() {});
+                                if(uploadPath.isNotEmpty){
+                                  ImageVoEntity e = ImageVoEntity();
+                                  e.url = uploadPath;
+                                  _formUpload.add(e);
+                                  setState(() {});
+                                }
                               },
                             );
                           },
@@ -265,35 +270,36 @@ class _SendingReferralPageState extends State<SendingReferralPage> {
                   ],
                 ),
                 const SizedBox(height: 40,),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: 46,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
-                      elevation: MaterialStateProperty.all(0),
-                    ),
-                    child: Text(AppLocalizations.of(context)!.sendReferralSubmitBtn, style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.w500,),),
-                    onPressed: () async {
-                      if(_sendReferralWhyDetailController.text.isEmpty){
-                        ComFun.showToast(msg:AppLocalizations.of(context)!.referralReason);
-                        return;
-                      }
-                      if(_formUpload.isEmpty){
-                        ComFun.showToast(msg:AppLocalizations.of(context)!.referralImage);
-                        return;
-                      }
-                      if(_receivedUser==null){
-                        ComFun.showToast(msg:AppLocalizations.of(context)!.referralReceivedUser);
-                        return;
-                      }
-                      EasyLoading.show();
-                      sendReferral(context, reason: _sendReferralWhyDetailController.text, images: _formUpload,receivedUser: _receivedUser!.userId, result: (v) {
-                        AutoRouter.of(context).pop();
-                      });
-                    },
-                  )
+                Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    margin: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+                    height: 46,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                        elevation: MaterialStateProperty.all(0),
+                      ),
+                      child: Text(AppLocalizations.of(context)!.sendReferralSubmitBtn, style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.w500,),),
+                      onPressed: () async {
+                        if(_sendReferralWhyDetailController.text.isEmpty){
+                          ComFun.showToast(msg:AppLocalizations.of(context)!.referralReason);
+                          return;
+                        }
+                        if(_formUpload.isEmpty){
+                          ComFun.showToast(msg:AppLocalizations.of(context)!.referralImage);
+                          return;
+                        }
+                        if(_receivedUser==null){
+                          ComFun.showToast(msg:AppLocalizations.of(context)!.referralReceivedUser);
+                          return;
+                        }
+                        EasyLoading.show();
+                        sendReferral(context, reason: _sendReferralWhyDetailController.text, images: _formUpload,receivedUser: _receivedUser!.userId, result: (v) {
+                          AutoRouter.of(context).pop();
+                        });
+                      },
+                    )
                 ),
               ],
             ),

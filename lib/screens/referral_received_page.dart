@@ -183,7 +183,7 @@ class _ReferralCardState extends State<ReferralCard> {
               },
               child: Image.asset('assets/icon/thank_you_z.png', width: 50,),
             )),
-          if (widget.referralEntity.status != 1&&!(widget.referralEntity.thank??false)) Positioned(
+          if (widget.referralEntity.status == 2&&!(widget.referralEntity.thank??false)) Positioned(
               bottom: 0, right: 0,
               child: GestureDetector(
                 onTap: (){

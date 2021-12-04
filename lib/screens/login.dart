@@ -53,11 +53,15 @@ class _LoginPageState extends State<LoginPage> {
     login(context, account: _phoneNumberController.text.trim(), password: _passwordController.text.trim(), endHideLoading: false, result: (LoginInfoEntity info) async {
       await saveLoginInfo(context, info);
       ///关联用户推送token
-      FirebaseMessaging.instance.getToken().then((value) {
-        if(value!=null){
-          setToken(context, token: value, result: (v){});
-        }
-      });
+      try{
+        FirebaseMessaging.instance.getToken().then((value) {
+          if(value!=null){
+            setToken(context, token: value, result: (v){});
+          }
+        });
+      }catch(e){
+        print(e);
+      }
 
       // 登录成功，初始化用户及首页数据，初始化成功再认为是登录成功
       getUserDetailData(context, userId: info.id, silence: true, result: (PersonalProfileInfoEntity profileInfo) async {

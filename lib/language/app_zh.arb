@@ -217,5 +217,7 @@
   "confirmSend":"确认发送?",
   "selectAll":"全选",
   "done": "完成",
-  "inbox": "我的消息"
+  "inbox": "我的消息",
+  "noGroup": "没有获取到分组信息",
+  "exit": "再按一次退出"
 }
