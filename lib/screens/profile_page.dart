@@ -17,7 +17,6 @@ import 'package:provider/src/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'network_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key, this.pageScrollDirectionChange}) : super(key: key);
@@ -61,10 +60,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-    noReadMessage(context).then((value) {
-      _messageNoReadEntity = value;
-      setState(() {});
-    });
+    if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token != null){
+      noReadMessage(context).then((value) {
+        _messageNoReadEntity = value;
+        setState(() {});
+      });
+    }
     super.initState();
   }
 
@@ -72,9 +73,10 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     Widget _scrollMain = EasyRefresh(
         onRefresh: () async {
-          getUserDetailData(context, userId: context.read<AuthService>().getLoginInfo!.id, result: (PersonalProfileInfoEntity info) {
-             savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, info);
-          },);
+          if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token != null){
+            PersonalProfileInfoEntity info = await getUserDetailData(context, userId: context.read<AuthService>().getLoginInfo!.id);
+            savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, info);
+          }
         },
         header: MaterialHeader(
             backgroundColor: const Color(0xFF095BD4)
@@ -137,7 +139,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   const SizedBox(height: 10,),
                                   Text(context.watch<PersonalProfileService>().getPersonalProfileInfo?.name ?? '-', style: const TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold,),),
                                   const SizedBox(height: 5,),
-                                  Text('ID:${context.watch<PersonalProfileService>().getPersonalProfileInfo?.userId}', style: TextStyle(fontSize: 15, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,),),
+                                  Text('ID:${context.watch<PersonalProfileService>().getPersonalProfileInfo?.userId??""}', style: TextStyle(fontSize: 15, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,),),
                                   const SizedBox(height: 12,),
                                   Text(context.watch<PersonalProfileService>().getPersonalProfileInfo?.industry ?? '-', style: TextStyle(fontSize: 15, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,), maxLines: 3, overflow: TextOverflow.ellipsis,),
                                   const SizedBox(height: 6,),
@@ -286,37 +288,44 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               const SizedBox(height: 30,),
-              Padding(
-                padding: EdgeInsets.only(left: 26),
-                child: Text('My QR code', style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 18),),
-              ),
-              const SizedBox(height: 20,),
-              Container(
-                width: double.infinity,
-                margin: EdgeInsets.only(left: 26, right: 26),
-                padding: EdgeInsets.only(bottom: 30),
-                decoration: BoxDecoration(
-                  color: Colors.blue.shade800,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Column(
+              Offstage(
+                offstage: Provider.of<AuthService>(context, listen: false).getLoginInfo?.token == null,
+                child:  Column(
                   children: [
-                    const SizedBox(height: 30,),
-                    const Text('For event check in', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white,),),
-                    const SizedBox(height: 36,),
+                    Padding(
+                      padding: EdgeInsets.only(left: 26),
+                      child: Text('My QR code', style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 18),),
+                    ),
+                    const SizedBox(height: 20,),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      height: MediaQuery.of(context).size.width * 0.7,
+                      width: double.infinity,
+                      margin: EdgeInsets.only(left: 26, right: 26),
+                      padding: EdgeInsets.only(bottom: 30),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.blue.shade800,
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: QrImage(
-                        data: json.encode({ 'scene': 'mmc-profileQr', 'about': '' }),
-                        version: QrVersions.auto,
-                        size: 300,
-                        gapless: false,
-                        padding: const EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 30,),
+                          const Text('For event check in', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white,),),
+                          const SizedBox(height: 36,),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            height: MediaQuery.of(context).size.width * 0.7,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: QrImage(
+                              data: json.encode({ 'scene': 'mmc-profileQr', 'about': '' }),
+                              version: QrVersions.auto,
+                              size: 300,
+                              gapless: false,
+                              padding: const EdgeInsets.all(16),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -414,9 +423,9 @@ class MonthlyAchievement extends StatelessWidget {
               Text("Joined event", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.joinEvent??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.joinEvent??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
-                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.joinEvent?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.joinEventPre??0)??0),
+                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.joinEvent?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.joinEventPre??0)??0),
                 ],
               ),
             ],
@@ -435,9 +444,9 @@ class MonthlyAchievement extends StatelessWidget {
               Text("Referral sent", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralSend??0).toString(), style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralSend??0).toString(), style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
-                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralSend?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevReferralSend??0)??0),
+                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralSend?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevReferralSend??0)??0),
                 ],
               ),
             ],
@@ -456,9 +465,9 @@ class MonthlyAchievement extends StatelessWidget {
               Text("Referral received", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralReceived??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralReceived??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
-                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralReceived?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevReferralReceived??0)??0),
+                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralReceived?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevReferralReceived??0)??0),
                 ],
               ),
             ],
@@ -477,9 +486,9 @@ class MonthlyAchievement extends StatelessWidget {
               Text("Thank you note", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteReceived??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.thankYouNoteReceived??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
-                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteReceived?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevThankYouNoteReceived??0)??0)
+                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.thankYouNoteReceived?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevThankYouNoteReceived??0)??0)
                 ],
               ),
             ],
@@ -522,7 +531,7 @@ class LifetimeAchievement extends StatelessWidget {
               Text("Joined event", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.joinEvent??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.joinEvent??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                 ],
               ),
             ],
@@ -541,7 +550,7 @@ class LifetimeAchievement extends StatelessWidget {
               Text("Referral sent", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralSendCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralSendCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                 ],
               ),
             ],
@@ -560,7 +569,7 @@ class LifetimeAchievement extends StatelessWidget {
               Text("Referral received", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.referralReceivedCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralReceivedCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                 ],
               ),
             ],
@@ -579,7 +588,7 @@ class LifetimeAchievement extends StatelessWidget {
               Text("Thank you note", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.thankYouNoteReceivedCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.thankYouNoteReceivedCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                 ],
               ),
             ],

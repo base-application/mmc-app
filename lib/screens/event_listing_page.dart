@@ -616,7 +616,7 @@ class _EventListingPageState extends State<EventListingPage> {
                   ),
                 ),
               ),
-              if (context.read<AuthService>().getLoginInfo!.createEvent) Positioned(
+              if (context.read<AuthService>().getLoginInfo?.createEvent??false) Positioned(
                 child: Image.asset('assets/icon/change.png', width: 18, height: 18,),
                 bottom: 0,
                 right: 3,

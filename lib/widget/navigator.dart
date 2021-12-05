@@ -1,18 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:keyboard_actions/external/platform_check/platform_check.dart';
-import 'package:mmc/bean/home_index_info_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
+import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/screens/checkin_page.dart';
 import 'package:mmc/screens/index_page.dart';
 import 'package:mmc/screens/network_page.dart';
 import 'package:mmc/screens/profile_page.dart';
 import 'package:mmc/utils/comfun.dart';
-import 'package:mmc/utils/http_request.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
 
@@ -148,10 +148,12 @@ class _NavigatorPageState extends State<NavigatorPage> {
           ),
         ),
         onTap: () {
-          if (index == 0) {
-            getIndexData(context, silence: true, result: (HomeIndexInfoEntity info) {
-              context.read<HomeIndexDataService>().setHomeIndexInfo(info);
-            });
+          ///checkIn 需要登陆
+          if(index == 2){
+            if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token == null){
+              AutoRouter.of(context).push(SignInRoute());
+              return;
+            }
           }
           setState(() {
             _currentIndex = index;

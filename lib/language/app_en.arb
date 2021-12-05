@@ -218,5 +218,6 @@
   "done": "done",
   "inbox": "My Inbox",
   "noGroup": "no Group",
-  "exit": "again exit"
+  "exit": "again exit",
+  "phoneNumberInput": "key phone number"
 }

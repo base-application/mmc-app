@@ -705,17 +705,17 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
     );
   }
 
-  _initCompanyData() {
-    return getUserDetailData(context, userId: widget.itemInfo.userId, silence: false, result: (PersonalProfileInfoEntity info) async {
-      companyVos = info.companyVos;
-      _displayCompanyInfo = null;
-      if (companyVos.isNotEmpty) {
-        _displayCompanyInfoIndex = 0;
-        _displayCompanyInfo = companyVos.first;
-        _changeDisplayCompanyInfo();
-      }
-      setState(() {});
-    });
+  _initCompanyData() async {
+    PersonalProfileInfoEntity info =  await getUserDetailData(context, userId: widget.itemInfo.userId, silence: false);
+
+    companyVos = info.companyVos;
+    _displayCompanyInfo = null;
+    if (companyVos.isNotEmpty) {
+      _displayCompanyInfoIndex = 0;
+      _displayCompanyInfo = companyVos.first;
+      _changeDisplayCompanyInfo();
+    }
+    setState(() {});
   }
 
   _changeDisplayCompanyInfo() {

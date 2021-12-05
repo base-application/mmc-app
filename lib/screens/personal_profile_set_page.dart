@@ -17,9 +17,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http.dart';
 import 'package:mmc/utils/http_request.dart';
+import 'package:mmc/widget/app_bar_home.dart';
 import 'package:provider/src/provider.dart';
-
-import 'login.dart';
 
 class PersonalProfileSetPage extends StatefulWidget {
   const PersonalProfileSetPage({Key? key}) : super(key: key);

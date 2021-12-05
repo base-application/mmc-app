@@ -13,6 +13,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mmc/router/auth_guard.dart';
+import 'package:mmc/router/router.gr.dart';
 import 'package:provider/provider.dart';
 
 
@@ -65,17 +66,17 @@ class DioHttpUtil {
         },
         onError: (DioError e, ErrorInterceptorHandler handler) {
           dismissLoading();
-          if (e.response?.statusCode == 403) {
+          if (e.response?.statusCode == 401) {
             // 无访问权限 or token过期失效
-            Future.delayed(const Duration(milliseconds: 400), () {
-              debugPrint('数据请求状态为403，当前是否在登录页面：${AutoRouter.of(context).current.name == 'LoginRoute'}');
-              if (AutoRouter.of(context).current.name != 'LoginRoute') {
-                eventBus.fire(LoginOutTimeEvent(statusCode: e.response!.statusCode!));
-              }
-            });
+            debugPrint('数据请求状态为401');
+            AutoRouter.of(ComFun.navigatorKey.currentState!.context).push(SignInRoute());
+            handler.next(e);
+            return;
           }
           if(e.response?.data.containsKey("message")){
             ComFun.showToast(msg: e.response?.data['message'], err: true);
+            handler.next(e);
+            return;
           }
           else {
             if (!quietRequest.contains(e.requestOptions.path)) {

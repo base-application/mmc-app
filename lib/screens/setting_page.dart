@@ -152,22 +152,24 @@ class _SettingPageState extends State<SettingPage> {
                 )).toList(),
               ),
               const SizedBox(height: 40,),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 46,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
-                    elevation: MaterialStateProperty.all(0),
+              Offstage(
+                offstage: Provider.of<AuthService>(context, listen: false).getLoginInfo?.token == null,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 46,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                      elevation: MaterialStateProperty.all(0),
+                    ),
+                    child: Text(AppLocalizations.of(context)!.loginOut, style: const TextStyle(color: Color(0xFF013B7B), fontSize: 16, fontWeight: FontWeight.bold,),),
+                    onPressed: () async {
+                      ComFun.outLogin(context);
+                    },
                   ),
-                  child: Text(AppLocalizations.of(context)!.loginOut, style: const TextStyle(color: Color(0xFF013B7B), fontSize: 16, fontWeight: FontWeight.bold,),),
-                  onPressed: () async {
-                    ComFun.outLogin(context);
-                  },
                 ),
-              ),
-              const SizedBox(height: 60,),
+              )
             ],
           ),
         ),

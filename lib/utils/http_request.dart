@@ -19,7 +19,7 @@ import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/bean/referral_entity.dart';
 import 'package:mmc/bean/state_item_info_entity.dart';
 import 'package:mmc/bean/thank_note_entity.dart';
-import 'package:mmc/screens/login.dart';
+import 'package:mmc/widget/app_bar_home.dart';
 
 import 'http.dart';
 
@@ -57,7 +57,7 @@ register(BuildContext context, { required String countryCode, required String ph
 
 /// 忘记密码
 forgotPassword(BuildContext context, { required String phoneNumber, required String verificationCode, required String password, required Function() result, Function? err }) {
-  httpPost(context, url: 'user/info/forgot/password', queryParameters: {
+  httpPut(context, url: 'user/info/forgot/password', queryParameters: {
     'phoneNumber': phoneNumber,
     'verificationCode': verificationCode,
     'password': password,
@@ -121,23 +121,15 @@ Future getIndustryData(BuildContext context, { bool silence = true, required Fun
 }
 
 /// 获取用户详细数据
-Future getUserDetailData(BuildContext context, { required int userId, bool silence = false, required Function(PersonalProfileInfoEntity info) result, Function? err }) async {
-  await httpGet(context, url: 'user/info/detail', queryParameters: {
-    'userId': userId,
-  }, silence: silence).then((value) {
-    result.call(PersonalProfileInfoEntity.fromJson(value!.data));
-  }).catchError((_) {
-    err?.call();
-  });
+Future<PersonalProfileInfoEntity> getUserDetailData(BuildContext context, { required int userId, bool silence = false}) async {
+  BaseBean? bean = await httpGet(context, url: 'user/info/detail', queryParameters: {'userId': userId,}, silence: silence);
+ return PersonalProfileInfoEntity.fromJson(bean!.data);
 }
 
 /// 获取首页主体数据
-Future getIndexData(BuildContext context, { bool silence = false, required Function(HomeIndexInfoEntity info) result, Function? err }) async {
-  await httpGet(context, url: 'user/info/index', queryParameters: {}, silence: silence).then((value) {
-    result.call(HomeIndexInfoEntity.fromJson(value!.data));
-  }).catchError((_) {
-    err?.call();
-  });
+Future<HomeIndexInfoEntity> getIndexData(BuildContext context, { bool silence = false}) async {
+  BaseBean? bean = await httpGet(context, url: 'user/info/index', queryParameters: {}, silence: silence);
+  return HomeIndexInfoEntity.fromJson(bean?.data);
 }
 
 /// group数据
@@ -431,7 +423,7 @@ Future getNewestListData(BuildContext context, { String? title, int? startDate, 
 
 /// 已读新闻
 Future newestRead(BuildContext context, int newId) async {
-  await httpGetPage(context, url: 'newest/story/detail', queryParameters: {
+  await httpGet(context, url: 'newest/story/detail', queryParameters: {
     'id': newId,
   }, silence: true);
 }

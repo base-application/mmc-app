@@ -30,10 +30,10 @@ HomeIndexInfoEntity $HomeIndexInfoEntityFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> $HomeIndexInfoEntityToJson(HomeIndexInfoEntity entity) {
 	final Map<String, dynamic> data = <String, dynamic>{};
-	data['slider'] =  entity.slider.map((v) => v.toJson()).toList();
-	data['user'] = entity.user.toJson();
+	data['slider'] =  entity.slider?.map((v) => v.toJson()).toList();
+	data['user'] = entity.user?.toJson();
 	data['newset'] =  entity.newset.map((v) => v.toJson()).toList();
-	data['upcoming'] =  entity.upcoming.map((v) => v.toJson()).toList();
+	data['upcoming'] =  entity.upcoming?.map((v) => v.toJson()).toList();
 	return data;
 }
 

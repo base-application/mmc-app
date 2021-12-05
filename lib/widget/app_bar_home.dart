@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -24,8 +26,7 @@ class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _HomeAppBarState extends State<HomeAppBar> {
 
-  changeNavigationTo(int index) {
-  }
+  changeNavigationTo(int index) {}
 
   @override
   Widget build(BuildContext context) {
@@ -57,5 +58,47 @@ class _HomeAppBarState extends State<HomeAppBar> {
         ],
       ),
     );
+  }
+}
+
+
+class CountryCodeInfo {
+  final int id;
+  final String iso2;
+  final String phonecode;
+  final String nativeName;
+  final List<CountryCodeTimezonesInfo>? timezones;
+
+  CountryCodeInfo.fromJson(Map<String, dynamic> result):
+        id = result.containsKey('id') && result['id'] != null ? result['id'] : 0,
+        iso2 = result.containsKey('iso2') && result['iso2'] != null ? result['iso2'] : '',
+        phonecode = result.containsKey('phonecode') && result['phonecode'] != null ? result['phonecode'] : '',
+        nativeName = result.containsKey('nativeName') && result['nativeName'] != null ? result['nativeName'] : '',
+        timezones = result.containsKey('nativeName') ? (json.decode(result['timezones']) as List).map((v) => CountryCodeTimezonesInfo.fromJson(v)).toList() : [];
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['iso2'] = iso2;
+    data['phonecode'] = phonecode;
+    data['nativeName'] = nativeName;
+    data['timezones'] = timezones;
+    return data;
+  }
+}
+
+class CountryCodeTimezonesInfo {
+  final String zoneName;
+  final String abbreviation;
+
+  CountryCodeTimezonesInfo.fromJson(Map<String, dynamic> result):
+        zoneName = result.containsKey('zoneName') && result['zoneName'] != null ? result['zoneName'] : '',
+        abbreviation = result.containsKey('abbreviation') && result['abbreviation'] != null ? result['abbreviation'] : '';
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['zoneName'] = zoneName;
+    data['abbreviation'] = abbreviation;
+    return data;
   }
 }

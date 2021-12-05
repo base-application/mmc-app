@@ -20,6 +20,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'event_bus.dart';
 
 class ComFun {
+  static GlobalKey<NavigatorState> navigatorKey=GlobalKey();
   /// 状态栏样式 沉浸式状态栏
   static statusBar({ required bool isLight }) {
     // 白色沉浸式状态栏颜色  白色文字
@@ -97,11 +98,7 @@ class ComFun {
   static Future outLogin(BuildContext context) async {
     await savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, null);
     await saveLoginInfo(context, null);
-    AutoRouter.of(context).replaceAll([
-      LoginRoute(onLoginSuccess: (ctx) {
-        AutoRouter.of(ctx).replaceAll([const HomeRoute()]);
-      })
-    ]);
+    AutoRouter.of(context).replaceAll([WelcomeRoute()]);
   }
 
 

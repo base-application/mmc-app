@@ -219,5 +219,6 @@
   "done": "完成",
   "inbox": "我的消息",
   "noGroup": "没有获取到分组信息",
-  "exit": "再按一次退出"
+  "exit": "再按一次退出",
+  "phoneNumberInput": "请输入手机号"
 }

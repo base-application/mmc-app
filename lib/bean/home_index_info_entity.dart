@@ -9,10 +9,10 @@ import 'package:mmc/bean/event_data_item_info_entity.dart';
 @JsonSerializable()
 class HomeIndexInfoEntity {
 
-	late List<HomeIndexInfoSlider> slider;
-	late PersonalProfileInfoEntity user;
+  List<HomeIndexInfoSlider>? slider;
+	PersonalProfileInfoEntity? user;
 	late List<NewestItemInfoEntity> newset;
-	late List<EventDataItemInfoEntity> upcoming;
+	List<EventDataItemInfoEntity>? upcoming;
 
   HomeIndexInfoEntity();
 

@@ -16,8 +16,7 @@ import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/dialog.dart';
 import 'package:mmc/utils/event_bus.dart';
 import 'package:mmc/utils/http_request.dart';
-
-import 'login.dart';
+import 'package:mmc/widget/app_bar_home.dart';
 
 class NetworkPage extends StatefulWidget {
   final bool onlyMy;

@@ -15,8 +15,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/dialog.dart';
 import 'package:mmc/utils/http_request.dart';
-
-import 'login.dart';
+import 'package:mmc/widget/app_bar_home.dart';
 
 class MyNetworkPage extends StatefulWidget {
   const MyNetworkPage({Key? key}) : super(key: key);
