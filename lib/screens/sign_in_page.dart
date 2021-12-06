@@ -29,8 +29,9 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return  Container(
       padding: EdgeInsets.only(left: 16,right: 16),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
+      decoration: BoxDecoration(
+        image: DecorationImage(image: Image.asset("assets/image/login_background.png").image,alignment: Alignment.topCenter),
+        gradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [

@@ -81,6 +81,7 @@ flutter:
    - assets/image/404.png
    - assets/image/err_net.png
    - assets/image/no_data.png
+   - assets/image/login_background.png
    # icon图标
    - assets/icon/home.png
    - assets/icon/network.png

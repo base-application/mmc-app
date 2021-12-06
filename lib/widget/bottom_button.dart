@@ -11,11 +11,11 @@ class BottomButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return  Container(
-      padding: EdgeInsets.only(top: 0,left: 16,right: 16,bottom: Platform.isIOS ? 0 : 16),
+      padding: const EdgeInsets.only(top: 0,left: 16,right: 16),
+      margin: EdgeInsets.only(bottom: Platform.isIOS ? 0 : 16),
       width: MediaQuery.of(context).size.width,
       child: SafeArea(
         child: Container(
-          height: 50,
           child: child,
         ),
       ),

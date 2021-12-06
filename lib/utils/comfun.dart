@@ -194,9 +194,15 @@ Future<LoginInfoEntity?> initLoginInfo(BuildContext context) async {
   await SpUtil.getInstance();
   var loginAbout = SpUtil.getObject('loginAbout');
   if (loginAbout != null) {
-    context.read<AuthService>().setLoginInfo(LoginInfoEntity.fromJson(loginAbout as Map<String, dynamic>));
+    LoginInfoEntity loginInfoEntity = LoginInfoEntity.fromJson(loginAbout as Map<String, dynamic>);
+    var personalProfileAbout = SpUtil.getObject('personalProfile-'+loginInfoEntity.id.toString());
+    context.read<AuthService>().setLoginInfo(loginInfoEntity);
+    if (personalProfileAbout != null) {
+      context.read<PersonalProfileService>().setPersonalProfileInfo(PersonalProfileInfoEntity.fromJson(personalProfileAbout as Map<String, dynamic>));
+    }
     return context.read<AuthService>().getLoginInfo;
   }
+
   return null;
 }
 

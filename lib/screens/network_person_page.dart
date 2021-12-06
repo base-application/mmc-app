@@ -35,22 +35,22 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
 
   bool _doIsCan(int index) {
     if (index == 0) {
-      return widget.itemInfo.concatNumber != null;
+      return widget.itemInfo.concatNumber != null && widget.itemInfo.concatNumber!.isNotEmpty;
     }
     if (index == 1) {
-      return widget.itemInfo.whatsapp != null;
+      return widget.itemInfo.whatsapp != null && widget.itemInfo.whatsapp!.isNotEmpty;
     }
     if (index == 2) {
-      return widget.itemInfo.facebook != null;
+      return widget.itemInfo.facebook != null && widget.itemInfo.facebook!.isNotEmpty;
     }
     if (index == 3) {
-      return widget.itemInfo.linkedin != null;
+      return widget.itemInfo.linkedin != null && widget.itemInfo.linkedin!.isNotEmpty;
     }
     if (index == 4) {
-      return widget.itemInfo.youtube != null;
+      return widget.itemInfo.youtube != null && widget.itemInfo.youtube!.isNotEmpty;
     }
     if (index == 5) {
-      return widget.itemInfo.instagram != null;
+      return widget.itemInfo.instagram != null && widget.itemInfo.instagram!.isNotEmpty;
     }
     return false;
   }
@@ -245,22 +245,22 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
                       PersonalProfileInfoCompanyVos companyItem = companyVos[index];
                       bool _businessDoIsCan(int index) {
                         if (index == 0) {
-                          return companyItem.companyPhone != null;
+                          return companyItem.companyPhone != null && companyItem.companyPhone!.isNotEmpty;
                         }
                         if (index == 1) {
-                          return companyItem.companyWhatsapp != null;
+                          return companyItem.companyWhatsapp != null && companyItem.companyWhatsapp!.isNotEmpty;
                         }
                         if (index == 2) {
-                          return companyItem.companyFacebook != null;
+                          return companyItem.companyFacebook != null && companyItem.companyFacebook!.isNotEmpty;
                         }
                         if (index == 3) {
-                          return companyItem.companyLinkedin != null;
+                          return companyItem.companyLinkedin != null && companyItem.companyLinkedin!.isNotEmpty;
                         }
                         if (index == 4) {
-                          return companyItem.companyYoutube != null;
+                          return companyItem.companyYoutube != null && companyItem.companyYoutube!.isNotEmpty;
                         }
                         if (index == 5) {
-                          return companyItem.companyInstagram != null;
+                          return companyItem.companyInstagram != null && companyItem.companyInstagram!.isNotEmpty;
                         }
                         return false;
                       }

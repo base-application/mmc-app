@@ -498,14 +498,15 @@ class _NetworkPageState extends State<NetworkPage> {
   }
 
   bool _pageScrollNotification(Notification notification) {
-    if (notification is ScrollStartNotification) {
-    }
     if (notification is ScrollUpdateNotification) {
       if (_pageScrollController.positions.isNotEmpty &&_pageScrollController.position.userScrollDirection != ScrollDirection.idle) {
         widget.pageScrollDirectionChange?.call(_pageScrollController.position.userScrollDirection);
       }
     }
-    if (notification is ScrollEndNotification) {
+    if (notification is ScrollMetricsNotification) {
+      if(_pageScrollController.positions.isNotEmpty && _pageScrollController.position.maxScrollExtent < MediaQuery.of(context).size.height){
+        widget.pageScrollDirectionChange?.call(ScrollDirection.forward);
+      }
     }
     return true;
   }

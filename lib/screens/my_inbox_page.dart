@@ -83,11 +83,11 @@ class _MyInboxPageState extends State<MyInboxPage> {
          bottomNavigationBar: _isEdit ? BottomButton(
            child: Container(
              width: MediaQuery.of(context).size.width,
-             height: 50,
-             margin: const EdgeInsets.only(left: 20, right: 20),
              child: ElevatedButton(
                style: ButtonStyle(
                  backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
+                 maximumSize: MaterialStateProperty.all(Size(MediaQuery.of(context).size.width,50)),
+                 minimumSize: MaterialStateProperty.all(Size(MediaQuery.of(context).size.width,50)),
                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
                  elevation: MaterialStateProperty.all(0),
                ),
