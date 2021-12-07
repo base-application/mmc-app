@@ -212,7 +212,7 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(AppLocalizations.of(context)!.homeIndexAchievementsTip, style: const TextStyle(fontSize: 15, color: Color(0xFF06387D)),),
-                        Text(snapshot.data!.user?.thankYouNote.formatNumber() ?? '0', style: const TextStyle(fontSize: 15, color: Color(0xFF06387D), fontWeight: FontWeight.bold),),
+                        Text(snapshot.data!.user?.thankYouNoteSum.formatNumber() ?? '0', style: const TextStyle(fontSize: 15, color: Color(0xFF06387D), fontWeight: FontWeight.bold),),
                       ],
                     ),
                   ),
@@ -442,7 +442,9 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                             ),
                             behavior: HitTestBehavior.opaque,
                             onTap: () {
-                              AutoRouter.of(context).push(const EventListingRoute());
+                              AutoRouter.of(context).push(const EventListingRoute()).then((value){
+                                _homeIndexInfoEntity = getIndexData(context, silence: false);
+                              });
                             },
                           ),
                         ],
@@ -548,9 +550,9 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                                                 shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
                                                 elevation: MaterialStateProperty.all(0),
                                               ),
-                                              child: Text(eventItemInfo.checkIn != null ? AppLocalizations.of(context)!.joined : AppLocalizations.of(context)!.join, style: const TextStyle(color: Color(0xFF013B7B), fontSize: 15, fontWeight: FontWeight.w500,),),
+                                              child: Text(eventItemInfo.join ==true ? AppLocalizations.of(context)!.joined : AppLocalizations.of(context)!.join, style: const TextStyle(color: Color(0xFF013B7B), fontSize: 15, fontWeight: FontWeight.w500,),),
                                               onPressed: () {
-                                                if (eventItemInfo.checkIn == null) {
+                                                if (eventItemInfo.join !=true) {
                                                   showDialog(
                                                     context: context,
                                                     barrierColor: Colors.black.withAlpha(180),
@@ -683,7 +685,7 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
   _doJoin(EventDataItemInfoEntity item) {
     doJoinEvent(context, eventId: item.eventId, result: (List<EventDataItemInfoAttendance> list) {
       ComFun.showToast(msg: 'Join event success');
-      item.checkIn = false;
+      item.join = true;
       item.attendance = list;
       setState(() {});
     });

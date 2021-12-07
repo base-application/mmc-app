@@ -30,6 +30,7 @@ class PersonalProfileInfoEntity {
 	int? referralSend;
 	int? referralReceived;
 	int? thankYouNote;
+	int? thankYouNoteSum;
 	late bool enable;
 	int? positionId;
 	String? positionName;

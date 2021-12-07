@@ -71,7 +71,7 @@ class _SettingPageState extends State<SettingPage> {
         iconAssets: 'assets/icon/set_privacy_policy.png',
         label: AppLocalizations.of(context)!.privacyPolicy,
         onTap: () {
-          // AutoRouter.of(context).push(const GuidelineRoute());
+          AutoRouter.of(context).push(WebRoute(title: AppLocalizations.of(context)!.privacyPolicy, initUrl: 'https://mastermindcouncil.asia/privacy-policy/'));
         },
       ),
       MenuDoItem(
@@ -169,6 +169,9 @@ class _SettingPageState extends State<SettingPage> {
                     },
                   ),
                 ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).padding.bottom,
               )
             ],
           ),

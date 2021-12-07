@@ -69,9 +69,9 @@ class DioHttpUtil {
           if (e.response?.statusCode == 401) {
             // 无访问权限 or token过期失效
             debugPrint('数据请求状态为401');
-            AutoRouter.of(ComFun.navigatorKey.currentState!.context).push(SignInRoute());
-            handler.next(e);
-            return;
+            if(AutoRouter.of(ComFun.navigatorKey.currentState!.context).current.name !="SignInRoute"){
+              AutoRouter.of(ComFun.navigatorKey.currentState!.context).push(SignInRoute());
+            }
           }
           if(e.response?.data.containsKey("message")){
             ComFun.showToast(msg: e.response?.data['message'], err: true);

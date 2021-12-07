@@ -67,13 +67,17 @@ class CountryCodeInfo {
   final String iso2;
   final String phonecode;
   final String nativeName;
+  final String name;
   final List<CountryCodeTimezonesInfo>? timezones;
+  final Translations translations;
 
   CountryCodeInfo.fromJson(Map<String, dynamic> result):
         id = result.containsKey('id') && result['id'] != null ? result['id'] : 0,
         iso2 = result.containsKey('iso2') && result['iso2'] != null ? result['iso2'] : '',
         phonecode = result.containsKey('phonecode') && result['phonecode'] != null ? result['phonecode'] : '',
         nativeName = result.containsKey('nativeName') && result['nativeName'] != null ? result['nativeName'] : '',
+        name = result.containsKey('name') && result['name'] != null ? result['name'] : '',
+        translations = result.containsKey('translations') && result['translations'] != null ? Translations.fromJson(jsonDecode(result['translations'])) : Translations(),
         timezones = result.containsKey('nativeName') ? (json.decode(result['timezones']) as List).map((v) => CountryCodeTimezonesInfo.fromJson(v)).toList() : [];
 
   Map<String, dynamic> toJson() {
@@ -83,8 +87,19 @@ class CountryCodeInfo {
     data['phonecode'] = phonecode;
     data['nativeName'] = nativeName;
     data['timezones'] = timezones;
+    data['name'] = name;
     return data;
   }
+}
+
+class Translations{
+
+  String? cn;
+  Translations.fromJson(Map<String, dynamic> result):
+  cn =  result.containsKey('cn') && result['cn'] != null ? result['cn'] : null
+  ;
+
+  Translations();
 }
 
 class CountryCodeTimezonesInfo {

@@ -148,8 +148,8 @@ class _NavigatorPageState extends State<NavigatorPage> {
           ),
         ),
         onTap: () {
-          ///checkIn 需要登陆
-          if(index == 2){
+          ///除了home都要登陆
+          if(index != 0){
             if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token == null){
               AutoRouter.of(context).push(SignInRoute());
               return;

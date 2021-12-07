@@ -60,15 +60,21 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-    if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token != null){
-      noReadMessage(context).then((value) {
-        _messageNoReadEntity = value;
-        setState(() {});
-      });
-    }
+    getNoReadMessage();
     super.initState();
   }
 
+  ///获取未读消息
+  getNoReadMessage(){
+    if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token != null){
+      noReadMessage(context).then((value) {
+        _messageNoReadEntity = value;
+        if(mounted){
+          setState(() {});
+        }
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     Widget _scrollMain = EasyRefresh(
@@ -76,6 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
           if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token != null){
             PersonalProfileInfoEntity info = await getUserDetailData(context, userId: context.read<AuthService>().getLoginInfo!.id);
             savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, info);
+            getNoReadMessage();
           }
         },
         header: MaterialHeader(

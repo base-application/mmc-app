@@ -50,107 +50,105 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
               padding: EdgeInsets.only(top: 50,bottom: 30),
               child: Text(widget.type == 1 ? AppLocalizations.of(context)!.loginPageWelcome : AppLocalizations.of(context)!.forgotPasswordAsk.replaceAll("?", ""), style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFFFBB714),), textAlign: TextAlign.start,),
             ),
-            Expanded(
-              child:  Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(AppLocalizations.of(context)!.tipLoginKeyPassword, style: const TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold,),),
-                  const SizedBox(height: 8,),
-                  Text(AppLocalizations.of(context)!.tipLoginKeyPasswordDescribe, style: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.4), fontWeight: FontWeight.w400,),),
-                  const SizedBox(height: 40,),
-                  Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextFormField(
-                      controller: _registerPasswordController,
-                      keyboardType: TextInputType.number,
-                      maxLength: 20,
-                      cursorColor: Colors.blueAccent,
-                      style: const TextStyle(textBaseline: TextBaseline.alphabetic),
-                      decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.hintLoginPassword,
-                        hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
-                        contentPadding: const EdgeInsets.only(top: 15, left: 14,),
-                        counterText: '',
-                        isDense: true,
-                        border: InputBorder.none,
-                        suffixIcon: IconButton(
-                          splashColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          icon: Padding(
-                            padding: const EdgeInsets.all(6),
-                            child: Image.asset(_isShowPwdForRegister ? 'assets/icon/login_password_eye_open.png' : 'assets/icon/login_password_eye_close.png', width: 16, height: 16,),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _isShowPwdForRegister = !_isShowPwdForRegister;
-                            });
-                          },
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(AppLocalizations.of(context)!.tipLoginKeyPassword, style: const TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold,),),
+                const SizedBox(height: 8,),
+                Text(AppLocalizations.of(context)!.tipLoginKeyPasswordDescribe, style: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.4), fontWeight: FontWeight.w400,),),
+                const SizedBox(height: 40,),
+                Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TextFormField(
+                    controller: _registerPasswordController,
+                    keyboardType: TextInputType.text,
+                    maxLength: 20,
+                    cursorColor: Colors.blueAccent,
+                    style: const TextStyle(textBaseline: TextBaseline.alphabetic),
+                    decoration: InputDecoration(
+                      hintText: AppLocalizations.of(context)!.hintLoginPassword,
+                      hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
+                      contentPadding: const EdgeInsets.only(top: 15, left: 14,),
+                      counterText: '',
+                      isDense: true,
+                      border: InputBorder.none,
+                      suffixIcon: IconButton(
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        icon: Padding(
+                          padding: const EdgeInsets.all(6),
+                          child: Image.asset(_isShowPwdForRegister ? 'assets/icon/login_password_eye_open.png' : 'assets/icon/login_password_eye_close.png', width: 16, height: 16,),
                         ),
+                        onPressed: () {
+                          setState(() {
+                            _isShowPwdForRegister = !_isShowPwdForRegister;
+                          });
+                        },
                       ),
-                      obscureText: !_isShowPwdForRegister,
                     ),
+                    obscureText: !_isShowPwdForRegister,
                   ),
-                  const SizedBox(height: 22,),
-                  Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextFormField(
-                      controller: _registerPasswordAgainController,
-                      keyboardType: TextInputType.number,
-                      maxLength: 20,
-                      cursorColor: Colors.blueAccent,
-                      style: const TextStyle(textBaseline: TextBaseline.alphabetic),
-                      decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.hintLoginConfirmPassword,
-                        hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
-                        contentPadding: const EdgeInsets.only(top: 15, left: 14,),
-                        counterText: '',
-                        isDense: true,
-                        border: InputBorder.none,
-                        suffixIcon: IconButton(
-                          splashColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          icon: Padding(
-                            padding: const EdgeInsets.all(6),
-                            child: Image.asset(_isShowPwdForRegisterAgain ? 'assets/icon/login_password_eye_open.png' : 'assets/icon/login_password_eye_close.png', width: 16, height: 16,),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _isShowPwdForRegisterAgain = !_isShowPwdForRegisterAgain;
-                            });
-                          },
+                ),
+                const SizedBox(height: 22,),
+                Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TextFormField(
+                    controller: _registerPasswordAgainController,
+                    keyboardType: TextInputType.number,
+                    maxLength: 20,
+                    cursorColor: Colors.blueAccent,
+                    style: const TextStyle(textBaseline: TextBaseline.alphabetic),
+                    decoration: InputDecoration(
+                      hintText: AppLocalizations.of(context)!.hintLoginConfirmPassword,
+                      hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
+                      contentPadding: const EdgeInsets.only(top: 15, left: 14,),
+                      counterText: '',
+                      isDense: true,
+                      border: InputBorder.none,
+                      suffixIcon: IconButton(
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        icon: Padding(
+                          padding: const EdgeInsets.all(6),
+                          child: Image.asset(_isShowPwdForRegisterAgain ? 'assets/icon/login_password_eye_open.png' : 'assets/icon/login_password_eye_close.png', width: 16, height: 16,),
                         ),
+                        onPressed: () {
+                          setState(() {
+                            _isShowPwdForRegisterAgain = !_isShowPwdForRegisterAgain;
+                          });
+                        },
                       ),
-                      obscureText: !_isShowPwdForRegisterAgain,
                     ),
+                    obscureText: !_isShowPwdForRegisterAgain,
                   ),
-                  const SizedBox(height: 16,),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-                        elevation: MaterialStateProperty.all(1),
-                      ),
-                      child: Text(AppLocalizations.of(context)!.hintLoginConfirmBtn, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.bold, letterSpacing: 1),),
-                      onPressed: () {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        _signUpOrForgotConfirm();
-                      },
+                ),
+                const SizedBox(height: 16,),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                      elevation: MaterialStateProperty.all(1),
                     ),
+                    child: Text(AppLocalizations.of(context)!.hintLoginConfirmBtn, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.bold, letterSpacing: 1),),
+                    onPressed: () {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      _signUpOrForgotConfirm();
+                    },
                   ),
-                ],
-              ),
-            )
+                ),
+              ],
+            ),
           ],
         ),
         bottomNavigationBar: GestureDetector(

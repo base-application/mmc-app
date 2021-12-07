@@ -101,6 +101,10 @@ PersonalProfileInfoEntity $PersonalProfileInfoEntityFromJson(Map<String, dynamic
 	if (thankYouNote != null) {
 		personalProfileInfoEntity.thankYouNote = thankYouNote;
 	}
+	var thankYouNoteSum = jsonConvert.convert<int>(json['thankYouNoteSum']);
+	if (thankYouNoteSum != null) {
+		personalProfileInfoEntity.thankYouNoteSum = thankYouNoteSum;
+	}
 	var enable = jsonConvert.convert<bool>(json['enable']);
 	if (enable != null) {
 		personalProfileInfoEntity.enable = enable;
@@ -158,6 +162,7 @@ Map<String, dynamic> $PersonalProfileInfoEntityToJson(PersonalProfileInfoEntity 
 	data['referralSend'] = entity.referralSend;
 	data['referralReceived'] = entity.referralReceived;
 	data['thankYouNote'] = entity.thankYouNote;
+	data['thankYouNoteSum'] = entity.thankYouNoteSum;
 	data['enable'] = entity.enable;
 	data['positionId'] = entity.positionId;
 	data['positionName'] = entity.positionName;

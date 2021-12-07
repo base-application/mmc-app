@@ -248,7 +248,7 @@ class _EventListingPageState extends State<EventListingPage> {
                           Expanded(
                             child: Row(
                               children: [
-                                SizedBox(
+                                Expanded(child: SizedBox(
                                   width: (item.attendance != null ? (item.attendance!.length > 4 ? 4 : item.attendance!.length) : 0) * 20 + 8,
                                   height: 28,
                                   child: Builder(builder: (ctx) {
@@ -280,7 +280,7 @@ class _EventListingPageState extends State<EventListingPage> {
                                       children: _item(),
                                     );
                                   }),
-                                ),
+                                )),
                                 if (item.attendance != null && item.attendance!.length > 4) const SizedBox(width: 6,),
                                 if (item.attendance != null && item.attendance!.length > 4) Text('+${item.attendance!.length - 4}', style: TextStyle(fontSize: 16, color: Colors.amber.shade600,),),
                               ],
@@ -289,7 +289,7 @@ class _EventListingPageState extends State<EventListingPage> {
                           const SizedBox(width: 10,),
                           Row(
                             children: [
-                              if (item.join??false) GestureDetector(
+                              if ((item.join??false)&&(item.eventStartTime??0) > DateTime.now().millisecondsSinceEpoch) GestureDetector(
                                 child: Padding(
                                   padding: const EdgeInsets.all(10).copyWith(top: 4, bottom: 4,),
                                   child: Text(AppLocalizations.of(context)!.unJoin, style: const TextStyle(fontSize: 14, color: Color(0xFFFDC12C), fontWeight: FontWeight.w500,),),

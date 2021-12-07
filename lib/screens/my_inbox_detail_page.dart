@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/notification_entity.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:mmc/utils/comfun.dart';
 import 'package:mmc/utils/http_request.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'my_inbox_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class InboxDetailPage extends StatefulWidget {
   final NotificationEntity notification;
@@ -24,7 +28,7 @@ class _InboxDetailPageState extends State<InboxDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Inbox"),
+        title: Text(AppLocalizations.of(context)!.inbox),
       ),
       body: Column(
         children: [
@@ -67,7 +71,31 @@ class _InboxDetailPageState extends State<InboxDetailPage> {
             ),
           ),
           Expanded(
-              child: Html(data: widget.notification.notificationContent,)
+              child: Column(
+                children: [
+                  Html(data: widget.notification.notificationContent,),
+                  if(widget.notification.registrationName!=null)
+                    Container(
+                      padding: EdgeInsets.only(left: 16,right: 16),
+                      width: MediaQuery.of(context).size.width,
+                      height: 45,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                          elevation: MaterialStateProperty.all(0),
+                        ),
+                        onPressed: ()async{
+                          if(await canLaunch(widget.notification.registrationLink??"")){
+                            launch(widget.notification.registrationLink!);
+                          }else{
+                            ComFun.showToast(msg: AppLocalizations.of(context)!.urlNotOPen);
+                          }
+                        }, child: Text(widget.notification.registrationName??"")
+                      ),
+                    )
+                ],
+              )
           )
         ],
       ),

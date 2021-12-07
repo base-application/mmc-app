@@ -22,7 +22,7 @@ class _PhoneNumberVerificationPageState extends State<PhoneNumberVerificationPag
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         image: DecorationImage(image: Image.asset("assets/image/login_background.png").image,alignment: Alignment.topCenter),
         gradient: const LinearGradient(
@@ -37,11 +37,11 @@ class _PhoneNumberVerificationPageState extends State<PhoneNumberVerificationPag
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: ListView(
-          physics: ClampingScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           children: [
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(top: 50,bottom: 30),
+              padding: EdgeInsets.only(top: 50,bottom: MediaQuery.of(context).size.height *.2),
               child: Text(widget.type == 1 ? AppLocalizations.of(context)!.loginPageWelcome : AppLocalizations.of(context)!.forgotPasswordAsk.replaceAll("?", ""), style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFFFBB714),), textAlign: TextAlign.start,),
             ),
             Column(

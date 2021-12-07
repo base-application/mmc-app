@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mmc/router/auth_guard.dart';
+import 'package:provider/src/provider.dart';
 
 import 'app_bar_home.dart';
 
@@ -74,7 +76,7 @@ class _CountryChooseState extends State<CountryChoose> {
                       children: [
                         Container(
                           padding: const EdgeInsets.only(top: 12,bottom: 12),
-                          child: Text(e.nativeName + "(" +e.phonecode+")",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                          child: Text(getName(e),style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                         ),
                         Divider()
                       ],
@@ -85,5 +87,13 @@ class _CountryChooseState extends State<CountryChoose> {
         )
       ],
     );
+  }
+
+  String getName(CountryCodeInfo e) {
+    if(context.read<SystemSetService>().appLanguage == "en"){
+      return e.name + "(" +e.phonecode+")";
+    }else{
+      return (e.translations.cn??"") + "(" +e.phonecode+")";
+    }
   }
 }

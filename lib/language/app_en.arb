@@ -219,5 +219,7 @@
   "inbox": "My Inbox",
   "noGroup": "no Group",
   "exit": "again exit",
-  "phoneNumberInput": "key phone number"
+  "phoneNumberInput": "key phone number",
+  "urlNotOPen": "url can not open",
+  "versionFound": "New version found"
 }

@@ -1,6 +1,7 @@
 
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mmc/bean/app_version_entity.dart';
 import 'package:mmc/bean/check_log_entity.dart';
 import 'package:mmc/bean/event_data_item_info_entity.dart';
 import 'package:mmc/bean/event_detail_info_entity.dart';
@@ -20,6 +21,7 @@ import 'package:mmc/bean/referral_entity.dart';
 import 'package:mmc/bean/state_item_info_entity.dart';
 import 'package:mmc/bean/thank_note_entity.dart';
 import 'package:mmc/widget/app_bar_home.dart';
+import 'package:package_info/package_info.dart';
 
 import 'http.dart';
 
@@ -95,8 +97,6 @@ Future<MessageNoReadEntity> noReadMessage(BuildContext context) async {
 Future getCountryCodeData(BuildContext context, { bool silence = true, required Function(List<CountryCodeInfo> list) result, Function? err }) async {
   await httpGetList(context, url: 'countries', queryParameters: {}, silence: silence).then((value) {
     result.call(value!.data!.map((e) => CountryCodeInfo.fromJson(e)).toList());
-  }).catchError((_) {
-    err?.call();
   });
 }
 
@@ -654,3 +654,18 @@ Future<List<GuideLineEntity>> guideLine(BuildContext context) async {
     return [];
   }
 }
+
+
+
+
+/// app检查更新
+Future<AppVersionEntity?> checkVersion(BuildContext context) async {
+  BaseBean? res = await httpPost(context, url: '/app/history/last', queryParameters: {"appId":'8156387750412255232'}, silence: true);
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  AppVersionEntity appVersionEntity = AppVersionEntity.fromJson(res!.data);
+  if(packageInfo.version != appVersionEntity.version){
+    return appVersionEntity;
+  }
+  return null;
+}
+

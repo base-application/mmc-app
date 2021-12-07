@@ -202,8 +202,8 @@
   "guideline": "手册",
   "aboutUs": "关于",
   "language": "语言",
-  "privacyPolicy": "语言",
-  "termService": "语言",
+  "privacyPolicy": "私隐政策",
+  "termService": "服务期限",
   "userTour": "语言",
   "setting": "设置",
   "netWork": "网络",
@@ -220,5 +220,7 @@
   "inbox": "我的消息",
   "noGroup": "没有获取到分组信息",
   "exit": "再按一次退出",
-  "phoneNumberInput": "请输入手机号"
+  "phoneNumberInput": "请输入手机号",
+  "urlNotOPen": "链接无法打开",
+  "versionFound": "发现新版本"
 }

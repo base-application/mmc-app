@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pickers/pickers.dart';
@@ -18,6 +19,7 @@ import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:mmc/widget/app_bar_home.dart';
+import 'package:mmc/widget/country_choose.dart';
 import 'package:provider/src/provider.dart';
 
 class PersonalProfileSetPage extends StatefulWidget {
@@ -233,7 +235,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                child: Text(_formCountry?.nativeName ?? AppLocalizations.of(context)!.personalProfileFormCountryHint, style: TextStyle(fontSize: 14, color: _formCountry == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
+                                child: Text(getName() ?? AppLocalizations.of(context)!.personalProfileFormCountryHint, style: TextStyle(fontSize: 14, color: _formCountry == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
                               ),
                               const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
                             ],
@@ -242,7 +244,24 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
                           FocusScope.of(context).requestFocus(FocusNode());
-                          _chooseCountry();
+                          getCountryCodeData(context,silence: false, result: (List<CountryCodeInfo> list) {
+                            List<CountryCodeInfo> countryCodeDataList = list.where((element) => element.phonecode != '' && element.nativeName != '').toList();
+                            showModalBottomSheet<CountryCodeInfo?>(
+                                context: context,
+                                isScrollControlled: true,
+                                constraints: BoxConstraints(
+                                  maxHeight: MediaQuery.of(context).size.height * .8,
+                                  minHeight: MediaQuery.of(context).size.height * .4,
+                                ),
+                                builder: (BuildContext context) {
+                                  return CountryChoose(curLocalData: countryCodeDataList,);
+                                }).then((country) {
+                              if(country!=null){
+                                _formCountry = country;
+                                setState(() {});
+                              }
+                            });
+                          });
                         },
                       ),
                     ],
@@ -888,7 +907,16 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
         ComFun.showToast(msg: AppLocalizations.of(context)!.updateProfileInfoSuccessToast);
         context.read<AuthService>().setAvatar(_formUserHead);
         savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, info);
+        AutoRouter.of(context).pop();
       },
     );
+  }
+
+  getName() {
+    if(context.read<SystemSetService>().appLanguage == "en"){
+     return _formCountry?.name;
+    }else{
+      return _formCountry?.translations.cn??"";
+    }
   }
 }

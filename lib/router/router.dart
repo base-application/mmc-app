@@ -50,7 +50,7 @@ import 'auth_guard.dart';
   routes: <AutoRoute>[
     AutoRoute(page: AdvertisementPage, path: '/advertisement',initial: true),
     AutoRoute<String>(page: HomePage,path: '/home'),
-    AutoRoute<String>(page: GroupPage, path: '/group', guards: [AuthGuard]),
+    AutoRoute<String>(page: GroupPage, path: '/group'),
     AutoRoute<String>(page: GroupDetailPage, path: '/groupDetail'),
     AutoRoute<String>(page: SendingReferralPage, path: '/sendingReferral', guards: [AuthGuard]),
     AutoRoute<String>(page: NetworkPersonPage, path: '/networkPerson', guards: [AuthGuard]),
@@ -63,7 +63,7 @@ import 'auth_guard.dart';
     AutoRoute<bool>(page: SendThankYouNotePage, path: '/sendThankYouNote', guards: [AuthGuard]),
     AutoRoute<String>(page: ThankYouNoteReceivedPage, path: '/thankYouNoteReceived', guards: [AuthGuard]),
     AutoRoute<String>(page: ShiningBoardPage, path: '/shiningBoardPage'),
-    AutoRoute<String>(page: ShiningBoardDetailPage, path: '/shiningBoardDetail'),
+    AutoRoute<String>(page: ShiningBoardDetailPage, path: '/shiningBoardDetail', guards: [AuthGuard]),
     AutoRoute<String>(page: MostReferralSentPage, path: '/mostReferralSent'),
     AutoRoute<String>(page: CreateEventPage, path: '/createEvent', guards: [AuthGuard]),
     AutoRoute<String>(page: MyInboxPage, path: '/myInbox', guards: [AuthGuard]),

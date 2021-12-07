@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:mmc/widget/app_bar_home.dart';
+import 'package:mmc/widget/bottom_button.dart';
 import 'package:mmc/widget/country_choose.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -21,11 +23,18 @@ class _SignUpPageState extends State<SignUpPage> {
 
   String? _registerCountryCode;
   List<CountryCodeInfo> countryCodeDataList = [];
+  @override
+  void initState() {
+    if(SpUtil.getString("phonecode")!=null){
+      _registerCountryCode = SpUtil.getString("phonecode");
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 16,right: 16),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         image: DecorationImage(image: Image.asset("assets/image/login_background.png").image,alignment: Alignment.topCenter),
         gradient: const LinearGradient(
@@ -44,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(top: 50,bottom: 30),
+              padding: EdgeInsets.only(top: 50,bottom: MediaQuery.of(context).size.height *.2),
               child: Text(widget.type ==1 ? AppLocalizations.of(context)!.loginPageWelcome:AppLocalizations.of(context)!.forgotPasswordAsk.replaceAll("?", ""), style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFFFBB714),), textAlign: TextAlign.start,),
             ),
             Row(
@@ -89,6 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           }).then((country) {
                             if(country!=null){
                               _registerCountryCode = country.phonecode;
+                              SpUtil.putString("phonecode", country.phonecode);
                               setState(() {});
                             }
                       });
