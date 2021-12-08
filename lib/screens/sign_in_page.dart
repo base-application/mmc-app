@@ -52,10 +52,15 @@ class _SignInPageState extends State<SignInPage> {
         backgroundColor: Colors.transparent,
         body: ListView(
           children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(top: 50,bottom: MediaQuery.of(context).size.height *.2),
-              child: Text(AppLocalizations.of(context)!.loginPageWelcome, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFFFBB714),), textAlign: TextAlign.start,),
+            GestureDetector(
+              onTap: (){
+                checkVersion(context);
+              },
+              child: Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.only(top: 50,bottom: MediaQuery.of(context).size.height *.2),
+                child: Text(AppLocalizations.of(context)!.loginPageWelcome, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFFFBB714),), textAlign: TextAlign.start,),
+              ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -190,9 +195,6 @@ class _SignInPageState extends State<SignInPage> {
                     child: Text(AppLocalizations.of(context)!.signIn, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.bold, letterSpacing: 1),),
                     onPressed: () {
                       FocusScope.of(context).requestFocus(FocusNode());
-                      // if (_countryCode == null || _countryCode!.trim() == '') {
-                      //   ComFun.showToast(msg: AppLocalizations.of(context)!.chooseCountryCodeTip, err: true,);
-                      // } else
                       if (_phoneNumberController.text.trim() == '') {
                         ComFun.showToast(msg: AppLocalizations.of(context)!.inputLoginAccountTip, err: true,);
                       } else if (_passwordController.text.trim() == '') {
@@ -256,7 +258,12 @@ class _SignInPageState extends State<SignInPage> {
       // 登录成功，初始化用户及首页数据，初始化成功再认为是登录成功
       PersonalProfileInfoEntity profileInfo = await getUserDetailData(context, userId: info.id, silence: true);
       await savePersonalProfileInfo(context, info.id, profileInfo);
-      AutoRouter.of(context).replaceAll([HomeRoute()]);
+      if(ComFun.isPerfect(context)){
+        AutoRouter.of(context).replaceAll([HomeRoute(),PersonalProfileSetRoute()]);
+      }else{
+        AutoRouter.of(context).replaceAll([HomeRoute()]);
+      }
+
     });
   }
 }

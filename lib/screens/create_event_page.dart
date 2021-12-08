@@ -9,6 +9,7 @@ import 'package:flutter_pickers/time_picker/model/date_mode.dart';
 import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:mmc/bean/grade_level_info_entity.dart';
 import 'package:mmc/bean/group_item_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
@@ -16,6 +17,7 @@ import 'package:mmc/utils/comfun.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/utils/comm_widget.dart';
+import 'package:mmc/utils/dialog.dart';
 import 'package:mmc/utils/http.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:provider/src/provider.dart';
@@ -290,6 +292,8 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                 onChanged: (res) {
                                   setState(() {
                                     _formStartDate = DateUtil.formatDate(DateTime.utc(res.year!, res.month!, res.day!), format: 'yyyy-MM-dd');
+                                    _formEndDate = null;
+                                    _formEndTime = null;
                                   });
                                 },
                               );
@@ -319,15 +323,21 @@ class _CreateEventPageState extends State<CreateEventPage> {
                             behavior: HitTestBehavior.opaque,
                             onTap: () {
                               FocusScope.of(context).requestFocus(FocusNode());
+                              if(_formStartDate==null){
+                                ComFun.showToast(msg: AppLocalizations.of(context)!.firstChooseDate);
+                                return;
+                              }
                               if (_formStartTime == null) {
                                 setState(() {
                                   _formStartTime = DateUtil.formatDate(DateTime.now(), format: 'HH:mm');
                                 });
                               }
+
+
                               Pickers.showDatePicker(context,
                                 mode: DateMode.HM,
                                 selectDate: _formStartTime != null ? PDuration.parse(DateTime.parse('2000-01-01 $_formStartTime')) : null,
-                                minDate: PDuration.now(),
+                                minDate: _formStartDate!=null && DateUtil.isToday(DateFormat("yyyy-MM-dd").parse(_formStartDate!).millisecondsSinceEpoch) ? PDuration.now(): null,
                                 maxDate: _formEndTime != null ? PDuration.parse(DateTime.parse('2000-01-01 $_formEndTime')) : null,
                                 pickerStyle: PickerStyle(
                                   showTitleBar: false,
@@ -339,6 +349,8 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                 onChanged: (res) {
                                   setState(() {
                                     _formStartTime = DateUtil.formatDate(DateTime.utc(res.year!, res.month!, res.day!, res.hour!, res.minute!), format: 'HH:mm');
+                                    _formEndDate = null;
+                                    _formEndTime = null;
                                   });
                                 },
                               );
@@ -391,6 +403,10 @@ class _CreateEventPageState extends State<CreateEventPage> {
                             behavior: HitTestBehavior.opaque,
                             onTap: () {
                               FocusScope.of(context).requestFocus(FocusNode());
+                              if(_formStartDate==null){
+                                ComFun.showToast(msg: AppLocalizations.of(context)!.firstChooseDate);
+                                return;
+                              }
                               if (_formEndDate == null) {
                                 if (_formStartDate != null) {
                                   setState(() {
@@ -445,6 +461,10 @@ class _CreateEventPageState extends State<CreateEventPage> {
                             behavior: HitTestBehavior.opaque,
                             onTap: () {
                               FocusScope.of(context).requestFocus(FocusNode());
+                              if(_formEndDate ==null || _formEndDate ==null){
+                                ComFun.showToast(msg: AppLocalizations.of(context)!.firstChooseDate);
+                                return;
+                              }
                               if (_formEndTime == null) {
                                 if (_formStartTime != null) {
                                   setState(() {
@@ -459,7 +479,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                               Pickers.showDatePicker(context,
                                 mode: DateMode.HM,
                                 selectDate: _formEndTime != null ? PDuration.parse(DateTime.parse('2000-01-01 $_formEndTime')) : null,
-                                minDate: _formStartTime != null ? PDuration.parse(DateTime.parse('2000-01-01 $_formStartTime')) : PDuration.now(),
+                                minDate: _formEndDate != null && isSameDay(DateFormat("yyyy-MM-dd").parse(_formStartDate!),DateFormat("yyyy-MM-dd").parse(_formEndDate!)) ? PDuration.parse(DateTime.parse('2000-01-01 $_formStartTime')) : null,
                                 pickerStyle: PickerStyle(
                                   showTitleBar: false,
                                   backgroundColor: Colors.white,
@@ -820,4 +840,9 @@ class _CreateEventPageState extends State<CreateEventPage> {
       },
     );
   }
+}
+
+
+bool isSameDay(DateTime date ,DateTime date2){
+  return date.year == date2.year && date.month == date2.month && date.day == date2.day;
 }

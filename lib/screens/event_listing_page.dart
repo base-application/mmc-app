@@ -535,7 +535,7 @@ class _EventListingPageState extends State<EventListingPage> {
               children: [
                 const SizedBox(width: 4,),
                 Container(
-                  width: 50,
+                  width: 55,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

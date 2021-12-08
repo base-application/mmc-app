@@ -214,8 +214,8 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                     children: [
                       Row(
                         children: [
-                          // Image.asset('assets/icon/form_required.png', width: 8, height: 8,),
-                          // const SizedBox(width: 6,),
+                          Image.asset('assets/icon/form_required.png', width: 8, height: 8,),
+                          const SizedBox(width: 6,),
                           Text(AppLocalizations.of(context)!.personalProfileFormCountry, style: TextStyle(fontSize: 15, color: Colors.black87.withAlpha(220),),),
                         ],
                       ),
@@ -258,6 +258,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                                 }).then((country) {
                               if(country!=null){
                                 _formCountry = country;
+                                _getStateData();
                                 setState(() {});
                               }
                             });
@@ -277,8 +278,8 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                     children: [
                       Row(
                         children: [
-                          // Image.asset('assets/icon/form_required.png', width: 8, height: 8,),
-                          // const SizedBox(width: 6,),
+                          Image.asset('assets/icon/form_required.png', width: 8, height: 8,),
+                          const SizedBox(width: 6,),
                           Text(AppLocalizations.of(context)!.personalProfileFormState, style: TextStyle(fontSize: 15, color: Colors.black87.withAlpha(220),),),
                         ],
                       ),
@@ -873,6 +874,15 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
     }
     if (_yourNameController.text.trim() == '') {
       ComFun.showToast(msg: 'Please fill your name');
+      return;
+    }
+
+    if (_formCountry == null) {
+      ComFun.showToast(msg: 'Please choose your country');
+      return;
+    }
+    if(_formState == null){
+      ComFun.showToast(msg: 'Please choose your state');
       return;
     }
     if (_yourOccupationController.text.trim() == '') {

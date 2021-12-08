@@ -155,6 +155,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   if(_registerPhoneNumberController.text.isEmpty){
                     return ComFun.showToast(msg: AppLocalizations.of(context)!.phoneNumberInput);
                   }
+                  if(_registerCountryCode==null){
+                    return ComFun.showToast(msg: AppLocalizations.of(context)!.chooseCountryCodeTip,);
+                  }
                   sendSmsCode(context, phoneNumber: _registerPhoneNumberController.text.trim(),countryCode: _registerCountryCode!.trim() , type: widget.type, result: () {
                     AutoRouter.of(context).push(PhoneNumberVerificationRoute(phoneNumber:_registerPhoneNumberController.text.trim(),countryCode: _registerCountryCode!, type: widget.type));
                   });

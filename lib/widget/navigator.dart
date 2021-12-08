@@ -151,7 +151,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
           ///除了home都要登陆
           if(index != 0){
             if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token == null){
-              AutoRouter.of(context).push(SignInRoute());
+              AutoRouter.of(context).push(SignUpRoute(type: 1));
               return;
             }
           }

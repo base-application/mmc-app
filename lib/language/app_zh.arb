@@ -222,5 +222,7 @@
   "exit": "再按一次退出",
   "phoneNumberInput": "请输入手机号",
   "urlNotOPen": "链接无法打开",
-  "versionFound": "发现新版本"
+  "versionFound": "发现新版本",
+  "firstChooseDate": "先选择日期",
+  "checkInSuccess": "签到成功"
 }

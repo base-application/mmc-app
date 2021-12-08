@@ -122,7 +122,7 @@ class _CheckInPageState extends State<CheckInPage> {
                   if(value.split(":")[0] == "event"){
                     checkIn(context,int.parse(value.split(":")[1])).then((response) {
                       if(response == true){
-                        ComFun.showToast(msg: "签到成功");
+                        ComFun.showToast(msg: AppLocalizations.of(context)!.checkInSuccess);
                         for(int i =0;i<_future.length;i++){
                           if(_future[i].eventId == int.parse(value.split(":")[1])){
                             _future[i].checkIn = true;

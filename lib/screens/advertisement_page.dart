@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:mmc/bean/advertisement_entity.dart';
 import 'package:mmc/bean/app_version_entity.dart';
+import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
@@ -21,23 +25,50 @@ class AdvertisementPage extends StatefulWidget {
 
 class _AdvertisementPageState extends State<AdvertisementPage> {
   late Timer _timer;
+  AdvertisementEntity? _advertisementEntity;
+  int time = 3;
   @override
   void initState() {
-    checkVersion(context).then((value) {
-      if(value==null){
-        next();
-      }else{
-        updateVersion(value);
-      }
-
+    advertisementPull(context).then((value) {
+      _advertisementEntity = value;
+      setState(() {});
+      advTime();
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Text("广告"),
+    return Stack(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: _advertisementEntity!=null ?
+          Image.network(
+            Provider.of<SystemSetService>(context, listen: false).baseUrl + _advertisementEntity!.advertisementPoster,
+            fit: BoxFit.cover,
+            errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace,){
+              return Image.asset("assets/image/app_launch.png",fit: BoxFit.cover);
+            },
+          ) :
+          Image.asset("assets/image/app_launch.png",fit: BoxFit.cover),
+        ),
+        Positioned(
+            top: MediaQuery.of(context).padding.top,
+            right: 20,
+            child: Container(
+              width: 50,
+              height: 30,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: Colors.black38,
+                  borderRadius: BorderRadius.circular(50)
+              ),
+              child: Text(time.toString(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+            ),
+        )
+      ],
     );
   }
 
@@ -47,16 +78,21 @@ class _AdvertisementPageState extends State<AdvertisementPage> {
     super.dispose();
   }
 
-  next(){
-    _timer = Timer.periodic(const Duration(seconds: 3), (t) {
-      initLoginInfo(context).then((value){
-        if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token != null){
-          AutoRouter.of(context).replaceAll([const HomeRoute()]);
-        }else{
-          AutoRouter.of(context).replaceAll([const WelcomeRoute()]);
-        }
-      });
-      _timer.cancel();
+  advTime(){
+    _timer = Timer.periodic(const Duration(seconds: 1), (t) {
+      if(time>0){
+        time--;
+        setState(() {});
+      }else{
+        checkVersion(context).then((value) {
+          if(value==null){
+            next();
+          }else{
+            updateVersion(value);
+          }
+        });
+        _timer.cancel();
+      }
     });
   }
 
@@ -137,5 +173,20 @@ class _AdvertisementPageState extends State<AdvertisementPage> {
         },
       );
     }
+  }
+
+  next(){
+    initLoginInfo(context).then((value){
+      if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token != null){
+        ///完善资料
+        if(ComFun.isPerfect(context)){
+          AutoRouter.of(context).replaceAll([HomeRoute(),PersonalProfileSetRoute()]);
+        }else{
+          AutoRouter.of(context).replaceAll([HomeRoute()]);
+        }
+      }else{
+        AutoRouter.of(context).replaceAll([WelcomeRoute()]);
+      }
+    });
   }
 }

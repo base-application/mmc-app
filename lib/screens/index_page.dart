@@ -11,6 +11,7 @@ import 'package:mmc/bean/event_data_item_info_entity.dart';
 import 'package:mmc/bean/home_index_info_entity.dart';
 import 'package:mmc/bean/message_no_read_entity.dart';
 import 'package:mmc/bean/newest_item_info_entity.dart';
+import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
@@ -449,201 +450,220 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 150,
-                        child: ScrollConfiguration(
-                          behavior: CusBehavior(),
-                          child: snapshot.data!.upcoming?.isNotEmpty ?? false ?
-                          ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: snapshot.data!.upcoming!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              EventDataItemInfoEntity eventItemInfo = snapshot.data!.upcoming![index];
-                              return GestureDetector(
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width * 0.82,
-                                  margin: EdgeInsets.only(left: 20, right: index == 1 ? 20 : 0, top: 6, bottom: 6),
-                                  padding: const EdgeInsets.only(left: 15, right: 15, top: 12, bottom: 12),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(6),
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                        blurRadius: 1,
-                                        color: Colors.black87.withAlpha(10),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          netImgWrap(context,
-                                            width: 30,
-                                            height: 30,
-                                            assets: 'assets/icon/upcoming_item_ic.png',
-                                            errorWidget: Container(color: Colors.grey.shade300, width: 30, height: 30,),
-                                          ),
-                                          const SizedBox(width: 12,),
-                                          Expanded(child: Text(eventItemInfo.eventTitle, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), overflow: TextOverflow.ellipsis,),),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 18,),
-                                      Row(
-                                        children: [
-                                          Image.asset('assets/icon/date.png', width: 15, height: 15,),
-                                          const SizedBox(width: 8,),
-                                          Text(DateFormat('EEEE, d MMMM yyyy | h:mm a', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(DateTime.fromMillisecondsSinceEpoch(eventItemInfo.eventStartTime!)), style: const TextStyle(fontSize: 13, color: Colors.black54,),),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 18,),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Expanded(
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: (eventItemInfo.attendance != null ? (eventItemInfo.attendance!.length > 4 ? 4 : eventItemInfo.attendance!.length) : 0) * 20 + 8,
-                                                  height: 28,
-                                                  child: StatefulBuilder(builder: (ctx, setSta) {
-                                                    List<Widget> _item() {
-                                                      List<Widget> items = [];
-                                                      (eventItemInfo.attendance?.take(4).toList() ?? []).asMap().forEach((index, value) {
-                                                        items.add(Positioned(
-                                                          child: Container(
-                                                            width: 28,
-                                                            height: 28,
-                                                            clipBehavior: Clip.antiAlias,
-                                                            decoration: BoxDecoration(
-                                                              borderRadius: const BorderRadius.all(Radius.circular(100)),
-                                                              border: Border.all(width: 2, color: Colors.white,),
-                                                            ),
-                                                            child: netImgWrap(context,
-                                                              url: value.picture,
-                                                              radius: 100,
-                                                              errorWidget: Container(color: Colors.grey.shade300,),
-                                                            ),
-                                                          ),
-                                                          left: index * 20,
-                                                        ));
-                                                      });
-                                                      return items;
-                                                    }
-                                                    return Stack(
-                                                      fit: StackFit.loose,
-                                                      children: _item(),
-                                                    );
-                                                  }),
-                                                ),
-                                                if (eventItemInfo.attendance != null && eventItemInfo.attendance!.length > 4) const SizedBox(width: 6,),
-                                                if (eventItemInfo.attendance != null && eventItemInfo.attendance!.length > 4) Text('+${eventItemInfo.attendance!.length - 4}', style: TextStyle(fontSize: 13, color: Colors.amber.shade800,),),
-                                              ],
+                      Offstage(
+                        offstage: Provider.of<AuthService>(context, listen: false).getLoginInfo?.token == null,
+                        child: SizedBox(
+                          height: 150,
+                          child:  ScrollConfiguration(
+                            behavior: CusBehavior(),
+                            child: snapshot.data!.upcoming?.isNotEmpty ?? false ?
+                            ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: snapshot.data!.upcoming!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                EventDataItemInfoEntity eventItemInfo = snapshot.data!.upcoming![index];
+                                return GestureDetector(
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width * 0.82,
+                                    margin: EdgeInsets.only(left: 20, right: index == 1 ? 20 : 0, top: 6, bottom: 6),
+                                    padding: const EdgeInsets.only(left: 15, right: 15, top: 12, bottom: 12),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(6),
+                                      boxShadow: <BoxShadow>[
+                                        BoxShadow(
+                                          blurRadius: 1,
+                                          color: Colors.black87.withAlpha(10),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            netImgWrap(context,
+                                              width: 30,
+                                              height: 30,
+                                              assets: 'assets/icon/upcoming_item_ic.png',
+                                              errorWidget: Container(color: Colors.grey.shade300, width: 30, height: 30,),
                                             ),
-                                          ),
-                                          const SizedBox(width: 30,),
-                                          SizedBox(
-                                            height: 30,
-                                            child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
-                                                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
-                                                elevation: MaterialStateProperty.all(0),
-                                              ),
-                                              child: Text(eventItemInfo.join ==true ? AppLocalizations.of(context)!.joined : AppLocalizations.of(context)!.join, style: const TextStyle(color: Color(0xFF013B7B), fontSize: 15, fontWeight: FontWeight.w500,),),
-                                              onPressed: () {
-                                                if (eventItemInfo.join !=true) {
-                                                  showDialog(
-                                                    context: context,
-                                                    barrierColor: Colors.black.withAlpha(180),
-                                                    barrierDismissible: true,
-                                                    builder: (BuildContext context) {
-                                                      return DialogWidget(
-                                                        title: '',
-                                                        content: '',
-                                                        slideMargin: 4,
-                                                        showTitle: false,
-                                                        showBottomDo: false,
-                                                        borderRadius: 14,
-                                                        outTapDismiss: true,
-                                                        contentExtend: Row(
-                                                          children: [
-                                                            Expanded(child: Column(
-                                                              children: [
-                                                                const SizedBox(height: 30,),
-                                                                Text(AppLocalizations.of(context)!.confirmJoin, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600,), textAlign: TextAlign.center,),
-                                                                const SizedBox(height: 50,),
-                                                                Row(
-                                                                  mainAxisSize: MainAxisSize.max,
-                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                  children: [
-                                                                    SizedBox(
-                                                                      width: 130,
-                                                                      height: 48,
-                                                                      child: ElevatedButton(
-                                                                        style: ButtonStyle(
-                                                                          backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
-                                                                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
-                                                                          elevation: MaterialStateProperty.all(0),
-                                                                        ),
-                                                                        child: Text(AppLocalizations.of(context)!.yes, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
-                                                                        onPressed: () {
-                                                                          Navigator.of(context).pop();
-                                                                          _doJoin(eventItemInfo);
-                                                                        },
-                                                                      ),
-                                                                    ),
-                                                                    const SizedBox(width: 20,),
-                                                                    Container(
-                                                                      width: 130,
-                                                                      height: 48,
-                                                                      decoration: BoxDecoration(
-                                                                        border: Border.all(width: 2, color: const Color(0xFF346295)),
-                                                                        borderRadius: BorderRadius.circular(14),
-                                                                      ),
-                                                                      child: ElevatedButton(
-                                                                        style: ButtonStyle(
-                                                                          backgroundColor: MaterialStateProperty.all(Colors.white),
-                                                                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
-                                                                          elevation: MaterialStateProperty.all(0),
-                                                                        ),
-                                                                        child: Text(AppLocalizations.of(context)!.cancel, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
-                                                                        onPressed: () {
-                                                                          Navigator.of(context).pop();
-                                                                        },
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                const SizedBox(height: 40,),
-                                                              ],
-                                                            )),
-                                                          ],
-                                                        ),
+                                            const SizedBox(width: 12,),
+                                            Expanded(child: Text(eventItemInfo.eventTitle, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,), overflow: TextOverflow.ellipsis,),),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 18,),
+                                        Row(
+                                          children: [
+                                            Image.asset('assets/icon/date.png', width: 15, height: 15,),
+                                            const SizedBox(width: 8,),
+                                            Text(DateFormat('EEEE, d MMMM yyyy | h:mm a', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(DateTime.fromMillisecondsSinceEpoch(eventItemInfo.eventStartTime!)), style: const TextStyle(fontSize: 13, color: Colors.black54,),),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 18,),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Expanded(
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: (eventItemInfo.attendance != null ? (eventItemInfo.attendance!.length > 4 ? 4 : eventItemInfo.attendance!.length) : 0) * 20 + 8,
+                                                    height: 28,
+                                                    child: StatefulBuilder(builder: (ctx, setSta) {
+                                                      List<Widget> _item() {
+                                                        List<Widget> items = [];
+                                                        (eventItemInfo.attendance?.take(4).toList() ?? []).asMap().forEach((index, value) {
+                                                          items.add(Positioned(
+                                                            child: Container(
+                                                              width: 28,
+                                                              height: 28,
+                                                              clipBehavior: Clip.antiAlias,
+                                                              decoration: BoxDecoration(
+                                                                borderRadius: const BorderRadius.all(Radius.circular(100)),
+                                                                border: Border.all(width: 2, color: Colors.white,),
+                                                              ),
+                                                              child: netImgWrap(context,
+                                                                url: value.picture,
+                                                                radius: 100,
+                                                                errorWidget: Container(color: Colors.grey.shade300,),
+                                                              ),
+                                                            ),
+                                                            left: index * 20,
+                                                          ));
+                                                        });
+                                                        return items;
+                                                      }
+                                                      return Stack(
+                                                        fit: StackFit.loose,
+                                                        children: _item(),
                                                       );
-                                                    },
-                                                  );
-                                                }
-                                              },
+                                                    }),
+                                                  ),
+                                                  if (eventItemInfo.attendance != null && eventItemInfo.attendance!.length > 4) const SizedBox(width: 6,),
+                                                  if (eventItemInfo.attendance != null && eventItemInfo.attendance!.length > 4) Text('+${eventItemInfo.attendance!.length - 4}', style: TextStyle(fontSize: 13, color: Colors.amber.shade800,),),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                            const SizedBox(width: 30,),
+                                            SizedBox(
+                                              height: 30,
+                                              child: ElevatedButton(
+                                                style: ButtonStyle(
+                                                  backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
+                                                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                                                  elevation: MaterialStateProperty.all(0),
+                                                ),
+                                                child: Text(eventItemInfo.join ==true ? AppLocalizations.of(context)!.joined : AppLocalizations.of(context)!.join, style: const TextStyle(color: Color(0xFF013B7B), fontSize: 15, fontWeight: FontWeight.w500,),),
+                                                onPressed: () {
+                                                  if (eventItemInfo.join !=true) {
+                                                    showDialog(
+                                                      context: context,
+                                                      barrierColor: Colors.black.withAlpha(180),
+                                                      barrierDismissible: true,
+                                                      builder: (BuildContext context) {
+                                                        return DialogWidget(
+                                                          title: '',
+                                                          content: '',
+                                                          slideMargin: 4,
+                                                          showTitle: false,
+                                                          showBottomDo: false,
+                                                          borderRadius: 14,
+                                                          outTapDismiss: true,
+                                                          contentExtend: Row(
+                                                            children: [
+                                                              Expanded(child: Column(
+                                                                children: [
+                                                                  const SizedBox(height: 30,),
+                                                                  Text(AppLocalizations.of(context)!.confirmJoin, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600,), textAlign: TextAlign.center,),
+                                                                  const SizedBox(height: 50,),
+                                                                  Row(
+                                                                    mainAxisSize: MainAxisSize.max,
+                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 130,
+                                                                        height: 48,
+                                                                        child: ElevatedButton(
+                                                                          style: ButtonStyle(
+                                                                            backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
+                                                                            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                                                                            elevation: MaterialStateProperty.all(0),
+                                                                          ),
+                                                                          child: Text(AppLocalizations.of(context)!.yes, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
+                                                                          onPressed: () {
+                                                                            Navigator.of(context).pop();
+                                                                            _doJoin(eventItemInfo);
+                                                                          },
+                                                                        ),
+                                                                      ),
+                                                                      const SizedBox(width: 20,),
+                                                                      Container(
+                                                                        width: 130,
+                                                                        height: 48,
+                                                                        decoration: BoxDecoration(
+                                                                          border: Border.all(width: 2, color: const Color(0xFF346295)),
+                                                                          borderRadius: BorderRadius.circular(14),
+                                                                        ),
+                                                                        child: ElevatedButton(
+                                                                          style: ButtonStyle(
+                                                                            backgroundColor: MaterialStateProperty.all(Colors.white),
+                                                                            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                                                                            elevation: MaterialStateProperty.all(0),
+                                                                          ),
+                                                                          child: Text(AppLocalizations.of(context)!.cancel, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
+                                                                          onPressed: () {
+                                                                            Navigator.of(context).pop();
+                                                                          },
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  const SizedBox(height: 40,),
+                                                                ],
+                                                              )),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                    );
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                behavior: HitTestBehavior.opaque,
-                                onTap: () {
-                                  AutoRouter.of(context).push(EventListingDetailRoute(eventInfo: eventItemInfo));
-                                },
-                              );
-                            },
-                          ):
-                          Center(
-                            child: Image.asset('assets/image/no_data.png', height: 120,),
-                          )
-                          ,
+                                  behavior: HitTestBehavior.opaque,
+                                  onTap: () {
+                                    AutoRouter.of(context).push(EventListingDetailRoute(eventInfo: eventItemInfo));
+                                  },
+                                );
+                              },
+                            ):
+                            Center(
+                              child: Image.asset('assets/image/no_data.png', height: 120,),
+                            )
+                            ,
+                          ),
                         ),
+                      ),
+                      Offstage(
+                        offstage: Provider.of<AuthService>(context, listen: false).getLoginInfo?.token != null,
+                        child: GestureDetector(
+                          onTap: (){
+                            AutoRouter.of(context).push(SignUpRoute(type: 1));
+                          },
+                          child: SizedBox(
+                              height: 100,
+                              child:  Container(
+                                color: Colors.white,
+                                alignment: Alignment.center,
+                                child: Text("点击注册"),
+                              )
+                          ),
+                        )
                       ),
                       const SizedBox(height: 120,),
                     ],
