@@ -25,8 +25,11 @@ class _SignUpPageState extends State<SignUpPage> {
   List<CountryCodeInfo> countryCodeDataList = [];
   @override
   void initState() {
-    if(SpUtil.getString("phonecode")!=null){
+    String? cacheCode = SpUtil.getString("phonecode");
+    if(cacheCode!=null && cacheCode.isNotEmpty ){
       _registerCountryCode = SpUtil.getString("phonecode");
+    }else{
+      _registerCountryCode= "60";
     }
     super.initState();
   }

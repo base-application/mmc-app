@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
@@ -32,6 +33,8 @@ class _AdvertisementPageState extends State<AdvertisementPage> {
     advertisementPull(context).then((value) {
       _advertisementEntity = value;
       setState(() {});
+      advTime();
+    }).catchError((e){
       advTime();
     });
     super.initState();
@@ -84,20 +87,96 @@ class _AdvertisementPageState extends State<AdvertisementPage> {
         time--;
         setState(() {});
       }else{
-        checkVersion(context).then((value) {
-          if(value==null){
-            next();
-          }else{
-            updateVersion(value);
-          }
-        });
         _timer.cancel();
+        checkAppVersion();
       }
     });
   }
 
+  checkAppVersion(){
+    checkVersion(context).then((value) {
+      if(value==null){
+        next();
+      }else{
+        updateVersion(value);
+      }
+    }).catchError((e){
+      netWorkError();
+    });
+  }
+  netWorkError(){
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withAlpha(180),
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return DialogWidget(
+          title: '',
+          content: '',
+          slideMargin: 4,
+          showTitle: false,
+          showBottomDo: false,
+          borderRadius: 14,
+          outTapDismiss: false,
+          contentExtend: Row(
+            children: [
+              Expanded(child: Column(
+                children: [
+                  const SizedBox(height: 30,),
+                  Text(AppLocalizations.of(context)!.netWorkError, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600,), textAlign: TextAlign.center,),
+                  const SizedBox(height: 50,),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 130,
+                        height: 48,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
+                            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                            elevation: MaterialStateProperty.all(0),
+                          ),
+                          child: Text(AppLocalizations.of(context)!.yes, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
+                          onPressed: () async {
+                            checkAppVersion();
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 20,),
+                      Container(
+                        width: 130,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: const Color(0xFF346295)),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(Colors.white),
+                            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                            elevation: MaterialStateProperty.all(0),
+                          ),
+                          child: Text(AppLocalizations.of(context)!.cancel, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
+                          onPressed: () {
+                           exit(0);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 40,),
+                ],
+              )),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   updateVersion(AppVersionEntity value){
-    {
       showDialog(
         context: context,
         barrierColor: Colors.black.withAlpha(180),
@@ -172,7 +251,6 @@ class _AdvertisementPageState extends State<AdvertisementPage> {
           );
         },
       );
-    }
   }
 
   next(){

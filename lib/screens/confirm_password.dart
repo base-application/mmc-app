@@ -102,7 +102,7 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
                   ),
                   child: TextFormField(
                     controller: _registerPasswordAgainController,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
                     maxLength: 20,
                     cursorColor: Colors.blueAccent,
                     style: const TextStyle(textBaseline: TextBaseline.alphabetic),

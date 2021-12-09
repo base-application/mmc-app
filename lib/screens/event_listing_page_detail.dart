@@ -11,7 +11,9 @@ import 'package:mmc/utils/event_bus.dart';
 import 'package:mmc/utils/http_request.dart';
 
 class EventListingDetailPage extends StatefulWidget {
-  const EventListingDetailPage({Key? key, required this.eventInfo}) : super(key: key);
+  /// 1 普通列表进入 2 创建列表进入
+  final int source;
+  const EventListingDetailPage({Key? key, required this.eventInfo, required this.source}) : super(key: key);
 
   final EventDataItemInfoEntity eventInfo;
 
@@ -98,90 +100,93 @@ class _EventListingDetailPageState extends State<EventListingDetailPage> {
                   const SizedBox(height: 12,),
                   Text(DateFormat('EEEE, d MMMM yyyy | h:mm a', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(DateTime.fromMillisecondsSinceEpoch(widget.eventInfo.eventStartTime!)), style: const TextStyle(fontSize: 13, color: Colors.black87, fontWeight: FontWeight.w500,),),
                   const SizedBox(height: 26,),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: 56,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
-                        elevation: MaterialStateProperty.all(0),
-                      ),
-                      child: Text(widget.eventInfo.join !=true ? AppLocalizations.of(context)!.join : AppLocalizations.of(context)!.joined, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
-                      onPressed: () {
-                        if (widget.eventInfo.join != true) {
-                          showDialog(
-                            context: context,
-                            barrierColor: Colors.black.withAlpha(180),
-                            barrierDismissible: true,
-                            builder: (BuildContext context) {
-                              return DialogWidget(
-                                title: '',
-                                content: '',
-                                slideMargin: 4,
-                                showTitle: false,
-                                showBottomDo: false,
-                                borderRadius: 14,
-                                outTapDismiss: true,
-                                contentExtend: Row(
-                                  children: [
-                                    Expanded(child: Column(
+                  Offstage(
+                    offstage: widget.source == 2,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      height: 56,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                          elevation: MaterialStateProperty.all(0),
+                        ),
+                        child: Text(widget.eventInfo.join !=true ? AppLocalizations.of(context)!.join : AppLocalizations.of(context)!.joined, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
+                        onPressed: () {
+                            if (widget.eventInfo.join != true) {
+                              showDialog(
+                                context: context,
+                                barrierColor: Colors.black.withAlpha(180),
+                                barrierDismissible: true,
+                                builder: (BuildContext context) {
+                                  return DialogWidget(
+                                    title: '',
+                                    content: '',
+                                    slideMargin: 4,
+                                    showTitle: false,
+                                    showBottomDo: false,
+                                    borderRadius: 14,
+                                    outTapDismiss: true,
+                                    contentExtend: Row(
                                       children: [
-                                        const SizedBox(height: 30,),
-                                        Text(AppLocalizations.of(context)!.confirmJoin, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600,), textAlign: TextAlign.center,),
-                                        const SizedBox(height: 50,),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                        Expanded(child: Column(
                                           children: [
-                                            SizedBox(
-                                              width: 130,
-                                              height: 48,
-                                              child: ElevatedButton(
-                                                style: ButtonStyle(
-                                                  backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
-                                                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
-                                                  elevation: MaterialStateProperty.all(0),
+                                            const SizedBox(height: 30,),
+                                            Text(AppLocalizations.of(context)!.confirmJoin, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600,), textAlign: TextAlign.center,),
+                                            const SizedBox(height: 50,),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                SizedBox(
+                                                  width: 130,
+                                                  height: 48,
+                                                  child: ElevatedButton(
+                                                    style: ButtonStyle(
+                                                      backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
+                                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                                                      elevation: MaterialStateProperty.all(0),
+                                                    ),
+                                                    child: Text(AppLocalizations.of(context)!.yes, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
+                                                    onPressed: () {
+                                                      Navigator.of(context).pop();
+                                                      _doJoin();
+                                                    },
+                                                  ),
                                                 ),
-                                                child: Text(AppLocalizations.of(context)!.yes, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                  _doJoin();
-                                                },
-                                              ),
-                                            ),
-                                            const SizedBox(width: 20,),
-                                            Container(
-                                              width: 130,
-                                              height: 48,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(width: 2, color: const Color(0xFF346295)),
-                                                borderRadius: BorderRadius.circular(14),
-                                              ),
-                                              child: ElevatedButton(
-                                                style: ButtonStyle(
-                                                  backgroundColor: MaterialStateProperty.all(Colors.white),
-                                                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
-                                                  elevation: MaterialStateProperty.all(0),
+                                                const SizedBox(width: 20,),
+                                                Container(
+                                                  width: 130,
+                                                  height: 48,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(width: 2, color: const Color(0xFF346295)),
+                                                    borderRadius: BorderRadius.circular(14),
+                                                  ),
+                                                  child: ElevatedButton(
+                                                    style: ButtonStyle(
+                                                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                                                      elevation: MaterialStateProperty.all(0),
+                                                    ),
+                                                    child: Text(AppLocalizations.of(context)!.cancel, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
+                                                    onPressed: () {
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                  ),
                                                 ),
-                                                child: Text(AppLocalizations.of(context)!.cancel, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
+                                              ],
                                             ),
+                                            const SizedBox(height: 40,),
                                           ],
-                                        ),
-                                        const SizedBox(height: 40,),
+                                        )),
                                       ],
-                                    )),
-                                  ],
-                                ),
+                                    ),
+                                  );
+                                },
                               );
-                            },
-                          );
-                        }
-                      },
+                            }
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16,),
@@ -349,7 +354,7 @@ class _EventListingDetailPageState extends State<EventListingDetailPage> {
                         crossAxisCount: 5,
                         crossAxisSpacing: 14,
                         mainAxisSpacing: 14,
-                        childAspectRatio: 3 / 4.4,
+                        childAspectRatio: 3 / 4.6,
                       ),
                       itemCount: widget.eventInfo.attendance?.length ?? 0,
                       itemBuilder: (BuildContext context, int index) {

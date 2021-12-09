@@ -7,7 +7,7 @@
   "loginSuccessTip": "登录成功",
   "registerSuccessTip": "账号注册成功，请登录",
   "passwordResetSuccessTip": "登录密码重置成功，请重新登录",
-  "loginPageWelcome": "欢迎来到\n智囊团",
+  "loginPageWelcome": "欢迎来到\nMaster Mind Council",
   "chooseCountryCodeTip": "请选择国家区号",
   "inputLoginAccountTip": "请填写登录手机账号",
   "inputLoginPasswordTip": "请填写登录密码",
@@ -224,5 +224,7 @@
   "urlNotOPen": "链接无法打开",
   "versionFound": "发现新版本",
   "firstChooseDate": "先选择日期",
-  "checkInSuccess": "签到成功"
+  "checkInSuccess": "签到成功",
+  "netWorkError": "网络链接出错,点击重试",
+  "clickRegister": "点击注册"
 }

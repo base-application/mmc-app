@@ -525,7 +525,7 @@ class _EventListingPageState extends State<EventListingPage> {
                 ),
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
-                  AutoRouter.of(context).push(EventListingDetailRoute(eventInfo: item));
+                  AutoRouter.of(context).push(EventListingDetailRoute(eventInfo: item, source: _isCreate?2:1));
                 },
               );
             }

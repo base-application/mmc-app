@@ -277,6 +277,8 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                   _formStartDate = DateUtil.formatDate(DateTime.now(), format: 'yyyy-MM-dd');
                                 });
                               }
+                              _formEndDate = null;
+                              _formEndTime = null;
                               Pickers.showDatePicker(context,
                                 mode: DateMode.YMD,
                                 selectDate: _formStartDate != null ? PDuration.parse(DateTime.parse(_formStartDate!)) : null,
@@ -292,8 +294,6 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                 onChanged: (res) {
                                   setState(() {
                                     _formStartDate = DateUtil.formatDate(DateTime.utc(res.year!, res.month!, res.day!), format: 'yyyy-MM-dd');
-                                    _formEndDate = null;
-                                    _formEndTime = null;
                                   });
                                 },
                               );
@@ -332,8 +332,8 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                   _formStartTime = DateUtil.formatDate(DateTime.now(), format: 'HH:mm');
                                 });
                               }
-
-
+                              _formEndDate = null;
+                              _formEndTime = null;
                               Pickers.showDatePicker(context,
                                 mode: DateMode.HM,
                                 selectDate: _formStartTime != null ? PDuration.parse(DateTime.parse('2000-01-01 $_formStartTime')) : null,

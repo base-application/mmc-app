@@ -468,6 +468,7 @@ class _CheckEventItemState extends State<CheckEventItem> {
             FocusScope.of(context).requestFocus(FocusNode());
             checkOut(context,data.eventId).then((value) {
               data.checkOutTime = DateTime.now().microsecondsSinceEpoch;
+              setState(() {});
             });
           },
         ),

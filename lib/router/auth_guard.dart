@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mmc/bean/login_info_entity.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/router/router.gr.dart';
-import 'package:mmc/utils/comfun.dart';
 
 bool isAuthenticated = false;
 class AuthGuard extends AutoRouteGuard {
@@ -13,7 +11,7 @@ class AuthGuard extends AutoRouteGuard {
   void onNavigation(NavigationResolver resolver, StackRouter router) {
     debugPrint('路由守卫：${router.current.name} 是否已登录 > $isAuthenticated');
     if (!isAuthenticated) {
-      router.push(WelcomeRoute());
+      router.push(SignUpRoute(type: 1));
     } else {
       resolver.next(true);
     }

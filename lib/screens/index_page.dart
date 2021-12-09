@@ -637,7 +637,7 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                                   ),
                                   behavior: HitTestBehavior.opaque,
                                   onTap: () {
-                                    AutoRouter.of(context).push(EventListingDetailRoute(eventInfo: eventItemInfo));
+                                    AutoRouter.of(context).push(EventListingDetailRoute(eventInfo: eventItemInfo, source: 1));
                                   },
                                 );
                               },
@@ -660,7 +660,7 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                               child:  Container(
                                 color: Colors.white,
                                 alignment: Alignment.center,
-                                child: Text("点击注册"),
+                                child: Text(AppLocalizations.of(context)!.clickRegister),
                               )
                           ),
                         )

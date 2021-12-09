@@ -6,7 +6,7 @@
   "loginSuccessTip": "Login succeeded",
   "registerSuccessTip": "Account registration succeeded, please log in",
   "passwordResetSuccessTip": "Login password reset succeeded. Please login again",
-  "loginPageWelcome": "Welcome to\nMastermind Club",
+  "loginPageWelcome": "Welcome to\nMaster Mind Council",
   "chooseCountryCodeTip": "Please select a country code",
   "inputLoginAccountTip": "Please fill in the login mobile account",
   "inputLoginPasswordTip": "Please fill in the login password",
@@ -223,5 +223,7 @@
   "urlNotOPen": "url can not open",
   "versionFound": "New version found",
   "firstChooseDate": "first choose date",
-  "checkInSuccess": "checkIn success"
+  "checkInSuccess": "checkIn success",
+  "netWorkError": "Network Error please retry",
+  "clickRegister": "Click Register"
 }

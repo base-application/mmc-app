@@ -119,7 +119,7 @@ class AppRouter extends _i41.RootStackRouter {
       return _i41.MaterialPageX<String>(
           routeData: routeData,
           child: _i10.EventListingDetailPage(
-              key: args.key, eventInfo: args.eventInfo));
+              key: args.key, eventInfo: args.eventInfo, source: args.source));
     },
     ReferralReceivedRoute.name: (routeData) {
       return _i41.MaterialPageX<String>(
@@ -461,20 +461,26 @@ class EventListingRoute extends _i41.PageRouteInfo<void> {
 class EventListingDetailRoute
     extends _i41.PageRouteInfo<EventListingDetailRouteArgs> {
   EventListingDetailRoute(
-      {_i42.Key? key, required _i48.EventDataItemInfoEntity eventInfo})
+      {_i42.Key? key,
+      required _i48.EventDataItemInfoEntity eventInfo,
+      required int source})
       : super(name,
             path: '/eventListingDetail',
-            args: EventListingDetailRouteArgs(key: key, eventInfo: eventInfo));
+            args: EventListingDetailRouteArgs(
+                key: key, eventInfo: eventInfo, source: source));
 
   static const String name = 'EventListingDetailRoute';
 }
 
 class EventListingDetailRouteArgs {
-  const EventListingDetailRouteArgs({this.key, required this.eventInfo});
+  const EventListingDetailRouteArgs(
+      {this.key, required this.eventInfo, required this.source});
 
   final _i42.Key? key;
 
   final _i48.EventDataItemInfoEntity eventInfo;
+
+  final int source;
 }
 
 /// generated route for [_i11.ReferralReceivedPage]
