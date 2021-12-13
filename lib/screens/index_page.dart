@@ -172,8 +172,11 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
       MenuDoItem(
         iconAssets: 'assets/icon/menu_referral_received.png',
         label: AppLocalizations.of(context)!.homeIndexMenuReferralReceivedBtn,
+        showBadge: true,
         onTap: () {
-          AutoRouter.of(context).push(const ReferralReceivedRoute());
+          AutoRouter.of(context).push(const ReferralReceivedRoute()).then((value) {
+            getMessage();
+          });
         },
       ),
       MenuDoItem(
@@ -244,7 +247,7 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                         itemCount: _menus.length,
                         itemBuilder: (BuildContext context, int index) {
                           MenuDoItem menuItem = _menus[index];
-                          if(menuItem.showBadge??false){
+                          if(index == 1){
                             return GestureDetector(
                               child: Container(
                                 alignment: Alignment.center,
@@ -259,6 +262,33 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                                         elevation: 0,
                                         badgeColor: (_messageNoReadEntity?.event??0) > 0 ? Colors.red : Colors.transparent,
                                         badgeContent:Text((_messageNoReadEntity?.event??0).toString(),style: TextStyle(color: (_messageNoReadEntity?.event??0) > 0 ? Colors.white : Colors.transparent,fontSize: 12),),
+                                        child: Image.asset(menuItem.iconAssets, width: 24, height: 24,)
+                                    ),
+                                    const SizedBox(height: 4,),
+                                    Text(menuItem.label, style: const TextStyle(fontSize: 12, color: Colors.white,),),
+                                  ],
+                                ),
+                              ),
+                              behavior: HitTestBehavior.opaque,
+                              onTap: () {
+                                menuItem.onTap?.call();
+                              },
+                            );
+                          }else if(index == 4){
+                            return GestureDetector(
+                              child: Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.only(left: 14, right: 14,),
+                                constraints: const BoxConstraints(
+                                  minWidth: 80,
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Badge(
+                                        elevation: 0,
+                                        badgeColor: (_messageNoReadEntity?.referral??0) > 0 ? Colors.red : Colors.transparent,
+                                        badgeContent:Text((_messageNoReadEntity?.referral??0).toString(),style: TextStyle(color: (_messageNoReadEntity?.referral??0) > 0 ? Colors.white : Colors.transparent,fontSize: 12),),
                                         child: Image.asset(menuItem.iconAssets, width: 24, height: 24,)
                                     ),
                                     const SizedBox(height: 4,),

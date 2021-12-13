@@ -248,7 +248,7 @@ class _EventListingPageState extends State<EventListingPage> {
                           Expanded(
                             child: Row(
                               children: [
-                                Expanded(child: SizedBox(
+                                SizedBox(
                                   width: (item.attendance != null ? (item.attendance!.length > 4 ? 4 : item.attendance!.length) : 0) * 20 + 8,
                                   height: 28,
                                   child: Builder(builder: (ctx) {
@@ -265,9 +265,9 @@ class _EventListingPageState extends State<EventListingPage> {
                                               border: Border.all(width: 1.4, color: Colors.white,),
                                             ),
                                             child: netImgWrap(context,
-                                              url: value.picture,
-                                              radius: 100,
-                                              errorWidget: Container(color: Colors.grey.shade300,),
+                                                url: value.picture,
+                                                radius: 100,
+                                                errorWidget: Image.asset("assets/image/personal_head_empty.png",fit: BoxFit.cover,)
                                             ),
                                           ),
                                           left: index * 20,
@@ -280,7 +280,7 @@ class _EventListingPageState extends State<EventListingPage> {
                                       children: _item(),
                                     );
                                   }),
-                                )),
+                                ),
                                 if (item.attendance != null && item.attendance!.length > 4) const SizedBox(width: 6,),
                                 if (item.attendance != null && item.attendance!.length > 4) Text('+${item.attendance!.length - 4}', style: TextStyle(fontSize: 16, color: Colors.amber.shade600,),),
                               ],
@@ -289,7 +289,11 @@ class _EventListingPageState extends State<EventListingPage> {
                           const SizedBox(width: 10,),
                           Row(
                             children: [
-                              if ((item.join??false)&&(item.eventStartTime??0) > DateTime.now().millisecondsSinceEpoch) GestureDetector(
+                              if ((item.join??false)
+                                  &&(item.eventStartTime??0) > DateTime.now().millisecondsSinceEpoch
+                                  && item.checkIn != true
+                                  && item.attend != true
+                              ) GestureDetector(
                                 child: Padding(
                                   padding: const EdgeInsets.all(10).copyWith(top: 4, bottom: 4,),
                                   child: Text(AppLocalizations.of(context)!.unJoin, style: const TextStyle(fontSize: 14, color: Color(0xFFFDC12C), fontWeight: FontWeight.w500,),),
@@ -368,6 +372,7 @@ class _EventListingPageState extends State<EventListingPage> {
                                   );
                                 },
                               ),
+
                               const SizedBox(width: 10,),
                               SizedBox(
                                 width: 66,
@@ -382,6 +387,10 @@ class _EventListingPageState extends State<EventListingPage> {
                                   child: Text(item.join==true ? AppLocalizations.of(context)!.joined : AppLocalizations.of(context)!.join, style: const TextStyle(color: Color(0xFF013B7B), fontSize: 15, fontWeight: FontWeight.w500,),),
                                   onPressed: () {
                                     if (item.join == false) {
+                                      if((item.eventStartTime??0) <= DateTime.now().millisecondsSinceEpoch){
+                                        ComFun.showToast(msg: AppLocalizations.of(context)!.joinOnStart);
+                                        return ;
+                                      }
                                       showDialog(
                                         context: context,
                                         barrierColor: Colors.black.withAlpha(180),

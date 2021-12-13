@@ -232,6 +232,12 @@ class _MyNetworkPageState extends State<MyNetworkPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(CupertinoIcons.left_chevron, color: Colors.black,),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: Text(AppLocalizations.of(context)!.myNetwork,style: const TextStyle(color: Colors.black),),
         actions: [
          Builder(builder: (BuildContext context) {

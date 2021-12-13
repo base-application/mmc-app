@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flustars/flustars.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/router/router.gr.dart';
@@ -54,9 +55,20 @@ class _SignUpPageState extends State<SignUpPage> {
         body: ListView(
           physics: ClampingScrollPhysics(),
           children: [
+            if(Navigator.canPop(context)) Align(
+              alignment: Alignment.centerLeft,
+              child: FloatingActionButton(
+                elevation: 0,
+                backgroundColor: Colors.white24,
+                child: const Icon(CupertinoIcons.left_chevron),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(top: 50,bottom: MediaQuery.of(context).size.height *.2),
+              padding: EdgeInsets.only(top: 30,bottom: MediaQuery.of(context).size.height *.2),
               child: Text(widget.type ==1 ? AppLocalizations.of(context)!.loginPageWelcome:AppLocalizations.of(context)!.forgotPasswordAsk.replaceAll("?", ""), style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFFFBB714),), textAlign: TextAlign.start,),
             ),
             Row(

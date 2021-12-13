@@ -60,13 +60,13 @@ class _SettingPageState extends State<SettingPage> {
           AutoRouter.of(context).push(WebRoute(title: 'About Us', initUrl: 'https://mastermindcouncil.asia/'));
         },
       ),
-      MenuDoItem(
-        iconAssets: 'assets/icon/set_new_user_tour.png',
-        label: AppLocalizations.of(context)!.userTour,
-        onTap: () {
-          // AutoRouter.of(context).push(const GuidelineRoute());
-        },
-      ),
+      // MenuDoItem(
+      //   iconAssets: 'assets/icon/set_new_user_tour.png',
+      //   label: AppLocalizations.of(context)!.userTour,
+      //   onTap: () {
+      //     // AutoRouter.of(context).push(const GuidelineRoute());
+      //   },
+      // ),
       MenuDoItem(
         iconAssets: 'assets/icon/set_privacy_policy.png',
         label: AppLocalizations.of(context)!.privacyPolicy,

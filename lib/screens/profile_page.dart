@@ -36,11 +36,11 @@ class _ProfilePageState extends State<ProfilePage> {
 
   final Map<String, String> _groupZ = {
     'Crystal': 'assets/image/profile_z.png',
-    'Elite': 'assets/image/profile_z.png',
-    'Premiere': 'assets/image/profile_z.png',
-    'MMC': 'assets/image/profile_z.png',
-    'Platinum': 'assets/image/profile_z.png',
-    'Titanium': 'assets/image/profile_z.png',
+    'Elite': 'assets/image/profile_e.png',
+    'Premiere': 'assets/image/profile_p.png',
+    'MMC': 'assets/image/profile_m.png',
+    'Platinum': 'assets/image/profile_pla.png',
+    'Titanium': 'assets/image/profile_t.png',
   };
   String? _getGroupZ(String? gradeName) {
     if (gradeName == null) {
@@ -217,29 +217,29 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   )
                     ,),
-                  Flexible(child:
-                  GestureDetector(
-                    onTap: (){
-                      AutoRouter.of(context).push(YourPicRoute());
-                    },
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 60,
-                          height: 60,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFDEE4EB),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Image.asset('assets/icon/profile_your_pic.png', width: 34, height: 34,),
-                        ),
-                        const SizedBox(height: 6,),
-                        Text(AppLocalizations.of(context)!.yourPIC, style: TextStyle(fontSize: 14),),
-                      ],
-                    ),
-                  )
-                    ,),
+                  // Flexible(child:
+                  // GestureDetector(
+                  //   onTap: (){
+                  //     AutoRouter.of(context).push(YourPicRoute());
+                  //   },
+                  //   child: Column(
+                  //     children: [
+                  //       Container(
+                  //         width: 60,
+                  //         height: 60,
+                  //         alignment: Alignment.center,
+                  //         decoration: BoxDecoration(
+                  //           color: const Color(0xFFDEE4EB),
+                  //           borderRadius: BorderRadius.circular(16),
+                  //         ),
+                  //         child: Image.asset('assets/icon/profile_your_pic.png', width: 34, height: 34,),
+                  //       ),
+                  //       const SizedBox(height: 6,),
+                  //       Text(AppLocalizations.of(context)!.yourPIC, style: TextStyle(fontSize: 14),),
+                  //     ],
+                  //   ),
+                  // )
+                  //   ,),
                 ],
               ),
               const SizedBox(height: 30,),

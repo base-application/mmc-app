@@ -9,6 +9,8 @@ class MessageNoReadEntity {
 	late int event;
 	late int newset;
 	late int notification;
+  late int referral;
+  late int thank;
   
   MessageNoReadEntity();
 

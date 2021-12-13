@@ -1,16 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flustars/flustars.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/bean/login_info_entity.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
+import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:mmc/widget/app_bar_home.dart';
 import 'package:mmc/widget/country_choose.dart';
+import 'package:provider/src/provider.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -55,13 +58,24 @@ class _SignInPageState extends State<SignInPage> {
         backgroundColor: Colors.transparent,
         body: ListView(
           children: [
+            if(Navigator.canPop(context)) Align(
+              alignment: Alignment.centerLeft,
+              child: FloatingActionButton(
+                elevation: 0,
+                backgroundColor: Colors.white24,
+                child: const Icon(CupertinoIcons.left_chevron),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
             GestureDetector(
               onTap: (){
                 checkVersion(context);
               },
               child: Container(
                 alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(top: 50,bottom: MediaQuery.of(context).size.height *.2),
+                padding: EdgeInsets.only(top: 30,bottom: MediaQuery.of(context).size.height *.2),
                 child: Text(AppLocalizations.of(context)!.loginPageWelcome, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFFFBB714),), textAlign: TextAlign.start,),
               ),
             ),
@@ -267,6 +281,9 @@ class _SignInPageState extends State<SignInPage> {
         AutoRouter.of(context).replaceAll([HomeRoute()]);
       }
 
+    },err: (){
+      savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, null);
+      saveLoginInfo(context, null);
     });
   }
 }

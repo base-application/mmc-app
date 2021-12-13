@@ -92,6 +92,7 @@ class _CheckInPageState extends State<CheckInPage> {
                    child: _future.isEmpty ?  Center(
                        child: Image.asset('assets/image/no_data.png', height: 140,)
                    ) :  ListView.builder(
+                     padding: EdgeInsets.only(bottom: 100),
                      controller: _pageScrollController,
                      itemCount: _future.length,
                      itemBuilder: (BuildContext context, int index) {
@@ -400,7 +401,12 @@ class _CheckEventItemState extends State<CheckEventItem> {
   }
 
   _getoperBtn(EventDataItemInfoEntity data) {
-    if(data.attend == null){
+
+    ///event开始前3天  开始之前 才能确认出席
+    if(data.attend == null
+    && (data.eventStartTime??0) > DateTime.now().millisecondsSinceEpoch
+    && DateTime.fromMillisecondsSinceEpoch(data.eventStartTime??0).difference(DateTime.now()).inDays <=3
+    ){
       return  SizedBox(
           width: MediaQuery.of(context).size.width,
           height: 40,
@@ -444,7 +450,9 @@ class _CheckEventItemState extends State<CheckEventItem> {
           )
       );
     }
-    if((data.checkIn??false)&&data.checkOutTime == null ){
+    /// event 开始之后才能签退
+    if((data.checkIn??false)&&data.checkOutTime == null
+        && (data.eventStartTime??0) <  DateTime.now().millisecondsSinceEpoch){
       return SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 40,

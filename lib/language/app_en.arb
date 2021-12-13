@@ -225,5 +225,6 @@
   "firstChooseDate": "first choose date",
   "checkInSuccess": "checkIn success",
   "netWorkError": "Network Error please retry",
-  "clickRegister": "Click Register"
+  "clickRegister": "Click Register",
+  "joinOnStart": "Join before the event"
 }

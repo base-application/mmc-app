@@ -43,7 +43,11 @@ class _HomeAppBarState extends State<HomeAppBar> {
             children: [
               Text(AppLocalizations.of(context)!.homeIndexHello, style: const  TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black87,),),
               const SizedBox(height: 2,),
-              Text(context.watch<PersonalProfileService>().getPersonalProfileInfo?.name ?? '-', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black87,),),
+              GestureDetector(
+                onTap: (){
+                },
+                child: Text(context.watch<PersonalProfileService>().getPersonalProfileInfo?.name ?? '-', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black87,),),
+              ),
             ],
           ),
           ClipRRect(

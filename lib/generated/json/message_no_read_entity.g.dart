@@ -19,6 +19,14 @@ MessageNoReadEntity $MessageNoReadEntityFromJson(Map<String, dynamic> json) {
 	if (notification != null) {
 		messageNoReadEntity.notification = notification;
 	}
+	var referral = jsonConvert.convert<int>(json['referral']);
+	if (referral != null) {
+		messageNoReadEntity.referral = referral;
+	}
+	var thank = jsonConvert.convert<int>(json['thank']);
+	if (thank != null) {
+		messageNoReadEntity.thank = thank;
+	}
 	return messageNoReadEntity;
 }
 
@@ -28,5 +36,7 @@ Map<String, dynamic> $MessageNoReadEntityToJson(MessageNoReadEntity entity) {
 	data['event'] = entity.event;
 	data['newset'] = entity.newset;
 	data['notification'] = entity.notification;
+	data['referral'] = entity.referral;
+	data['thank'] = entity.thank;
 	return data;
 }
