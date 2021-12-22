@@ -9,16 +9,17 @@
 // **************************************************************************
 
 import 'package:auto_route/auto_route.dart' as _i41;
+import 'package:flutter/cupertino.dart' as _i45;
 import 'package:flutter/material.dart' as _i42;
-import 'package:flutter/rendering.dart' as _i52;
+import 'package:flutter/rendering.dart' as _i53;
 
-import '../bean/event_data_item_info_entity.dart' as _i48;
-import '../bean/group_item_info_entity.dart' as _i45;
-import '../bean/guide_line_entity.dart' as _i50;
-import '../bean/network_item_info_entity.dart' as _i46;
-import '../bean/newest_item_info_entity.dart' as _i47;
-import '../bean/notification_entity.dart' as _i51;
-import '../bean/personal_profile_info_entity.dart' as _i49;
+import '../bean/event_data_item_info_entity.dart' as _i49;
+import '../bean/group_item_info_entity.dart' as _i46;
+import '../bean/guide_line_entity.dart' as _i51;
+import '../bean/network_item_info_entity.dart' as _i47;
+import '../bean/newest_item_info_entity.dart' as _i48;
+import '../bean/notification_entity.dart' as _i52;
+import '../bean/personal_profile_info_entity.dart' as _i50;
 import '../bean/referral_entity.dart' as _i44;
 import '../screens/advertisement_page.dart' as _i1;
 import '../screens/business_profile_create_page.dart' as _i23;
@@ -158,8 +159,10 @@ class AppRouter extends _i41.RootStackRouter {
           routeData: routeData, child: const _i17.MostReferralSentPage());
     },
     CreateEventRoute.name: (routeData) {
+      final args = routeData.argsAs<CreateEventRouteArgs>();
       return _i41.MaterialPageX<String>(
-          routeData: routeData, child: const _i18.CreateEventPage());
+          routeData: routeData,
+          child: _i18.CreateEventPage(key: args.key, entity: args.entity));
     },
     MyInboxRoute.name: (routeData) {
       return _i41.MaterialPageX<String>(
@@ -360,31 +363,36 @@ class AppRouter extends _i41.RootStackRouter {
       ];
 }
 
-/// generated route for [_i1.AdvertisementPage]
+/// generated route for
+/// [_i1.AdvertisementPage]
 class AdvertisementRoute extends _i41.PageRouteInfo<void> {
-  const AdvertisementRoute() : super(name, path: '/advertisement');
+  const AdvertisementRoute()
+      : super(AdvertisementRoute.name, path: '/advertisement');
 
   static const String name = 'AdvertisementRoute';
 }
 
-/// generated route for [_i2.HomePage]
+/// generated route for
+/// [_i2.HomePage]
 class HomeRoute extends _i41.PageRouteInfo<void> {
-  const HomeRoute() : super(name, path: '/home');
+  const HomeRoute() : super(HomeRoute.name, path: '/home');
 
   static const String name = 'HomeRoute';
 }
 
-/// generated route for [_i3.GroupPage]
+/// generated route for
+/// [_i3.GroupPage]
 class GroupRoute extends _i41.PageRouteInfo<void> {
-  const GroupRoute() : super(name, path: '/group');
+  const GroupRoute() : super(GroupRoute.name, path: '/group');
 
   static const String name = 'GroupRoute';
 }
 
-/// generated route for [_i4.GroupDetailPage]
+/// generated route for
+/// [_i4.GroupDetailPage]
 class GroupDetailRoute extends _i41.PageRouteInfo<GroupDetailRouteArgs> {
-  GroupDetailRoute({_i42.Key? key, required _i45.GroupItemInfoEntity info})
-      : super(name,
+  GroupDetailRoute({_i45.Key? key, required _i46.GroupItemInfoEntity info})
+      : super(GroupDetailRoute.name,
             path: '/groupDetail',
             args: GroupDetailRouteArgs(key: key, info: info));
 
@@ -394,23 +402,31 @@ class GroupDetailRoute extends _i41.PageRouteInfo<GroupDetailRouteArgs> {
 class GroupDetailRouteArgs {
   const GroupDetailRouteArgs({this.key, required this.info});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
-  final _i45.GroupItemInfoEntity info;
+  final _i46.GroupItemInfoEntity info;
+
+  @override
+  String toString() {
+    return 'GroupDetailRouteArgs{key: $key, info: $info}';
+  }
 }
 
-/// generated route for [_i5.SendingReferralPage]
+/// generated route for
+/// [_i5.SendingReferralPage]
 class SendingReferralRoute extends _i41.PageRouteInfo<void> {
-  const SendingReferralRoute() : super(name, path: '/sendingReferral');
+  const SendingReferralRoute()
+      : super(SendingReferralRoute.name, path: '/sendingReferral');
 
   static const String name = 'SendingReferralRoute';
 }
 
-/// generated route for [_i6.NetworkPersonPage]
+/// generated route for
+/// [_i6.NetworkPersonPage]
 class NetworkPersonRoute extends _i41.PageRouteInfo<NetworkPersonRouteArgs> {
   NetworkPersonRoute(
-      {_i42.Key? key, required _i46.NetworkItemInfoEntity itemInfo})
-      : super(name,
+      {_i45.Key? key, required _i47.NetworkItemInfoEntity itemInfo})
+      : super(NetworkPersonRoute.name,
             path: '/networkPerson',
             args: NetworkPersonRouteArgs(key: key, itemInfo: itemInfo));
 
@@ -420,22 +436,29 @@ class NetworkPersonRoute extends _i41.PageRouteInfo<NetworkPersonRouteArgs> {
 class NetworkPersonRouteArgs {
   const NetworkPersonRouteArgs({this.key, required this.itemInfo});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
-  final _i46.NetworkItemInfoEntity itemInfo;
+  final _i47.NetworkItemInfoEntity itemInfo;
+
+  @override
+  String toString() {
+    return 'NetworkPersonRouteArgs{key: $key, itemInfo: $itemInfo}';
+  }
 }
 
-/// generated route for [_i7.TodayNewestPage]
+/// generated route for
+/// [_i7.TodayNewestPage]
 class TodayNewestRoute extends _i41.PageRouteInfo<void> {
-  const TodayNewestRoute() : super(name, path: '/todayNewest');
+  const TodayNewestRoute() : super(TodayNewestRoute.name, path: '/todayNewest');
 
   static const String name = 'TodayNewestRoute';
 }
 
-/// generated route for [_i8.NewestDetailPage]
+/// generated route for
+/// [_i8.NewestDetailPage]
 class NewestDetailRoute extends _i41.PageRouteInfo<NewestDetailRouteArgs> {
-  NewestDetailRoute({_i42.Key? key, required _i47.NewestItemInfoEntity info})
-      : super(name,
+  NewestDetailRoute({_i45.Key? key, required _i48.NewestItemInfoEntity info})
+      : super(NewestDetailRoute.name,
             path: '/newestDetail',
             args: NewestDetailRouteArgs(key: key, info: info));
 
@@ -445,26 +468,34 @@ class NewestDetailRoute extends _i41.PageRouteInfo<NewestDetailRouteArgs> {
 class NewestDetailRouteArgs {
   const NewestDetailRouteArgs({this.key, required this.info});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
-  final _i47.NewestItemInfoEntity info;
+  final _i48.NewestItemInfoEntity info;
+
+  @override
+  String toString() {
+    return 'NewestDetailRouteArgs{key: $key, info: $info}';
+  }
 }
 
-/// generated route for [_i9.EventListingPage]
+/// generated route for
+/// [_i9.EventListingPage]
 class EventListingRoute extends _i41.PageRouteInfo<void> {
-  const EventListingRoute() : super(name, path: '/eventListing');
+  const EventListingRoute()
+      : super(EventListingRoute.name, path: '/eventListing');
 
   static const String name = 'EventListingRoute';
 }
 
-/// generated route for [_i10.EventListingDetailPage]
+/// generated route for
+/// [_i10.EventListingDetailPage]
 class EventListingDetailRoute
     extends _i41.PageRouteInfo<EventListingDetailRouteArgs> {
   EventListingDetailRoute(
-      {_i42.Key? key,
-      required _i48.EventDataItemInfoEntity eventInfo,
+      {_i45.Key? key,
+      required _i49.EventDataItemInfoEntity eventInfo,
       required int source})
-      : super(name,
+      : super(EventListingDetailRoute.name,
             path: '/eventListingDetail',
             args: EventListingDetailRouteArgs(
                 key: key, eventInfo: eventInfo, source: source));
@@ -476,26 +507,34 @@ class EventListingDetailRouteArgs {
   const EventListingDetailRouteArgs(
       {this.key, required this.eventInfo, required this.source});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
-  final _i48.EventDataItemInfoEntity eventInfo;
+  final _i49.EventDataItemInfoEntity eventInfo;
 
   final int source;
+
+  @override
+  String toString() {
+    return 'EventListingDetailRouteArgs{key: $key, eventInfo: $eventInfo, source: $source}';
+  }
 }
 
-/// generated route for [_i11.ReferralReceivedPage]
+/// generated route for
+/// [_i11.ReferralReceivedPage]
 class ReferralReceivedRoute extends _i41.PageRouteInfo<void> {
-  const ReferralReceivedRoute() : super(name, path: '/referralReceived');
+  const ReferralReceivedRoute()
+      : super(ReferralReceivedRoute.name, path: '/referralReceived');
 
   static const String name = 'ReferralReceivedRoute';
 }
 
-/// generated route for [_i12.ReferralReceivedContactedPage]
+/// generated route for
+/// [_i12.ReferralReceivedContactedPage]
 class ReferralReceivedContactedRoute
     extends _i41.PageRouteInfo<ReferralReceivedContactedRouteArgs> {
   ReferralReceivedContactedRoute(
-      {_i42.Key? key, required _i44.ReferralEntity referralEntity})
-      : super(name,
+      {_i45.Key? key, required _i44.ReferralEntity referralEntity})
+      : super(ReferralReceivedContactedRoute.name,
             path: '/referralReceivedContacted',
             args: ReferralReceivedContactedRouteArgs(
                 key: key, referralEntity: referralEntity));
@@ -507,16 +546,22 @@ class ReferralReceivedContactedRouteArgs {
   const ReferralReceivedContactedRouteArgs(
       {this.key, required this.referralEntity});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
   final _i44.ReferralEntity referralEntity;
+
+  @override
+  String toString() {
+    return 'ReferralReceivedContactedRouteArgs{key: $key, referralEntity: $referralEntity}';
+  }
 }
 
-/// generated route for [_i13.SendThankYouNotePage]
+/// generated route for
+/// [_i13.SendThankYouNotePage]
 class SendThankYouNoteRoute
     extends _i41.PageRouteInfo<SendThankYouNoteRouteArgs> {
-  SendThankYouNoteRoute({_i42.Key? key, required int referralId})
-      : super(name,
+  SendThankYouNoteRoute({_i45.Key? key, required int referralId})
+      : super(SendThankYouNoteRoute.name,
             path: '/sendThankYouNote',
             args: SendThankYouNoteRouteArgs(key: key, referralId: referralId));
 
@@ -526,31 +571,40 @@ class SendThankYouNoteRoute
 class SendThankYouNoteRouteArgs {
   const SendThankYouNoteRouteArgs({this.key, required this.referralId});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
   final int referralId;
+
+  @override
+  String toString() {
+    return 'SendThankYouNoteRouteArgs{key: $key, referralId: $referralId}';
+  }
 }
 
-/// generated route for [_i14.ThankYouNoteReceivedPage]
+/// generated route for
+/// [_i14.ThankYouNoteReceivedPage]
 class ThankYouNoteReceivedRoute extends _i41.PageRouteInfo<void> {
   const ThankYouNoteReceivedRoute()
-      : super(name, path: '/thankYouNoteReceived');
+      : super(ThankYouNoteReceivedRoute.name, path: '/thankYouNoteReceived');
 
   static const String name = 'ThankYouNoteReceivedRoute';
 }
 
-/// generated route for [_i15.ShiningBoardPage]
+/// generated route for
+/// [_i15.ShiningBoardPage]
 class ShiningBoardRoute extends _i41.PageRouteInfo<void> {
-  const ShiningBoardRoute() : super(name, path: '/shiningBoardPage');
+  const ShiningBoardRoute()
+      : super(ShiningBoardRoute.name, path: '/shiningBoardPage');
 
   static const String name = 'ShiningBoardRoute';
 }
 
-/// generated route for [_i16.ShiningBoardDetailPage]
+/// generated route for
+/// [_i16.ShiningBoardDetailPage]
 class ShiningBoardDetailRoute
     extends _i41.PageRouteInfo<ShiningBoardDetailRouteArgs> {
-  ShiningBoardDetailRoute({_i42.Key? key, required _i15.ShiningBoardInfo about})
-      : super(name,
+  ShiningBoardDetailRoute({_i45.Key? key, required _i15.ShiningBoardInfo about})
+      : super(ShiningBoardDetailRoute.name,
             path: '/shiningBoardDetail',
             args: ShiningBoardDetailRouteArgs(key: key, about: about));
 
@@ -560,59 +614,91 @@ class ShiningBoardDetailRoute
 class ShiningBoardDetailRouteArgs {
   const ShiningBoardDetailRouteArgs({this.key, required this.about});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
   final _i15.ShiningBoardInfo about;
+
+  @override
+  String toString() {
+    return 'ShiningBoardDetailRouteArgs{key: $key, about: $about}';
+  }
 }
 
-/// generated route for [_i17.MostReferralSentPage]
+/// generated route for
+/// [_i17.MostReferralSentPage]
 class MostReferralSentRoute extends _i41.PageRouteInfo<void> {
-  const MostReferralSentRoute() : super(name, path: '/mostReferralSent');
+  const MostReferralSentRoute()
+      : super(MostReferralSentRoute.name, path: '/mostReferralSent');
 
   static const String name = 'MostReferralSentRoute';
 }
 
-/// generated route for [_i18.CreateEventPage]
-class CreateEventRoute extends _i41.PageRouteInfo<void> {
-  const CreateEventRoute() : super(name, path: '/createEvent');
+/// generated route for
+/// [_i18.CreateEventPage]
+class CreateEventRoute extends _i41.PageRouteInfo<CreateEventRouteArgs> {
+  CreateEventRoute(
+      {_i45.Key? key, required _i49.EventDataItemInfoEntity? entity})
+      : super(CreateEventRoute.name,
+            path: '/createEvent',
+            args: CreateEventRouteArgs(key: key, entity: entity));
 
   static const String name = 'CreateEventRoute';
 }
 
-/// generated route for [_i19.MyInboxPage]
+class CreateEventRouteArgs {
+  const CreateEventRouteArgs({this.key, required this.entity});
+
+  final _i45.Key? key;
+
+  final _i49.EventDataItemInfoEntity? entity;
+
+  @override
+  String toString() {
+    return 'CreateEventRouteArgs{key: $key, entity: $entity}';
+  }
+}
+
+/// generated route for
+/// [_i19.MyInboxPage]
 class MyInboxRoute extends _i41.PageRouteInfo<void> {
-  const MyInboxRoute() : super(name, path: '/myInbox');
+  const MyInboxRoute() : super(MyInboxRoute.name, path: '/myInbox');
 
   static const String name = 'MyInboxRoute';
 }
 
-/// generated route for [_i20.SettingPage]
+/// generated route for
+/// [_i20.SettingPage]
 class SettingRoute extends _i41.PageRouteInfo<void> {
-  const SettingRoute() : super(name, path: '/setting');
+  const SettingRoute() : super(SettingRoute.name, path: '/setting');
 
   static const String name = 'SettingRoute';
 }
 
-/// generated route for [_i21.PersonalProfileSetPage]
+/// generated route for
+/// [_i21.PersonalProfileSetPage]
 class PersonalProfileSetRoute extends _i41.PageRouteInfo<void> {
-  const PersonalProfileSetRoute() : super(name, path: '/personalProfileSet');
+  const PersonalProfileSetRoute()
+      : super(PersonalProfileSetRoute.name, path: '/personalProfileSet');
 
   static const String name = 'PersonalProfileSetRoute';
 }
 
-/// generated route for [_i22.BusinessProfileSetPage]
+/// generated route for
+/// [_i22.BusinessProfileSetPage]
 class BusinessProfileSetRoute extends _i41.PageRouteInfo<void> {
-  const BusinessProfileSetRoute() : super(name, path: '/businessProfileSet');
+  const BusinessProfileSetRoute()
+      : super(BusinessProfileSetRoute.name, path: '/businessProfileSet');
 
   static const String name = 'BusinessProfileSetRoute';
 }
 
-/// generated route for [_i23.BusinessProfileCreatePage]
+/// generated route for
+/// [_i23.BusinessProfileCreatePage]
 class BusinessProfileCreateRoute
     extends _i41.PageRouteInfo<BusinessProfileCreateRouteArgs> {
   BusinessProfileCreateRoute(
-      {_i42.Key? key, _i49.PersonalProfileInfoCompanyVos? info})
-      : super(name,
+      {_i45.Key? key, _i50.PersonalProfileInfoCompanyVos? info})
+      : super(BusinessProfileCreateRoute.name,
             path: '/businessProfileCreate',
             args: BusinessProfileCreateRouteArgs(key: key, info: info));
 
@@ -622,31 +708,40 @@ class BusinessProfileCreateRoute
 class BusinessProfileCreateRouteArgs {
   const BusinessProfileCreateRouteArgs({this.key, this.info});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
-  final _i49.PersonalProfileInfoCompanyVos? info;
+  final _i50.PersonalProfileInfoCompanyVos? info;
+
+  @override
+  String toString() {
+    return 'BusinessProfileCreateRouteArgs{key: $key, info: $info}';
+  }
 }
 
-/// generated route for [_i24.ChangePasswordPage]
+/// generated route for
+/// [_i24.ChangePasswordPage]
 class ChangePasswordRoute extends _i41.PageRouteInfo<void> {
-  const ChangePasswordRoute() : super(name, path: '/changePassword');
+  const ChangePasswordRoute()
+      : super(ChangePasswordRoute.name, path: '/changePassword');
 
   static const String name = 'ChangePasswordRoute';
 }
 
-/// generated route for [_i25.GuidelinePage]
+/// generated route for
+/// [_i25.GuidelinePage]
 class GuidelineRoute extends _i41.PageRouteInfo<void> {
-  const GuidelineRoute() : super(name, path: '/guideline');
+  const GuidelineRoute() : super(GuidelineRoute.name, path: '/guideline');
 
   static const String name = 'GuidelineRoute';
 }
 
-/// generated route for [_i26.GuidelineDetailPage]
+/// generated route for
+/// [_i26.GuidelineDetailPage]
 class GuidelineDetailRoute
     extends _i41.PageRouteInfo<GuidelineDetailRouteArgs> {
   GuidelineDetailRoute(
-      {_i42.Key? key, required _i50.GuideLineEntity guideLineEntity})
-      : super(name,
+      {_i45.Key? key, required _i51.GuideLineEntity guideLineEntity})
+      : super(GuidelineDetailRoute.name,
             path: '/guidelineDetail',
             args: GuidelineDetailRouteArgs(
                 key: key, guideLineEntity: guideLineEntity));
@@ -657,29 +752,37 @@ class GuidelineDetailRoute
 class GuidelineDetailRouteArgs {
   const GuidelineDetailRouteArgs({this.key, required this.guideLineEntity});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
-  final _i50.GuideLineEntity guideLineEntity;
+  final _i51.GuideLineEntity guideLineEntity;
+
+  @override
+  String toString() {
+    return 'GuidelineDetailRouteArgs{key: $key, guideLineEntity: $guideLineEntity}';
+  }
 }
 
-/// generated route for [_i27.LanguageSetPage]
+/// generated route for
+/// [_i27.LanguageSetPage]
 class LanguageSetRoute extends _i41.PageRouteInfo<void> {
-  const LanguageSetRoute() : super(name, path: '/languageSet');
+  const LanguageSetRoute() : super(LanguageSetRoute.name, path: '/languageSet');
 
   static const String name = 'LanguageSetRoute';
 }
 
-/// generated route for [_i28.YourPicPage]
+/// generated route for
+/// [_i28.YourPicPage]
 class YourPicRoute extends _i41.PageRouteInfo<void> {
-  const YourPicRoute() : super(name, path: '/yourPic');
+  const YourPicRoute() : super(YourPicRoute.name, path: '/yourPic');
 
   static const String name = 'YourPicRoute';
 }
 
-/// generated route for [_i29.QrViewPage]
+/// generated route for
+/// [_i29.QrViewPage]
 class QrViewRoute extends _i41.PageRouteInfo<QrViewRouteArgs> {
-  QrViewRoute({_i42.Key? key, required int type})
-      : super(name,
+  QrViewRoute({_i45.Key? key, required int type})
+      : super(QrViewRoute.name,
             path: '/qrview', args: QrViewRouteArgs(key: key, type: type));
 
   static const String name = 'QrViewRoute';
@@ -688,15 +791,21 @@ class QrViewRoute extends _i41.PageRouteInfo<QrViewRouteArgs> {
 class QrViewRouteArgs {
   const QrViewRouteArgs({this.key, required this.type});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
   final int type;
+
+  @override
+  String toString() {
+    return 'QrViewRouteArgs{key: $key, type: $type}';
+  }
 }
 
-/// generated route for [_i30.WebPage]
+/// generated route for
+/// [_i30.WebPage]
 class WebRoute extends _i41.PageRouteInfo<WebRouteArgs> {
-  WebRoute({_i42.Key? key, required String title, required String initUrl})
-      : super(name,
+  WebRoute({_i45.Key? key, required String title, required String initUrl})
+      : super(WebRoute.name,
             path: '/webpage',
             args: WebRouteArgs(key: key, title: title, initUrl: initUrl));
 
@@ -706,25 +815,33 @@ class WebRoute extends _i41.PageRouteInfo<WebRouteArgs> {
 class WebRouteArgs {
   const WebRouteArgs({this.key, required this.title, required this.initUrl});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
   final String title;
 
   final String initUrl;
+
+  @override
+  String toString() {
+    return 'WebRouteArgs{key: $key, title: $title, initUrl: $initUrl}';
+  }
 }
 
-/// generated route for [_i31.CheckHistoryPage]
+/// generated route for
+/// [_i31.CheckHistoryPage]
 class CheckHistoryRoute extends _i41.PageRouteInfo<void> {
-  const CheckHistoryRoute() : super(name, path: '/checkHistory');
+  const CheckHistoryRoute()
+      : super(CheckHistoryRoute.name, path: '/checkHistory');
 
   static const String name = 'CheckHistoryRoute';
 }
 
-/// generated route for [_i32.InboxDetailPage]
+/// generated route for
+/// [_i32.InboxDetailPage]
 class InboxDetailRoute extends _i41.PageRouteInfo<InboxDetailRouteArgs> {
   InboxDetailRoute(
-      {_i42.Key? key, required _i51.NotificationEntity notification})
-      : super(name,
+      {_i45.Key? key, required _i52.NotificationEntity notification})
+      : super(InboxDetailRoute.name,
             path: '/inboxDetail',
             args: InboxDetailRouteArgs(key: key, notification: notification));
 
@@ -734,19 +851,25 @@ class InboxDetailRoute extends _i41.PageRouteInfo<InboxDetailRouteArgs> {
 class InboxDetailRouteArgs {
   const InboxDetailRouteArgs({this.key, required this.notification});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
-  final _i51.NotificationEntity notification;
+  final _i52.NotificationEntity notification;
+
+  @override
+  String toString() {
+    return 'InboxDetailRouteArgs{key: $key, notification: $notification}';
+  }
 }
 
-/// generated route for [_i33.NetworkPage]
+/// generated route for
+/// [_i33.NetworkPage]
 class NetworkRoute extends _i41.PageRouteInfo<NetworkRouteArgs> {
   NetworkRoute(
-      {_i42.Key? key,
-      dynamic Function(_i52.ScrollDirection)? pageScrollDirectionChange,
+      {_i45.Key? key,
+      dynamic Function(_i53.ScrollDirection)? pageScrollDirectionChange,
       required bool onlyMy,
       required String title})
-      : super(name,
+      : super(NetworkRoute.name,
             path: '/network',
             args: NetworkRouteArgs(
                 key: key,
@@ -764,40 +887,49 @@ class NetworkRouteArgs {
       required this.onlyMy,
       required this.title});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
-  final dynamic Function(_i52.ScrollDirection)? pageScrollDirectionChange;
+  final dynamic Function(_i53.ScrollDirection)? pageScrollDirectionChange;
 
   final bool onlyMy;
 
   final String title;
+
+  @override
+  String toString() {
+    return 'NetworkRouteArgs{key: $key, pageScrollDirectionChange: $pageScrollDirectionChange, onlyMy: $onlyMy, title: $title}';
+  }
 }
 
-/// generated route for [_i34.MyNetworkPage]
+/// generated route for
+/// [_i34.MyNetworkPage]
 class MyNetworkRoute extends _i41.PageRouteInfo<void> {
-  const MyNetworkRoute() : super(name, path: '/myNetwork');
+  const MyNetworkRoute() : super(MyNetworkRoute.name, path: '/myNetwork');
 
   static const String name = 'MyNetworkRoute';
 }
 
-/// generated route for [_i35.WelcomePage]
+/// generated route for
+/// [_i35.WelcomePage]
 class WelcomeRoute extends _i41.PageRouteInfo<void> {
-  const WelcomeRoute() : super(name, path: '/welcome');
+  const WelcomeRoute() : super(WelcomeRoute.name, path: '/welcome');
 
   static const String name = 'WelcomeRoute';
 }
 
-/// generated route for [_i36.SignInPage]
+/// generated route for
+/// [_i36.SignInPage]
 class SignInRoute extends _i41.PageRouteInfo<void> {
-  const SignInRoute() : super(name, path: '/signIn');
+  const SignInRoute() : super(SignInRoute.name, path: '/signIn');
 
   static const String name = 'SignInRoute';
 }
 
-/// generated route for [_i37.SignUpPage]
+/// generated route for
+/// [_i37.SignUpPage]
 class SignUpRoute extends _i41.PageRouteInfo<SignUpRouteArgs> {
-  SignUpRoute({_i42.Key? key, required int type})
-      : super(name,
+  SignUpRoute({_i45.Key? key, required int type})
+      : super(SignUpRoute.name,
             path: '/signUp', args: SignUpRouteArgs(key: key, type: type));
 
   static const String name = 'SignUpRoute';
@@ -806,21 +938,27 @@ class SignUpRoute extends _i41.PageRouteInfo<SignUpRouteArgs> {
 class SignUpRouteArgs {
   const SignUpRouteArgs({this.key, required this.type});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
   final int type;
+
+  @override
+  String toString() {
+    return 'SignUpRouteArgs{key: $key, type: $type}';
+  }
 }
 
-/// generated route for [_i38.ConfirmPasswordPage]
+/// generated route for
+/// [_i38.ConfirmPasswordPage]
 class ConfirmPasswordRoute
     extends _i41.PageRouteInfo<ConfirmPasswordRouteArgs> {
   ConfirmPasswordRoute(
-      {_i42.Key? key,
+      {_i45.Key? key,
       required String phoneNumber,
       required String countryCode,
       required String verificationCode,
       required int type})
-      : super(name,
+      : super(ConfirmPasswordRoute.name,
             path: '/confirmPassword',
             args: ConfirmPasswordRouteArgs(
                 key: key,
@@ -840,7 +978,7 @@ class ConfirmPasswordRouteArgs {
       required this.verificationCode,
       required this.type});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
   final String phoneNumber;
 
@@ -849,17 +987,23 @@ class ConfirmPasswordRouteArgs {
   final String verificationCode;
 
   final int type;
+
+  @override
+  String toString() {
+    return 'ConfirmPasswordRouteArgs{key: $key, phoneNumber: $phoneNumber, countryCode: $countryCode, verificationCode: $verificationCode, type: $type}';
+  }
 }
 
-/// generated route for [_i39.PhoneNumberVerificationPage]
+/// generated route for
+/// [_i39.PhoneNumberVerificationPage]
 class PhoneNumberVerificationRoute
     extends _i41.PageRouteInfo<PhoneNumberVerificationRouteArgs> {
   PhoneNumberVerificationRoute(
-      {_i42.Key? key,
+      {_i45.Key? key,
       required String phoneNumber,
       required String countryCode,
       required int type})
-      : super(name,
+      : super(PhoneNumberVerificationRoute.name,
             path: 'phoneNumberVerification',
             args: PhoneNumberVerificationRouteArgs(
                 key: key,
@@ -877,21 +1021,27 @@ class PhoneNumberVerificationRouteArgs {
       required this.countryCode,
       required this.type});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
   final String phoneNumber;
 
   final String countryCode;
 
   final int type;
+
+  @override
+  String toString() {
+    return 'PhoneNumberVerificationRouteArgs{key: $key, phoneNumber: $phoneNumber, countryCode: $countryCode, type: $type}';
+  }
 }
 
-/// generated route for [_i40.CheckInPage]
+/// generated route for
+/// [_i40.CheckInPage]
 class CheckInRoute extends _i41.PageRouteInfo<CheckInRouteArgs> {
   CheckInRoute(
-      {_i42.Key? key,
-      dynamic Function(_i52.ScrollDirection)? pageScrollDirectionChange})
-      : super(name,
+      {_i45.Key? key,
+      dynamic Function(_i53.ScrollDirection)? pageScrollDirectionChange})
+      : super(CheckInRoute.name,
             path: 'CheckIn',
             args: CheckInRouteArgs(
                 key: key,
@@ -903,7 +1053,12 @@ class CheckInRoute extends _i41.PageRouteInfo<CheckInRouteArgs> {
 class CheckInRouteArgs {
   const CheckInRouteArgs({this.key, this.pageScrollDirectionChange});
 
-  final _i42.Key? key;
+  final _i45.Key? key;
 
-  final dynamic Function(_i52.ScrollDirection)? pageScrollDirectionChange;
+  final dynamic Function(_i53.ScrollDirection)? pageScrollDirectionChange;
+
+  @override
+  String toString() {
+    return 'CheckInRouteArgs{key: $key, pageScrollDirectionChange: $pageScrollDirectionChange}';
+  }
 }

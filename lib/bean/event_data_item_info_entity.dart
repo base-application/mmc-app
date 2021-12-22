@@ -1,3 +1,5 @@
+import 'package:mmc/bean/grade_level_info_entity.dart';
+import 'package:mmc/bean/group_item_entity.dart';
 import 'package:mmc/generated/json/base/json_field.dart';
 import 'package:mmc/generated/json/event_data_item_info_entity.g.dart';
 
@@ -23,7 +25,8 @@ class EventDataItemInfoEntity {
 	int? checkInTime;
 	int? checkOutTime;
 	List<EventDataItemInfoEventPoster>? eventPoster;
-	List<EventDataItemInfoGroups>? groups;
+	List<GroupItemEntity>? groups;
+	List<GradeLevelInfoEntity>? grades;
 	List<EventDataItemInfoAttendance>? attendance;
 	double? attendanceProportion;
 	int? approveStatus;

@@ -4,132 +4,132 @@ import 'package:mmc/bean/achievement_entity.dart';
 
 
 PersonalProfileInfoEntity $PersonalProfileInfoEntityFromJson(Map<String, dynamic> json) {
-	PersonalProfileInfoEntity personalProfileInfoEntity = PersonalProfileInfoEntity();
-	var userId = jsonConvert.convert<int>(json['userId']);
+	final PersonalProfileInfoEntity personalProfileInfoEntity = PersonalProfileInfoEntity();
+	final int? userId = jsonConvert.convert<int>(json['userId']);
 	if (userId != null) {
 		personalProfileInfoEntity.userId = userId;
 	}
-	var picture = jsonConvert.convert<String>(json['picture']);
+	final String? picture = jsonConvert.convert<String>(json['picture']);
 	if (picture != null) {
 		personalProfileInfoEntity.picture = picture;
 	}
-	var name = jsonConvert.convert<String>(json['name']);
+	final String? name = jsonConvert.convert<String>(json['name']);
 	if (name != null) {
 		personalProfileInfoEntity.name = name;
 	}
-	var concatNumber = jsonConvert.convert<String>(json['concatNumber']);
+	final String? concatNumber = jsonConvert.convert<String>(json['concatNumber']);
 	if (concatNumber != null) {
 		personalProfileInfoEntity.concatNumber = concatNumber;
 	}
-	var industry = jsonConvert.convert<String>(json['industry']);
+	final String? industry = jsonConvert.convert<String>(json['industry']);
 	if (industry != null) {
 		personalProfileInfoEntity.industry = industry;
 	}
-	var country = jsonConvert.convert<int>(json['country']);
+	final int? country = jsonConvert.convert<int>(json['country']);
 	if (country != null) {
 		personalProfileInfoEntity.country = country;
 	}
-	var state = jsonConvert.convert<int>(json['state']);
+	final int? state = jsonConvert.convert<int>(json['state']);
 	if (state != null) {
 		personalProfileInfoEntity.state = state;
 	}
-	var birthday = jsonConvert.convert<int>(json['birthday']);
+	final int? birthday = jsonConvert.convert<int>(json['birthday']);
 	if (birthday != null) {
 		personalProfileInfoEntity.birthday = birthday;
 	}
-	var occupation = jsonConvert.convert<String>(json['occupation']);
+	final String? occupation = jsonConvert.convert<String>(json['occupation']);
 	if (occupation != null) {
 		personalProfileInfoEntity.occupation = occupation;
 	}
-	var introduction = jsonConvert.convert<String>(json['introduction']);
+	final String? introduction = jsonConvert.convert<String>(json['introduction']);
 	if (introduction != null) {
 		personalProfileInfoEntity.introduction = introduction;
 	}
-	var whatsapp = jsonConvert.convert<String>(json['whatsapp']);
+	final String? whatsapp = jsonConvert.convert<String>(json['whatsapp']);
 	if (whatsapp != null) {
 		personalProfileInfoEntity.whatsapp = whatsapp;
 	}
-	var facebook = jsonConvert.convert<String>(json['facebook']);
+	final String? facebook = jsonConvert.convert<String>(json['facebook']);
 	if (facebook != null) {
 		personalProfileInfoEntity.facebook = facebook;
 	}
-	var linkedin = jsonConvert.convert<String>(json['linkedin']);
+	final String? linkedin = jsonConvert.convert<String>(json['linkedin']);
 	if (linkedin != null) {
 		personalProfileInfoEntity.linkedin = linkedin;
 	}
-	var youtube = jsonConvert.convert<String>(json['youtube']);
+	final String? youtube = jsonConvert.convert<String>(json['youtube']);
 	if (youtube != null) {
 		personalProfileInfoEntity.youtube = youtube;
 	}
-	var instagram = jsonConvert.convert<String>(json['instagram']);
+	final String? instagram = jsonConvert.convert<String>(json['instagram']);
 	if (instagram != null) {
 		personalProfileInfoEntity.instagram = instagram;
 	}
-	var gradeId = jsonConvert.convert<int>(json['gradeId']);
+	final int? gradeId = jsonConvert.convert<int>(json['gradeId']);
 	if (gradeId != null) {
 		personalProfileInfoEntity.gradeId = gradeId;
 	}
-	var gradeName = jsonConvert.convert<String>(json['gradeName']);
+	final String? gradeName = jsonConvert.convert<String>(json['gradeName']);
 	if (gradeName != null) {
 		personalProfileInfoEntity.gradeName = gradeName;
 	}
-	var groupId = jsonConvert.convert<int>(json['groupId']);
+	final int? groupId = jsonConvert.convert<int>(json['groupId']);
 	if (groupId != null) {
 		personalProfileInfoEntity.groupId = groupId;
 	}
-	var groupName = jsonConvert.convert<String>(json['groupName']);
+	final String? groupName = jsonConvert.convert<String>(json['groupName']);
 	if (groupName != null) {
 		personalProfileInfoEntity.groupName = groupName;
 	}
-	var email = jsonConvert.convert<String>(json['email']);
+	final String? email = jsonConvert.convert<String>(json['email']);
 	if (email != null) {
 		personalProfileInfoEntity.email = email;
 	}
-	var attendance = jsonConvert.convert<int>(json['attendance']);
+	final int? attendance = jsonConvert.convert<int>(json['attendance']);
 	if (attendance != null) {
 		personalProfileInfoEntity.attendance = attendance;
 	}
-	var referralSend = jsonConvert.convert<int>(json['referralSend']);
+	final int? referralSend = jsonConvert.convert<int>(json['referralSend']);
 	if (referralSend != null) {
 		personalProfileInfoEntity.referralSend = referralSend;
 	}
-	var referralReceived = jsonConvert.convert<int>(json['referralReceived']);
+	final int? referralReceived = jsonConvert.convert<int>(json['referralReceived']);
 	if (referralReceived != null) {
 		personalProfileInfoEntity.referralReceived = referralReceived;
 	}
-	var thankYouNote = jsonConvert.convert<int>(json['thankYouNote']);
+	final int? thankYouNote = jsonConvert.convert<int>(json['thankYouNote']);
 	if (thankYouNote != null) {
 		personalProfileInfoEntity.thankYouNote = thankYouNote;
 	}
-	var thankYouNoteSum = jsonConvert.convert<int>(json['thankYouNoteSum']);
+	final int? thankYouNoteSum = jsonConvert.convert<int>(json['thankYouNoteSum']);
 	if (thankYouNoteSum != null) {
 		personalProfileInfoEntity.thankYouNoteSum = thankYouNoteSum;
 	}
-	var enable = jsonConvert.convert<bool>(json['enable']);
+	final bool? enable = jsonConvert.convert<bool>(json['enable']);
 	if (enable != null) {
 		personalProfileInfoEntity.enable = enable;
 	}
-	var positionId = jsonConvert.convert<int>(json['positionId']);
+	final int? positionId = jsonConvert.convert<int>(json['positionId']);
 	if (positionId != null) {
 		personalProfileInfoEntity.positionId = positionId;
 	}
-	var positionName = jsonConvert.convert<String>(json['positionName']);
+	final String? positionName = jsonConvert.convert<String>(json['positionName']);
 	if (positionName != null) {
 		personalProfileInfoEntity.positionName = positionName;
 	}
-	var member = jsonConvert.convert<String>(json['member']);
+	final String? member = jsonConvert.convert<String>(json['member']);
 	if (member != null) {
 		personalProfileInfoEntity.member = member;
 	}
-	var companyVos = jsonConvert.convertListNotNull<PersonalProfileInfoCompanyVos>(json['companyVos']);
+	final List<PersonalProfileInfoCompanyVos>? companyVos = jsonConvert.convertListNotNull<PersonalProfileInfoCompanyVos>(json['companyVos']);
 	if (companyVos != null) {
 		personalProfileInfoEntity.companyVos = companyVos;
 	}
-	var achievement = jsonConvert.convert<AchievementEntity>(json['achievement']);
+	final AchievementEntity? achievement = jsonConvert.convert<AchievementEntity>(json['achievement']);
 	if (achievement != null) {
 		personalProfileInfoEntity.achievement = achievement;
 	}
-	var friend = jsonConvert.convert<dynamic>(json['friend']);
+	final dynamic? friend = jsonConvert.convert<dynamic>(json['friend']);
 	if (friend != null) {
 		personalProfileInfoEntity.friend = friend;
 	}
@@ -174,88 +174,88 @@ Map<String, dynamic> $PersonalProfileInfoEntityToJson(PersonalProfileInfoEntity 
 }
 
 PersonalProfileInfoCompanyVos $PersonalProfileInfoCompanyVosFromJson(Map<String, dynamic> json) {
-	PersonalProfileInfoCompanyVos personalProfileInfoCompanyVos = PersonalProfileInfoCompanyVos();
-	var companyId = jsonConvert.convert<int>(json['companyId']);
+	final PersonalProfileInfoCompanyVos personalProfileInfoCompanyVos = PersonalProfileInfoCompanyVos();
+	final int? companyId = jsonConvert.convert<int>(json['companyId']);
 	if (companyId != null) {
 		personalProfileInfoCompanyVos.companyId = companyId;
 	}
-	var userId = jsonConvert.convert<int>(json['userId']);
+	final int? userId = jsonConvert.convert<int>(json['userId']);
 	if (userId != null) {
 		personalProfileInfoCompanyVos.userId = userId;
 	}
-	var companyLogo = jsonConvert.convert<String>(json['companyLogo']);
+	final String? companyLogo = jsonConvert.convert<String>(json['companyLogo']);
 	if (companyLogo != null) {
 		personalProfileInfoCompanyVos.companyLogo = companyLogo;
 	}
-	var companyName = jsonConvert.convert<String>(json['companyName']);
+	final String? companyName = jsonConvert.convert<String>(json['companyName']);
 	if (companyName != null) {
 		personalProfileInfoCompanyVos.companyName = companyName;
 	}
-	var companyAddress = jsonConvert.convert<String>(json['companyAddress']);
+	final String? companyAddress = jsonConvert.convert<String>(json['companyAddress']);
 	if (companyAddress != null) {
 		personalProfileInfoCompanyVos.companyAddress = companyAddress;
 	}
-	var city = jsonConvert.convert<String>(json['city']);
+	final String? city = jsonConvert.convert<String>(json['city']);
 	if (city != null) {
 		personalProfileInfoCompanyVos.city = city;
 	}
-	var postCode = jsonConvert.convert<String>(json['postCode']);
+	final String? postCode = jsonConvert.convert<String>(json['postCode']);
 	if (postCode != null) {
 		personalProfileInfoCompanyVos.postCode = postCode;
 	}
-	var companyWebsite = jsonConvert.convert<String>(json['companyWebsite']);
+	final String? companyWebsite = jsonConvert.convert<String>(json['companyWebsite']);
 	if (companyWebsite != null) {
 		personalProfileInfoCompanyVos.companyWebsite = companyWebsite;
 	}
-	var companyWhatsapp = jsonConvert.convert<String>(json['companyWhatsapp']);
+	final String? companyWhatsapp = jsonConvert.convert<String>(json['companyWhatsapp']);
 	if (companyWhatsapp != null) {
 		personalProfileInfoCompanyVos.companyWhatsapp = companyWhatsapp;
 	}
-	var companyEmail = jsonConvert.convert<String>(json['companyEmail']);
+	final String? companyEmail = jsonConvert.convert<String>(json['companyEmail']);
 	if (companyEmail != null) {
 		personalProfileInfoCompanyVos.companyEmail = companyEmail;
 	}
-	var companyPhone = jsonConvert.convert<String>(json['companyPhone']);
+	final String? companyPhone = jsonConvert.convert<String>(json['companyPhone']);
 	if (companyPhone != null) {
 		personalProfileInfoCompanyVos.companyPhone = companyPhone;
 	}
-	var companyFacebook = jsonConvert.convert<String>(json['companyFacebook']);
+	final String? companyFacebook = jsonConvert.convert<String>(json['companyFacebook']);
 	if (companyFacebook != null) {
 		personalProfileInfoCompanyVos.companyFacebook = companyFacebook;
 	}
-	var companyLinkedin = jsonConvert.convert<String>(json['companyLinkedin']);
+	final String? companyLinkedin = jsonConvert.convert<String>(json['companyLinkedin']);
 	if (companyLinkedin != null) {
 		personalProfileInfoCompanyVos.companyLinkedin = companyLinkedin;
 	}
-	var companyYoutube = jsonConvert.convert<String>(json['companyYoutube']);
+	final String? companyYoutube = jsonConvert.convert<String>(json['companyYoutube']);
 	if (companyYoutube != null) {
 		personalProfileInfoCompanyVos.companyYoutube = companyYoutube;
 	}
-	var companyInstagram = jsonConvert.convert<String>(json['companyInstagram']);
+	final String? companyInstagram = jsonConvert.convert<String>(json['companyInstagram']);
 	if (companyInstagram != null) {
 		personalProfileInfoCompanyVos.companyInstagram = companyInstagram;
 	}
-	var companyIntroduction = jsonConvert.convert<String>(json['companyIntroduction']);
+	final String? companyIntroduction = jsonConvert.convert<String>(json['companyIntroduction']);
 	if (companyIntroduction != null) {
 		personalProfileInfoCompanyVos.companyIntroduction = companyIntroduction;
 	}
-	var companyGoals = jsonConvert.convert<String>(json['companyGoals']);
+	final String? companyGoals = jsonConvert.convert<String>(json['companyGoals']);
 	if (companyGoals != null) {
 		personalProfileInfoCompanyVos.companyGoals = companyGoals;
 	}
-	var companyAccomplishments = jsonConvert.convert<String>(json['companyAccomplishments']);
+	final String? companyAccomplishments = jsonConvert.convert<String>(json['companyAccomplishments']);
 	if (companyAccomplishments != null) {
 		personalProfileInfoCompanyVos.companyAccomplishments = companyAccomplishments;
 	}
-	var companyInterests = jsonConvert.convert<String>(json['companyInterests']);
+	final String? companyInterests = jsonConvert.convert<String>(json['companyInterests']);
 	if (companyInterests != null) {
 		personalProfileInfoCompanyVos.companyInterests = companyInterests;
 	}
-	var serviceIntroduction = jsonConvert.convert<String>(json['serviceIntroduction']);
+	final String? serviceIntroduction = jsonConvert.convert<String>(json['serviceIntroduction']);
 	if (serviceIntroduction != null) {
 		personalProfileInfoCompanyVos.serviceIntroduction = serviceIntroduction;
 	}
-	var producePictures = jsonConvert.convertListNotNull<PersonalProfileInfoCompanyVosProducePictures>(json['producePictures']);
+	final List<PersonalProfileInfoCompanyVosProducePictures>? producePictures = jsonConvert.convertListNotNull<PersonalProfileInfoCompanyVosProducePictures>(json['producePictures']);
 	if (producePictures != null) {
 		personalProfileInfoCompanyVos.producePictures = producePictures;
 	}
@@ -289,16 +289,16 @@ Map<String, dynamic> $PersonalProfileInfoCompanyVosToJson(PersonalProfileInfoCom
 }
 
 PersonalProfileInfoCompanyVosProducePictures $PersonalProfileInfoCompanyVosProducePicturesFromJson(Map<String, dynamic> json) {
-	PersonalProfileInfoCompanyVosProducePictures personalProfileInfoCompanyVosProducePictures = PersonalProfileInfoCompanyVosProducePictures();
-	var produceId = jsonConvert.convert<int>(json['produceId']);
+	final PersonalProfileInfoCompanyVosProducePictures personalProfileInfoCompanyVosProducePictures = PersonalProfileInfoCompanyVosProducePictures();
+	final int? produceId = jsonConvert.convert<int>(json['produceId']);
 	if (produceId != null) {
 		personalProfileInfoCompanyVosProducePictures.produceId = produceId;
 	}
-	var producePicture = jsonConvert.convert<String>(json['producePicture']);
+	final String? producePicture = jsonConvert.convert<String>(json['producePicture']);
 	if (producePicture != null) {
 		personalProfileInfoCompanyVosProducePictures.producePicture = producePicture;
 	}
-	var companyId = jsonConvert.convert<int>(json['companyId']);
+	final int? companyId = jsonConvert.convert<int>(json['companyId']);
 	if (companyId != null) {
 		personalProfileInfoCompanyVosProducePictures.companyId = companyId;
 	}

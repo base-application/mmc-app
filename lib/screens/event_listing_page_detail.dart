@@ -1,7 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/event_data_item_info_entity.dart';
 import 'package:mmc/bean/event_detail_info_entity.dart';
+import 'package:mmc/router/auth_guard.dart';
+import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,6 +12,7 @@ import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/dialog.dart';
 import 'package:mmc/utils/event_bus.dart';
 import 'package:mmc/utils/http_request.dart';
+import 'package:provider/provider.dart';
 
 class EventListingDetailPage extends StatefulWidget {
   /// 1 普通列表进入 2 创建列表进入
@@ -390,8 +394,18 @@ class _EventListingDetailPageState extends State<EventListingDetailPage> {
       );
     }
 
-    return PageContainer(
-      title: widget.eventInfo.eventTitle,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+            widget.eventInfo.eventTitle,
+          style: TextStyle(fontSize: 20, color: Colors.black87, fontWeight: FontWeight.bold,),
+        ),
+        actions: [
+          if(widget.eventInfo.createId == Provider.of<AuthService>(context, listen: false).getLoginInfo?.id
+          && widget.eventInfo.eventStartTime! > DateTime.now().millisecondsSinceEpoch
+          ) IconButton(onPressed: (){ AutoRouter.of(context).push(CreateEventRoute(entity: widget.eventInfo));}, icon: Icon(Icons.edit))
+        ],
+      ),
       body: ScrollConfiguration(
         behavior: CusBehavior(),
         child: _scroll(),

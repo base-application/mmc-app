@@ -2,100 +2,100 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/network_item_info_entity.dart';
 
 NetworkItemInfoEntity $NetworkItemInfoEntityFromJson(Map<String, dynamic> json) {
-	NetworkItemInfoEntity networkItemInfoEntity = NetworkItemInfoEntity();
-	var userId = jsonConvert.convert<int>(json['userId']);
+	final NetworkItemInfoEntity networkItemInfoEntity = NetworkItemInfoEntity();
+	final int? userId = jsonConvert.convert<int>(json['userId']);
 	if (userId != null) {
 		networkItemInfoEntity.userId = userId;
 	}
-	var picture = jsonConvert.convert<String>(json['picture']);
+	final String? picture = jsonConvert.convert<String>(json['picture']);
 	if (picture != null) {
 		networkItemInfoEntity.picture = picture;
 	}
-	var groupId = jsonConvert.convert<int>(json['groupId']);
+	final int? groupId = jsonConvert.convert<int>(json['groupId']);
 	if (groupId != null) {
 		networkItemInfoEntity.groupId = groupId;
 	}
-	var name = jsonConvert.convert<String>(json['name']);
+	final String? name = jsonConvert.convert<String>(json['name']);
 	if (name != null) {
 		networkItemInfoEntity.name = name;
 	}
-	var concatNumber = jsonConvert.convert<String>(json['concatNumber']);
+	final String? concatNumber = jsonConvert.convert<String>(json['concatNumber']);
 	if (concatNumber != null) {
 		networkItemInfoEntity.concatNumber = concatNumber;
 	}
-	var industry = jsonConvert.convert<String>(json['industry']);
+	final String? industry = jsonConvert.convert<String>(json['industry']);
 	if (industry != null) {
 		networkItemInfoEntity.industry = industry;
 	}
-	var country = jsonConvert.convert<int>(json['country']);
+	final int? country = jsonConvert.convert<int>(json['country']);
 	if (country != null) {
 		networkItemInfoEntity.country = country;
 	}
-	var state = jsonConvert.convert<int>(json['state']);
+	final int? state = jsonConvert.convert<int>(json['state']);
 	if (state != null) {
 		networkItemInfoEntity.state = state;
 	}
-	var birthday = jsonConvert.convert<int>(json['birthday']);
+	final int? birthday = jsonConvert.convert<int>(json['birthday']);
 	if (birthday != null) {
 		networkItemInfoEntity.birthday = birthday;
 	}
-	var occupation = jsonConvert.convert<String>(json['occupation']);
+	final String? occupation = jsonConvert.convert<String>(json['occupation']);
 	if (occupation != null) {
 		networkItemInfoEntity.occupation = occupation;
 	}
-	var introduction = jsonConvert.convert<String>(json['introduction']);
+	final String? introduction = jsonConvert.convert<String>(json['introduction']);
 	if (introduction != null) {
 		networkItemInfoEntity.introduction = introduction;
 	}
-	var whatsapp = jsonConvert.convert<String>(json['whatsapp']);
+	final String? whatsapp = jsonConvert.convert<String>(json['whatsapp']);
 	if (whatsapp != null) {
 		networkItemInfoEntity.whatsapp = whatsapp;
 	}
-	var facebook = jsonConvert.convert<String>(json['facebook']);
+	final String? facebook = jsonConvert.convert<String>(json['facebook']);
 	if (facebook != null) {
 		networkItemInfoEntity.facebook = facebook;
 	}
-	var linkedin = jsonConvert.convert<String>(json['linkedin']);
+	final String? linkedin = jsonConvert.convert<String>(json['linkedin']);
 	if (linkedin != null) {
 		networkItemInfoEntity.linkedin = linkedin;
 	}
-	var youtube = jsonConvert.convert<String>(json['youtube']);
+	final String? youtube = jsonConvert.convert<String>(json['youtube']);
 	if (youtube != null) {
 		networkItemInfoEntity.youtube = youtube;
 	}
-	var instagram = jsonConvert.convert<String>(json['instagram']);
+	final String? instagram = jsonConvert.convert<String>(json['instagram']);
 	if (instagram != null) {
 		networkItemInfoEntity.instagram = instagram;
 	}
-	var gradeId = jsonConvert.convert<int>(json['gradeId']);
+	final int? gradeId = jsonConvert.convert<int>(json['gradeId']);
 	if (gradeId != null) {
 		networkItemInfoEntity.gradeId = gradeId;
 	}
-	var gradeName = jsonConvert.convert<String>(json['gradeName']);
+	final String? gradeName = jsonConvert.convert<String>(json['gradeName']);
 	if (gradeName != null) {
 		networkItemInfoEntity.gradeName = gradeName;
 	}
-	var attendance = jsonConvert.convert<double>(json['attendance']);
+	final double? attendance = jsonConvert.convert<double>(json['attendance']);
 	if (attendance != null) {
 		networkItemInfoEntity.attendance = attendance;
 	}
-	var referralSend = jsonConvert.convert<int>(json['referralSend']);
+	final int? referralSend = jsonConvert.convert<int>(json['referralSend']);
 	if (referralSend != null) {
 		networkItemInfoEntity.referralSend = referralSend;
 	}
-	var referralReceived = jsonConvert.convert<int>(json['referralReceived']);
+	final int? referralReceived = jsonConvert.convert<int>(json['referralReceived']);
 	if (referralReceived != null) {
 		networkItemInfoEntity.referralReceived = referralReceived;
 	}
-	var thankUouNote = jsonConvert.convert<int>(json['thankUouNote']);
+	final int? thankUouNote = jsonConvert.convert<int>(json['thankUouNote']);
 	if (thankUouNote != null) {
 		networkItemInfoEntity.thankUouNote = thankUouNote;
 	}
-	var enable = jsonConvert.convert<bool>(json['enable']);
+	final bool? enable = jsonConvert.convert<bool>(json['enable']);
 	if (enable != null) {
 		networkItemInfoEntity.enable = enable;
 	}
-	var isFriend = jsonConvert.convert<bool>(json['isFriend']);
+	final bool? isFriend = jsonConvert.convert<bool>(json['isFriend']);
 	if (isFriend != null) {
 		networkItemInfoEntity.isFriend = isFriend;
 	}

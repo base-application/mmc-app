@@ -2,24 +2,24 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/group_item_info_entity.dart';
 
 GroupItemInfoEntity $GroupItemInfoEntityFromJson(Map<String, dynamic> json) {
-	GroupItemInfoEntity groupItemInfoEntity = GroupItemInfoEntity();
-	var groupId = jsonConvert.convert<int>(json['groupId']);
+	final GroupItemInfoEntity groupItemInfoEntity = GroupItemInfoEntity();
+	final int? groupId = jsonConvert.convert<int>(json['groupId']);
 	if (groupId != null) {
 		groupItemInfoEntity.groupId = groupId;
 	}
-	var groupName = jsonConvert.convert<String>(json['groupName']);
+	final String? groupName = jsonConvert.convert<String>(json['groupName']);
 	if (groupName != null) {
 		groupItemInfoEntity.groupName = groupName;
 	}
-	var thankYouNote = jsonConvert.convert<int>(json['thankYouNote']);
+	final int? thankYouNote = jsonConvert.convert<int>(json['thankYouNote']);
 	if (thankYouNote != null) {
 		groupItemInfoEntity.thankYouNote = thankYouNote;
 	}
-	var refer = jsonConvert.convert<int>(json['refer']);
+	final int? refer = jsonConvert.convert<int>(json['refer']);
 	if (refer != null) {
 		groupItemInfoEntity.refer = refer;
 	}
-	var userInfoVos = jsonConvert.convertListNotNull<GroupItemInfoUserInfoVos>(json['userInfoVos']);
+	final List<GroupItemInfoUserInfoVos>? userInfoVos = jsonConvert.convertListNotNull<GroupItemInfoUserInfoVos>(json['userInfoVos']);
 	if (userInfoVos != null) {
 		groupItemInfoEntity.userInfoVos = userInfoVos;
 	}
@@ -37,124 +37,124 @@ Map<String, dynamic> $GroupItemInfoEntityToJson(GroupItemInfoEntity entity) {
 }
 
 GroupItemInfoUserInfoVos $GroupItemInfoUserInfoVosFromJson(Map<String, dynamic> json) {
-	GroupItemInfoUserInfoVos groupItemInfoUserInfoVos = GroupItemInfoUserInfoVos();
-	var userId = jsonConvert.convert<int>(json['userId']);
+	final GroupItemInfoUserInfoVos groupItemInfoUserInfoVos = GroupItemInfoUserInfoVos();
+	final int? userId = jsonConvert.convert<int>(json['userId']);
 	if (userId != null) {
 		groupItemInfoUserInfoVos.userId = userId;
 	}
-	var picture = jsonConvert.convert<String>(json['picture']);
+	final String? picture = jsonConvert.convert<String>(json['picture']);
 	if (picture != null) {
 		groupItemInfoUserInfoVos.picture = picture;
 	}
-	var name = jsonConvert.convert<String>(json['name']);
+	final String? name = jsonConvert.convert<String>(json['name']);
 	if (name != null) {
 		groupItemInfoUserInfoVos.name = name;
 	}
-	var concatNumber = jsonConvert.convert<String>(json['concatNumber']);
+	final String? concatNumber = jsonConvert.convert<String>(json['concatNumber']);
 	if (concatNumber != null) {
 		groupItemInfoUserInfoVos.concatNumber = concatNumber;
 	}
-	var industry = jsonConvert.convert<String>(json['industry']);
+	final String? industry = jsonConvert.convert<String>(json['industry']);
 	if (industry != null) {
 		groupItemInfoUserInfoVos.industry = industry;
 	}
-	var country = jsonConvert.convert<int>(json['country']);
+	final int? country = jsonConvert.convert<int>(json['country']);
 	if (country != null) {
 		groupItemInfoUserInfoVos.country = country;
 	}
-	var state = jsonConvert.convert<int>(json['state']);
+	final int? state = jsonConvert.convert<int>(json['state']);
 	if (state != null) {
 		groupItemInfoUserInfoVos.state = state;
 	}
-	var birthday = jsonConvert.convert<int>(json['birthday']);
+	final int? birthday = jsonConvert.convert<int>(json['birthday']);
 	if (birthday != null) {
 		groupItemInfoUserInfoVos.birthday = birthday;
 	}
-	var occupation = jsonConvert.convert<String>(json['occupation']);
+	final String? occupation = jsonConvert.convert<String>(json['occupation']);
 	if (occupation != null) {
 		groupItemInfoUserInfoVos.occupation = occupation;
 	}
-	var introduction = jsonConvert.convert<String>(json['introduction']);
+	final String? introduction = jsonConvert.convert<String>(json['introduction']);
 	if (introduction != null) {
 		groupItemInfoUserInfoVos.introduction = introduction;
 	}
-	var whatsapp = jsonConvert.convert<String>(json['whatsapp']);
+	final String? whatsapp = jsonConvert.convert<String>(json['whatsapp']);
 	if (whatsapp != null) {
 		groupItemInfoUserInfoVos.whatsapp = whatsapp;
 	}
-	var facebook = jsonConvert.convert<String>(json['facebook']);
+	final String? facebook = jsonConvert.convert<String>(json['facebook']);
 	if (facebook != null) {
 		groupItemInfoUserInfoVos.facebook = facebook;
 	}
-	var linkedin = jsonConvert.convert<String>(json['linkedin']);
+	final String? linkedin = jsonConvert.convert<String>(json['linkedin']);
 	if (linkedin != null) {
 		groupItemInfoUserInfoVos.linkedin = linkedin;
 	}
-	var youtube = jsonConvert.convert<String>(json['youtube']);
+	final String? youtube = jsonConvert.convert<String>(json['youtube']);
 	if (youtube != null) {
 		groupItemInfoUserInfoVos.youtube = youtube;
 	}
-	var instagram = jsonConvert.convert<String>(json['instagram']);
+	final String? instagram = jsonConvert.convert<String>(json['instagram']);
 	if (instagram != null) {
 		groupItemInfoUserInfoVos.instagram = instagram;
 	}
-	var gradeId = jsonConvert.convert<int>(json['gradeId']);
+	final int? gradeId = jsonConvert.convert<int>(json['gradeId']);
 	if (gradeId != null) {
 		groupItemInfoUserInfoVos.gradeId = gradeId;
 	}
-	var gradeName = jsonConvert.convert<String>(json['gradeName']);
+	final String? gradeName = jsonConvert.convert<String>(json['gradeName']);
 	if (gradeName != null) {
 		groupItemInfoUserInfoVos.gradeName = gradeName;
 	}
-	var groupId = jsonConvert.convert<int>(json['groupId']);
+	final int? groupId = jsonConvert.convert<int>(json['groupId']);
 	if (groupId != null) {
 		groupItemInfoUserInfoVos.groupId = groupId;
 	}
-	var groupName = jsonConvert.convert<String>(json['groupName']);
+	final String? groupName = jsonConvert.convert<String>(json['groupName']);
 	if (groupName != null) {
 		groupItemInfoUserInfoVos.groupName = groupName;
 	}
-	var attendance = jsonConvert.convert<int>(json['attendance']);
+	final int? attendance = jsonConvert.convert<int>(json['attendance']);
 	if (attendance != null) {
 		groupItemInfoUserInfoVos.attendance = attendance;
 	}
-	var referralSend = jsonConvert.convert<int>(json['referralSend']);
+	final int? referralSend = jsonConvert.convert<int>(json['referralSend']);
 	if (referralSend != null) {
 		groupItemInfoUserInfoVos.referralSend = referralSend;
 	}
-	var referralReceived = jsonConvert.convert<int>(json['referralReceived']);
+	final int? referralReceived = jsonConvert.convert<int>(json['referralReceived']);
 	if (referralReceived != null) {
 		groupItemInfoUserInfoVos.referralReceived = referralReceived;
 	}
-	var thankYouNote = jsonConvert.convert<int>(json['thankYouNote']);
+	final int? thankYouNote = jsonConvert.convert<int>(json['thankYouNote']);
 	if (thankYouNote != null) {
 		groupItemInfoUserInfoVos.thankYouNote = thankYouNote;
 	}
-	var enable = jsonConvert.convert<bool>(json['enable']);
+	final bool? enable = jsonConvert.convert<bool>(json['enable']);
 	if (enable != null) {
 		groupItemInfoUserInfoVos.enable = enable;
 	}
-	var positionId = jsonConvert.convert<int>(json['positionId']);
+	final int? positionId = jsonConvert.convert<int>(json['positionId']);
 	if (positionId != null) {
 		groupItemInfoUserInfoVos.positionId = positionId;
 	}
-	var positionName = jsonConvert.convert<String>(json['positionName']);
+	final String? positionName = jsonConvert.convert<String>(json['positionName']);
 	if (positionName != null) {
 		groupItemInfoUserInfoVos.positionName = positionName;
 	}
-	var member = jsonConvert.convert<String>(json['member']);
+	final String? member = jsonConvert.convert<String>(json['member']);
 	if (member != null) {
 		groupItemInfoUserInfoVos.member = member;
 	}
-	var companyVos = jsonConvert.convertListNotNull<GroupItemInfoUserInfoVosCompanyVos>(json['companyVos']);
+	final List<GroupItemInfoUserInfoVosCompanyVos>? companyVos = jsonConvert.convertListNotNull<GroupItemInfoUserInfoVosCompanyVos>(json['companyVos']);
 	if (companyVos != null) {
 		groupItemInfoUserInfoVos.companyVos = companyVos;
 	}
-	var achievement = jsonConvert.convert<dynamic>(json['achievement']);
+	final dynamic? achievement = jsonConvert.convert<dynamic>(json['achievement']);
 	if (achievement != null) {
 		groupItemInfoUserInfoVos.achievement = achievement;
 	}
-	var friend = jsonConvert.convert<bool>(json['friend']);
+	final bool? friend = jsonConvert.convert<bool>(json['friend']);
 	if (friend != null) {
 		groupItemInfoUserInfoVos.friend = friend;
 	}
@@ -197,76 +197,76 @@ Map<String, dynamic> $GroupItemInfoUserInfoVosToJson(GroupItemInfoUserInfoVos en
 }
 
 GroupItemInfoUserInfoVosCompanyVos $GroupItemInfoUserInfoVosCompanyVosFromJson(Map<String, dynamic> json) {
-	GroupItemInfoUserInfoVosCompanyVos groupItemInfoUserInfoVosCompanyVos = GroupItemInfoUserInfoVosCompanyVos();
-	var companyId = jsonConvert.convert<int>(json['companyId']);
+	final GroupItemInfoUserInfoVosCompanyVos groupItemInfoUserInfoVosCompanyVos = GroupItemInfoUserInfoVosCompanyVos();
+	final int? companyId = jsonConvert.convert<int>(json['companyId']);
 	if (companyId != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyId = companyId;
 	}
-	var userId = jsonConvert.convert<int>(json['userId']);
+	final int? userId = jsonConvert.convert<int>(json['userId']);
 	if (userId != null) {
 		groupItemInfoUserInfoVosCompanyVos.userId = userId;
 	}
-	var companyLogo = jsonConvert.convert<dynamic>(json['companyLogo']);
+	final dynamic? companyLogo = jsonConvert.convert<dynamic>(json['companyLogo']);
 	if (companyLogo != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyLogo = companyLogo;
 	}
-	var companyName = jsonConvert.convert<String>(json['companyName']);
+	final String? companyName = jsonConvert.convert<String>(json['companyName']);
 	if (companyName != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyName = companyName;
 	}
-	var companyAddress = jsonConvert.convert<dynamic>(json['companyAddress']);
+	final dynamic? companyAddress = jsonConvert.convert<dynamic>(json['companyAddress']);
 	if (companyAddress != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyAddress = companyAddress;
 	}
-	var companyWebsite = jsonConvert.convert<dynamic>(json['companyWebsite']);
+	final dynamic? companyWebsite = jsonConvert.convert<dynamic>(json['companyWebsite']);
 	if (companyWebsite != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyWebsite = companyWebsite;
 	}
-	var companyEmail = jsonConvert.convert<dynamic>(json['companyEmail']);
+	final dynamic? companyEmail = jsonConvert.convert<dynamic>(json['companyEmail']);
 	if (companyEmail != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyEmail = companyEmail;
 	}
-	var companyPhone = jsonConvert.convert<dynamic>(json['companyPhone']);
+	final dynamic? companyPhone = jsonConvert.convert<dynamic>(json['companyPhone']);
 	if (companyPhone != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyPhone = companyPhone;
 	}
-	var companyFacebook = jsonConvert.convert<dynamic>(json['companyFacebook']);
+	final dynamic? companyFacebook = jsonConvert.convert<dynamic>(json['companyFacebook']);
 	if (companyFacebook != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyFacebook = companyFacebook;
 	}
-	var companyLinkedin = jsonConvert.convert<dynamic>(json['companyLinkedin']);
+	final dynamic? companyLinkedin = jsonConvert.convert<dynamic>(json['companyLinkedin']);
 	if (companyLinkedin != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyLinkedin = companyLinkedin;
 	}
-	var companyYoutube = jsonConvert.convert<dynamic>(json['companyYoutube']);
+	final dynamic? companyYoutube = jsonConvert.convert<dynamic>(json['companyYoutube']);
 	if (companyYoutube != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyYoutube = companyYoutube;
 	}
-	var companyInstagram = jsonConvert.convert<dynamic>(json['companyInstagram']);
+	final dynamic? companyInstagram = jsonConvert.convert<dynamic>(json['companyInstagram']);
 	if (companyInstagram != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyInstagram = companyInstagram;
 	}
-	var companyIntroduction = jsonConvert.convert<dynamic>(json['companyIntroduction']);
+	final dynamic? companyIntroduction = jsonConvert.convert<dynamic>(json['companyIntroduction']);
 	if (companyIntroduction != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyIntroduction = companyIntroduction;
 	}
-	var companyGoals = jsonConvert.convert<dynamic>(json['companyGoals']);
+	final dynamic? companyGoals = jsonConvert.convert<dynamic>(json['companyGoals']);
 	if (companyGoals != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyGoals = companyGoals;
 	}
-	var companyAccomplishments = jsonConvert.convert<dynamic>(json['companyAccomplishments']);
+	final dynamic? companyAccomplishments = jsonConvert.convert<dynamic>(json['companyAccomplishments']);
 	if (companyAccomplishments != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyAccomplishments = companyAccomplishments;
 	}
-	var companyInterests = jsonConvert.convert<dynamic>(json['companyInterests']);
+	final dynamic? companyInterests = jsonConvert.convert<dynamic>(json['companyInterests']);
 	if (companyInterests != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyInterests = companyInterests;
 	}
-	var serviceIntroduction = jsonConvert.convert<dynamic>(json['serviceIntroduction']);
+	final dynamic? serviceIntroduction = jsonConvert.convert<dynamic>(json['serviceIntroduction']);
 	if (serviceIntroduction != null) {
 		groupItemInfoUserInfoVosCompanyVos.serviceIntroduction = serviceIntroduction;
 	}
-	var producePictures = jsonConvert.convertListNotNull<GroupItemInfoUserInfoVosCompanyVosProducePictures>(json['producePictures']);
+	final List<GroupItemInfoUserInfoVosCompanyVosProducePictures>? producePictures = jsonConvert.convertListNotNull<GroupItemInfoUserInfoVosCompanyVosProducePictures>(json['producePictures']);
 	if (producePictures != null) {
 		groupItemInfoUserInfoVosCompanyVos.producePictures = producePictures;
 	}
@@ -297,16 +297,16 @@ Map<String, dynamic> $GroupItemInfoUserInfoVosCompanyVosToJson(GroupItemInfoUser
 }
 
 GroupItemInfoUserInfoVosCompanyVosProducePictures $GroupItemInfoUserInfoVosCompanyVosProducePicturesFromJson(Map<String, dynamic> json) {
-	GroupItemInfoUserInfoVosCompanyVosProducePictures groupItemInfoUserInfoVosCompanyVosProducePictures = GroupItemInfoUserInfoVosCompanyVosProducePictures();
-	var produceId = jsonConvert.convert<int>(json['produceId']);
+	final GroupItemInfoUserInfoVosCompanyVosProducePictures groupItemInfoUserInfoVosCompanyVosProducePictures = GroupItemInfoUserInfoVosCompanyVosProducePictures();
+	final int? produceId = jsonConvert.convert<int>(json['produceId']);
 	if (produceId != null) {
 		groupItemInfoUserInfoVosCompanyVosProducePictures.produceId = produceId;
 	}
-	var producePicture = jsonConvert.convert<String>(json['producePicture']);
+	final String? producePicture = jsonConvert.convert<String>(json['producePicture']);
 	if (producePicture != null) {
 		groupItemInfoUserInfoVosCompanyVosProducePictures.producePicture = producePicture;
 	}
-	var companyId = jsonConvert.convert<int>(json['companyId']);
+	final int? companyId = jsonConvert.convert<int>(json['companyId']);
 	if (companyId != null) {
 		groupItemInfoUserInfoVosCompanyVosProducePictures.companyId = companyId;
 	}

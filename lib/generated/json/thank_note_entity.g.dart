@@ -2,76 +2,76 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/thank_note_entity.dart';
 
 ThankNoteEntity $ThankNoteEntityFromJson(Map<String, dynamic> json) {
-	ThankNoteEntity thankNoteEntity = ThankNoteEntity();
-	var fromUserId = jsonConvert.convert<int>(json['fromUserId']);
+	final ThankNoteEntity thankNoteEntity = ThankNoteEntity();
+	final int? fromUserId = jsonConvert.convert<int>(json['fromUserId']);
 	if (fromUserId != null) {
 		thankNoteEntity.fromUserId = fromUserId;
 	}
-	var fromPicture = jsonConvert.convert<String>(json['fromPicture']);
+	final String? fromPicture = jsonConvert.convert<String>(json['fromPicture']);
 	if (fromPicture != null) {
 		thankNoteEntity.fromPicture = fromPicture;
 	}
-	var fromGroupId = jsonConvert.convert<int>(json['fromGroupId']);
+	final int? fromGroupId = jsonConvert.convert<int>(json['fromGroupId']);
 	if (fromGroupId != null) {
 		thankNoteEntity.fromGroupId = fromGroupId;
 	}
-	var fromName = jsonConvert.convert<String>(json['fromName']);
+	final String? fromName = jsonConvert.convert<String>(json['fromName']);
 	if (fromName != null) {
 		thankNoteEntity.fromName = fromName;
 	}
-	var toUserId = jsonConvert.convert<int>(json['toUserId']);
+	final int? toUserId = jsonConvert.convert<int>(json['toUserId']);
 	if (toUserId != null) {
 		thankNoteEntity.toUserId = toUserId;
 	}
-	var toPicture = jsonConvert.convert<String>(json['toPicture']);
+	final String? toPicture = jsonConvert.convert<String>(json['toPicture']);
 	if (toPicture != null) {
 		thankNoteEntity.toPicture = toPicture;
 	}
-	var toGroupId = jsonConvert.convert<int>(json['toGroupId']);
+	final int? toGroupId = jsonConvert.convert<int>(json['toGroupId']);
 	if (toGroupId != null) {
 		thankNoteEntity.toGroupId = toGroupId;
 	}
-	var toName = jsonConvert.convert<String>(json['toName']);
+	final String? toName = jsonConvert.convert<String>(json['toName']);
 	if (toName != null) {
 		thankNoteEntity.toName = toName;
 	}
-	var thankYouNoteId = jsonConvert.convert<int>(json['thankYouNoteId']);
+	final int? thankYouNoteId = jsonConvert.convert<int>(json['thankYouNoteId']);
 	if (thankYouNoteId != null) {
 		thankNoteEntity.thankYouNoteId = thankYouNoteId;
 	}
-	var sendUser = jsonConvert.convert<int>(json['sendUser']);
+	final int? sendUser = jsonConvert.convert<int>(json['sendUser']);
 	if (sendUser != null) {
 		thankNoteEntity.sendUser = sendUser;
 	}
-	var receivedUser = jsonConvert.convert<int>(json['receivedUser']);
+	final int? receivedUser = jsonConvert.convert<int>(json['receivedUser']);
 	if (receivedUser != null) {
 		thankNoteEntity.receivedUser = receivedUser;
 	}
-	var sendTime = jsonConvert.convert<int>(json['sendTime']);
+	final int? sendTime = jsonConvert.convert<int>(json['sendTime']);
 	if (sendTime != null) {
 		thankNoteEntity.sendTime = sendTime;
 	}
-	var receivedTime = jsonConvert.convert<int>(json['receivedTime']);
+	final int? receivedTime = jsonConvert.convert<int>(json['receivedTime']);
 	if (receivedTime != null) {
 		thankNoteEntity.receivedTime = receivedTime;
 	}
-	var note = jsonConvert.convert<String>(json['note']);
+	final String? note = jsonConvert.convert<String>(json['note']);
 	if (note != null) {
 		thankNoteEntity.note = note;
 	}
-	var value = jsonConvert.convert<int>(json['value']);
+	final int? value = jsonConvert.convert<int>(json['value']);
 	if (value != null) {
 		thankNoteEntity.value = value;
 	}
-	var fromGroup = jsonConvert.convert<String>(json['fromGroup']);
+	final String? fromGroup = jsonConvert.convert<String>(json['fromGroup']);
 	if (fromGroup != null) {
 		thankNoteEntity.fromGroup = fromGroup;
 	}
-	var toGroup = jsonConvert.convert<String>(json['toGroup']);
+	final String? toGroup = jsonConvert.convert<String>(json['toGroup']);
 	if (toGroup != null) {
 		thankNoteEntity.toGroup = toGroup;
 	}
-	var picture = jsonConvert.convert<String>(json['picture']);
+	final String? picture = jsonConvert.convert<String>(json['picture']);
 	if (picture != null) {
 		thankNoteEntity.picture = picture;
 	}

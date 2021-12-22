@@ -2,60 +2,60 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/event_detail_info_entity.dart';
 
 EventDetailInfoEntity $EventDetailInfoEntityFromJson(Map<String, dynamic> json) {
-	EventDetailInfoEntity eventDetailInfoEntity = EventDetailInfoEntity();
-	var eventId = jsonConvert.convert<int>(json['eventId']);
+	final EventDetailInfoEntity eventDetailInfoEntity = EventDetailInfoEntity();
+	final int? eventId = jsonConvert.convert<int>(json['eventId']);
 	if (eventId != null) {
 		eventDetailInfoEntity.eventId = eventId;
 	}
-	var eventTitle = jsonConvert.convert<String>(json['eventTitle']);
+	final String? eventTitle = jsonConvert.convert<String>(json['eventTitle']);
 	if (eventTitle != null) {
 		eventDetailInfoEntity.eventTitle = eventTitle;
 	}
-	var eventDescription = jsonConvert.convert<String>(json['eventDescription']);
+	final String? eventDescription = jsonConvert.convert<String>(json['eventDescription']);
 	if (eventDescription != null) {
 		eventDetailInfoEntity.eventDescription = eventDescription;
 	}
-	var eventStartTime = jsonConvert.convert<int>(json['eventStartTime']);
+	final int? eventStartTime = jsonConvert.convert<int>(json['eventStartTime']);
 	if (eventStartTime != null) {
 		eventDetailInfoEntity.eventStartTime = eventStartTime;
 	}
-	var eventEndTime = jsonConvert.convert<int>(json['eventEndTime']);
+	final int? eventEndTime = jsonConvert.convert<int>(json['eventEndTime']);
 	if (eventEndTime != null) {
 		eventDetailInfoEntity.eventEndTime = eventEndTime;
 	}
-	var eventLocation = jsonConvert.convert<String>(json['eventLocation']);
+	final String? eventLocation = jsonConvert.convert<String>(json['eventLocation']);
 	if (eventLocation != null) {
 		eventDetailInfoEntity.eventLocation = eventLocation;
 	}
-	var eventMapLink = jsonConvert.convert<String>(json['eventMapLink']);
+	final String? eventMapLink = jsonConvert.convert<String>(json['eventMapLink']);
 	if (eventMapLink != null) {
 		eventDetailInfoEntity.eventMapLink = eventMapLink;
 	}
-	var eventType = jsonConvert.convert<int>(json['eventType']);
+	final int? eventType = jsonConvert.convert<int>(json['eventType']);
 	if (eventType != null) {
 		eventDetailInfoEntity.eventType = eventType;
 	}
-	var createId = jsonConvert.convert<int>(json['createId']);
+	final int? createId = jsonConvert.convert<int>(json['createId']);
 	if (createId != null) {
 		eventDetailInfoEntity.createId = createId;
 	}
-	var eventPoster = jsonConvert.convertListNotNull<EventDetailInfoEventPoster>(json['eventPoster']);
+	final List<EventDetailInfoEventPoster>? eventPoster = jsonConvert.convertListNotNull<EventDetailInfoEventPoster>(json['eventPoster']);
 	if (eventPoster != null) {
 		eventDetailInfoEntity.eventPoster = eventPoster;
 	}
-	var groups = jsonConvert.convertListNotNull<EventDetailInfoGroups>(json['groups']);
+	final List<EventDetailInfoGroups>? groups = jsonConvert.convertListNotNull<EventDetailInfoGroups>(json['groups']);
 	if (groups != null) {
 		eventDetailInfoEntity.groups = groups;
 	}
-	var attendanceProportion = jsonConvert.convert<double>(json['attendanceProportion']);
+	final double? attendanceProportion = jsonConvert.convert<double>(json['attendanceProportion']);
 	if (attendanceProportion != null) {
 		eventDetailInfoEntity.attendanceProportion = attendanceProportion;
 	}
-	var approveStatus = jsonConvert.convert<int>(json['approveStatus']);
+	final int? approveStatus = jsonConvert.convert<int>(json['approveStatus']);
 	if (approveStatus != null) {
 		eventDetailInfoEntity.approveStatus = approveStatus;
 	}
-	var checkIn = jsonConvert.convert<bool>(json['checkIn']);
+	final bool? checkIn = jsonConvert.convert<bool>(json['checkIn']);
 	if (checkIn != null) {
 		eventDetailInfoEntity.checkIn = checkIn;
 	}
@@ -82,12 +82,12 @@ Map<String, dynamic> $EventDetailInfoEntityToJson(EventDetailInfoEntity entity) 
 }
 
 EventDetailInfoEventPoster $EventDetailInfoEventPosterFromJson(Map<String, dynamic> json) {
-	EventDetailInfoEventPoster eventDetailInfoEventPoster = EventDetailInfoEventPoster();
-	var id = jsonConvert.convert<int>(json['id']);
+	final EventDetailInfoEventPoster eventDetailInfoEventPoster = EventDetailInfoEventPoster();
+	final int? id = jsonConvert.convert<int>(json['id']);
 	if (id != null) {
 		eventDetailInfoEventPoster.id = id;
 	}
-	var url = jsonConvert.convert<String>(json['url']);
+	final String? url = jsonConvert.convert<String>(json['url']);
 	if (url != null) {
 		eventDetailInfoEventPoster.url = url;
 	}
@@ -102,12 +102,12 @@ Map<String, dynamic> $EventDetailInfoEventPosterToJson(EventDetailInfoEventPoste
 }
 
 EventDetailInfoGroups $EventDetailInfoGroupsFromJson(Map<String, dynamic> json) {
-	EventDetailInfoGroups eventDetailInfoGroups = EventDetailInfoGroups();
-	var groupId = jsonConvert.convert<int>(json['groupId']);
+	final EventDetailInfoGroups eventDetailInfoGroups = EventDetailInfoGroups();
+	final int? groupId = jsonConvert.convert<int>(json['groupId']);
 	if (groupId != null) {
 		eventDetailInfoGroups.groupId = groupId;
 	}
-	var groupName = jsonConvert.convert<String>(json['groupName']);
+	final String? groupName = jsonConvert.convert<String>(json['groupName']);
 	if (groupName != null) {
 		eventDetailInfoGroups.groupName = groupName;
 	}

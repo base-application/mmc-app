@@ -2,12 +2,12 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/grade_level_info_entity.dart';
 
 GradeLevelInfoEntity $GradeLevelInfoEntityFromJson(Map<String, dynamic> json) {
-	GradeLevelInfoEntity gradeLevelInfoEntity = GradeLevelInfoEntity();
-	var gradeId = jsonConvert.convert<int>(json['gradeId']);
+	final GradeLevelInfoEntity gradeLevelInfoEntity = GradeLevelInfoEntity();
+	final int? gradeId = jsonConvert.convert<int>(json['gradeId']);
 	if (gradeId != null) {
 		gradeLevelInfoEntity.gradeId = gradeId;
 	}
-	var gradeName = jsonConvert.convert<String>(json['gradeName']);
+	final String? gradeName = jsonConvert.convert<String>(json['gradeName']);
 	if (gradeName != null) {
 		gradeLevelInfoEntity.gradeName = gradeName;
 	}

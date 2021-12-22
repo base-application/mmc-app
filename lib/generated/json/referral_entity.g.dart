@@ -4,80 +4,80 @@ import 'package:mmc/bean/image_vo_entity.dart';
 
 
 ReferralEntity $ReferralEntityFromJson(Map<String, dynamic> json) {
-	ReferralEntity referralEntity = ReferralEntity();
-	var fromPicture = jsonConvert.convert<String>(json['fromPicture']);
+	final ReferralEntity referralEntity = ReferralEntity();
+	final String? fromPicture = jsonConvert.convert<String>(json['fromPicture']);
 	if (fromPicture != null) {
 		referralEntity.fromPicture = fromPicture;
 	}
-	var fromGroupId = jsonConvert.convert<int>(json['fromGroupId']);
+	final int? fromGroupId = jsonConvert.convert<int>(json['fromGroupId']);
 	if (fromGroupId != null) {
 		referralEntity.fromGroupId = fromGroupId;
 	}
-	var fromName = jsonConvert.convert<String>(json['fromName']);
+	final String? fromName = jsonConvert.convert<String>(json['fromName']);
 	if (fromName != null) {
 		referralEntity.fromName = fromName;
 	}
-	var fromGroup = jsonConvert.convert<String>(json['fromGroup']);
+	final String? fromGroup = jsonConvert.convert<String>(json['fromGroup']);
 	if (fromGroup != null) {
 		referralEntity.fromGroup = fromGroup;
 	}
-	var toPicture = jsonConvert.convert<String>(json['toPicture']);
+	final String? toPicture = jsonConvert.convert<String>(json['toPicture']);
 	if (toPicture != null) {
 		referralEntity.toPicture = toPicture;
 	}
-	var toGroupId = jsonConvert.convert<int>(json['toGroupId']);
+	final int? toGroupId = jsonConvert.convert<int>(json['toGroupId']);
 	if (toGroupId != null) {
 		referralEntity.toGroupId = toGroupId;
 	}
-	var toGroup = jsonConvert.convert<String>(json['toGroup']);
+	final String? toGroup = jsonConvert.convert<String>(json['toGroup']);
 	if (toGroup != null) {
 		referralEntity.toGroup = toGroup;
 	}
-	var toName = jsonConvert.convert<String>(json['toName']);
+	final String? toName = jsonConvert.convert<String>(json['toName']);
 	if (toName != null) {
 		referralEntity.toName = toName;
 	}
-	var referralId = jsonConvert.convert<int>(json['referralId']);
+	final int? referralId = jsonConvert.convert<int>(json['referralId']);
 	if (referralId != null) {
 		referralEntity.referralId = referralId;
 	}
-	var reason = jsonConvert.convert<String>(json['reason']);
+	final String? reason = jsonConvert.convert<String>(json['reason']);
 	if (reason != null) {
 		referralEntity.reason = reason;
 	}
-	var receivedUser = jsonConvert.convert<int>(json['receivedUser']);
+	final int? receivedUser = jsonConvert.convert<int>(json['receivedUser']);
 	if (receivedUser != null) {
 		referralEntity.receivedUser = receivedUser;
 	}
-	var sendUser = jsonConvert.convert<String>(json['sendUser']);
+	final String? sendUser = jsonConvert.convert<String>(json['sendUser']);
 	if (sendUser != null) {
 		referralEntity.sendUser = sendUser;
 	}
-	var failMessage = jsonConvert.convert<String>(json['failMessage']);
+	final String? failMessage = jsonConvert.convert<String>(json['failMessage']);
 	if (failMessage != null) {
 		referralEntity.failMessage = failMessage;
 	}
-	var sendTime = jsonConvert.convert<int>(json['sendTime']);
+	final int? sendTime = jsonConvert.convert<int>(json['sendTime']);
 	if (sendTime != null) {
 		referralEntity.sendTime = sendTime;
 	}
-	var receivedTime = jsonConvert.convert<int>(json['receivedTime']);
+	final int? receivedTime = jsonConvert.convert<int>(json['receivedTime']);
 	if (receivedTime != null) {
 		referralEntity.receivedTime = receivedTime;
 	}
-	var status = jsonConvert.convert<int>(json['status']);
+	final int? status = jsonConvert.convert<int>(json['status']);
 	if (status != null) {
 		referralEntity.status = status;
 	}
-	var remark = jsonConvert.convert<String>(json['remark']);
+	final String? remark = jsonConvert.convert<String>(json['remark']);
 	if (remark != null) {
 		referralEntity.remark = remark;
 	}
-	var thank = jsonConvert.convert<bool>(json['thank']);
+	final bool? thank = jsonConvert.convert<bool>(json['thank']);
 	if (thank != null) {
 		referralEntity.thank = thank;
 	}
-	var picture = jsonConvert.convertListNotNull<ImageVoEntity>(json['picture']);
+	final List<ImageVoEntity>? picture = jsonConvert.convertListNotNull<ImageVoEntity>(json['picture']);
 	if (picture != null) {
 		referralEntity.picture = picture;
 	}

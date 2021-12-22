@@ -2,12 +2,12 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/group_item_entity.dart';
 
 GroupItemEntity $GroupItemEntityFromJson(Map<String, dynamic> json) {
-	GroupItemEntity groupItemEntity = GroupItemEntity();
-	var groupId = jsonConvert.convert<int>(json['groupId']);
+	final GroupItemEntity groupItemEntity = GroupItemEntity();
+	final int? groupId = jsonConvert.convert<int>(json['groupId']);
 	if (groupId != null) {
 		groupItemEntity.groupId = groupId;
 	}
-	var groupName = jsonConvert.convert<String>(json['groupName']);
+	final String? groupName = jsonConvert.convert<String>(json['groupName']);
 	if (groupName != null) {
 		groupItemEntity.groupName = groupName;
 	}

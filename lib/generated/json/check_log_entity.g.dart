@@ -2,28 +2,28 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/check_log_entity.dart';
 
 CheckLogEntity $CheckLogEntityFromJson(Map<String, dynamic> json) {
-	CheckLogEntity checkLogEntity = CheckLogEntity();
-	var checkLogId = jsonConvert.convert<int>(json['checkLogId']);
+	final CheckLogEntity checkLogEntity = CheckLogEntity();
+	final int? checkLogId = jsonConvert.convert<int>(json['checkLogId']);
 	if (checkLogId != null) {
 		checkLogEntity.checkLogId = checkLogId;
 	}
-	var eventId = jsonConvert.convert<int>(json['eventId']);
+	final int? eventId = jsonConvert.convert<int>(json['eventId']);
 	if (eventId != null) {
 		checkLogEntity.eventId = eventId;
 	}
-	var userId = jsonConvert.convert<int>(json['userId']);
+	final int? userId = jsonConvert.convert<int>(json['userId']);
 	if (userId != null) {
 		checkLogEntity.userId = userId;
 	}
-	var checkType = jsonConvert.convert<int>(json['checkType']);
+	final int? checkType = jsonConvert.convert<int>(json['checkType']);
 	if (checkType != null) {
 		checkLogEntity.checkType = checkType;
 	}
-	var createTime = jsonConvert.convert<int>(json['createTime']);
+	final int? createTime = jsonConvert.convert<int>(json['createTime']);
 	if (createTime != null) {
 		checkLogEntity.createTime = createTime;
 	}
-	var eventTitle = jsonConvert.convert<String>(json['eventTitle']);
+	final String? eventTitle = jsonConvert.convert<String>(json['eventTitle']);
 	if (eventTitle != null) {
 		checkLogEntity.eventTitle = eventTitle;
 	}

@@ -2,64 +2,64 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/achievement_entity.dart';
 
 AchievementEntity $AchievementEntityFromJson(Map<String, dynamic> json) {
-	AchievementEntity achievementEntity = AchievementEntity();
-	var referralSend = jsonConvert.convert<int>(json['referralSend']);
+	final AchievementEntity achievementEntity = AchievementEntity();
+	final int? referralSend = jsonConvert.convert<int>(json['referralSend']);
 	if (referralSend != null) {
 		achievementEntity.referralSend = referralSend;
 	}
-	var referralReceived = jsonConvert.convert<int>(json['referralReceived']);
+	final int? referralReceived = jsonConvert.convert<int>(json['referralReceived']);
 	if (referralReceived != null) {
 		achievementEntity.referralReceived = referralReceived;
 	}
-	var thankYouNoteSend = jsonConvert.convert<int>(json['thankYouNoteSend']);
+	final int? thankYouNoteSend = jsonConvert.convert<int>(json['thankYouNoteSend']);
 	if (thankYouNoteSend != null) {
 		achievementEntity.thankYouNoteSend = thankYouNoteSend;
 	}
-	var thankYouNoteReceived = jsonConvert.convert<int>(json['thankYouNoteReceived']);
+	final int? thankYouNoteReceived = jsonConvert.convert<int>(json['thankYouNoteReceived']);
 	if (thankYouNoteReceived != null) {
 		achievementEntity.thankYouNoteReceived = thankYouNoteReceived;
 	}
-	var prevReferralSend = jsonConvert.convert<int>(json['prevReferralSend']);
+	final int? prevReferralSend = jsonConvert.convert<int>(json['prevReferralSend']);
 	if (prevReferralSend != null) {
 		achievementEntity.prevReferralSend = prevReferralSend;
 	}
-	var prevReferralReceived = jsonConvert.convert<int>(json['prevReferralReceived']);
+	final int? prevReferralReceived = jsonConvert.convert<int>(json['prevReferralReceived']);
 	if (prevReferralReceived != null) {
 		achievementEntity.prevReferralReceived = prevReferralReceived;
 	}
-	var prevThankYouNoteSend = jsonConvert.convert<int>(json['prevThankYouNoteSend']);
+	final int? prevThankYouNoteSend = jsonConvert.convert<int>(json['prevThankYouNoteSend']);
 	if (prevThankYouNoteSend != null) {
 		achievementEntity.prevThankYouNoteSend = prevThankYouNoteSend;
 	}
-	var prevThankYouNoteReceived = jsonConvert.convert<int>(json['prevThankYouNoteReceived']);
+	final int? prevThankYouNoteReceived = jsonConvert.convert<int>(json['prevThankYouNoteReceived']);
 	if (prevThankYouNoteReceived != null) {
 		achievementEntity.prevThankYouNoteReceived = prevThankYouNoteReceived;
 	}
-	var referralSendCount = jsonConvert.convert<int>(json['referralSendCount']);
+	final int? referralSendCount = jsonConvert.convert<int>(json['referralSendCount']);
 	if (referralSendCount != null) {
 		achievementEntity.referralSendCount = referralSendCount;
 	}
-	var referralReceivedCount = jsonConvert.convert<int>(json['referralReceivedCount']);
+	final int? referralReceivedCount = jsonConvert.convert<int>(json['referralReceivedCount']);
 	if (referralReceivedCount != null) {
 		achievementEntity.referralReceivedCount = referralReceivedCount;
 	}
-	var thankYouNoteSendCount = jsonConvert.convert<int>(json['thankYouNoteSendCount']);
+	final int? thankYouNoteSendCount = jsonConvert.convert<int>(json['thankYouNoteSendCount']);
 	if (thankYouNoteSendCount != null) {
 		achievementEntity.thankYouNoteSendCount = thankYouNoteSendCount;
 	}
-	var thankYouNoteReceivedCount = jsonConvert.convert<int>(json['thankYouNoteReceivedCount']);
+	final int? thankYouNoteReceivedCount = jsonConvert.convert<int>(json['thankYouNoteReceivedCount']);
 	if (thankYouNoteReceivedCount != null) {
 		achievementEntity.thankYouNoteReceivedCount = thankYouNoteReceivedCount;
 	}
-	var joinEvent = jsonConvert.convert<int>(json['joinEvent']);
+	final int? joinEvent = jsonConvert.convert<int>(json['joinEvent']);
 	if (joinEvent != null) {
 		achievementEntity.joinEvent = joinEvent;
 	}
-	var joinEventCount = jsonConvert.convert<int>(json['joinEventCount']);
+	final int? joinEventCount = jsonConvert.convert<int>(json['joinEventCount']);
 	if (joinEventCount != null) {
 		achievementEntity.joinEventCount = joinEventCount;
 	}
-	var joinEventPre = jsonConvert.convert<int>(json['joinEventPre']);
+	final int? joinEventPre = jsonConvert.convert<int>(json['joinEventPre']);
 	if (joinEventPre != null) {
 		achievementEntity.joinEventPre = joinEventPre;
 	}

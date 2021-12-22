@@ -1,81 +1,89 @@
 import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/event_data_item_info_entity.dart';
+import 'package:mmc/bean/grade_level_info_entity.dart';
+
+import 'package:mmc/bean/group_item_entity.dart';
+
 
 EventDataItemInfoEntity $EventDataItemInfoEntityFromJson(Map<String, dynamic> json) {
-	EventDataItemInfoEntity eventDataItemInfoEntity = EventDataItemInfoEntity();
-	var eventId = jsonConvert.convert<int>(json['eventId']);
+	final EventDataItemInfoEntity eventDataItemInfoEntity = EventDataItemInfoEntity();
+	final int? eventId = jsonConvert.convert<int>(json['eventId']);
 	if (eventId != null) {
 		eventDataItemInfoEntity.eventId = eventId;
 	}
-	var eventTitle = jsonConvert.convert<String>(json['eventTitle']);
+	final String? eventTitle = jsonConvert.convert<String>(json['eventTitle']);
 	if (eventTitle != null) {
 		eventDataItemInfoEntity.eventTitle = eventTitle;
 	}
-	var eventDescription = jsonConvert.convert<String>(json['eventDescription']);
+	final String? eventDescription = jsonConvert.convert<String>(json['eventDescription']);
 	if (eventDescription != null) {
 		eventDataItemInfoEntity.eventDescription = eventDescription;
 	}
-	var eventStartTime = jsonConvert.convert<int>(json['eventStartTime']);
+	final int? eventStartTime = jsonConvert.convert<int>(json['eventStartTime']);
 	if (eventStartTime != null) {
 		eventDataItemInfoEntity.eventStartTime = eventStartTime;
 	}
-	var eventEndTime = jsonConvert.convert<int>(json['eventEndTime']);
+	final int? eventEndTime = jsonConvert.convert<int>(json['eventEndTime']);
 	if (eventEndTime != null) {
 		eventDataItemInfoEntity.eventEndTime = eventEndTime;
 	}
-	var eventLocation = jsonConvert.convert<String>(json['eventLocation']);
+	final String? eventLocation = jsonConvert.convert<String>(json['eventLocation']);
 	if (eventLocation != null) {
 		eventDataItemInfoEntity.eventLocation = eventLocation;
 	}
-	var eventMapLink = jsonConvert.convert<String>(json['eventMapLink']);
+	final String? eventMapLink = jsonConvert.convert<String>(json['eventMapLink']);
 	if (eventMapLink != null) {
 		eventDataItemInfoEntity.eventMapLink = eventMapLink;
 	}
-	var eventType = jsonConvert.convert<int>(json['eventType']);
+	final int? eventType = jsonConvert.convert<int>(json['eventType']);
 	if (eventType != null) {
 		eventDataItemInfoEntity.eventType = eventType;
 	}
-	var createId = jsonConvert.convert<int>(json['createId']);
+	final int? createId = jsonConvert.convert<int>(json['createId']);
 	if (createId != null) {
 		eventDataItemInfoEntity.createId = createId;
 	}
-	var checkInTime = jsonConvert.convert<int>(json['checkInTime']);
+	final int? checkInTime = jsonConvert.convert<int>(json['checkInTime']);
 	if (checkInTime != null) {
 		eventDataItemInfoEntity.checkInTime = checkInTime;
 	}
-	var checkOutTime = jsonConvert.convert<int>(json['checkOutTime']);
+	final int? checkOutTime = jsonConvert.convert<int>(json['checkOutTime']);
 	if (checkOutTime != null) {
 		eventDataItemInfoEntity.checkOutTime = checkOutTime;
 	}
-	var eventPoster = jsonConvert.convertListNotNull<EventDataItemInfoEventPoster>(json['eventPoster']);
+	final List<EventDataItemInfoEventPoster>? eventPoster = jsonConvert.convertListNotNull<EventDataItemInfoEventPoster>(json['eventPoster']);
 	if (eventPoster != null) {
 		eventDataItemInfoEntity.eventPoster = eventPoster;
 	}
-	var groups = jsonConvert.convertListNotNull<EventDataItemInfoGroups>(json['groups']);
+	final List<GroupItemEntity>? groups = jsonConvert.convertListNotNull<GroupItemEntity>(json['groups']);
 	if (groups != null) {
 		eventDataItemInfoEntity.groups = groups;
 	}
-	var attendance = jsonConvert.convertListNotNull<EventDataItemInfoAttendance>(json['attendance']);
+	final List<GradeLevelInfoEntity>? grades = jsonConvert.convertListNotNull<GradeLevelInfoEntity>(json['grades']);
+	if (grades != null) {
+		eventDataItemInfoEntity.grades = grades;
+	}
+	final List<EventDataItemInfoAttendance>? attendance = jsonConvert.convertListNotNull<EventDataItemInfoAttendance>(json['attendance']);
 	if (attendance != null) {
 		eventDataItemInfoEntity.attendance = attendance;
 	}
-	var attendanceProportion = jsonConvert.convert<double>(json['attendanceProportion']);
+	final double? attendanceProportion = jsonConvert.convert<double>(json['attendanceProportion']);
 	if (attendanceProportion != null) {
 		eventDataItemInfoEntity.attendanceProportion = attendanceProportion;
 	}
-	var approveStatus = jsonConvert.convert<int>(json['approveStatus']);
+	final int? approveStatus = jsonConvert.convert<int>(json['approveStatus']);
 	if (approveStatus != null) {
 		eventDataItemInfoEntity.approveStatus = approveStatus;
 	}
-	var checkIn = jsonConvert.convert<bool>(json['checkIn']);
+	final bool? checkIn = jsonConvert.convert<bool>(json['checkIn']);
 	if (checkIn != null) {
 		eventDataItemInfoEntity.checkIn = checkIn;
 	}
-	var attend = jsonConvert.convert<bool>(json['attend']);
+	final bool? attend = jsonConvert.convert<bool>(json['attend']);
 	if (attend != null) {
 		eventDataItemInfoEntity.attend = attend;
 	}
-	var join = jsonConvert.convert<bool>(json['join']);
+	final bool? join = jsonConvert.convert<bool>(json['join']);
 	if (join != null) {
 		eventDataItemInfoEntity.join = join;
 	}
@@ -97,6 +105,7 @@ Map<String, dynamic> $EventDataItemInfoEntityToJson(EventDataItemInfoEntity enti
 	data['checkOutTime'] = entity.checkOutTime;
 	data['eventPoster'] =  entity.eventPoster?.map((v) => v.toJson()).toList();
 	data['groups'] =  entity.groups?.map((v) => v.toJson()).toList();
+	data['grades'] =  entity.grades?.map((v) => v.toJson()).toList();
 	data['attendance'] =  entity.attendance?.map((v) => v.toJson()).toList();
 	data['attendanceProportion'] = entity.attendanceProportion;
 	data['approveStatus'] = entity.approveStatus;
@@ -107,12 +116,12 @@ Map<String, dynamic> $EventDataItemInfoEntityToJson(EventDataItemInfoEntity enti
 }
 
 EventDataItemInfoEventPoster $EventDataItemInfoEventPosterFromJson(Map<String, dynamic> json) {
-	EventDataItemInfoEventPoster eventDataItemInfoEventPoster = EventDataItemInfoEventPoster();
-	var id = jsonConvert.convert<int>(json['id']);
+	final EventDataItemInfoEventPoster eventDataItemInfoEventPoster = EventDataItemInfoEventPoster();
+	final int? id = jsonConvert.convert<int>(json['id']);
 	if (id != null) {
 		eventDataItemInfoEventPoster.id = id;
 	}
-	var url = jsonConvert.convert<String>(json['url']);
+	final String? url = jsonConvert.convert<String>(json['url']);
 	if (url != null) {
 		eventDataItemInfoEventPoster.url = url;
 	}
@@ -127,12 +136,12 @@ Map<String, dynamic> $EventDataItemInfoEventPosterToJson(EventDataItemInfoEventP
 }
 
 EventDataItemInfoGroups $EventDataItemInfoGroupsFromJson(Map<String, dynamic> json) {
-	EventDataItemInfoGroups eventDataItemInfoGroups = EventDataItemInfoGroups();
-	var groupId = jsonConvert.convert<int>(json['groupId']);
+	final EventDataItemInfoGroups eventDataItemInfoGroups = EventDataItemInfoGroups();
+	final int? groupId = jsonConvert.convert<int>(json['groupId']);
 	if (groupId != null) {
 		eventDataItemInfoGroups.groupId = groupId;
 	}
-	var groupName = jsonConvert.convert<String>(json['groupName']);
+	final String? groupName = jsonConvert.convert<String>(json['groupName']);
 	if (groupName != null) {
 		eventDataItemInfoGroups.groupName = groupName;
 	}
@@ -147,52 +156,52 @@ Map<String, dynamic> $EventDataItemInfoGroupsToJson(EventDataItemInfoGroups enti
 }
 
 EventDataItemInfoAttendance $EventDataItemInfoAttendanceFromJson(Map<String, dynamic> json) {
-	EventDataItemInfoAttendance eventDataItemInfoAttendance = EventDataItemInfoAttendance();
-	var userId = jsonConvert.convert<int>(json['userId']);
+	final EventDataItemInfoAttendance eventDataItemInfoAttendance = EventDataItemInfoAttendance();
+	final int? userId = jsonConvert.convert<int>(json['userId']);
 	if (userId != null) {
 		eventDataItemInfoAttendance.userId = userId;
 	}
-	var eventId = jsonConvert.convert<int>(json['eventId']);
+	final int? eventId = jsonConvert.convert<int>(json['eventId']);
 	if (eventId != null) {
 		eventDataItemInfoAttendance.eventId = eventId;
 	}
-	var checkInTime = jsonConvert.convert<int>(json['checkInTime']);
+	final int? checkInTime = jsonConvert.convert<int>(json['checkInTime']);
 	if (checkInTime != null) {
 		eventDataItemInfoAttendance.checkInTime = checkInTime;
 	}
-	var checkOutTime = jsonConvert.convert<int>(json['checkOutTime']);
+	final int? checkOutTime = jsonConvert.convert<int>(json['checkOutTime']);
 	if (checkOutTime != null) {
 		eventDataItemInfoAttendance.checkOutTime = checkOutTime;
 	}
-	var attendance = jsonConvert.convert<bool>(json['attendance']);
+	final bool? attendance = jsonConvert.convert<bool>(json['attendance']);
 	if (attendance != null) {
 		eventDataItemInfoAttendance.attendance = attendance;
 	}
-	var remark = jsonConvert.convert<String>(json['remark']);
+	final String? remark = jsonConvert.convert<String>(json['remark']);
 	if (remark != null) {
 		eventDataItemInfoAttendance.remark = remark;
 	}
-	var name = jsonConvert.convert<String>(json['name']);
+	final String? name = jsonConvert.convert<String>(json['name']);
 	if (name != null) {
 		eventDataItemInfoAttendance.name = name;
 	}
-	var picture = jsonConvert.convert<String>(json['picture']);
+	final String? picture = jsonConvert.convert<String>(json['picture']);
 	if (picture != null) {
 		eventDataItemInfoAttendance.picture = picture;
 	}
-	var gradeName = jsonConvert.convert<String>(json['gradeName']);
+	final String? gradeName = jsonConvert.convert<String>(json['gradeName']);
 	if (gradeName != null) {
 		eventDataItemInfoAttendance.gradeName = gradeName;
 	}
-	var concatNumber = jsonConvert.convert<String>(json['concatNumber']);
+	final String? concatNumber = jsonConvert.convert<String>(json['concatNumber']);
 	if (concatNumber != null) {
 		eventDataItemInfoAttendance.concatNumber = concatNumber;
 	}
-	var absentReason = jsonConvert.convert<String>(json['absentReason']);
+	final String? absentReason = jsonConvert.convert<String>(json['absentReason']);
 	if (absentReason != null) {
 		eventDataItemInfoAttendance.absentReason = absentReason;
 	}
-	var facebookComment = jsonConvert.convert<bool>(json['facebookComment']);
+	final bool? facebookComment = jsonConvert.convert<bool>(json['facebookComment']);
 	if (facebookComment != null) {
 		eventDataItemInfoAttendance.facebookComment = facebookComment;
 	}

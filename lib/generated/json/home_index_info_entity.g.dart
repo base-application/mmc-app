@@ -8,20 +8,20 @@ import 'package:mmc/bean/event_data_item_info_entity.dart';
 
 
 HomeIndexInfoEntity $HomeIndexInfoEntityFromJson(Map<String, dynamic> json) {
-	HomeIndexInfoEntity homeIndexInfoEntity = HomeIndexInfoEntity();
-	var slider = jsonConvert.convertListNotNull<HomeIndexInfoSlider>(json['slider']);
+	final HomeIndexInfoEntity homeIndexInfoEntity = HomeIndexInfoEntity();
+	final List<HomeIndexInfoSlider>? slider = jsonConvert.convertListNotNull<HomeIndexInfoSlider>(json['slider']);
 	if (slider != null) {
 		homeIndexInfoEntity.slider = slider;
 	}
-	var user = jsonConvert.convert<PersonalProfileInfoEntity>(json['user']);
+	final PersonalProfileInfoEntity? user = jsonConvert.convert<PersonalProfileInfoEntity>(json['user']);
 	if (user != null) {
 		homeIndexInfoEntity.user = user;
 	}
-	var newset = jsonConvert.convertListNotNull<NewestItemInfoEntity>(json['newset']);
+	final List<NewestItemInfoEntity>? newset = jsonConvert.convertListNotNull<NewestItemInfoEntity>(json['newset']);
 	if (newset != null) {
 		homeIndexInfoEntity.newset = newset;
 	}
-	var upcoming = jsonConvert.convertListNotNull<EventDataItemInfoEntity>(json['upcoming']);
+	final List<EventDataItemInfoEntity>? upcoming = jsonConvert.convertListNotNull<EventDataItemInfoEntity>(json['upcoming']);
 	if (upcoming != null) {
 		homeIndexInfoEntity.upcoming = upcoming;
 	}
@@ -38,24 +38,24 @@ Map<String, dynamic> $HomeIndexInfoEntityToJson(HomeIndexInfoEntity entity) {
 }
 
 HomeIndexInfoSlider $HomeIndexInfoSliderFromJson(Map<String, dynamic> json) {
-	HomeIndexInfoSlider homeIndexInfoSlider = HomeIndexInfoSlider();
-	var sliderId = jsonConvert.convert<int>(json['sliderId']);
+	final HomeIndexInfoSlider homeIndexInfoSlider = HomeIndexInfoSlider();
+	final int? sliderId = jsonConvert.convert<int>(json['sliderId']);
 	if (sliderId != null) {
 		homeIndexInfoSlider.sliderId = sliderId;
 	}
-	var sliderPoster = jsonConvert.convert<String>(json['sliderPoster']);
+	final String? sliderPoster = jsonConvert.convert<String>(json['sliderPoster']);
 	if (sliderPoster != null) {
 		homeIndexInfoSlider.sliderPoster = sliderPoster;
 	}
-	var createTime = jsonConvert.convert<int>(json['createTime']);
+	final int? createTime = jsonConvert.convert<int>(json['createTime']);
 	if (createTime != null) {
 		homeIndexInfoSlider.createTime = createTime;
 	}
-	var group = jsonConvert.convertListNotNull<HomeIndexInfoSliderGroup>(json['group']);
+	final List<HomeIndexInfoSliderGroup>? group = jsonConvert.convertListNotNull<HomeIndexInfoSliderGroup>(json['group']);
 	if (group != null) {
 		homeIndexInfoSlider.group = group;
 	}
-	var grades = jsonConvert.convertListNotNull<HomeIndexInfoSliderGrades>(json['grades']);
+	final List<HomeIndexInfoSliderGrades>? grades = jsonConvert.convertListNotNull<HomeIndexInfoSliderGrades>(json['grades']);
 	if (grades != null) {
 		homeIndexInfoSlider.grades = grades;
 	}
@@ -73,12 +73,12 @@ Map<String, dynamic> $HomeIndexInfoSliderToJson(HomeIndexInfoSlider entity) {
 }
 
 HomeIndexInfoSliderGroup $HomeIndexInfoSliderGroupFromJson(Map<String, dynamic> json) {
-	HomeIndexInfoSliderGroup homeIndexInfoSliderGroup = HomeIndexInfoSliderGroup();
-	var groupId = jsonConvert.convert<int>(json['groupId']);
+	final HomeIndexInfoSliderGroup homeIndexInfoSliderGroup = HomeIndexInfoSliderGroup();
+	final int? groupId = jsonConvert.convert<int>(json['groupId']);
 	if (groupId != null) {
 		homeIndexInfoSliderGroup.groupId = groupId;
 	}
-	var groupName = jsonConvert.convert<String>(json['groupName']);
+	final String? groupName = jsonConvert.convert<String>(json['groupName']);
 	if (groupName != null) {
 		homeIndexInfoSliderGroup.groupName = groupName;
 	}
@@ -93,12 +93,12 @@ Map<String, dynamic> $HomeIndexInfoSliderGroupToJson(HomeIndexInfoSliderGroup en
 }
 
 HomeIndexInfoSliderGrades $HomeIndexInfoSliderGradesFromJson(Map<String, dynamic> json) {
-	HomeIndexInfoSliderGrades homeIndexInfoSliderGrades = HomeIndexInfoSliderGrades();
-	var gradeId = jsonConvert.convert<int>(json['gradeId']);
+	final HomeIndexInfoSliderGrades homeIndexInfoSliderGrades = HomeIndexInfoSliderGrades();
+	final int? gradeId = jsonConvert.convert<int>(json['gradeId']);
 	if (gradeId != null) {
 		homeIndexInfoSliderGrades.gradeId = gradeId;
 	}
-	var gradeName = jsonConvert.convert<String>(json['gradeName']);
+	final String? gradeName = jsonConvert.convert<String>(json['gradeName']);
 	if (gradeName != null) {
 		homeIndexInfoSliderGrades.gradeName = gradeName;
 	}

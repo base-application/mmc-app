@@ -598,7 +598,7 @@ class _EventListingPageState extends State<EventListingPage> {
                 ),
                 child: const Icon(Icons.add_circle_rounded, size: 26, color: Color(0xFF013B7B),),
                 onPressed: () async {
-                  AutoRouter.of(context).push(const CreateEventRoute());
+                  AutoRouter.of(context).push(CreateEventRoute(entity: null));
                 },
               ),
             ),

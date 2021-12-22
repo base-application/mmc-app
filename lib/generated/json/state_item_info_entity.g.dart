@@ -2,44 +2,44 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/state_item_info_entity.dart';
 
 StateItemInfoEntity $StateItemInfoEntityFromJson(Map<String, dynamic> json) {
-	StateItemInfoEntity stateItemInfoEntity = StateItemInfoEntity();
-	var id = jsonConvert.convert<int>(json['id']);
+	final StateItemInfoEntity stateItemInfoEntity = StateItemInfoEntity();
+	final int? id = jsonConvert.convert<int>(json['id']);
 	if (id != null) {
 		stateItemInfoEntity.id = id;
 	}
-	var name = jsonConvert.convert<String>(json['name']);
+	final String? name = jsonConvert.convert<String>(json['name']);
 	if (name != null) {
 		stateItemInfoEntity.name = name;
 	}
-	var countryId = jsonConvert.convert<int>(json['countryId']);
+	final int? countryId = jsonConvert.convert<int>(json['countryId']);
 	if (countryId != null) {
 		stateItemInfoEntity.countryId = countryId;
 	}
-	var countryCode = jsonConvert.convert<String>(json['countryCode']);
+	final String? countryCode = jsonConvert.convert<String>(json['countryCode']);
 	if (countryCode != null) {
 		stateItemInfoEntity.countryCode = countryCode;
 	}
-	var fipsCode = jsonConvert.convert<String>(json['fipsCode']);
+	final String? fipsCode = jsonConvert.convert<String>(json['fipsCode']);
 	if (fipsCode != null) {
 		stateItemInfoEntity.fipsCode = fipsCode;
 	}
-	var iso2 = jsonConvert.convert<String>(json['iso2']);
+	final String? iso2 = jsonConvert.convert<String>(json['iso2']);
 	if (iso2 != null) {
 		stateItemInfoEntity.iso2 = iso2;
 	}
-	var latitude = jsonConvert.convert<double>(json['latitude']);
+	final double? latitude = jsonConvert.convert<double>(json['latitude']);
 	if (latitude != null) {
 		stateItemInfoEntity.latitude = latitude;
 	}
-	var longitude = jsonConvert.convert<double>(json['longitude']);
+	final double? longitude = jsonConvert.convert<double>(json['longitude']);
 	if (longitude != null) {
 		stateItemInfoEntity.longitude = longitude;
 	}
-	var cities = jsonConvert.convert<dynamic>(json['cities']);
+	final dynamic? cities = jsonConvert.convert<dynamic>(json['cities']);
 	if (cities != null) {
 		stateItemInfoEntity.cities = cities;
 	}
-	var translations = jsonConvert.convert<String>(json['translations']);
+	final String? translations = jsonConvert.convert<String>(json['translations']);
 	if (translations != null) {
 		stateItemInfoEntity.translations = translations;
 	}

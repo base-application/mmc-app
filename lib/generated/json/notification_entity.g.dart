@@ -2,52 +2,52 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/notification_entity.dart';
 
 NotificationEntity $NotificationEntityFromJson(Map<String, dynamic> json) {
-	NotificationEntity notificationEntity = NotificationEntity();
-	var notificationTitle = jsonConvert.convert<String>(json['notificationTitle']);
+	final NotificationEntity notificationEntity = NotificationEntity();
+	final String? notificationTitle = jsonConvert.convert<String>(json['notificationTitle']);
 	if (notificationTitle != null) {
 		notificationEntity.notificationTitle = notificationTitle;
 	}
-	var notificationId = jsonConvert.convert<int>(json['notificationId']);
+	final int? notificationId = jsonConvert.convert<int>(json['notificationId']);
 	if (notificationId != null) {
 		notificationEntity.notificationId = notificationId;
 	}
-	var registrationName = jsonConvert.convert<String>(json['registrationName']);
+	final String? registrationName = jsonConvert.convert<String>(json['registrationName']);
 	if (registrationName != null) {
 		notificationEntity.registrationName = registrationName;
 	}
-	var registrationLink = jsonConvert.convert<String>(json['registrationLink']);
+	final String? registrationLink = jsonConvert.convert<String>(json['registrationLink']);
 	if (registrationLink != null) {
 		notificationEntity.registrationLink = registrationLink;
 	}
-	var notificationContent = jsonConvert.convert<String>(json['notificationContent']);
+	final String? notificationContent = jsonConvert.convert<String>(json['notificationContent']);
 	if (notificationContent != null) {
 		notificationEntity.notificationContent = notificationContent;
 	}
-	var createId = jsonConvert.convert<int>(json['createId']);
+	final int? createId = jsonConvert.convert<int>(json['createId']);
 	if (createId != null) {
 		notificationEntity.createId = createId;
 	}
-	var notificationTime = jsonConvert.convert<int>(json['notificationTime']);
+	final int? notificationTime = jsonConvert.convert<int>(json['notificationTime']);
 	if (notificationTime != null) {
 		notificationEntity.notificationTime = notificationTime;
 	}
-	var notificationType = jsonConvert.convert<int>(json['notificationType']);
+	final int? notificationType = jsonConvert.convert<int>(json['notificationType']);
 	if (notificationType != null) {
 		notificationEntity.notificationType = notificationType;
 	}
-	var linkId = jsonConvert.convert<int>(json['linkId']);
+	final int? linkId = jsonConvert.convert<int>(json['linkId']);
 	if (linkId != null) {
 		notificationEntity.linkId = linkId;
 	}
-	var linkType = jsonConvert.convert<int>(json['linkType']);
+	final int? linkType = jsonConvert.convert<int>(json['linkType']);
 	if (linkType != null) {
 		notificationEntity.linkType = linkType;
 	}
-	var status = jsonConvert.convert<int>(json['status']);
+	final int? status = jsonConvert.convert<int>(json['status']);
 	if (status != null) {
 		notificationEntity.status = status;
 	}
-	var check = jsonConvert.convert<bool>(json['check']);
+	final bool? check = jsonConvert.convert<bool>(json['check']);
 	if (check != null) {
 		notificationEntity.check = check;
 	}

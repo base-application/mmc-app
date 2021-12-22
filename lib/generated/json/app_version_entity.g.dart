@@ -2,40 +2,40 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/app_version_entity.dart';
 
 AppVersionEntity $AppVersionEntityFromJson(Map<String, dynamic> json) {
-	AppVersionEntity appVersionEntity = AppVersionEntity();
-	var id = jsonConvert.convert<int>(json['id']);
+	final AppVersionEntity appVersionEntity = AppVersionEntity();
+	final int? id = jsonConvert.convert<int>(json['id']);
 	if (id != null) {
 		appVersionEntity.id = id;
 	}
-	var appId = jsonConvert.convert<int>(json['appId']);
+	final int? appId = jsonConvert.convert<int>(json['appId']);
 	if (appId != null) {
 		appVersionEntity.appId = appId;
 	}
-	var url = jsonConvert.convert<String>(json['url']);
+	final String? url = jsonConvert.convert<String>(json['url']);
 	if (url != null) {
 		appVersionEntity.url = url;
 	}
-	var platform = jsonConvert.convert<String>(json['platform']);
+	final String? platform = jsonConvert.convert<String>(json['platform']);
 	if (platform != null) {
 		appVersionEntity.platform = platform;
 	}
-	var version = jsonConvert.convert<String>(json['version']);
+	final String? version = jsonConvert.convert<String>(json['version']);
 	if (version != null) {
 		appVersionEntity.version = version;
 	}
-	var info = jsonConvert.convert<String>(json['info']);
+	final String? info = jsonConvert.convert<String>(json['info']);
 	if (info != null) {
 		appVersionEntity.info = info;
 	}
-	var createDate = jsonConvert.convert<String>(json['createDate']);
+	final String? createDate = jsonConvert.convert<String>(json['createDate']);
 	if (createDate != null) {
 		appVersionEntity.createDate = createDate;
 	}
-	var qrcode = jsonConvert.convert<dynamic>(json['qrcode']);
+	final dynamic? qrcode = jsonConvert.convert<dynamic>(json['qrcode']);
 	if (qrcode != null) {
 		appVersionEntity.qrcode = qrcode;
 	}
-	var md5 = jsonConvert.convert<String>(json['md5']);
+	final String? md5 = jsonConvert.convert<String>(json['md5']);
 	if (md5 != null) {
 		appVersionEntity.md5 = md5;
 	}

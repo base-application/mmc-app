@@ -215,6 +215,7 @@ Future createEventData(BuildContext context, {
     required String eventDescription,
     required int eventStartTime,
     required int eventEndTime,
+    int? eventId,
     required String eventLocation,
     required String eventMapLink,
     required List<String> eventPoster,
@@ -223,6 +224,7 @@ Future createEventData(BuildContext context, {
     Function? err,
   }) async {
   await httpPost(context, url: 'event/add', data: {
+    'eventId': eventId,
     'grades': grades,
     'groups': groups,
     'eventTitle': eventTitle,

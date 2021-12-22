@@ -2,12 +2,12 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/image_vo_entity.dart';
 
 ImageVoEntity $ImageVoEntityFromJson(Map<String, dynamic> json) {
-	ImageVoEntity imageVoEntity = ImageVoEntity();
-	var id = jsonConvert.convert<int>(json['id']);
+	final ImageVoEntity imageVoEntity = ImageVoEntity();
+	final int? id = jsonConvert.convert<int>(json['id']);
 	if (id != null) {
 		imageVoEntity.id = id;
 	}
-	var url = jsonConvert.convert<String>(json['url']);
+	final String? url = jsonConvert.convert<String>(json['url']);
 	if (url != null) {
 		imageVoEntity.url = url;
 	}

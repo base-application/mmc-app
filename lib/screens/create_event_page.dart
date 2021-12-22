@@ -10,6 +10,7 @@ import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:mmc/bean/event_data_item_info_entity.dart';
 import 'package:mmc/bean/grade_level_info_entity.dart';
 import 'package:mmc/bean/group_item_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
@@ -23,7 +24,8 @@ import 'package:mmc/utils/http_request.dart';
 import 'package:provider/src/provider.dart';
 
 class CreateEventPage extends StatefulWidget {
-  const CreateEventPage({Key? key}) : super(key: key);
+  final EventDataItemInfoEntity? entity;
+  const CreateEventPage({Key? key, required this.entity}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -33,8 +35,8 @@ class CreateEventPage extends StatefulWidget {
 
 class _CreateEventPageState extends State<CreateEventPage> {
   bool _showGroupSelectItem = false;
-  final List<GradeLevelInfoEntity> _formEventFor = [];
-  final List<GroupItemEntity> _formGroup = [];
+  late List<GradeLevelInfoEntity> _formEventFor = [];
+  late List<GroupItemEntity> _formGroup = [];
   final TextEditingController _formTitleController = TextEditingController();
   final TextEditingController _formDescriptionController = TextEditingController();
   String? _formStartDate;
@@ -43,7 +45,29 @@ class _CreateEventPageState extends State<CreateEventPage> {
   String? _formEndTime;
   final TextEditingController _formLocationController = TextEditingController();
   final TextEditingController _formRespectiveLinkController = TextEditingController();
-  final List<String> _formPoster = [];
+  late  List<String> _formPoster = [];
+
+  @override
+  void initState() {
+    if(widget.entity!=null){
+      _formTitleController.text = widget.entity?.eventTitle??"";
+      _formDescriptionController.text = widget.entity?.eventDescription??"";
+      _formLocationController.text  =widget.entity?.eventLocation??"";
+      _formRespectiveLinkController.text = widget.entity?.eventMapLink??"";
+      _formPoster = widget.entity?.eventPoster?.map((e) => e.url).toList() ?? [];
+
+      DateTime date = DateTime.fromMillisecondsSinceEpoch(widget.entity!.eventStartTime??0);
+      DateTime enddate = DateTime.fromMillisecondsSinceEpoch(widget.entity!.eventEndTime??0);
+      _formStartDate =DateUtil.formatDate(date, format: 'yyyy-MM-dd');
+      _formStartTime = DateUtil.formatDate(date, format: 'HH:mm');
+      _formEndDate = DateUtil.formatDate(enddate, format: 'yyyy-MM-dd');
+      _formEndTime = DateUtil.formatDate(enddate, format: 'HH:mm');
+      _formEventFor = widget.entity?.grades??[];
+      _showGroupSelectItem = _formEventFor.where((element) => element.gradeId > 3).isNotEmpty;
+      _formGroup = widget.entity?.groups ??[];
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -825,6 +849,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
       return false;
     }
     createEventData(context,
+      eventId: widget.entity?.eventId,
       grades: _formEventFor,
       groups: _formGroup.isNotEmpty ? _formGroup : null,
       eventTitle: _formTitleController.text.trim(),
@@ -835,7 +860,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
       eventMapLink: _formRespectiveLinkController.text.trim(),
       eventPoster: _formPoster,
       result: () {
-        ComFun.showToast(msg: 'event create success');
+        ComFun.showToast(msg: 'event save success');
         Navigator.of(context).pop();
       },
     );

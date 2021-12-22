@@ -2,16 +2,16 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/guide_line_entity.dart';
 
 GuideLineEntity $GuideLineEntityFromJson(Map<String, dynamic> json) {
-	GuideLineEntity guideLineEntity = GuideLineEntity();
-	var guideLineId = jsonConvert.convert<int>(json['guideLineId']);
+	final GuideLineEntity guideLineEntity = GuideLineEntity();
+	final int? guideLineId = jsonConvert.convert<int>(json['guideLineId']);
 	if (guideLineId != null) {
 		guideLineEntity.guideLineId = guideLineId;
 	}
-	var guideLineTitle = jsonConvert.convert<String>(json['guideLineTitle']);
+	final String? guideLineTitle = jsonConvert.convert<String>(json['guideLineTitle']);
 	if (guideLineTitle != null) {
 		guideLineEntity.guideLineTitle = guideLineTitle;
 	}
-	var guideLineImage = jsonConvert.convert<String>(json['guideLineImage']);
+	final String? guideLineImage = jsonConvert.convert<String>(json['guideLineImage']);
 	if (guideLineImage != null) {
 		guideLineEntity.guideLineImage = guideLineImage;
 	}

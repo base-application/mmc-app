@@ -2,24 +2,24 @@ import 'package:mmc/generated/json/base/json_convert_content.dart';
 import 'package:mmc/bean/advertisement_entity.dart';
 
 AdvertisementEntity $AdvertisementEntityFromJson(Map<String, dynamic> json) {
-	AdvertisementEntity advertisementEntity = AdvertisementEntity();
-	var advertisementId = jsonConvert.convert<int>(json['advertisementId']);
+	final AdvertisementEntity advertisementEntity = AdvertisementEntity();
+	final int? advertisementId = jsonConvert.convert<int>(json['advertisementId']);
 	if (advertisementId != null) {
 		advertisementEntity.advertisementId = advertisementId;
 	}
-	var advertisementPoster = jsonConvert.convert<String>(json['advertisementPoster']);
+	final String? advertisementPoster = jsonConvert.convert<String>(json['advertisementPoster']);
 	if (advertisementPoster != null) {
 		advertisementEntity.advertisementPoster = advertisementPoster;
 	}
-	var advertisementType = jsonConvert.convert<int>(json['advertisementType']);
+	final int? advertisementType = jsonConvert.convert<int>(json['advertisementType']);
 	if (advertisementType != null) {
 		advertisementEntity.advertisementType = advertisementType;
 	}
-	var status = jsonConvert.convert<bool>(json['status']);
+	final bool? status = jsonConvert.convert<bool>(json['status']);
 	if (status != null) {
 		advertisementEntity.status = status;
 	}
-	var advertisementLink = jsonConvert.convert<String>(json['advertisementLink']);
+	final String? advertisementLink = jsonConvert.convert<String>(json['advertisementLink']);
 	if (advertisementLink != null) {
 		advertisementEntity.advertisementLink = advertisementLink;
 	}
