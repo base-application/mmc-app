@@ -186,13 +186,14 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
           AutoRouter.of(context).push(const ThankYouNoteReceivedRoute());
         },
       ),
-      MenuDoItem(
-        iconAssets: 'assets/icon/menu_shop.png',
-        label: AppLocalizations.of(context)!.homeIndexMenuShopBtn,
-        onTap: () {
-          // AutoRouter.of(context).push(const SendingReferralRoute());
-        },
-      ),
+      ///todo
+      // MenuDoItem(
+      //   iconAssets: 'assets/icon/menu_shop.png',
+      //   label: AppLocalizations.of(context)!.homeIndexMenuShopBtn,
+      //   onTap: () {
+      //     // AutoRouter.of(context).push(const SendingReferralRoute());
+      //   },
+      // ),
     ]);
 
     Widget _scrollMain =
