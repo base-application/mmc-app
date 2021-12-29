@@ -139,7 +139,7 @@ class _AdvertisementPageState extends State<AdvertisementPage> {
                             elevation: MaterialStateProperty.all(0),
                           ),
                           child: Text(AppLocalizations.of(context)!.yes, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
-                          onPressed: () async {
+                          onPressed: () {
                             checkAppVersion();
                           },
                         ),

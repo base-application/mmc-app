@@ -57,7 +57,7 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(width: 0.6, color: Colors.grey.shade300,)
                 ),
-                child: Text(widget.referralEntity.fromName??"", style: TextStyle(fontSize: 13, color: Colors.black87.withAlpha(200), fontWeight: FontWeight.w500,),),
+                child: Text(widget.referralEntity.reason??"", style: TextStyle(fontSize: 13, color: Colors.black87.withAlpha(200), fontWeight: FontWeight.w500,),),
               ),
               const SizedBox(height: 28,),
               Text('Name Card', style: TextStyle(fontSize: 14, color: Colors.black87.withAlpha(200), fontWeight: FontWeight.w500,),),

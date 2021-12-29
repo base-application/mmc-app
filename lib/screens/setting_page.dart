@@ -1,6 +1,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/router/router.gr.dart';
@@ -103,6 +104,7 @@ class _SettingPageState extends State<SettingPage> {
                 height: 100,
                 radius: 100,
                 url: context.watch<AuthService>().getLoginInfo?.avatar,
+                fit: BoxFit.cover,
                 errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 100, height: 100, fit: BoxFit.fitWidth,),
               ),
               const SizedBox(height: 16,),

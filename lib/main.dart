@@ -1,7 +1,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -15,9 +15,16 @@ import 'package:provider/provider.dart';
 import 'package:async/async.dart' show AsyncMemoizer;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+init() async{
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  Firebase.initializeApp().then((value) {
+    ProjectInit.init();
+  });
+}
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) { // 设置仅竖屏
+  init().then((_) { // 设置仅竖屏
     runApp(
       MultiProvider(
         providers: [
@@ -81,15 +88,12 @@ class _MyAppState extends State<MyApp> {
     authGuard: AuthGuard(),
   );
 
-  final AsyncMemoizer<bool> _memoization = AsyncMemoizer<bool>();
 
-  FirebaseAnalytics analytics = FirebaseAnalytics();
 
   @override
   void initState() {
     ComFun.statusBar(isLight: false);
     super.initState();
-    ProjectInit.init(context);
   }
 
   @override
@@ -117,7 +121,7 @@ class _MyAppState extends State<MyApp> {
       ),
       routerDelegate: AutoRouterDelegate(
           _appRouter,
-          navigatorObservers: ()=>[FirebaseAnalyticsObserver(analytics: analytics,nameExtractor : ( RouteSettings settings){return settings.name;})]
+          navigatorObservers: ()=>[FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance,nameExtractor : ( RouteSettings settings){return settings.name;})]
       ),
       routeInformationProvider: _appRouter.routeInfoProvider(),
       routeInformationParser: _appRouter.defaultRouteParser(),

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "382700842265-j85igi6klb8r1mks0va8b8tmh7cqm4tj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mmc.mmcapp",
+            "certificate_hash": "ba01fdc7b596369789950948a5b81a992f7accc4"
+          }
+        },
+        {
           "client_id": "382700842265-q7q048li4tfroj071aisjmjl4vsgv0id.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -37,6 +45,13 @@
             {
               "client_id": "382700842265-65ebpon834f8ea7umrck89tu9j394llk.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "382700842265-babmi0sl3lv3dsrottjii399jk9o30ll.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mmc.mmcapp"
+              }
             }
           ]
         }

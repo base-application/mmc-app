@@ -47,6 +47,12 @@ class _QrViewPageState extends State<QrViewPage> {
           Expanded(
             flex: 5,
             child: QRView(
+              overlay: QrScannerOverlayShape(
+                  borderColor: Colors.white,
+                  borderRadius: 10,
+                  borderLength: 30,
+                  borderWidth: 10,
+                  cutOutSize: MediaQuery.of(context).size.width * 0.6),
               key: qrKey,
               onQRViewCreated: _onQRViewCreated,
             ),

@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/painting.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/router/auth_guard.dart';
@@ -55,6 +56,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
             child: netImgWrap(context,
               width: 50,
               height: 50,
+              fit: BoxFit.cover,
               url: context.watch<AuthService>().getLoginInfo?.avatar,
               errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 50, height: 50, fit: BoxFit.fitWidth,),
             ),

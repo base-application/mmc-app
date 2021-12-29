@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mmc/bean/concat_item_entity.dart';
 import 'package:mmc/bean/network_item_info_entity.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
@@ -24,36 +26,7 @@ class NetworkPersonPage extends StatefulWidget {
 
 class _NetworkPersonPageState extends State<NetworkPersonPage> {
   bool _isLike = false;
-  final List<String> _dos = [
-    'assets/icon/call.png',
-    'assets/icon/wechat.png',
-    'assets/icon/facebook.png',
-    'assets/icon/in.png',
-    'assets/icon/video.png',
-    'assets/icon/photo_mei.png',
-  ];
-
-  bool _doIsCan(int index) {
-    if (index == 0) {
-      return widget.itemInfo.concatNumber != null && widget.itemInfo.concatNumber!.isNotEmpty;
-    }
-    if (index == 1) {
-      return widget.itemInfo.whatsapp != null && widget.itemInfo.whatsapp!.isNotEmpty;
-    }
-    if (index == 2) {
-      return widget.itemInfo.facebook != null && widget.itemInfo.facebook!.isNotEmpty;
-    }
-    if (index == 3) {
-      return widget.itemInfo.linkedin != null && widget.itemInfo.linkedin!.isNotEmpty;
-    }
-    if (index == 4) {
-      return widget.itemInfo.youtube != null && widget.itemInfo.youtube!.isNotEmpty;
-    }
-    if (index == 5) {
-      return widget.itemInfo.instagram != null && widget.itemInfo.instagram!.isNotEmpty;
-    }
-    return false;
-  }
+  late List<ConcatItemEntity> _dos = [];
 
   final Map<String, String> _groupZ = {
     'Crystal': 'assets/image/profile_z.png',
@@ -94,6 +67,14 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
   void initState() {
     super.initState();
     _isLike = widget.itemInfo.isFriend == true;
+    _dos = [
+      ConcatItemEntity(widget.itemInfo.concatNumber,'assets/icon/call.png'),
+      ConcatItemEntity(widget.itemInfo.whatsapp,'assets/icon/wechat.png'),
+      ConcatItemEntity(widget.itemInfo.facebook,'assets/icon/facebook.png'),
+      ConcatItemEntity(widget.itemInfo.linkedin,'assets/icon/in.png'),
+      ConcatItemEntity(widget.itemInfo.youtube,'assets/icon/video.png'),
+      ConcatItemEntity(widget.itemInfo.instagram,'assets/icon/photo_mei.png')
+    ];
     _initCompanyData();
   }
 
@@ -188,13 +169,21 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
                   ),
                   itemCount: _dos.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        color: const Color(0xFFF1F1EF),
+                    return GestureDetector(
+                      onTap: (){
+                          if( _dos[index].text !=null && _dos[index].text!.isNotEmpty){
+                            Clipboard.setData(ClipboardData(text: _dos[index].text));
+                            ComFun.showToast(msg: "copy success");
+                          }
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          color: const Color(0xFFF1F1EF),
+                        ),
+                        child: Image.asset(_dos[index].image, color: _dos[index].text!=null && _dos[index].text!.isNotEmpty ? null : Colors.grey, colorBlendMode: _dos[index].text!=null && _dos[index].text!.isNotEmpty ? null : BlendMode.srcATop,),
                       ),
-                      child: Image.asset(_dos[index], color: _doIsCan(index) ? null : Colors.grey, colorBlendMode: _doIsCan(index) ? null : BlendMode.srcATop,),
                     );
                   },
                 ),
@@ -243,27 +232,14 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
                     itemCount: companyVos.length,
                     itemBuilder: (BuildContext context, int index) {
                       PersonalProfileInfoCompanyVos companyItem = companyVos[index];
-                      bool _businessDoIsCan(int index) {
-                        if (index == 0) {
-                          return companyItem.companyPhone != null && companyItem.companyPhone!.isNotEmpty;
-                        }
-                        if (index == 1) {
-                          return companyItem.companyWhatsapp != null && companyItem.companyWhatsapp!.isNotEmpty;
-                        }
-                        if (index == 2) {
-                          return companyItem.companyFacebook != null && companyItem.companyFacebook!.isNotEmpty;
-                        }
-                        if (index == 3) {
-                          return companyItem.companyLinkedin != null && companyItem.companyLinkedin!.isNotEmpty;
-                        }
-                        if (index == 4) {
-                          return companyItem.companyYoutube != null && companyItem.companyYoutube!.isNotEmpty;
-                        }
-                        if (index == 5) {
-                          return companyItem.companyInstagram != null && companyItem.companyInstagram!.isNotEmpty;
-                        }
-                        return false;
-                      }
+                      late List<ConcatItemEntity> _cdos = [
+                        ConcatItemEntity(companyItem.companyPhone,'assets/icon/call.png'),
+                        ConcatItemEntity(companyItem.companyWhatsapp,'assets/icon/wechat.png'),
+                        ConcatItemEntity(companyItem.companyFacebook,'assets/icon/facebook.png'),
+                        ConcatItemEntity(companyItem.companyLinkedin,'assets/icon/in.png'),
+                        ConcatItemEntity(companyItem.companyYoutube,'assets/icon/video.png'),
+                        ConcatItemEntity(companyItem.companyInstagram,'assets/icon/photo_mei.png')
+                      ];
                       return Padding(
                         padding: const EdgeInsets.only(top: 10, bottom: 10, left: 18, right: 18,),
                         child: Column(
@@ -310,15 +286,23 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
                                 crossAxisSpacing: 14,
                                 mainAxisSpacing: 14,
                               ),
-                              itemCount: _dos.length,
+                              itemCount: _cdos.length,
                               itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(14),
-                                    color: const Color(0xFFF1F1EF),
+                                return GestureDetector(
+                                 onTap: (){
+                                   if( _cdos[index].text !=null && _cdos[index].text!.isNotEmpty){
+                                     Clipboard.setData(ClipboardData(text: _cdos[index].text));
+                                     ComFun.showToast(msg: "copy success");
+                                   }
+                                 },
+                                child: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(14),
+                                      color: const Color(0xFFF1F1EF),
+                                    ),
+                                    child: Image.asset(_cdos[index].image, color: _cdos[index].text !=null && _cdos[index].text!.isNotEmpty ? null : Colors.grey, colorBlendMode:  _cdos[index].text !=null && _cdos[index].text!.isNotEmpty ? null : BlendMode.srcATop,),
                                   ),
-                                  child: Image.asset(_dos[index], color: _businessDoIsCan(index) ? null : Colors.grey, colorBlendMode: _businessDoIsCan(index) ? null : BlendMode.srcATop,),
                                 );
                               },
                             ),
