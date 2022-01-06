@@ -11,7 +11,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http.dart';
 import 'package:mmc/utils/http_request.dart';
-import 'package:mmc/widget/bottom_button.dart';
 import 'package:mmc/widget/post_image_view.dart';
 
 class SendingReferralPage extends StatefulWidget {

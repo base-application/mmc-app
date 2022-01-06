@@ -31,7 +31,7 @@ AppVersionEntity $AppVersionEntityFromJson(Map<String, dynamic> json) {
 	if (createDate != null) {
 		appVersionEntity.createDate = createDate;
 	}
-	final dynamic? qrcode = jsonConvert.convert<dynamic>(json['qrcode']);
+	final String? qrcode = jsonConvert.convert<String>(json['qrcode']);
 	if (qrcode != null) {
 		appVersionEntity.qrcode = qrcode;
 	}

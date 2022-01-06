@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_pickers/pickers.dart';
 import 'package:flutter_pickers/style/picker_style.dart';
 import 'package:mmc/bean/network_item_info_entity.dart';
@@ -220,7 +219,7 @@ class _MyNetworkPageState extends State<MyNetworkPage> {
             behavior: HitTestBehavior.opaque,
             onTap: () {
               FocusScope.of(context).requestFocus(FocusNode());
-              AutoRouter.of(context).push(NetworkPersonRoute(itemInfo: itemInfo));
+              AutoRouter.of(context).push(NetworkPersonRoute(userId: itemInfo.userId));
             },
           );
         },
@@ -233,7 +232,7 @@ class _MyNetworkPageState extends State<MyNetworkPage> {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(CupertinoIcons.left_chevron, color: Colors.black,),
+          icon: const Icon(CupertinoIcons.left_chevron, color: Colors.black,),
           onPressed: () {
             Navigator.of(context).pop();
           },

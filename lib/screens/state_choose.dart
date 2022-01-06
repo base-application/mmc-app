@@ -1,24 +1,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mmc/router/auth_guard.dart';
-import 'package:provider/provider.dart';
+import 'package:mmc/bean/state_item_info_entity.dart';
 
-import 'app_bar_home.dart';
-
-class CountryChoose extends StatefulWidget {
-  final List<CountryCodeInfo> curLocalData;
-  const CountryChoose({Key? key, required this.curLocalData}) : super(key: key);
+class StateChoose extends StatefulWidget {
+  final List<StateItemInfoEntity> states;
+  const StateChoose({Key? key, required this.states}) : super(key: key);
 
   @override
-  _CountryChooseState createState() => _CountryChooseState();
+  _StateChooseState createState() => _StateChooseState();
 }
 
-class _CountryChooseState extends State<CountryChoose> {
-  late List<CountryCodeInfo> country;
+class _StateChooseState extends State<StateChoose> {
+  late List<StateItemInfoEntity> _states;
+
   @override
   void initState() {
-    country = widget.curLocalData;
+    _states = widget.states;
     super.initState();
   }
   @override
@@ -42,9 +40,9 @@ class _CountryChooseState extends State<CountryChoose> {
                     ),
                     onChanged: (v){
                       if(v.isEmpty){
-                        country = widget.curLocalData;
+                        _states = widget.states;
                       }else{
-                        country = widget.curLocalData.where((element) => (element.phonecode).toLowerCase().contains(v.toLowerCase()) || getName(element).toLowerCase().contains(v.toLowerCase())).toList();
+                        _states =widget.states.where((element) => (element.name).toLowerCase().contains(v.toLowerCase())).toList();
                       }
                       setState((){});
                     },
@@ -64,7 +62,7 @@ class _CountryChooseState extends State<CountryChoose> {
           child: ListView(
               physics:  const ClampingScrollPhysics(),
               padding:  const EdgeInsets.all(16),
-              children: country.map<Widget>((e) =>
+              children: _states.map<Widget>((e) =>
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: (){
@@ -76,7 +74,7 @@ class _CountryChooseState extends State<CountryChoose> {
                       children: [
                         Container(
                           padding: const EdgeInsets.only(top: 12,bottom: 12),
-                          child: Text(getName(e),style:  const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                          child: Text(e.name,style:  const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                         ),
                         const Divider()
                       ],
@@ -87,13 +85,5 @@ class _CountryChooseState extends State<CountryChoose> {
         )
       ],
     );
-  }
-
-  String getName(CountryCodeInfo e) {
-    if(Provider.of(context).read<SystemSetService>().appLanguage == "en"){
-      return e.name + "(" +e.phonecode+")";
-    }else{
-      return (e.translations.cn??"") + "(" +e.phonecode+")";
-    }
   }
 }

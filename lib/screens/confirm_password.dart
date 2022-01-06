@@ -28,7 +28,7 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         image: DecorationImage(image: Image.asset("assets/image/login_background.png").image,alignment: Alignment.topCenter),
         gradient: const LinearGradient(
@@ -43,11 +43,11 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: ListView(
-          physics: ClampingScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           children: [
             Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(top: 50,bottom: 30),
+              padding: const EdgeInsets.only(top: 50,bottom: 30),
               child: Text(widget.type == 1 ? AppLocalizations.of(context)!.loginPageWelcome : AppLocalizations.of(context)!.forgotPasswordAsk.replaceAll("?", ""), style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFFFBB714),), textAlign: TextAlign.start,),
             ),
             Column(
@@ -165,7 +165,7 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
           ),
           behavior: HitTestBehavior.opaque,
           onTap: () {
-            AutoRouter.of(context).push(SignInRoute());
+            AutoRouter.of(context).push(const SignInRoute());
           },
         ),
       ),
@@ -175,14 +175,14 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
     if(widget.type == 1){
       register(context, countryCode: widget.countryCode, phoneNumber: widget.phoneNumber, verificationCode: widget.verificationCode, password: _registerPasswordController.text.trim(), result: () {
         ComFun.showToast(msg: AppLocalizations.of(context)!.registerSuccessTip);
-        AutoRouter.of(context).replaceAll([SignInRoute()]);
+        AutoRouter.of(context).replaceAll([const SignInRoute()]);
       });
     }
     if(widget.type == 2){
 
       forgotPassword(context, phoneNumber: widget.phoneNumber,  verificationCode: widget.verificationCode, password: _registerPasswordController.text.trim(), result: () {
         ComFun.showToast(msg: AppLocalizations.of(context)!.passwordResetSuccessTip);
-        AutoRouter.of(context).replaceAll([SignInRoute()]);
+        AutoRouter.of(context).replaceAll([const SignInRoute()]);
       });
     }
   }

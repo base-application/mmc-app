@@ -6,7 +6,7 @@ import 'package:mmc/bean/image_vo_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 class PosterView extends StatefulWidget {
   final List<ImageVoEntity> images;
@@ -41,33 +41,31 @@ class _PosterViewState extends State<PosterView> {
         onTap: (){
           Navigator.pop(context);
         },
-        child:  Container(
-            child: PhotoViewGallery.builder(
-              pageController: _pageController,
-              scrollPhysics: const BouncingScrollPhysics(),
-              builder: (BuildContext context, int index) {
-                return PhotoViewGalleryPageOptions(
-                  imageProvider: Image.network(context.read<SystemSetService>().baseUrl + widget.images[index].url,width: MediaQuery.of(context).size.width,fit: BoxFit.fitWidth,).image,
-                  initialScale: PhotoViewComputedScale.contained,
-                  heroAttributes: PhotoViewHeroAttributes(tag: index),
-                );
-              },
-              itemCount: widget.images.length,
-              loadingBuilder: (context, event) => Center(
-                child: Container(
-                  width: 20.0,
-                  height: 20.0,
-                  child: CircularProgressIndicator(
-                    value: event == null
-                        ? 0
-                        : event.cumulativeBytesLoaded / (event.expectedTotalBytes??0),
-                  ),
-                ),
+        child:  PhotoViewGallery.builder(
+          pageController: _pageController,
+          scrollPhysics: const BouncingScrollPhysics(),
+          builder: (BuildContext context, int index) {
+            return PhotoViewGalleryPageOptions(
+              imageProvider: Image.network(Provider.of(context).read<SystemSetService>().baseUrl + widget.images[index].url,width: MediaQuery.of(context).size.width,fit: BoxFit.fitWidth,).image,
+              initialScale: PhotoViewComputedScale.contained,
+              heroAttributes: PhotoViewHeroAttributes(tag: index),
+            );
+          },
+          itemCount: widget.images.length,
+          loadingBuilder: (context, event) => Center(
+            child: SizedBox(
+              width: 20.0,
+              height: 20.0,
+              child: CircularProgressIndicator(
+                value: event == null
+                    ? 0
+                    : event.cumulativeBytesLoaded / (event.expectedTotalBytes??0),
               ),
-              // backgroundDecoration: widget.backgroundDecoration,
-              // pageController: widget.pageController,
-              // onPageChanged: onPageChanged,
-            )
+            ),
+          ),
+          // backgroundDecoration: widget.backgroundDecoration,
+          // pageController: widget.pageController,
+          // onPageChanged: onPageChanged,
         ),
       )
     );

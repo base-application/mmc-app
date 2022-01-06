@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:mmc/bean/message_no_read_entity.dart';
@@ -13,7 +11,7 @@ import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http_request.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -189,7 +187,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Image.asset('assets/icon/profile_my_group.png', width: 34, height: 34,),
                         ),
                         const SizedBox(height: 6,),
-                        Text(AppLocalizations.of(context)!.myGroup, style: TextStyle(fontSize: 14),),
+                        Text(AppLocalizations.of(context)!.myGroup, style:  const TextStyle(fontSize: 14),),
                       ],
                     ),
                   )
@@ -197,7 +195,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Flexible(child:
                   GestureDetector(
                     onTap: (){
-                      AutoRouter.of(context).push(MyNetworkRoute());
+                      AutoRouter.of(context).push( const MyNetworkRoute());
                     },
                     child: Column(
                       children: [
@@ -212,7 +210,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Image.asset('assets/icon/profile_my_network.png', width: 34, height: 34,),
                         ),
                         const SizedBox(height: 6,),
-                        Text(AppLocalizations.of(context)!.myNetwork, style: TextStyle(fontSize: 14),),
+                        Text(AppLocalizations.of(context)!.myNetwork, style:  const TextStyle(fontSize: 14),),
                       ],
                     ),
                   )
@@ -248,8 +246,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 26),
-                    child: Text(AppLocalizations.of(context)!.myAchievements, style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 18),),
+                    padding:  const EdgeInsets.only(left: 26),
+                    child: Text(AppLocalizations.of(context)!.myAchievements, style:  const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 18),),
                   ),
                   Row(
                     children: [
@@ -280,7 +278,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
               const SizedBox(height: 4,),
-              Container(
+              SizedBox(
                 height: 250,
                 child: PageView(
                   controller: _pageController,
@@ -288,7 +286,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     _achievementIndex = page;
                     setState(() {});
                   },
-                  children: [
+                  children:  const [
                     MonthlyAchievement(),
                     LifetimeAchievement()
                   ],
@@ -299,15 +297,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 offstage: Provider.of<AuthService>(context, listen: false).getLoginInfo?.token == null,
                 child:  Column(
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(left: 26),
                       child: Text('My QR code', style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 18),),
                     ),
                     const SizedBox(height: 20,),
                     Container(
                       width: double.infinity,
-                      margin: EdgeInsets.only(left: 26, right: 26),
-                      padding: EdgeInsets.only(bottom: 30),
+                      margin:  const EdgeInsets.only(left: 26, right: 26),
+                      padding: const  EdgeInsets.only(bottom: 30),
                       decoration: BoxDecoration(
                         color: Colors.blue.shade800,
                         borderRadius: BorderRadius.circular(20),
@@ -427,10 +425,10 @@ class MonthlyAchievement extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Joined event", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+              const Text("Joined event", style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.joinEvent??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.joinEvent??0).toString(), style:  const  TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
                   getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.joinEvent?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.joinEventPre??0)??0),
                 ],
@@ -448,12 +446,12 @@ class MonthlyAchievement extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Referral sent", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+              const Text("Referral sent", style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralSend??0).toString(), style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralSend??0).toString(), style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
-                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralSend?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevReferralSend??0)??0),
+                  getIsUp(Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralSend?.compareTo(Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevReferralSend??0)??0),
                 ],
               ),
             ],
@@ -469,12 +467,12 @@ class MonthlyAchievement extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Referral received", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+              const Text("Referral received", style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralReceived??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralReceived??0).toString(), style: const  TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
-                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralReceived?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevReferralReceived??0)??0),
+                  getIsUp(Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralReceived?.compareTo(Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevReferralReceived??0)??0),
                 ],
               ),
             ],
@@ -490,12 +488,12 @@ class MonthlyAchievement extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Thank you note", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+              const Text("Thank you note", style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.thankYouNoteReceived??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.thankYouNoteReceived??0).toString(), style:  const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
-                  getIsUp(context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.thankYouNoteReceived?.compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevThankYouNoteReceived??0)??0)
+                  getIsUp(Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.thankYouNoteReceived?.compareTo(Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.prevThankYouNoteReceived??0)??0)
                 ],
               ),
             ],
@@ -535,10 +533,10 @@ class LifetimeAchievement extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Joined event", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+              const  Text("Joined event", style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.joinEvent??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.joinEvent??0).toString(), style:  const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                 ],
               ),
             ],
@@ -554,10 +552,10 @@ class LifetimeAchievement extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Referral sent", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+              const Text("Referral sent", style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralSendCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralSendCount??0).toString(), style:  const  TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                 ],
               ),
             ],
@@ -573,10 +571,10 @@ class LifetimeAchievement extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Referral received", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+              const Text("Referral received", style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralReceivedCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.referralReceivedCount??0).toString(), style:  const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                 ],
               ),
             ],
@@ -592,10 +590,10 @@ class LifetimeAchievement extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Thank you note", style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+              const Text("Thank you note", style:  TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
-                  Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.thankYouNoteReceivedCount??0).toString(), style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+                  Text((Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.thankYouNoteReceivedCount??0).toString(), style:  const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                 ],
               ),
             ],

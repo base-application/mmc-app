@@ -37,12 +37,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(left: 16,right: 16),
+                  contentPadding: const EdgeInsets.only(left: 16,right: 16),
                   fillColor: Colors.white,
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: const Color(0xffEBEBEB)),
+                    borderSide: const BorderSide(color: Color(0xffEBEBEB)),
                   ),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -65,12 +65,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(left: 16,right: 16),
+                  contentPadding: const EdgeInsets.only(left: 16,right: 16),
                   fillColor: Colors.white,
                   filled: true,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: const Color(0xffEBEBEB)),
+                    borderSide: const BorderSide(color: Color(0xffEBEBEB)),
                   ),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),

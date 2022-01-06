@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:mmc/bean/advertisement_entity.dart';
 import 'package:mmc/bean/app_version_entity.dart';
-import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
@@ -44,7 +41,7 @@ class _AdvertisementPageState extends State<AdvertisementPage> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: _advertisementEntity!=null ?
@@ -68,7 +65,7 @@ class _AdvertisementPageState extends State<AdvertisementPage> {
                   color: Colors.black38,
                   borderRadius: BorderRadius.circular(50)
               ),
-              child: Text(time.toString(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+              child: Text(time.toString(),style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
             ),
         )
       ],
@@ -258,12 +255,12 @@ class _AdvertisementPageState extends State<AdvertisementPage> {
       if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token != null){
         ///完善资料
         if(ComFun.isPerfect(context)){
-          AutoRouter.of(context).replaceAll([HomeRoute(),PersonalProfileSetRoute()]);
+          AutoRouter.of(context).replaceAll([const HomeRoute(),const PersonalProfileSetRoute()]);
         }else{
-          AutoRouter.of(context).replaceAll([HomeRoute()]);
+          AutoRouter.of(context).replaceAll([const HomeRoute()]);
         }
       }else{
-        AutoRouter.of(context).replaceAll([WelcomeRoute()]);
+        AutoRouter.of(context).replaceAll([const WelcomeRoute()]);
       }
     });
   }

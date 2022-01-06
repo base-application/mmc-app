@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/newest_item_info_entity.dart';
 import 'package:mmc/utils/comfun.dart';
@@ -210,7 +209,7 @@ class _NewestDetailPageState extends State<NewestDetailPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Text('Information', style: const TextStyle(fontSize: 15, color: Colors.black87, fontWeight: FontWeight.bold,),),
+                          const Text('Information', style: TextStyle(fontSize: 15, color: Colors.black87, fontWeight: FontWeight.bold,),),
                           const SizedBox(height: 8,),
                           Expanded(child: ScrollConfiguration(
                             behavior: CusBehavior(),

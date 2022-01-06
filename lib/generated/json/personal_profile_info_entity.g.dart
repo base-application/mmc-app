@@ -129,7 +129,7 @@ PersonalProfileInfoEntity $PersonalProfileInfoEntityFromJson(Map<String, dynamic
 	if (achievement != null) {
 		personalProfileInfoEntity.achievement = achievement;
 	}
-	final dynamic? friend = jsonConvert.convert<dynamic>(json['friend']);
+	final bool? friend = jsonConvert.convert<bool>(json['friend']);
 	if (friend != null) {
 		personalProfileInfoEntity.friend = friend;
 	}

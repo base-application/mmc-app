@@ -227,5 +227,6 @@
   "checkInSuccess": "签到成功",
   "netWorkError": "网络链接出错,点击重试",
   "clickRegister": "点击注册",
-  "joinOnStart": "活动开始前加入"
+  "joinOnStart": "活动开始前加入",
+  "position": "[\"Business\",\"owner\",\"Manager\",\"Founder\",\"Co-Founder\",\"CEO\",\"CFO\",\"CMO\"]"
 }

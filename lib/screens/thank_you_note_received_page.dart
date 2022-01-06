@@ -30,7 +30,7 @@ class _ThankYouNoteReceivedPageState extends State<ThankYouNoteReceivedPage> {
         padding: const EdgeInsets.only(top: 10, left: 26, right: 26, bottom: 30,),
         child:  Column(
           children: [
-            Text('Well Done! You play a big role in connecting our member in MMC network!', style: TextStyle(fontSize: 14, color: Colors.black87, fontWeight: FontWeight.w500,),),
+            const Text('Well Done! You play a big role in connecting our member in MMC network!', style: TextStyle(fontSize: 14, color: Colors.black87, fontWeight: FontWeight.w500,),),
             const SizedBox(height: 30,),
             Expanded(child: FutureBuilder(
               future: _future,
@@ -95,7 +95,7 @@ class _ThankYouNoteReceivedPageState extends State<ThankYouNoteReceivedPage> {
                                   'MYR ' +
                                       (snapshot.data![index].value.toString()) +
                                       ' refer!!!',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     color: Colors.white,
                                     fontWeight: FontWeight.w500,

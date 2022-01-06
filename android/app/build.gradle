@@ -49,7 +49,7 @@ android {
     defaultConfig {
         applicationId "com.mmc.mmcapp"
         minSdkVersion 20
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true

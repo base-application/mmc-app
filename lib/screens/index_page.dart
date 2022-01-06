@@ -3,15 +3,12 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/event_data_item_info_entity.dart';
 import 'package:mmc/bean/home_index_info_entity.dart';
 import 'package:mmc/bean/message_no_read_entity.dart';
 import 'package:mmc/bean/newest_item_info_entity.dart';
-import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
@@ -20,9 +17,9 @@ import 'package:mmc/utils/dialog.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:mmc/widget/app_bar_home.dart';
 import 'package:mmc/widget/banner.dart';
-import 'package:provider/src/provider.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({Key? key, this.pageScrollDirectionChange}) : super(key: key);
@@ -198,7 +195,7 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
 
     Widget _scrollMain =
     Scaffold(
-      appBar: HomeAppBar(),
+      appBar: const HomeAppBar(),
       body: FutureBuilder(
         future: _homeIndexInfoEntity,
         builder: (BuildContext context, AsyncSnapshot<HomeIndexInfoEntity> snapshot) {
@@ -226,7 +223,7 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                     isNetImg: true,
                     topGradientHeight: 0,
                     showIndicator: false,
-                    imageList: snapshot.data!.slider!.map((e) => '${context.read<SystemSetService>().baseUrl}${e.sliderPoster}').toList(),
+                    imageList: snapshot.data!.slider!.map((e) => '${Provider.of(context).read<SystemSetService>().baseUrl}${e.sliderPoster}').toList(),
                   ),
                   Container(
                     height: 70,

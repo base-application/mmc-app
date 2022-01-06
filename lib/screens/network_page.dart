@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_pickers/pickers.dart';
 import 'package:flutter_pickers/style/picker_style.dart';
 import 'package:mmc/bean/network_item_info_entity.dart';
+import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/bean/state_item_info_entity.dart';
 import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
@@ -14,7 +15,6 @@ import 'package:mmc/utils/comfun.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/dialog.dart';
-import 'package:mmc/utils/event_bus.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:mmc/widget/app_bar_home.dart';
 
@@ -57,25 +57,15 @@ class _NetworkPageState extends State<NetworkPage> {
 
   List<NetworkItemInfoEntity> pageList = [];
 
-  late StreamSubscription _followUserStateChangeEvent;
 
   @override
   void initState() {
     super.initState();
-    _followUserStateChangeEvent = eventBus.on<FollowUserStateChangeEvent>().listen((event) async {
-      List<NetworkItemInfoEntity> n = pageList.where((element) => element.userId == event.userId).toList();
-      if (n.isNotEmpty) {
-        setState(() {
-          n.first.isFriend = event.isFollow;
-        });
-      }
-    });
     _getPageData();
   }
 
   @override
   void dispose() {
-    _followUserStateChangeEvent.cancel();
     super.dispose();
   }
 
@@ -125,6 +115,7 @@ class _NetworkPageState extends State<NetworkPage> {
                         width: 66,
                         height: 66,
                         radius: 66,
+                        fit: BoxFit.cover,
                         url: itemInfo.picture,
                         errorWidget: Image.asset('assets/image/personal_head_empty.png', fit: BoxFit.fitWidth, width: 66, height: 66,),
                       ),
@@ -236,7 +227,12 @@ class _NetworkPageState extends State<NetworkPage> {
             behavior: HitTestBehavior.opaque,
             onTap: () {
               FocusScope.of(context).requestFocus(FocusNode());
-              AutoRouter.of(context).push(NetworkPersonRoute(itemInfo: itemInfo));
+              AutoRouter.of(context).push<PersonalProfileInfoEntity>(NetworkPersonRoute(userId: itemInfo.userId)).then((value) {
+                if(value!=null){
+                  itemInfo.isFriend = value.friend;
+                  setState(() {});
+                }
+              });
             },
           );
         },
@@ -279,7 +275,7 @@ class _NetworkPageState extends State<NetworkPage> {
                 filled: true,
                 fillColor: const Color(0xffFBB714),
                 floatingLabelBehavior: FloatingLabelBehavior.never,
-                label: Center(child: Text(AppLocalizations.of(context)!.pageNetworkHeadSearchTip,textAlign: TextAlign.center,style: TextStyle(fontSize: 14,color: Color(0xff002A67)),),),
+                label: Center(child: Text(AppLocalizations.of(context)!.pageNetworkHeadSearchTip,textAlign: TextAlign.center,style: const TextStyle(fontSize: 14,color: Color(0xff002A67)),),),
                 contentPadding: const EdgeInsets.only(left: 16),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),

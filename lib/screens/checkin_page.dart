@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/event_data_item_info_entity.dart';
@@ -11,8 +10,7 @@ import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http_request.dart';
-import 'package:provider/src/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class CheckInPage extends StatefulWidget {
   const CheckInPage({Key? key, this.pageScrollDirectionChange}) : super(key: key);
@@ -49,20 +47,21 @@ class _CheckInPageState extends State<CheckInPage> {
             children: [
               const SizedBox(width: 26,),
               netImgWrap(context,
+                fit: BoxFit.cover,
                 width: 90,
                 height: 90,
                 radius: 34,
-                url: context.watch<AuthService>().getLoginInfo?.avatar,
+                url: Provider.of(context).watch<AuthService>().getLoginInfo?.avatar,
                 errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 90, height: 90, fit: BoxFit.fitWidth,),
               ),
               const SizedBox(width: 22,),
               Expanded(child: Column(
                 children: [
-                  Text(context.watch<PersonalProfileService>().getPersonalProfileInfo?.name ?? '-', style: const TextStyle(fontSize: 25, color: Colors.black87, fontWeight: FontWeight.bold,),),
+                  Text(Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo?.name ?? '-', style: const TextStyle(fontSize: 25, color: Colors.black87, fontWeight: FontWeight.bold,),),
                   const SizedBox(height: 2,),
-                  Text(context.watch<PersonalProfileService>().getPersonalProfileInfo?.industry ?? '-', style: const TextStyle(fontSize: 13, color: Colors.black87, fontWeight: FontWeight.w400,),),
+                  Text(Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo?.industry ?? '-', style: const TextStyle(fontSize: 13, color: Colors.black87, fontWeight: FontWeight.w400,),),
                   const SizedBox(height: 12,),
-                  Text(context.watch<PersonalProfileService>().getPersonalProfileInfo?.groupName ?? '', style: const TextStyle(fontSize: 14, color: Color(0xFFCCA962), fontWeight: FontWeight.w500,),),
+                  Text(Provider.of(context).watch<PersonalProfileService>().getPersonalProfileInfo?.groupName ?? '', style: const TextStyle(fontSize: 14, color: Color(0xFFCCA962), fontWeight: FontWeight.w500,),),
                 ],
                 crossAxisAlignment: CrossAxisAlignment.start,
               )),
@@ -84,7 +83,7 @@ class _CheckInPageState extends State<CheckInPage> {
                   ),
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
-                    AutoRouter.of(context).push(CheckHistoryRoute());
+                    AutoRouter.of(context).push(const CheckHistoryRoute());
                   },
                 ),
                 const SizedBox(height: 6,),
@@ -92,7 +91,7 @@ class _CheckInPageState extends State<CheckInPage> {
                    child: _future.isEmpty ?  Center(
                        child: Image.asset('assets/image/no_data.png', height: 140,)
                    ) :  ListView.builder(
-                     padding: EdgeInsets.only(bottom: 100),
+                     padding: const EdgeInsets.only(bottom: 100),
                      controller: _pageScrollController,
                      itemCount: _future.length,
                      itemBuilder: (BuildContext context, int index) {
@@ -189,8 +188,8 @@ class _ConfirmAttendState extends State<ConfirmAttend> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(widget.entity.eventTitle,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,)),
-          Text("Please confirm your attendance.",style: TextStyle(fontSize: 16,)),
+          Text(widget.entity.eventTitle,style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold,)),
+          const Text("Please confirm your attendance.",style: TextStyle(fontSize: 16,)),
           const SizedBox(height: 20,),
           Row(
             children: [
@@ -216,7 +215,7 @@ class _ConfirmAttendState extends State<ConfirmAttend> {
                       },
                       child: Text(
                         AppLocalizations.of(context)!.yes,
-                        style: TextStyle(color: Color(0xff013B7B)),
+                        style: const TextStyle(color:  Color(0xff013B7B)),
                       ))),
               const SizedBox(width: 20,),
               Expanded(
@@ -240,7 +239,7 @@ class _ConfirmAttendState extends State<ConfirmAttend> {
                         setState(() {});
                       },
                       child: Text(AppLocalizations.of(context)!.no,
-                          style: TextStyle(color: Color(0xff013B7B)
+                          style: const TextStyle(color: Color(0xff013B7B)
                           )
                       )
                   )
@@ -252,13 +251,13 @@ class _ConfirmAttendState extends State<ConfirmAttend> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("If No, please fill in reason below:",style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.bold),textAlign: TextAlign.left,),
+                const Text("If No, please fill in reason below:",style:  TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.bold),textAlign: TextAlign.left,),
                 const SizedBox(height: 10,),
                 TextFormField(
                   controller: _reasonController,
                   maxLines: 3,
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10),
+                      contentPadding: const EdgeInsets.all(10),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12)
                       )
@@ -266,26 +265,26 @@ class _ConfirmAttendState extends State<ConfirmAttend> {
 
                 ),
                 const SizedBox(height: 10,),
-                Text("If you would send your representative, please fill in the information below",style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.bold),textAlign: TextAlign.left),
+                const Text("If you would send your representative, please fill in the information below",style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.bold),textAlign: TextAlign.left),
                 const SizedBox(height: 10,),
-                Text("Representative name"),
+                const Text("Representative name"),
                 const SizedBox(height: 10,),
                 TextFormField(
                   controller: _nameController,
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10),
+                      contentPadding: const EdgeInsets.all(10),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12)
                       )
                   ),
                 ),
                 const SizedBox(height: 10,),
-                Text("Representative role"),
+                const Text("Representative role"),
                 const SizedBox(height: 10,),
                 TextFormField(
                   controller: _roleController,
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10),
+                      contentPadding: const EdgeInsets.all(10),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12)
                       )
@@ -324,7 +323,7 @@ class _ConfirmAttendState extends State<ConfirmAttend> {
               },
               child: Text(
                 AppLocalizations.of(context)!.submit,
-                style: TextStyle(color: Color(0xff013B7B)),
+                style: const TextStyle(color: Color(0xff013B7B)),
               ))
         ],
       ),
@@ -356,7 +355,7 @@ class _CheckEventItemState extends State<CheckEventItem> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.entity.eventTitle, style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold,),),
+                  Text(widget.entity.eventTitle, style: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold,),),
                   const SizedBox(height: 10,),
                   Text(DateFormat('EEEE, d MMMM yyyy | h:mm a', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(DateTime.fromMillisecondsSinceEpoch(widget.entity.eventStartTime??0)), style: TextStyle(fontSize: 13, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,),),
                   const SizedBox(height: 10,),
@@ -387,9 +386,9 @@ class _CheckEventItemState extends State<CheckEventItem> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(DateFormat('MMM d', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(DateTime.fromMillisecondsSinceEpoch(widget.entity.eventStartTime??0)), style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87,),),
+            Text(DateFormat('MMM d', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(DateTime.fromMillisecondsSinceEpoch(widget.entity.eventStartTime??0)), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87,),),
             const SizedBox(height: 2,),
-            Text(DateFormat('EE', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(DateTime.fromMillisecondsSinceEpoch(widget.entity.eventStartTime??0)), style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black87,),),
+            Text(DateFormat('EE', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(DateTime.fromMillisecondsSinceEpoch(widget.entity.eventStartTime??0)), style:const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black87,),),
           ],
         ),
       );

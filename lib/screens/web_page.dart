@@ -34,7 +34,7 @@ class _WebPageState extends State<WebPage> {
               loading = true;
               setState(() {});
             },
-            gestureRecognizers: Set()..add(Factory<VerticalDragGestureRecognizer>(() => VerticalDragGestureRecognizer())),
+            gestureRecognizers: <Factory<VerticalDragGestureRecognizer>>{}..add(Factory<VerticalDragGestureRecognizer>(() => VerticalDragGestureRecognizer())),
           ),
         ],
       ),

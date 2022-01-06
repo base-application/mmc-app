@@ -71,10 +71,6 @@ ThankNoteEntity $ThankNoteEntityFromJson(Map<String, dynamic> json) {
 	if (toGroup != null) {
 		thankNoteEntity.toGroup = toGroup;
 	}
-	final String? picture = jsonConvert.convert<String>(json['picture']);
-	if (picture != null) {
-		thankNoteEntity.picture = picture;
-	}
 	return thankNoteEntity;
 }
 
@@ -97,6 +93,5 @@ Map<String, dynamic> $ThankNoteEntityToJson(ThankNoteEntity entity) {
 	data['value'] = entity.value;
 	data['fromGroup'] = entity.fromGroup;
 	data['toGroup'] = entity.toGroup;
-	data['picture'] = entity.picture;
 	return data;
 }

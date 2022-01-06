@@ -8,7 +8,7 @@ import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/event_bus.dart';
 import 'package:mmc/utils/http.dart';
 import 'package:mmc/utils/http_request.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 class BusinessProfileCreatePage extends StatefulWidget {
   const BusinessProfileCreatePage({Key? key, this.info}) : super(key: key);
@@ -845,7 +845,7 @@ class _BusinessProfileCreatePageState extends State<BusinessProfileCreatePage> {
                             child: Container(
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: Color(0xFFDFE5ED),
+                                color: const Color(0xFFDFE5ED),
                                 borderRadius: BorderRadius.circular(14)
                               ),
                               child: const Icon(Icons.add_circle_rounded, size: 36, color: Color(0xFF013B7B),),
@@ -984,7 +984,7 @@ class _BusinessProfileCreatePageState extends State<BusinessProfileCreatePage> {
       companyInterests: _companyInterestsLookingForController.text.trim(),
       serviceIntroduction: _companyProductServiceController.text.trim(),
       producePictures: _formProducts.map((e) => { 'companyId': _companyId, 'producePicture': e }).toList(),
-      userId: context.read<AuthService>().getLoginInfo!.id,
+      userId: Provider.of(context).read<AuthService>().getLoginInfo!.id,
       result: (int companyId) {
         _companyId = companyId;
         ComFun.showToast(msg: AppLocalizations.of(context)!.updateProfileInfoSuccessToast);

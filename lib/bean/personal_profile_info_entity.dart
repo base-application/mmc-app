@@ -37,7 +37,7 @@ class PersonalProfileInfoEntity {
 	String? member;
 	late List<PersonalProfileInfoCompanyVos> companyVos;
 	late AchievementEntity achievement;
-	dynamic friend;
+	bool? friend;
   
   PersonalProfileInfoEntity();
 

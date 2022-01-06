@@ -22,8 +22,7 @@ class ThankNoteEntity {
 	int? value;
 	String? fromGroup;
 	String? toGroup;
-	String? picture;
-  
+
   ThankNoteEntity();
 
   factory ThankNoteEntity.fromJson(Map<String, dynamic> json) => $ThankNoteEntityFromJson(json);

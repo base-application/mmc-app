@@ -1,27 +1,19 @@
-import 'dart:io';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pickers/pickers.dart';
 import 'package:flutter_pickers/style/picker_style.dart';
 import 'package:flutter_pickers/time_picker/model/date_mode.dart';
 import 'package:flutter_pickers/time_picker/model/pduration.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/event_data_item_info_entity.dart';
 import 'package:mmc/bean/grade_level_info_entity.dart';
 import 'package:mmc/bean/group_item_entity.dart';
-import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/utils/comfun.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/utils/comm_widget.dart';
-import 'package:mmc/utils/dialog.dart';
 import 'package:mmc/utils/http.dart';
 import 'package:mmc/utils/http_request.dart';
-import 'package:provider/src/provider.dart';
 
 class CreateEventPage extends StatefulWidget {
   final EventDataItemInfoEntity? entity;

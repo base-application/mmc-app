@@ -1,14 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:mmc/bean/referral_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/utils/comfun.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/utils/http_request.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 class ReferralReceivedContactedPage extends StatefulWidget {
   final ReferralEntity referralEntity;
@@ -42,7 +41,7 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
                       color: const Color(0xFFFBB714),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Text('From '+ (widget.referralEntity.fromName??""), style: TextStyle(fontSize: 14, color: Color(0xFF013B7B), fontWeight: FontWeight.w400,),),
+                    child: Text('From '+ (widget.referralEntity.fromName??""), style:  const TextStyle(fontSize: 14, color: Color(0xFF013B7B), fontWeight: FontWeight.w400,),),
                   ),),
                 ],
               ),
@@ -79,7 +78,7 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
                           borderRadius: BorderRadius.circular(14),
                         ),
                         child: CachedNetworkImage(
-                          imageUrl: context.read<SystemSetService>().baseUrl + widget.referralEntity.picture![index].url,
+                          imageUrl: Provider.of(context).read<SystemSetService>().baseUrl + widget.referralEntity.picture![index].url,
                           placeholder: (BuildContext context, String url,) {
                             return Container(color: Colors.grey.shade300,);
                           },
@@ -105,7 +104,7 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('You have clicked contacted button, may we know how the status?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87,),),
+            const Text('You have clicked contacted button, may we know how the status?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87,),),
             const SizedBox(height: 30,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -159,7 +158,7 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
             if (_chooseSuccess == 3) Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('If fail, please fill in reason below:', style: TextStyle(fontSize: 14, color: Colors.deepOrange, fontWeight: FontWeight.bold,),),
+                const Text('If fail, please fill in reason below:', style: TextStyle(fontSize: 14, color: Colors.deepOrange, fontWeight: FontWeight.bold,),),
                 const SizedBox(height: 8,),
                 Container(
                   width: double.infinity,

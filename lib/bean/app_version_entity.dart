@@ -12,7 +12,7 @@ class AppVersionEntity {
 	late String version;
 	late String info;
 	late String createDate;
-	late dynamic qrcode;
+	late String qrcode;
 	late String md5;
   
   AppVersionEntity();

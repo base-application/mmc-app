@@ -225,7 +225,7 @@ class _EventListingDetailPageState extends State<EventListingDetailPage> {
                         ),
                       ),
                       const SizedBox(width: 12,),
-                      Text('Description', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
+                      const  Text('Description', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
                     ],
                   ),
                   Container(
@@ -258,7 +258,7 @@ class _EventListingDetailPageState extends State<EventListingDetailPage> {
                         ),
                       ),
                       const SizedBox(width: 12,),
-                      Text('Location', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
+                      const  Text('Location', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
                     ],
                   ),
                   Container(
@@ -291,7 +291,7 @@ class _EventListingDetailPageState extends State<EventListingDetailPage> {
                         ),
                       ),
                       const SizedBox(width: 12,),
-                      Text('Link', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
+                      const  Text('Link', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
                     ],
                   ),
                   Container(
@@ -345,7 +345,7 @@ class _EventListingDetailPageState extends State<EventListingDetailPage> {
                         ),
                       ),
                       const SizedBox(width: 12,),
-                      Text('Participants', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
+                      const Text('Participants', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
                     ],
                   ),
                   Container(
@@ -398,12 +398,12 @@ class _EventListingDetailPageState extends State<EventListingDetailPage> {
       appBar: AppBar(
         title: Text(
             widget.eventInfo.eventTitle,
-          style: TextStyle(fontSize: 20, color: Colors.black87, fontWeight: FontWeight.bold,),
+          style: const TextStyle(fontSize: 20, color: Colors.black87, fontWeight: FontWeight.bold,),
         ),
         actions: [
           if(widget.eventInfo.createId == Provider.of<AuthService>(context, listen: false).getLoginInfo?.id
           && widget.eventInfo.eventStartTime! > DateTime.now().millisecondsSinceEpoch
-          ) IconButton(onPressed: (){ AutoRouter.of(context).push(CreateEventRoute(entity: widget.eventInfo));}, icon: Icon(Icons.edit))
+          ) IconButton(onPressed: (){ AutoRouter.of(context).push(CreateEventRoute(entity: widget.eventInfo));}, icon: const Icon(Icons.edit))
         ],
       ),
       body: ScrollConfiguration(

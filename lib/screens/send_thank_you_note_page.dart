@@ -1,14 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:mmc/bean/image_vo_entity.dart';
-import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/utils/comfun.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mmc/utils/http.dart';
 import 'package:mmc/utils/http_request.dart';
-import 'package:provider/src/provider.dart';
 
 class SendThankYouNotePage extends StatefulWidget {
   final int referralId;
@@ -21,7 +16,6 @@ class SendThankYouNotePage extends StatefulWidget {
 }
 
 class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
-  final List<ImageVoEntity> _upload = [];
   final TextEditingController _noteController = TextEditingController();
   final TextEditingController _valueController = TextEditingController();
 
@@ -34,11 +28,11 @@ class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('I wish to send a thank you note to the friend who successfully refer a network to me', style: TextStyle(fontSize: 14, color: Colors.black87, fontWeight: FontWeight.w500,),),
+              const Text('I wish to send a thank you note to the friend who successfully refer a network to me', style: TextStyle(fontSize: 14, color: Colors.black87, fontWeight: FontWeight.w500,),),
               const SizedBox(height: 30,),
-              Text('Thank you note', style: TextStyle(fontSize: 14, color: Colors.black87),),
+              const  Text('Thank you note', style: TextStyle(fontSize: 14, color: Colors.black87),),
               const SizedBox(height: 6,),
-              Text('You can write your own word here and he/she will know.', style: TextStyle(fontSize: 14, color: Colors.black45),),
+              const  Text('You can write your own word here and he/she will know.', style: TextStyle(fontSize: 14, color: Colors.black45),),
               const SizedBox(height: 8,),
               TextFormField(
                 controller: _noteController,
@@ -53,9 +47,9 @@ class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   label: Container(
                     alignment: Alignment.centerLeft,
-                    child: Text("输入答案",style: TextStyle(fontSize: 14, color: Colors.black38),),
+                    child:  const Text("输入答案",style: TextStyle(fontSize: 14, color: Colors.black38),),
                   ),
-                  contentPadding: EdgeInsets.only(left: 16,top: 10,bottom: 10,right: 16),
+                  contentPadding:  const EdgeInsets.only(left: 16,top: 10,bottom: 10,right: 16),
                   counterText: '',
                   isDense: true,
                   enabledBorder:  OutlineInputBorder(
@@ -71,7 +65,7 @@ class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
               const SizedBox(height: 20,),
               Row(
                 children: [
-                  Text('Thank you note value', style: TextStyle(fontSize: 14, color: Colors.black87),),
+                  const  Text('Thank you note value', style: TextStyle(fontSize: 14, color: Colors.black87),),
                   const SizedBox(width: 4,),
                   Image.asset('assets/icon/form_required.png', width: 8, height: 8, color: Colors.redAccent, colorBlendMode: BlendMode.srcATop,),
                 ],
@@ -105,53 +99,6 @@ class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20,),
-              Row(
-                children: [
-                  Text('Upload receipt', style: TextStyle(fontSize: 14, color: Colors.black87),),
-                  const SizedBox(width: 4,),
-                  Image.asset('assets/icon/form_required.png', width: 8, height: 8, color: Colors.redAccent, colorBlendMode: BlendMode.srcATop,),
-                ],
-              ),
-              const SizedBox(height: 8,),
-              ListView.builder(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: _upload.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 18),
-                    child: CachedNetworkImage(
-                      height: MediaQuery.of(context).size.width * 9 / 16,
-                      imageUrl: context.read<SystemSetService>().baseUrl  + _upload[index].url,
-                      placeholder: (BuildContext context, String url,) {
-                        return Container(color: Colors.grey.shade300,);
-                      },
-                      fit: BoxFit.fill,
-                      errorWidget: (BuildContext context, String url, dynamic error,) {
-                        return Container(color: Colors.grey.shade300,);
-                      },
-                    ),
-                  );
-                },
-              ),
-              Center(
-                child: GestureDetector(
-                  child: const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Icon(Icons.add_circle_rounded, size: 30, color: Color(0xFF0544A6),),
-                  ),
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () async {
-                    String uploadPath = await httpUpload(context);
-                    ImageVoEntity e = ImageVoEntity();
-                    e.url = uploadPath;
-                    _upload.add(e);
-                    setState(() {});
-                  },
-                ),
-              ),
               const SizedBox(height: 30,),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
@@ -168,11 +115,7 @@ class _SendThankYouNotePageState extends State<SendThankYouNotePage> {
                       ComFun.showToast(msg: "请输入");
                       return;
                     }
-                    if(_upload.isEmpty){
-                      ComFun.showToast(msg: "请上传图片");
-                      return;
-                    }
-                    ComFun.confirm(context, () => thank(context,note: _noteController.text, images: _upload, value: _valueController.text,referralId: widget.referralId,result: (o) {
+                    ComFun.confirm(context, () => thank(context,note: _noteController.text, value: _valueController.text,referralId: widget.referralId,result: (o) {
                       AutoRouter.of(context).pop(true);
                     }, ), AppLocalizations.of(context)!.confirmSend);
                   },

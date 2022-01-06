@@ -107,8 +107,8 @@
   "personalProfileFormStateHint": "Please select",
   "personalProfileFormIndustry": "Industry",
   "personalProfileFormIndustryHint": "Please select",
-  "personalProfileFormYourOccupation": "Your Occupation",
-  "personalProfileFormYourOccupationHint": "Please key in your occupation",
+  "personalProfileFormYourOccupation": "Your Position",
+  "personalProfileFormYourOccupationHint": "Please key in your position",
   "personalProfileFormSelfIntroduction": "Self Introduction",
   "personalProfileFormSelfIntroductionHint": "You may write up to 200 words of self introduction",
   "personalProfileFormYourPhoneNumber": "Your phone number",
@@ -226,5 +226,6 @@
   "checkInSuccess": "checkIn success",
   "netWorkError": "Network Error please retry",
   "clickRegister": "Click Register",
-  "joinOnStart": "Join before the event"
+  "joinOnStart": "Join before the event",
+  "position": "[\"Business\",\"owner\",\"Manager\",\"Founder\",\"Co-Founder\",\"CEO\",\"CFO\",\"CMO\"]"
 }

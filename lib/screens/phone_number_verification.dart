@@ -164,7 +164,7 @@ class _PhoneNumberVerificationPageState extends State<PhoneNumberVerificationPag
           ),
           behavior: HitTestBehavior.opaque,
           onTap: () {
-            AutoRouter.of(context).push(SignInRoute());
+            AutoRouter.of(context).push(const SignInRoute());
           },
         ),
       ),

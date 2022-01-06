@@ -38,12 +38,12 @@ class _CheckHistoryPageState extends State<CheckHistoryPage> with SingleTickerPr
         builder: (BuildContext context, AsyncSnapshot<List<CheckLogEntity>> snapshot) {
           if(snapshot.connectionState == ConnectionState.done && snapshot.hasData && snapshot.data!.isNotEmpty){
             return  ListView.builder(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               itemCount: snapshot.data!.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                  padding: EdgeInsets.all(16),
-                  margin: EdgeInsets.only(top: 16),
+                  padding: const EdgeInsets.all(16),
+                  margin: const EdgeInsets.only(top: 16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     gradient: const LinearGradient(
@@ -58,7 +58,7 @@ class _CheckHistoryPageState extends State<CheckHistoryPage> with SingleTickerPr
                   child:Row(
                     children: [
                       getIcon(snapshot.data![index]),
-                      SizedBox(width: 10,),
+                      const SizedBox(width: 10,),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

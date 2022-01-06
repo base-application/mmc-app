@@ -3,7 +3,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/bean/login_info_entity.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
@@ -13,7 +12,7 @@ import 'package:mmc/utils/comfun.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:mmc/widget/app_bar_home.dart';
 import 'package:mmc/widget/country_choose.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -42,7 +41,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return  Container(
-      padding: EdgeInsets.all(16),
+      padding:  const EdgeInsets.all(16),
       decoration: BoxDecoration(
         image: DecorationImage(image: Image.asset("assets/image/login_background.png").image,alignment: Alignment.topCenter),
         gradient: const LinearGradient(
@@ -131,7 +130,7 @@ class _SignInPageState extends State<SignInPage> {
                         });
                       },
                     ),
-                    SizedBox(width: 10,),
+                    const SizedBox(width: 10,),
                     Expanded(
                       child: Container(
                       height: 50,
@@ -276,13 +275,14 @@ class _SignInPageState extends State<SignInPage> {
       PersonalProfileInfoEntity profileInfo = await getUserDetailData(context, userId: info.id, silence: true);
       await savePersonalProfileInfo(context, info.id, profileInfo);
       if(ComFun.isPerfect(context)){
-        AutoRouter.of(context).replaceAll([HomeRoute(),PersonalProfileSetRoute()]);
+        AutoRouter.of(context).replaceAll([ const HomeRoute(), const PersonalProfileSetRoute()]);
       }else{
-        AutoRouter.of(context).replaceAll([HomeRoute()]);
+        AutoRouter.of(context).replaceAll([ const HomeRoute()]);
       }
 
     },err: (){
-      savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, null);
+      savePersonalProfileInfo(context, Provider.of(context)
+          .read<AuthService>().getLoginInfo!.id, null);
       saveLoginInfo(context, null);
     });
   }

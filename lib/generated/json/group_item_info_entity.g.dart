@@ -206,7 +206,7 @@ GroupItemInfoUserInfoVosCompanyVos $GroupItemInfoUserInfoVosCompanyVosFromJson(M
 	if (userId != null) {
 		groupItemInfoUserInfoVosCompanyVos.userId = userId;
 	}
-	final dynamic? companyLogo = jsonConvert.convert<dynamic>(json['companyLogo']);
+	final String? companyLogo = jsonConvert.convert<String>(json['companyLogo']);
 	if (companyLogo != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyLogo = companyLogo;
 	}
@@ -214,55 +214,55 @@ GroupItemInfoUserInfoVosCompanyVos $GroupItemInfoUserInfoVosCompanyVosFromJson(M
 	if (companyName != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyName = companyName;
 	}
-	final dynamic? companyAddress = jsonConvert.convert<dynamic>(json['companyAddress']);
+	final String? companyAddress = jsonConvert.convert<String>(json['companyAddress']);
 	if (companyAddress != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyAddress = companyAddress;
 	}
-	final dynamic? companyWebsite = jsonConvert.convert<dynamic>(json['companyWebsite']);
+	final String? companyWebsite = jsonConvert.convert<String>(json['companyWebsite']);
 	if (companyWebsite != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyWebsite = companyWebsite;
 	}
-	final dynamic? companyEmail = jsonConvert.convert<dynamic>(json['companyEmail']);
+	final String? companyEmail = jsonConvert.convert<String>(json['companyEmail']);
 	if (companyEmail != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyEmail = companyEmail;
 	}
-	final dynamic? companyPhone = jsonConvert.convert<dynamic>(json['companyPhone']);
+	final String? companyPhone = jsonConvert.convert<String>(json['companyPhone']);
 	if (companyPhone != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyPhone = companyPhone;
 	}
-	final dynamic? companyFacebook = jsonConvert.convert<dynamic>(json['companyFacebook']);
+	final String? companyFacebook = jsonConvert.convert<String>(json['companyFacebook']);
 	if (companyFacebook != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyFacebook = companyFacebook;
 	}
-	final dynamic? companyLinkedin = jsonConvert.convert<dynamic>(json['companyLinkedin']);
+	final String? companyLinkedin = jsonConvert.convert<String>(json['companyLinkedin']);
 	if (companyLinkedin != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyLinkedin = companyLinkedin;
 	}
-	final dynamic? companyYoutube = jsonConvert.convert<dynamic>(json['companyYoutube']);
+	final String? companyYoutube = jsonConvert.convert<String>(json['companyYoutube']);
 	if (companyYoutube != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyYoutube = companyYoutube;
 	}
-	final dynamic? companyInstagram = jsonConvert.convert<dynamic>(json['companyInstagram']);
+	final String? companyInstagram = jsonConvert.convert<String>(json['companyInstagram']);
 	if (companyInstagram != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyInstagram = companyInstagram;
 	}
-	final dynamic? companyIntroduction = jsonConvert.convert<dynamic>(json['companyIntroduction']);
+	final String? companyIntroduction = jsonConvert.convert<String>(json['companyIntroduction']);
 	if (companyIntroduction != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyIntroduction = companyIntroduction;
 	}
-	final dynamic? companyGoals = jsonConvert.convert<dynamic>(json['companyGoals']);
+	final String? companyGoals = jsonConvert.convert<String>(json['companyGoals']);
 	if (companyGoals != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyGoals = companyGoals;
 	}
-	final dynamic? companyAccomplishments = jsonConvert.convert<dynamic>(json['companyAccomplishments']);
+	final String? companyAccomplishments = jsonConvert.convert<String>(json['companyAccomplishments']);
 	if (companyAccomplishments != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyAccomplishments = companyAccomplishments;
 	}
-	final dynamic? companyInterests = jsonConvert.convert<dynamic>(json['companyInterests']);
+	final String? companyInterests = jsonConvert.convert<String>(json['companyInterests']);
 	if (companyInterests != null) {
 		groupItemInfoUserInfoVosCompanyVos.companyInterests = companyInterests;
 	}
-	final dynamic? serviceIntroduction = jsonConvert.convert<dynamic>(json['serviceIntroduction']);
+	final String? serviceIntroduction = jsonConvert.convert<String>(json['serviceIntroduction']);
 	if (serviceIntroduction != null) {
 		groupItemInfoUserInfoVosCompanyVos.serviceIntroduction = serviceIntroduction;
 	}

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/utils/comfun.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 class LanguageSetPage extends StatefulWidget {
   const LanguageSetPage({Key? key}) : super(key: key);
@@ -86,7 +86,7 @@ class _LanguageSetPageState extends State<LanguageSetPage> {
   }
 
   getMark(String language) {
-    if(context.read<SystemSetService>().appLanguage == language){
+    if(Provider.of(context).read<SystemSetService>().appLanguage == language){
       return const Icon(CupertinoIcons.check_mark_circled,color: Colors.white,);
     }else{
       return const Icon(CupertinoIcons.check_mark_circled,color: Colors.transparent,);

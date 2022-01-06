@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/bean/referral_entity.dart';
 import 'package:mmc/screens/advertisement_page.dart';
 import 'package:mmc/screens/business_profile_create_page.dart';
@@ -53,7 +54,7 @@ import 'auth_guard.dart';
     AutoRoute<String>(page: GroupPage, path: '/group'),
     AutoRoute<String>(page: GroupDetailPage, path: '/groupDetail'),
     AutoRoute<String>(page: SendingReferralPage, path: '/sendingReferral', guards: [AuthGuard]),
-    AutoRoute<String>(page: NetworkPersonPage, path: '/networkPerson', guards: [AuthGuard]),
+    AutoRoute<PersonalProfileInfoEntity>(page: NetworkPersonPage, path: '/networkPerson', guards: [AuthGuard]),
     AutoRoute<String>(page: TodayNewestPage, path: '/todayNewest'),
     AutoRoute<String>(page: NewestDetailPage, path: '/newestDetail'),
     AutoRoute<String>(page: EventListingPage, path: '/eventListing'),

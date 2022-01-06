@@ -7,7 +7,6 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_log/interceptor/dio_log_interceptor.dart';
 import 'package:flustars/flustars.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -18,7 +17,6 @@ import 'package:provider/provider.dart';
 
 
 import 'comfun.dart';
-import 'event_bus.dart';
 
 /// dio 构造器
 class DioHttpUtil {
@@ -50,7 +48,7 @@ class DioHttpUtil {
 
       LogUtil.init(isDebug: const bool.fromEnvironment('dart.vm.product') == false);
       _dio!.options.baseUrl = context.read<SystemSetService>().baseUrl;
-      _dio!.options.connectTimeout = 30000;
+      _dio!.options.connectTimeout = 60000;
       _dio!.options.receiveTimeout = 20000;
       _dio!.options.sendTimeout = 20000;
       _dio!.options.contentType = 'application/json';
@@ -70,7 +68,7 @@ class DioHttpUtil {
             // 无访问权限 or token过期失效
             debugPrint('数据请求状态为401');
             if(AutoRouter.of(ComFun.navigatorKey.currentState!.context).current.name !="SignInRoute"){
-              AutoRouter.of(ComFun.navigatorKey.currentState!.context).push(SignInRoute());
+              AutoRouter.of(ComFun.navigatorKey.currentState!.context).push(const SignInRoute());
             }
           }
           if(e.response?.data.containsKey("message")){

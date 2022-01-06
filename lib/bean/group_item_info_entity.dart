@@ -70,21 +70,21 @@ class GroupItemInfoUserInfoVosCompanyVos {
 
 	late int companyId;
 	late int userId;
-	dynamic companyLogo;
+	String? companyLogo;
 	String? companyName;
-	dynamic companyAddress;
-	dynamic companyWebsite;
-	dynamic companyEmail;
-	dynamic companyPhone;
-	dynamic companyFacebook;
-	dynamic companyLinkedin;
-	dynamic companyYoutube;
-	dynamic companyInstagram;
-	dynamic companyIntroduction;
-	dynamic companyGoals;
-	dynamic companyAccomplishments;
-	dynamic companyInterests;
-	dynamic serviceIntroduction;
+	String? companyAddress;
+	String? companyWebsite;
+	String? companyEmail;
+	String? companyPhone;
+	String? companyFacebook;
+	String? companyLinkedin;
+	String? companyYoutube;
+	String? companyInstagram;
+	String? companyIntroduction;
+	String? companyGoals;
+	String? companyAccomplishments;
+	String? companyInterests;
+	String? serviceIntroduction;
 	List<GroupItemInfoUserInfoVosCompanyVosProducePictures>? producePictures;
 }
 

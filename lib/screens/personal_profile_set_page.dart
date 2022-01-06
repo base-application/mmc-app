@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:convert';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flustars/flustars.dart';
@@ -7,11 +7,10 @@ import 'package:flutter_pickers/pickers.dart';
 import 'package:flutter_pickers/style/picker_style.dart';
 import 'package:flutter_pickers/time_picker/model/date_mode.dart';
 import 'package:flutter_pickers/time_picker/model/pduration.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/bean/state_item_info_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
+import 'package:mmc/screens/state_choose.dart';
 import 'package:mmc/utils/comfun.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,7 +19,10 @@ import 'package:mmc/utils/http.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:mmc/widget/app_bar_home.dart';
 import 'package:mmc/widget/country_choose.dart';
-import 'package:provider/src/provider.dart';
+import 'package:mmc/widget/input_select.dart';
+import 'dart:developer' as developer;
+
+import 'package:provider/provider.dart';
 
 class PersonalProfileSetPage extends StatefulWidget {
   const PersonalProfileSetPage({Key? key}) : super(key: key);
@@ -38,7 +40,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
   CountryCodeInfo? _formCountry;
   StateItemInfoEntity? _formState;
   String? _formIndustry;
-  final TextEditingController _yourOccupationController = TextEditingController();
+  String? _formOccupation;
   final TextEditingController _selfIntroductionController = TextEditingController();
   final TextEditingController _yourPhoneNumberController = TextEditingController();
   final TextEditingController _yourWhatsAppController = TextEditingController();
@@ -77,7 +79,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                         width: 120,
                         height: 162,
                         radius: 14,
-                        url: _formUserHead ?? context.watch<AuthService>().getLoginInfo?.avatar,
+                        url: _formUserHead ?? Provider.of(context).watch<AuthService>().getLoginInfo?.avatar,
                         errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 100, fit: BoxFit.cover,),
                       ),
                       const SizedBox(width: 12,),
@@ -378,29 +380,32 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                         ],
                       ),
                       const SizedBox(height: 8,),
-                      Container(
-                        width: double.infinity,
-                        height: 44,
-                        padding: const EdgeInsets.only(left: 10, right: 10,),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(width: 0.6, color: Colors.grey.shade300,)
-                        ),
-                        child: TextFormField(
-                          controller: _yourOccupationController,
-                          keyboardType: TextInputType.text,
-                          cursorColor: Colors.blueAccent,
-                          style: const TextStyle(textBaseline: TextBaseline.alphabetic),
-                          decoration: InputDecoration(
-                            hintText: AppLocalizations.of(context)!.personalProfileFormYourOccupationHint,
-                            hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
-                            contentPadding: const EdgeInsets.only(top: 12,),
-                            counterText: '',
-                            isDense: true,
-                            border: InputBorder.none,
+                      GestureDetector(
+                        child: Container(
+                          width: double.infinity,
+                          height: 44,
+                          padding: const EdgeInsets.only(left: 14, right: 10,),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(width: 0.6, color: Colors.grey.shade300,)
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(_formOccupation ?? AppLocalizations.of(context)!.personalProfileFormYourOccupationHint, style: TextStyle(fontSize: 14, color: _formOccupation == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
+                              ),
+                              const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
+                            ],
                           ),
                         ),
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          _chooseOccupation();
+                        },
                       ),
                     ],
                   ),),
@@ -413,13 +418,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                   Expanded(child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Image.asset('assets/icon/form_required.png', width: 8, height: 8,),
-                          const SizedBox(width: 6,),
-                          Text(AppLocalizations.of(context)!.personalProfileFormSelfIntroduction, style: TextStyle(fontSize: 15, color: Colors.black87.withAlpha(220),),),
-                        ],
-                      ),
+                      Text(AppLocalizations.of(context)!.personalProfileFormSelfIntroduction, style: TextStyle(fontSize: 15, color: Colors.black87.withAlpha(220),),),
                       const SizedBox(height: 8,),
                       Container(
                         width: double.infinity,
@@ -744,31 +743,35 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
   }
 
   _initFormData() {
-    _formUserHead = context.read<AuthService>().getLoginInfo!.avatar;
-    PersonalProfileInfoEntity personalProfileInfo = context.read<PersonalProfileService>().getPersonalProfileInfo!;
+    _formUserHead = Provider.of(context).read<AuthService>().getLoginInfo!.avatar;
+    PersonalProfileInfoEntity personalProfileInfo = Provider.of(context).read<PersonalProfileService>().getPersonalProfileInfo!;
     if (personalProfileInfo.name != null) _yourNameController.text = personalProfileInfo.name!;
     if (personalProfileInfo.birthday != null) _formDateOfBirth = DateUtil.formatDate(DateTime.fromMillisecondsSinceEpoch(personalProfileInfo.birthday!), format: 'yyyy-MM-dd');
-    if (personalProfileInfo.country != null) {
-      getCountryCodeData(context, silence: true, result: (List<CountryCodeInfo> list) {
-        List<CountryCodeInfo> initCountry = list.where((element) => element.id == personalProfileInfo.country!).toList();
-        if (initCountry.isNotEmpty) {
-          _formCountry = initCountry.first;
-          if (personalProfileInfo.state != null) {
-            getStateDataByCountryCode(context, silence: true, countryCode: _formCountry!.iso2, result: (List<StateItemInfoEntity> list) {
-              setState(() {
-                _aboutState = list;
-              });
-              List<StateItemInfoEntity> initState = list.where((element) => element.id == personalProfileInfo.state!).toList();
-              if (initState.isNotEmpty) {
-                _formState = initState.first;
-              }
-            });
+    developer.log("国家代码");
+    developer.log( WidgetsBinding.instance?.window.locale.languageCode??"");
+    getCountryCodeData(context, silence: true, result: (List<CountryCodeInfo> list) {
+      CountryCodeInfo? initCountry;
+      if(personalProfileInfo.country !=null){
+        initCountry = list.firstWhere((element) => element.id == personalProfileInfo.country!);
+      }else{
+        initCountry = list.firstWhere((element) => element.iso2 == WidgetsBinding.instance?.window.locale.countryCode!);
+      }
+      _formCountry = initCountry;
+      setState(() {});
+      getStateDataByCountryCode(context, silence: true, countryCode: _formCountry!.iso2, result: (List<StateItemInfoEntity> list) {
+        setState(() {
+          _aboutState = list;
+        });
+        if(personalProfileInfo.state!=null){
+          List<StateItemInfoEntity> initState = list.where((element) => element.id == personalProfileInfo.state!).toList();
+          if (initState.isNotEmpty) {
+            _formState = initState.first;
           }
         }
       });
-    }
+    });
     _formIndustry = personalProfileInfo.industry;
-    _yourOccupationController.text = personalProfileInfo.occupation ?? '';
+    _formOccupation = personalProfileInfo.occupation;
     _selfIntroductionController.text = personalProfileInfo.introduction ?? '';
     _yourPhoneNumberController.text = personalProfileInfo.concatNumber ?? '';
     _yourWhatsAppController.text = personalProfileInfo.whatsapp ?? '';
@@ -776,31 +779,6 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
     _yourLinkedInController.text = personalProfileInfo.linkedin ?? '';
     _yourYoutubeChannelController.text = personalProfileInfo.youtube ?? '';
     _yourInstagramController.text = personalProfileInfo.instagram ?? '';
-  }
-
-  /// 选择国家
-  _chooseCountry() {
-    getCountryCodeData(context, silence: false, result: (List<CountryCodeInfo> list) {
-      Pickers.showSinglePicker(context,
-        data: list.map((e) => e.nativeName).toList(),
-        selectData: _formCountry?.nativeName,
-        pickerStyle: PickerStyle(
-          showTitleBar: true,
-          backgroundColor: Colors.white,
-          textColor: Colors.black87,
-          pickerHeight: MediaQuery.of(context).size.height * 0.4,
-          menuHeight: MediaQuery.of(context).size.height * 0.4,
-        ),
-        onConfirm: (res, position) {
-          setState(() {
-            _aboutState = [];
-            _formCountry = list[position];
-            _formState = null;
-          });
-          _getStateData();
-        },
-      );
-    });
   }
 
   _getStateData() {
@@ -815,54 +793,60 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
   /// 前提是已选国家，_formCountry
   _chooseState() {
     if (_aboutState.isNotEmpty) {
-      if (_formState == null) {
-        setState(() {
-          _formState = _aboutState[0];
-        });
-      }
-      Pickers.showSinglePicker(context,
-        data: _aboutState.map((e) => e.name).toList(),
-        selectData: _formState?.name,
-        pickerStyle: PickerStyle(
-          showTitleBar: false,
-          backgroundColor: Colors.white,
-          textColor: Colors.black87,
-          pickerHeight: MediaQuery.of(context).size.height * 0.4,
-          menuHeight: MediaQuery.of(context).size.height * 0.4,
-        ),
-        onChanged: (res, position) {
-          setState(() {
-            _formState = _aboutState[position];
-          });
-        },
-      );
+      showModalBottomSheet<StateItemInfoEntity?>(
+          context: context,
+          isScrollControlled: true,
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * .8,
+            minHeight: MediaQuery.of(context).size.height * .4,
+          ),
+          builder: (BuildContext context) {
+            return StateChoose(states: _aboutState,);
+          }).then((country) {
+        if(country!=null){
+          _formState = country;
+          setState(() {});
+        }
+      });
     }
   }
 
   /// 选择行业
   _chooseIndustry() {
     getIndustryData(context, result: (List<String> industryList) {
-      if (_formIndustry == null) {
-        setState(() {
-          _formIndustry = industryList.first;
-        });
-      }
-      Pickers.showSinglePicker(context,
-        data: industryList,
-        selectData: _formIndustry,
-        pickerStyle: PickerStyle(
-          showTitleBar: false,
-          backgroundColor: Colors.white,
-          textColor: Colors.black87,
-          pickerHeight: MediaQuery.of(context).size.height * 0.4,
-          menuHeight: MediaQuery.of(context).size.height * 0.4,
+      showModalBottomSheet<String?>(
+          context: context,
+          isScrollControlled: true,
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * .8,
+            minHeight: MediaQuery.of(context).size.height * .4,
+          ),
+          builder: (BuildContext context) {
+            return InputSelect(name: industryList,);
+          }).then((industry) {
+        if(industry!=null){
+          _formIndustry = industry;
+          setState(() {});
+        }
+      });
+    });
+  }
+
+  void _chooseOccupation() {
+    showModalBottomSheet<String?>(
+        context: context,
+        isScrollControlled: true,
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * .8,
+          minHeight: MediaQuery.of(context).size.height * .4,
         ),
-        onChanged: (res, position) {
-          setState(() {
-            _formIndustry = res;
-          });
-        },
-      );
+        builder: (BuildContext context) {
+          return InputSelect(name: json.decode(AppLocalizations.of(context)!.position).cast<String>(),);
+        }).then((industry) {
+      if(industry!=null){
+        _formOccupation = industry;
+        setState(() {});
+      }
     });
   }
 
@@ -885,12 +869,8 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
       ComFun.showToast(msg: 'Please choose your state');
       return;
     }
-    if (_yourOccupationController.text.trim() == '') {
+    if (_formOccupation==null || _formOccupation == '') {
       ComFun.showToast(msg: 'Please fill your occupation');
-      return;
-    }
-    if (_selfIntroductionController.text.trim() == '') {
-      ComFun.showToast(msg: 'Please fill self introduction');
       return;
     }
     if (_yourPhoneNumberController.text.trim() == '') {
@@ -904,7 +884,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
       country: _formCountry?.id,
       state: _formState?.id,
       industry: _formIndustry, // 行业
-      occupation: _yourOccupationController.text.trim(),
+      occupation: _formOccupation!,
       introduction: _selfIntroductionController.text.trim(),
       concatNumber: _yourPhoneNumberController.text.trim(),
       whatsapp: _yourWhatsAppController.text.trim(),
@@ -912,21 +892,22 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
       linkedin: _yourLinkedInController.text.trim(),
       youtube: _yourYoutubeChannelController.text.trim(),
       instagram: _yourInstagramController.text.trim(),
-      userId: context.read<AuthService>().getLoginInfo!.id,
+      userId: Provider.of(context).read<AuthService>().getLoginInfo!.id,
       result: (PersonalProfileInfoEntity info) {
         ComFun.showToast(msg: AppLocalizations.of(context)!.updateProfileInfoSuccessToast);
-        context.read<AuthService>().setAvatar(_formUserHead);
-        savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, info);
+        Provider.of(context).read<AuthService>().setAvatar(_formUserHead);
+        savePersonalProfileInfo(context, Provider.of(context).read<AuthService>().getLoginInfo!.id, info);
         AutoRouter.of(context).pop();
       },
     );
   }
 
   getName() {
-    if(context.read<SystemSetService>().appLanguage == "en"){
+    if(Provider.of(context).read<SystemSetService>().appLanguage == "en"){
      return _formCountry?.name;
     }else{
       return _formCountry?.translations.cn??"";
     }
   }
+
 }

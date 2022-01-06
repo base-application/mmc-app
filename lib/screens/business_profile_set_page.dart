@@ -13,7 +13,7 @@ import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/dialog.dart';
 import 'package:mmc/utils/event_bus.dart';
 import 'package:mmc/utils/http_request.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 class BusinessProfileSetPage extends StatefulWidget {
   const BusinessProfileSetPage({Key? key}) : super(key: key);
@@ -273,7 +273,7 @@ class _BusinessProfileSetPageState extends State<BusinessProfileSetPage> {
 
   /// 获取公司列表数据
   Future _getDataList({ bool silence = false }) async {
-    PersonalProfileInfoEntity info = await getUserDetailData(context, userId: context.read<AuthService>().getLoginInfo!.id, silence: silence);
+    PersonalProfileInfoEntity info = await getUserDetailData(context, userId: Provider.of(context).read<AuthService>().getLoginInfo!.id, silence: silence);
 
     savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, info);
     companyVos = info.companyVos;

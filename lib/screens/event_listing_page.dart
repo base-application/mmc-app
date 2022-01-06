@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/event_data_item_info_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
@@ -16,7 +15,7 @@ import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/dialog.dart';
 import 'package:mmc/utils/event_bus.dart';
 import 'package:mmc/utils/http_request.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -543,7 +542,7 @@ class _EventListingPageState extends State<EventListingPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(width: 4,),
-                Container(
+                SizedBox(
                   width: 55,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -620,19 +619,19 @@ class _EventListingPageState extends State<EventListingPage> {
                   child: netImgWrap(context,
                     width: 40,
                     height: 40,
-                    url: context.watch<AuthService>().getLoginInfo?.avatar,
+                    url: Provider.of(context).watch<AuthService>().getLoginInfo?.avatar,
                     errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 40, height: 40, fit: BoxFit.fitWidth,),
                   ),
                 ),
               ),
-              if (context.read<AuthService>().getLoginInfo?.createEvent??false) Positioned(
+              if (Provider.of(context).read<AuthService>().getLoginInfo?.createEvent??false) Positioned(
                 child: Image.asset('assets/icon/change.png', width: 18, height: 18,),
                 bottom: 0,
                 right: 3,
               ),
             ],
           ): (ctx) {
-            if (context.read<AuthService>().getLoginInfo!.createEvent) {
+            if (Provider.of(context).read<AuthService>().getLoginInfo!.createEvent) {
               _data.clear();
               _isCreate = !_isCreate;
               setState(() {});

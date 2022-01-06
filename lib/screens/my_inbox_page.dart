@@ -42,11 +42,11 @@ class _MyInboxPageState extends State<MyInboxPage> {
                onPressed: (){
                  _isEdit = false;
                  setState(() {});
-                 snapshot.data!.forEach((element) {
+                 for (var element in snapshot.data!) {
                    element.check = false;
-                 });
+                 }
                  },
-               child: Text(AppLocalizations.of(context)!.done,style: TextStyle(color: Color(0xFF013B7B)),
+               child: Text(AppLocalizations.of(context)!.done,style: const TextStyle(color: Color(0xFF013B7B)),
                )
            ) :
            IconButton(
@@ -59,9 +59,9 @@ class _MyInboxPageState extends State<MyInboxPage> {
              GestureDetector(
                onTap: (){
                  if(_isEdit){
-                   snapshot.data!.forEach((element) {
+                   for (var element in snapshot.data!) {
                      element.check = true;
-                   });
+                   }
                    setState(() {});
                  }else{
                    _isEdit = true;
@@ -81,7 +81,7 @@ class _MyInboxPageState extends State<MyInboxPage> {
          ),
          body: getBody(snapshot),
          bottomNavigationBar: _isEdit ? BottomButton(
-           child: Container(
+           child: SizedBox(
              width: MediaQuery.of(context).size.width,
              child: ElevatedButton(
                style: ButtonStyle(
@@ -164,7 +164,7 @@ class _MyInboxPageState extends State<MyInboxPage> {
                   if (_isEdit) const SizedBox(width: 8,),
                   Expanded(
                       child: Container(
-                        padding: EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(9),
                           gradient: const LinearGradient(
@@ -179,12 +179,12 @@ class _MyInboxPageState extends State<MyInboxPage> {
                         child: Row(
                           children: [
                             getIcon(snapshot.data![index].notificationType),
-                            SizedBox(width: 10,),
+                            const SizedBox(width: 10,),
                             Expanded(
                                 child:Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(snapshot.data![index].notificationTitle,style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold,)),
+                                    Text(snapshot.data![index].notificationTitle,style: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold,)),
                                     Text(DateFormat('EEE, d MMM yyyy | h:mm a', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(DateTime.fromMillisecondsSinceEpoch(snapshot.data![index].notificationTime)),
                                       style: TextStyle(fontSize: 12, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,),
                                     ),

@@ -2,13 +2,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/painting.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/utils/comm_widget.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 GlobalKey<_HomeAppBarState> childKeyHomeAppBar = GlobalKey();
 class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -47,7 +45,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
               GestureDetector(
                 onTap: (){
                 },
-                child: Text(context.watch<PersonalProfileService>().getPersonalProfileInfo?.name ?? '-', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black87,),),
+                child: Text(Provider.of(context)
+                    .watch<PersonalProfileService>().getPersonalProfileInfo?.name ?? '-', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black87,),),
               ),
             ],
           ),
@@ -57,7 +56,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
               width: 50,
               height: 50,
               fit: BoxFit.cover,
-              url: context.watch<AuthService>().getLoginInfo?.avatar,
+              url: Provider.of(context)
+                  .watch<AuthService>().getLoginInfo?.avatar,
               errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 50, height: 50, fit: BoxFit.fitWidth,),
             ),
           )
@@ -85,6 +85,7 @@ class CountryCodeInfo {
         name = result.containsKey('name') && result['name'] != null ? result['name'] : '',
         translations = result.containsKey('translations') && result['translations'] != null ? Translations.fromJson(jsonDecode(result['translations'])) : Translations(),
         timezones = result.containsKey('nativeName') ? (json.decode(result['timezones']) as List).map((v) => CountryCodeTimezonesInfo.fromJson(v)).toList() : [];
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

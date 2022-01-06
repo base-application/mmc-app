@@ -19,7 +19,8 @@ class _MostReferralSentPageState extends State<MostReferralSentPage> {
         child: Container(
           padding: const EdgeInsets.only(top: 10, left: 26, right: 26, bottom: 30,),
           child: Column(
-            children: [
+            children: const [
+              Text("")
             ],
           ),
         ),

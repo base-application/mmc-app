@@ -1,4 +1,5 @@
 
+import 'dart:developer';
 import 'dart:io';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
@@ -462,7 +463,7 @@ Future getMyNetwork(BuildContext context, { String? name, String? industry, int?
   }, silence: silence).then((value) {
     result.call(value!.data!.list.map((e) => NetworkItemInfoEntity.fromJson(e)).toList());
   }).catchError((_) {
-    print(err);
+    log(err.toString());
     err?.call();
   });
 }
@@ -521,11 +522,10 @@ Future received(BuildContext context,
 
 
 /// 发送感谢
-Future thank(BuildContext context, { required String note, required String value,required List<ImageVoEntity> images,required int referralId, required Function(bool) result}) async {
+Future thank(BuildContext context, { required String note, required String value,required int referralId, required Function(bool) result}) async {
   await httpPost(context, url: '/thank/you/note/add', data: {
     'note': note,
     'value': value,
-    'picture': images,
     'referralId':referralId
   }, silence: false).then((value) {
     result.call(value!.code == 200);

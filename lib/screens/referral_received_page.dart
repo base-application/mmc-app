@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/referral_entity.dart';
@@ -40,7 +38,7 @@ class _ReferralReceivedPageState extends State<ReferralReceivedPage> {
                 color: const Color(0xFFFBB714),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text('Referral received from our MMC network.Get ready to contact. WooHoo~~~', style: TextStyle(fontSize: 16, color: Color(0xFF013B7B)),),
+              child:  const Text('Referral received from our MMC network.Get ready to contact. WooHoo~~~', style: TextStyle(fontSize: 16, color: Color(0xFF013B7B)),),
             ),
             const SizedBox(height: 14,),
             Expanded(
@@ -137,7 +135,7 @@ class _ReferralCardState extends State<ReferralCard> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.referralEntity.reason??'………', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500,),),
+              Text(widget.referralEntity.reason??'………', style:  const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500,),),
               const SizedBox(height: 12,),
               Text(DateFormat('EEEE, d MMMM yyyy | h:mm a', Localizations.localeOf(context).languageCode == 'en' ? 'en_US' : 'zh_CN').format(DateTime.fromMillisecondsSinceEpoch(widget.referralEntity.sendTime??0)), style: TextStyle(fontSize: 13, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,),),
               const SizedBox(height: 4,),
@@ -147,9 +145,9 @@ class _ReferralCardState extends State<ReferralCard> {
                 opacity: widget.referralEntity.status==1 ? 0 : 1,
                 child: Row(
                   children: [
-                    Text('Contacted', style: TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w300,),),
-                    Text(' | ', style: TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w300,),),
-                    Text(widget.referralEntity.status == 3 ? 'Failed' : 'Success', style: TextStyle(fontSize: 13, color: widget.referralEntity.status == 3 ? Color(0xFF8CBCFF) : Color(0xFFFFB809), fontWeight: FontWeight.w300,),),
+                    const  Text('Contacted', style: TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w300,),),
+                    const  Text(' | ', style: TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w300,),),
+                    Text(widget.referralEntity.status == 3 ? 'Failed' : 'Success', style: TextStyle(fontSize: 13, color: widget.referralEntity.status == 3 ? const  Color(0xFF8CBCFF) : const  Color(0xFFFFB809), fontWeight: FontWeight.w300,),),
                   ],
                 ),
               ),

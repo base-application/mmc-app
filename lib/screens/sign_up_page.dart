@@ -7,7 +7,6 @@ import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:mmc/widget/app_bar_home.dart';
-import 'package:mmc/widget/bottom_button.dart';
 import 'package:mmc/widget/country_choose.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -38,7 +37,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding:  const EdgeInsets.all(16),
       decoration: BoxDecoration(
         image: DecorationImage(image: Image.asset("assets/image/login_background.png").image,alignment: Alignment.topCenter),
         gradient: const LinearGradient(
@@ -53,7 +52,7 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: ListView(
-          physics: ClampingScrollPhysics(),
+          physics:  const ClampingScrollPhysics(),
           children: [
             if(Navigator.canPop(context)) Align(
               alignment: Alignment.centerLeft,
@@ -168,10 +167,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 onPressed: () {
                   FocusScope.of(context).requestFocus(FocusNode());
                   if(_registerPhoneNumberController.text.isEmpty){
-                    return ComFun.showToast(msg: AppLocalizations.of(context)!.phoneNumberInput);
+                    ComFun.showToast(msg: AppLocalizations.of(context)!.phoneNumberInput);
+                    return;
                   }
                   if(_registerCountryCode==null){
-                    return ComFun.showToast(msg: AppLocalizations.of(context)!.chooseCountryCodeTip,);
+                    ComFun.showToast(msg: AppLocalizations.of(context)!.chooseCountryCodeTip,);
+                    return;
                   }
                   sendSmsCode(context, phoneNumber: _registerPhoneNumberController.text.trim(),countryCode: _registerCountryCode!.trim() , type: widget.type, result: () {
                     AutoRouter.of(context).push(PhoneNumberVerificationRoute(phoneNumber:_registerPhoneNumberController.text.trim(),countryCode: _registerCountryCode!, type: widget.type));
@@ -195,7 +196,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           behavior: HitTestBehavior.opaque,
           onTap: () {
-            AutoRouter.of(context).push(SignInRoute());
+            AutoRouter.of(context).push( const SignInRoute());
           },
         ),
       ),

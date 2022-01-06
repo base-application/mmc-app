@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flustars/flustars.dart';
@@ -98,7 +97,7 @@ class ComFun {
   static Future outLogin(BuildContext context) async {
     await savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, null);
     await saveLoginInfo(context, null);
-    AutoRouter.of(context).replaceAll([WelcomeRoute()]);
+    AutoRouter.of(context).replaceAll([ const WelcomeRoute()]);
   }
 
 

@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/router/router.gr.dart';
@@ -31,7 +30,7 @@ class _WelcomePageState extends State<WelcomePage> {
         body: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 200),
+              padding:  const EdgeInsets.only(top: 200),
               child: Text(AppLocalizations.of(context)!.loginPageWelcome, style: const TextStyle(fontSize: 34, fontWeight: FontWeight.bold, color: Colors.white,), textAlign: TextAlign.center,),
             ),
             Image.asset('assets/image/logo.png', width: MediaQuery.of(context).size.width * 0.36, height: MediaQuery.of(context).size.width * 0.36,),
@@ -51,7 +50,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       ),
                       child: Text(AppLocalizations.of(context)!.signIn, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.bold, letterSpacing: 1),),
                       onPressed: () {
-                        AutoRouter.of(context).push(SignInRoute());
+                        AutoRouter.of(context).push( const SignInRoute());
                       },
                     ),
                   ),
@@ -80,7 +79,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                   GestureDetector(
                     onTap: (){
-                      AutoRouter.of(context).push(HomeRoute());
+                      AutoRouter.of(context).push( const HomeRoute());
                     },
                     child: Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom+30),

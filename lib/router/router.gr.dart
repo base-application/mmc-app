@@ -9,18 +9,16 @@
 // **************************************************************************
 
 import 'package:auto_route/auto_route.dart' as _i41;
-import 'package:flutter/cupertino.dart' as _i45;
 import 'package:flutter/material.dart' as _i42;
-import 'package:flutter/rendering.dart' as _i53;
+import 'package:flutter/rendering.dart' as _i51;
 
-import '../bean/event_data_item_info_entity.dart' as _i49;
+import '../bean/event_data_item_info_entity.dart' as _i48;
 import '../bean/group_item_info_entity.dart' as _i46;
-import '../bean/guide_line_entity.dart' as _i51;
-import '../bean/network_item_info_entity.dart' as _i47;
-import '../bean/newest_item_info_entity.dart' as _i48;
-import '../bean/notification_entity.dart' as _i52;
-import '../bean/personal_profile_info_entity.dart' as _i50;
-import '../bean/referral_entity.dart' as _i44;
+import '../bean/guide_line_entity.dart' as _i49;
+import '../bean/newest_item_info_entity.dart' as _i47;
+import '../bean/notification_entity.dart' as _i50;
+import '../bean/personal_profile_info_entity.dart' as _i44;
+import '../bean/referral_entity.dart' as _i45;
 import '../screens/advertisement_page.dart' as _i1;
 import '../screens/business_profile_create_page.dart' as _i23;
 import '../screens/business_profile_set_page.dart' as _i22;
@@ -97,9 +95,9 @@ class AppRouter extends _i41.RootStackRouter {
     },
     NetworkPersonRoute.name: (routeData) {
       final args = routeData.argsAs<NetworkPersonRouteArgs>();
-      return _i41.MaterialPageX<String>(
+      return _i41.MaterialPageX<_i44.PersonalProfileInfoEntity>(
           routeData: routeData,
-          child: _i6.NetworkPersonPage(key: args.key, itemInfo: args.itemInfo));
+          child: _i6.NetworkPersonPage(key: args.key, userId: args.userId));
     },
     TodayNewestRoute.name: (routeData) {
       return _i41.MaterialPageX<String>(
@@ -128,7 +126,7 @@ class AppRouter extends _i41.RootStackRouter {
     },
     ReferralReceivedContactedRoute.name: (routeData) {
       final args = routeData.argsAs<ReferralReceivedContactedRouteArgs>();
-      return _i41.MaterialPageX<_i44.ReferralEntity>(
+      return _i41.MaterialPageX<_i45.ReferralEntity>(
           routeData: routeData,
           child: _i12.ReferralReceivedContactedPage(
               key: args.key, referralEntity: args.referralEntity));
@@ -391,7 +389,7 @@ class GroupRoute extends _i41.PageRouteInfo<void> {
 /// generated route for
 /// [_i4.GroupDetailPage]
 class GroupDetailRoute extends _i41.PageRouteInfo<GroupDetailRouteArgs> {
-  GroupDetailRoute({_i45.Key? key, required _i46.GroupItemInfoEntity info})
+  GroupDetailRoute({_i42.Key? key, required _i46.GroupItemInfoEntity info})
       : super(GroupDetailRoute.name,
             path: '/groupDetail',
             args: GroupDetailRouteArgs(key: key, info: info));
@@ -402,7 +400,7 @@ class GroupDetailRoute extends _i41.PageRouteInfo<GroupDetailRouteArgs> {
 class GroupDetailRouteArgs {
   const GroupDetailRouteArgs({this.key, required this.info});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
   final _i46.GroupItemInfoEntity info;
 
@@ -424,25 +422,24 @@ class SendingReferralRoute extends _i41.PageRouteInfo<void> {
 /// generated route for
 /// [_i6.NetworkPersonPage]
 class NetworkPersonRoute extends _i41.PageRouteInfo<NetworkPersonRouteArgs> {
-  NetworkPersonRoute(
-      {_i45.Key? key, required _i47.NetworkItemInfoEntity itemInfo})
+  NetworkPersonRoute({_i42.Key? key, required int userId})
       : super(NetworkPersonRoute.name,
             path: '/networkPerson',
-            args: NetworkPersonRouteArgs(key: key, itemInfo: itemInfo));
+            args: NetworkPersonRouteArgs(key: key, userId: userId));
 
   static const String name = 'NetworkPersonRoute';
 }
 
 class NetworkPersonRouteArgs {
-  const NetworkPersonRouteArgs({this.key, required this.itemInfo});
+  const NetworkPersonRouteArgs({this.key, required this.userId});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
-  final _i47.NetworkItemInfoEntity itemInfo;
+  final int userId;
 
   @override
   String toString() {
-    return 'NetworkPersonRouteArgs{key: $key, itemInfo: $itemInfo}';
+    return 'NetworkPersonRouteArgs{key: $key, userId: $userId}';
   }
 }
 
@@ -457,7 +454,7 @@ class TodayNewestRoute extends _i41.PageRouteInfo<void> {
 /// generated route for
 /// [_i8.NewestDetailPage]
 class NewestDetailRoute extends _i41.PageRouteInfo<NewestDetailRouteArgs> {
-  NewestDetailRoute({_i45.Key? key, required _i48.NewestItemInfoEntity info})
+  NewestDetailRoute({_i42.Key? key, required _i47.NewestItemInfoEntity info})
       : super(NewestDetailRoute.name,
             path: '/newestDetail',
             args: NewestDetailRouteArgs(key: key, info: info));
@@ -468,9 +465,9 @@ class NewestDetailRoute extends _i41.PageRouteInfo<NewestDetailRouteArgs> {
 class NewestDetailRouteArgs {
   const NewestDetailRouteArgs({this.key, required this.info});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
-  final _i48.NewestItemInfoEntity info;
+  final _i47.NewestItemInfoEntity info;
 
   @override
   String toString() {
@@ -492,8 +489,8 @@ class EventListingRoute extends _i41.PageRouteInfo<void> {
 class EventListingDetailRoute
     extends _i41.PageRouteInfo<EventListingDetailRouteArgs> {
   EventListingDetailRoute(
-      {_i45.Key? key,
-      required _i49.EventDataItemInfoEntity eventInfo,
+      {_i42.Key? key,
+      required _i48.EventDataItemInfoEntity eventInfo,
       required int source})
       : super(EventListingDetailRoute.name,
             path: '/eventListingDetail',
@@ -507,9 +504,9 @@ class EventListingDetailRouteArgs {
   const EventListingDetailRouteArgs(
       {this.key, required this.eventInfo, required this.source});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
-  final _i49.EventDataItemInfoEntity eventInfo;
+  final _i48.EventDataItemInfoEntity eventInfo;
 
   final int source;
 
@@ -533,7 +530,7 @@ class ReferralReceivedRoute extends _i41.PageRouteInfo<void> {
 class ReferralReceivedContactedRoute
     extends _i41.PageRouteInfo<ReferralReceivedContactedRouteArgs> {
   ReferralReceivedContactedRoute(
-      {_i45.Key? key, required _i44.ReferralEntity referralEntity})
+      {_i42.Key? key, required _i45.ReferralEntity referralEntity})
       : super(ReferralReceivedContactedRoute.name,
             path: '/referralReceivedContacted',
             args: ReferralReceivedContactedRouteArgs(
@@ -546,9 +543,9 @@ class ReferralReceivedContactedRouteArgs {
   const ReferralReceivedContactedRouteArgs(
       {this.key, required this.referralEntity});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
-  final _i44.ReferralEntity referralEntity;
+  final _i45.ReferralEntity referralEntity;
 
   @override
   String toString() {
@@ -560,7 +557,7 @@ class ReferralReceivedContactedRouteArgs {
 /// [_i13.SendThankYouNotePage]
 class SendThankYouNoteRoute
     extends _i41.PageRouteInfo<SendThankYouNoteRouteArgs> {
-  SendThankYouNoteRoute({_i45.Key? key, required int referralId})
+  SendThankYouNoteRoute({_i42.Key? key, required int referralId})
       : super(SendThankYouNoteRoute.name,
             path: '/sendThankYouNote',
             args: SendThankYouNoteRouteArgs(key: key, referralId: referralId));
@@ -571,7 +568,7 @@ class SendThankYouNoteRoute
 class SendThankYouNoteRouteArgs {
   const SendThankYouNoteRouteArgs({this.key, required this.referralId});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
   final int referralId;
 
@@ -603,7 +600,7 @@ class ShiningBoardRoute extends _i41.PageRouteInfo<void> {
 /// [_i16.ShiningBoardDetailPage]
 class ShiningBoardDetailRoute
     extends _i41.PageRouteInfo<ShiningBoardDetailRouteArgs> {
-  ShiningBoardDetailRoute({_i45.Key? key, required _i15.ShiningBoardInfo about})
+  ShiningBoardDetailRoute({_i42.Key? key, required _i15.ShiningBoardInfo about})
       : super(ShiningBoardDetailRoute.name,
             path: '/shiningBoardDetail',
             args: ShiningBoardDetailRouteArgs(key: key, about: about));
@@ -614,7 +611,7 @@ class ShiningBoardDetailRoute
 class ShiningBoardDetailRouteArgs {
   const ShiningBoardDetailRouteArgs({this.key, required this.about});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
   final _i15.ShiningBoardInfo about;
 
@@ -637,7 +634,7 @@ class MostReferralSentRoute extends _i41.PageRouteInfo<void> {
 /// [_i18.CreateEventPage]
 class CreateEventRoute extends _i41.PageRouteInfo<CreateEventRouteArgs> {
   CreateEventRoute(
-      {_i45.Key? key, required _i49.EventDataItemInfoEntity? entity})
+      {_i42.Key? key, required _i48.EventDataItemInfoEntity? entity})
       : super(CreateEventRoute.name,
             path: '/createEvent',
             args: CreateEventRouteArgs(key: key, entity: entity));
@@ -648,9 +645,9 @@ class CreateEventRoute extends _i41.PageRouteInfo<CreateEventRouteArgs> {
 class CreateEventRouteArgs {
   const CreateEventRouteArgs({this.key, required this.entity});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
-  final _i49.EventDataItemInfoEntity? entity;
+  final _i48.EventDataItemInfoEntity? entity;
 
   @override
   String toString() {
@@ -697,7 +694,7 @@ class BusinessProfileSetRoute extends _i41.PageRouteInfo<void> {
 class BusinessProfileCreateRoute
     extends _i41.PageRouteInfo<BusinessProfileCreateRouteArgs> {
   BusinessProfileCreateRoute(
-      {_i45.Key? key, _i50.PersonalProfileInfoCompanyVos? info})
+      {_i42.Key? key, _i44.PersonalProfileInfoCompanyVos? info})
       : super(BusinessProfileCreateRoute.name,
             path: '/businessProfileCreate',
             args: BusinessProfileCreateRouteArgs(key: key, info: info));
@@ -708,9 +705,9 @@ class BusinessProfileCreateRoute
 class BusinessProfileCreateRouteArgs {
   const BusinessProfileCreateRouteArgs({this.key, this.info});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
-  final _i50.PersonalProfileInfoCompanyVos? info;
+  final _i44.PersonalProfileInfoCompanyVos? info;
 
   @override
   String toString() {
@@ -740,7 +737,7 @@ class GuidelineRoute extends _i41.PageRouteInfo<void> {
 class GuidelineDetailRoute
     extends _i41.PageRouteInfo<GuidelineDetailRouteArgs> {
   GuidelineDetailRoute(
-      {_i45.Key? key, required _i51.GuideLineEntity guideLineEntity})
+      {_i42.Key? key, required _i49.GuideLineEntity guideLineEntity})
       : super(GuidelineDetailRoute.name,
             path: '/guidelineDetail',
             args: GuidelineDetailRouteArgs(
@@ -752,9 +749,9 @@ class GuidelineDetailRoute
 class GuidelineDetailRouteArgs {
   const GuidelineDetailRouteArgs({this.key, required this.guideLineEntity});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
-  final _i51.GuideLineEntity guideLineEntity;
+  final _i49.GuideLineEntity guideLineEntity;
 
   @override
   String toString() {
@@ -781,7 +778,7 @@ class YourPicRoute extends _i41.PageRouteInfo<void> {
 /// generated route for
 /// [_i29.QrViewPage]
 class QrViewRoute extends _i41.PageRouteInfo<QrViewRouteArgs> {
-  QrViewRoute({_i45.Key? key, required int type})
+  QrViewRoute({_i42.Key? key, required int type})
       : super(QrViewRoute.name,
             path: '/qrview', args: QrViewRouteArgs(key: key, type: type));
 
@@ -791,7 +788,7 @@ class QrViewRoute extends _i41.PageRouteInfo<QrViewRouteArgs> {
 class QrViewRouteArgs {
   const QrViewRouteArgs({this.key, required this.type});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
   final int type;
 
@@ -804,7 +801,7 @@ class QrViewRouteArgs {
 /// generated route for
 /// [_i30.WebPage]
 class WebRoute extends _i41.PageRouteInfo<WebRouteArgs> {
-  WebRoute({_i45.Key? key, required String title, required String initUrl})
+  WebRoute({_i42.Key? key, required String title, required String initUrl})
       : super(WebRoute.name,
             path: '/webpage',
             args: WebRouteArgs(key: key, title: title, initUrl: initUrl));
@@ -815,7 +812,7 @@ class WebRoute extends _i41.PageRouteInfo<WebRouteArgs> {
 class WebRouteArgs {
   const WebRouteArgs({this.key, required this.title, required this.initUrl});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
   final String title;
 
@@ -840,7 +837,7 @@ class CheckHistoryRoute extends _i41.PageRouteInfo<void> {
 /// [_i32.InboxDetailPage]
 class InboxDetailRoute extends _i41.PageRouteInfo<InboxDetailRouteArgs> {
   InboxDetailRoute(
-      {_i45.Key? key, required _i52.NotificationEntity notification})
+      {_i42.Key? key, required _i50.NotificationEntity notification})
       : super(InboxDetailRoute.name,
             path: '/inboxDetail',
             args: InboxDetailRouteArgs(key: key, notification: notification));
@@ -851,9 +848,9 @@ class InboxDetailRoute extends _i41.PageRouteInfo<InboxDetailRouteArgs> {
 class InboxDetailRouteArgs {
   const InboxDetailRouteArgs({this.key, required this.notification});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
-  final _i52.NotificationEntity notification;
+  final _i50.NotificationEntity notification;
 
   @override
   String toString() {
@@ -865,8 +862,8 @@ class InboxDetailRouteArgs {
 /// [_i33.NetworkPage]
 class NetworkRoute extends _i41.PageRouteInfo<NetworkRouteArgs> {
   NetworkRoute(
-      {_i45.Key? key,
-      dynamic Function(_i53.ScrollDirection)? pageScrollDirectionChange,
+      {_i42.Key? key,
+      dynamic Function(_i51.ScrollDirection)? pageScrollDirectionChange,
       required bool onlyMy,
       required String title})
       : super(NetworkRoute.name,
@@ -887,9 +884,9 @@ class NetworkRouteArgs {
       required this.onlyMy,
       required this.title});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
-  final dynamic Function(_i53.ScrollDirection)? pageScrollDirectionChange;
+  final dynamic Function(_i51.ScrollDirection)? pageScrollDirectionChange;
 
   final bool onlyMy;
 
@@ -928,7 +925,7 @@ class SignInRoute extends _i41.PageRouteInfo<void> {
 /// generated route for
 /// [_i37.SignUpPage]
 class SignUpRoute extends _i41.PageRouteInfo<SignUpRouteArgs> {
-  SignUpRoute({_i45.Key? key, required int type})
+  SignUpRoute({_i42.Key? key, required int type})
       : super(SignUpRoute.name,
             path: '/signUp', args: SignUpRouteArgs(key: key, type: type));
 
@@ -938,7 +935,7 @@ class SignUpRoute extends _i41.PageRouteInfo<SignUpRouteArgs> {
 class SignUpRouteArgs {
   const SignUpRouteArgs({this.key, required this.type});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
   final int type;
 
@@ -953,7 +950,7 @@ class SignUpRouteArgs {
 class ConfirmPasswordRoute
     extends _i41.PageRouteInfo<ConfirmPasswordRouteArgs> {
   ConfirmPasswordRoute(
-      {_i45.Key? key,
+      {_i42.Key? key,
       required String phoneNumber,
       required String countryCode,
       required String verificationCode,
@@ -978,7 +975,7 @@ class ConfirmPasswordRouteArgs {
       required this.verificationCode,
       required this.type});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
   final String phoneNumber;
 
@@ -999,7 +996,7 @@ class ConfirmPasswordRouteArgs {
 class PhoneNumberVerificationRoute
     extends _i41.PageRouteInfo<PhoneNumberVerificationRouteArgs> {
   PhoneNumberVerificationRoute(
-      {_i45.Key? key,
+      {_i42.Key? key,
       required String phoneNumber,
       required String countryCode,
       required int type})
@@ -1021,7 +1018,7 @@ class PhoneNumberVerificationRouteArgs {
       required this.countryCode,
       required this.type});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
   final String phoneNumber;
 
@@ -1039,8 +1036,8 @@ class PhoneNumberVerificationRouteArgs {
 /// [_i40.CheckInPage]
 class CheckInRoute extends _i41.PageRouteInfo<CheckInRouteArgs> {
   CheckInRoute(
-      {_i45.Key? key,
-      dynamic Function(_i53.ScrollDirection)? pageScrollDirectionChange})
+      {_i42.Key? key,
+      dynamic Function(_i51.ScrollDirection)? pageScrollDirectionChange})
       : super(CheckInRoute.name,
             path: 'CheckIn',
             args: CheckInRouteArgs(
@@ -1053,9 +1050,9 @@ class CheckInRoute extends _i41.PageRouteInfo<CheckInRouteArgs> {
 class CheckInRouteArgs {
   const CheckInRouteArgs({this.key, this.pageScrollDirectionChange});
 
-  final _i45.Key? key;
+  final _i42.Key? key;
 
-  final dynamic Function(_i53.ScrollDirection)? pageScrollDirectionChange;
+  final dynamic Function(_i51.ScrollDirection)? pageScrollDirectionChange;
 
   @override
   String toString() {

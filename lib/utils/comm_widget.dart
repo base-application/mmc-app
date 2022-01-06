@@ -1,8 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:mmc/router/auth_guard.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 import 'comfun.dart';
 
@@ -82,7 +81,7 @@ Widget netImgWrap(BuildContext context, { String? url, String? assets, double? w
     return errorWidget;
   }
   Widget _img = CachedNetworkImage(
-    imageUrl: '${context.read<SystemSetService>().baseUrl}$url',
+    imageUrl: '${Provider.of(context).read<SystemSetService>().baseUrl}$url',
     width: width,
     height: height,
     placeholder: (BuildContext context, String url,) {

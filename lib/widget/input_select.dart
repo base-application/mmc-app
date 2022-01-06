@@ -1,24 +1,23 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mmc/router/auth_guard.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'app_bar_home.dart';
-
-class CountryChoose extends StatefulWidget {
-  final List<CountryCodeInfo> curLocalData;
-  const CountryChoose({Key? key, required this.curLocalData}) : super(key: key);
+class InputSelect extends StatefulWidget {
+  final List<String> name;
+  const InputSelect({Key? key, required this.name}) : super(key: key);
 
   @override
-  _CountryChooseState createState() => _CountryChooseState();
+  _InputSelectState createState() => _InputSelectState();
 }
 
-class _CountryChooseState extends State<CountryChoose> {
-  late List<CountryCodeInfo> country;
+class _InputSelectState extends State<InputSelect> {
+
+  late List<String> name;
+
+  final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
-    country = widget.curLocalData;
+    name = widget.name;
     super.initState();
   }
   @override
@@ -31,6 +30,7 @@ class _CountryChooseState extends State<CountryChoose> {
             children: [
               Expanded(
                   child: TextFormField(
+                    controller: _controller,
                     style:  const TextStyle(fontSize: 14),
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(16),
@@ -42,20 +42,18 @@ class _CountryChooseState extends State<CountryChoose> {
                     ),
                     onChanged: (v){
                       if(v.isEmpty){
-                        country = widget.curLocalData;
+                        name = widget.name;
                       }else{
-                        country = widget.curLocalData.where((element) => (element.phonecode).toLowerCase().contains(v.toLowerCase()) || getName(element).toLowerCase().contains(v.toLowerCase())).toList();
+                        name = widget.name.where((element) => (element).toLowerCase().contains(v.toLowerCase())).toList();
                       }
                       setState((){});
                     },
                   )
               ),
               const SizedBox(width: 10,),
-              GestureDetector(
-                  onTap: (){
-                    AutoRouter.of(context).pop();
-                  },
-                  child: const Icon(CupertinoIcons.clear_circled)
+              TextButton(
+                  onPressed: (){ AutoRouter.of(context).pop(_controller.text);},
+                  child:  Text(AppLocalizations.of(context)!.hintLoginConfirmBtn,style:  const TextStyle(fontWeight: FontWeight.bold),)
               )
             ],
           ),
@@ -64,11 +62,11 @@ class _CountryChooseState extends State<CountryChoose> {
           child: ListView(
               physics:  const ClampingScrollPhysics(),
               padding:  const EdgeInsets.all(16),
-              children: country.map<Widget>((e) =>
+              children: name.map<Widget>((e) =>
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: (){
-                      AutoRouter.of(context).pop(e);
+                      _controller.text = e;
                     },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -76,7 +74,7 @@ class _CountryChooseState extends State<CountryChoose> {
                       children: [
                         Container(
                           padding: const EdgeInsets.only(top: 12,bottom: 12),
-                          child: Text(getName(e),style:  const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                          child: Text(e,style:  const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                         ),
                         const Divider()
                       ],
@@ -87,13 +85,5 @@ class _CountryChooseState extends State<CountryChoose> {
         )
       ],
     );
-  }
-
-  String getName(CountryCodeInfo e) {
-    if(Provider.of(context).read<SystemSetService>().appLanguage == "en"){
-      return e.name + "(" +e.phonecode+")";
-    }else{
-      return (e.translations.cn??"") + "(" +e.phonecode+")";
-    }
   }
 }
