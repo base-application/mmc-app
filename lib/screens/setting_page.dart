@@ -1,11 +1,14 @@
 
 import 'package:auto_route/auto_route.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mmc/bean/message_no_read_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comfun.dart';
 import 'package:mmc/utils/comm_widget.dart';
+import 'package:mmc/utils/http_request.dart';
 import 'package:provider/provider.dart';
 
 class SettingPage extends StatefulWidget {
@@ -19,7 +22,13 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   final List<MenuDoItem> _menus = [];
+  MessageNoReadEntity? _messageNoReadEntity;
 
+  @override
+  void initState() {
+    getNoReadMessage();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     _menus.clear();
@@ -101,17 +110,14 @@ class _SettingPageState extends State<SettingPage> {
                 width: 100,
                 height: 100,
                 radius: 100,
-                url: Provider.of(context)
-                    .watch<AuthService>().getLoginInfo?.avatar,
+                url: context.watch<AuthService>().getLoginInfo?.avatar,
                 fit: BoxFit.cover,
                 errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 100, height: 100, fit: BoxFit.fitWidth,),
               ),
               const SizedBox(height: 16,),
-              Text(Provider.of(context)
-                  .watch<PersonalProfileService>().getPersonalProfileInfo?.name ?? '-', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,),),
+              Text(context.watch<PersonalProfileService>().getPersonalProfileInfo?.name ?? '-', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,),),
               const SizedBox(height: 4,),
-              Text(Provider.of(context)
-                  .watch<PersonalProfileService>().getPersonalProfileInfo?.concatNumber ?? '-', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black87.withAlpha(120),),),
+              Text(context.watch<PersonalProfileService>().getPersonalProfileInfo?.concatNumber ?? '-', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black87.withAlpha(120),),),
               const SizedBox(height: 28,),
               Column(
                 children: _menus.map((item) => GestureDetector(
@@ -182,13 +188,46 @@ class _SettingPageState extends State<SettingPage> {
       );
     }
 
-    return PageContainer(
-      title: AppLocalizations.of(context)!.setting,
-      pageBg: Colors.white,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.setting,),
+        actions: [
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Badge(
+                animationType: BadgeAnimationType.fade,
+                elevation: 0,
+                badgeColor: (_messageNoReadEntity?.notification??0)>0 ? Colors.red : Colors.transparent,
+                position: const BadgePosition(bottom: 6, start: 12),
+                padding: const EdgeInsets.all(5),
+                badgeContent: Text((_messageNoReadEntity?.notification??0).toString(),style: TextStyle(fontSize: 12,color: (_messageNoReadEntity?.notification??0)>0 ? Colors.white : Colors.transparent),),
+                child: Image.asset('assets/icon/message.png', width: 20, height: 20,),
+              ),
+            ),
+            onTap: (){
+              AutoRouter.of(context).push(const MyInboxRoute());
+            },
+          ),
+        ],
+      ),
       body: ScrollConfiguration(
         behavior: CusBehavior(),
         child: _scroll(),
       ),
     );
+  }
+
+  ///获取未读消息
+  getNoReadMessage(){
+    if(context.read<AuthService>().getLoginInfo?.token != null){
+      noReadMessage(context).then((value) {
+        _messageNoReadEntity = value;
+        if(mounted){
+          setState(() {});
+        }
+      });
+    }
   }
 }

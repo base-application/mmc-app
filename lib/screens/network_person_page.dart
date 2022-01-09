@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mmc/bean/concat_item_entity.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/utils/comfun.dart';
@@ -10,6 +11,7 @@ import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/dialog.dart';
 import 'package:mmc/utils/event_bus.dart';
 import 'package:mmc/utils/http_request.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NetworkPersonPage extends StatefulWidget {
   const NetworkPersonPage({Key? key,required this.userId}) : super(key: key);
@@ -72,7 +74,10 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
       future: userInfo,
       builder: (BuildContext context, AsyncSnapshot<PersonalProfileInfoEntity> snapshot) {
         if(snapshot.connectionState == ConnectionState.waiting){
-          return const Text("加载中");
+          return LottieBuilder.asset(
+            'assets/lottie/5039-planet.json',
+            fit: BoxFit.contain,
+          );
         }
         if(snapshot.hasError){
           return Center(child: Text(snapshot.error.toString()),);
@@ -80,12 +85,12 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
         if(snapshot.hasData){
           PersonalProfileInfoEntity info = snapshot.data!;
           _dos = [
-            ConcatItemEntity(info.concatNumber,'assets/icon/call.png'),
-            ConcatItemEntity(info.whatsapp,'assets/icon/wechat.png'),
-            ConcatItemEntity(info.facebook,'assets/icon/facebook.png'),
-            ConcatItemEntity(info.linkedin,'assets/icon/in.png'),
-            ConcatItemEntity(info.youtube,'assets/icon/video.png'),
-            ConcatItemEntity(info.instagram,'assets/icon/photo_mei.png')
+            ConcatItemEntity(info.concatNumber,'assets/icon/call.png',"copy"),
+            ConcatItemEntity(info.whatsapp,'assets/icon/wechat.png',"copy"),
+            ConcatItemEntity(info.facebook,'assets/icon/facebook.png',"url"),
+            ConcatItemEntity(info.linkedin,'assets/icon/in.png',"url"),
+            ConcatItemEntity(info.youtube,'assets/icon/video.png',"url"),
+            ConcatItemEntity(info.instagram,'assets/icon/photo_mei.png',"url")
           ];
           return WillPopScope(
               onWillPop: () async {
@@ -159,14 +164,14 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
                                           Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              const SizedBox(height: 10,),
                                               Text(info.name ?? '-', style: const TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold,),),
                                               const SizedBox(height: 5,),
                                               Text('ID:${info.userId}', style: TextStyle(fontSize: 15, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,),),
-                                              const SizedBox(height: 12,),
-                                              Text(info.industry ?? '-', style: TextStyle(fontSize: 15, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,), maxLines: 3, overflow: TextOverflow.ellipsis,),
                                               const SizedBox(height: 6,),
-                                              Text(info.occupation ?? '-', style: TextStyle(fontSize: 15, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,), maxLines: 3, overflow: TextOverflow.ellipsis,),
+                                              Text(info.industry ?? '-', style: TextStyle(fontSize: 15, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,), maxLines: 1, overflow: TextOverflow.ellipsis,),
+                                              Text(info.occupation ?? '-', style: TextStyle(fontSize: 15, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,), maxLines: 1, overflow: TextOverflow.ellipsis,),
+                                              const SizedBox(height: 6,),
+                                              Text(info.introduction ?? '-', style: TextStyle(fontSize: 15, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,), maxLines: 2, overflow: TextOverflow.ellipsis,),
                                             ],
                                           ),
                                         ],
@@ -191,8 +196,17 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
                               return GestureDetector(
                                 onTap: (){
                                   if( _dos[index].text !=null && _dos[index].text!.isNotEmpty){
-                                    Clipboard.setData(ClipboardData(text: _dos[index].text));
-                                    ComFun.showToast(msg: "copy success");
+                                    if(_dos[index].operation == "copy"){
+                                      Clipboard.setData(ClipboardData(text: _dos[index].text));
+                                      ComFun.showToast(msg: "copy success");
+                                    }
+                                    if(_dos[index].operation == "url"){
+                                      launch(
+                                        _dos[index].text??"",
+                                        forceSafariVC: false,
+                                        forceWebView: false,
+                                      );
+                                    }
                                   }
                                 },
                                 child: Container(
@@ -312,404 +326,421 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
   }
 
   company(List<PersonalProfileInfoCompanyVos> companies) {
-   return Column(
-      children: [
-        const SizedBox(height: 16,),
-        Row(
-          children: [
-            const SizedBox(width: 24,),
-            Container(
-              width: 5,
-              height: 20,
-              decoration: BoxDecoration(
-                color: Colors.amber,
-                borderRadius: BorderRadius.circular(2),
+    if(companies.isNotEmpty){
+      return Column(
+        children: [
+          const SizedBox(height: 16,),
+          Row(
+            children: [
+              const SizedBox(width: 24,),
+              Container(
+                width: 5,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const SizedBox(width: 12,),
+              const Text('My Business Profile', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
+            ],
+          ),
+          const SizedBox(height: 8,),
+          Container(
+            margin: const EdgeInsets.only(top: 4, left: 26, right: 26,),
+            height: MediaQuery.of(context).size.width * 0.5,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(22),
+              gradient: const LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xFF043B94),
+                  Color(0xFF095BD4),
+                ],
               ),
             ),
-            const SizedBox(width: 12,),
-            const Text('My Business Profile', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
-          ],
-        ),
-        const SizedBox(height: 8,),
-        Container(
-          margin: const EdgeInsets.only(top: 4, left: 26, right: 26,),
-          height: MediaQuery.of(context).size.width * 0.5,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(22),
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF043B94),
-                Color(0xFF095BD4),
+            child: Stack(
+              alignment: Alignment.center,
+              clipBehavior: Clip.none,
+              children: [
+                ScrollConfiguration(
+                  behavior: CusBehavior(),
+                  child: PageView.builder(
+                    controller: _companyPageViewController,
+                    itemCount: companies.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      PersonalProfileInfoCompanyVos companyItem = companies[index];
+                      late List<ConcatItemEntity> _cdos = [
+                        ConcatItemEntity(companyItem.companyPhone,'assets/icon/call.png',"copy"),
+                        ConcatItemEntity(companyItem.companyWhatsapp,'assets/icon/wechat.png',"copy"),
+                        ConcatItemEntity(companyItem.companyFacebook,'assets/icon/facebook.png',"url"),
+                        ConcatItemEntity(companyItem.companyLinkedin,'assets/icon/in.png',"url"),
+                        ConcatItemEntity(companyItem.companyYoutube,'assets/icon/video.png',"url"),
+                        ConcatItemEntity(companyItem.companyInstagram,'assets/icon/photo_mei.png',"url")
+                      ];
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 10, bottom: 10, left: 18, right: 18,),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 4,),
+                            Row(
+                              children: [
+                                netImgWrap(context,
+                                  width: 26,
+                                  height: 26,
+                                  radius: 14,
+                                  url: companyItem.companyLogo,
+                                  errorWidget: Container(
+                                    padding: const EdgeInsets.all(6),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(14),
+                                      color: Colors.amber,
+                                    ),
+                                    child: Image.asset('assets/image/logo.png', width: 26, height: 26,),
+                                  ),
+                                ),
+                                const SizedBox(width: 12,),
+                                Expanded(child: Text(companyItem.companyName ?? '-', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500,), overflow: TextOverflow.ellipsis,),),
+                              ],
+                            ),
+                            const SizedBox(height: 14,),
+                            Text(companyItem.companyIntroduction ?? '-', style: TextStyle(fontSize: 13, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,),),
+                            const SizedBox(height: 12,),
+                            Expanded(child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(companyItem.companyWebsite ?? '-', style: TextStyle(fontSize: 13, color: Colors.amber.withAlpha(200), fontWeight: FontWeight.w300,),),
+                                Text(companyItem.companyEmail ?? '-', style: TextStyle(fontSize: 13, color: Colors.amber.withAlpha(200), fontWeight: FontWeight.w300,),),
+                              ],
+                            )),
+                            const SizedBox(height: 6,),
+                            GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: const EdgeInsets.only(left: 2, right: 2,),
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 6,
+                                crossAxisSpacing: 14,
+                                mainAxisSpacing: 14,
+                              ),
+                              itemCount: _cdos.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return GestureDetector(
+                                  onTap: (){
+                                    if( _cdos[index].text !=null && _cdos[index].text!.isNotEmpty){
+                                      if(_cdos[index].operation == "copy"){
+                                        Clipboard.setData(ClipboardData(text: _cdos[index].text));
+                                        ComFun.showToast(msg: "copy success");
+                                      }
+                                      if(_cdos[index].operation == "url"){
+                                        launch(
+                                          _cdos[index].text??"",
+                                          forceSafariVC: false,
+                                          forceWebView: false,
+                                        );
+                                      }
+                                    }
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(14),
+                                      color: const Color(0xFFF1F1EF),
+                                    ),
+                                    child: Image.asset(_cdos[index].image, color: _cdos[index].text !=null && _cdos[index].text!.isNotEmpty ? null : Colors.grey, colorBlendMode:  _cdos[index].text !=null && _cdos[index].text!.isNotEmpty ? null : BlendMode.srcATop,),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    onPageChanged: (page) {
+                      _displayCompanyInfoIndex = page;
+                      _changeDisplayCompanyInfo(companies[_displayCompanyInfoIndex]);
+                      setState(() {});
+                    },
+                  ),
+                ),
+                if (_displayCompanyInfoIndex > 0) Positioned(
+                  child: GestureDetector(
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.amber,
+                        borderRadius: BorderRadius.circular(60),
+                      ),
+                      child: const Icon(Icons.navigate_before_rounded, size: 18, color: Color(0xFF013B7B),),
+                    ),
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      _companyPageViewController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear);
+                    },
+                  ),
+                  left: -10,
+                ),
+                if (_displayCompanyInfoIndex < companies.length - 1) Positioned(
+                  child: GestureDetector(
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.amber,
+                        borderRadius: BorderRadius.circular(60),
+                      ),
+                      child: const Icon(Icons.navigate_next_rounded, size: 18, color: Color(0xFF013B7B),),
+                    ),
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      _companyPageViewController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear);
+                    },
+                  ),
+                  right: -10,
+                ),
               ],
             ),
           ),
-          child: Stack(
-            alignment: Alignment.center,
-            clipBehavior: Clip.none,
-            children: [
-              ScrollConfiguration(
-                behavior: CusBehavior(),
-                child: PageView.builder(
-                  controller: _companyPageViewController,
-                  itemCount: companies.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    PersonalProfileInfoCompanyVos companyItem = companies[index];
-                    late List<ConcatItemEntity> _cdos = [
-                      ConcatItemEntity(companyItem.companyPhone,'assets/icon/call.png'),
-                      ConcatItemEntity(companyItem.companyWhatsapp,'assets/icon/wechat.png'),
-                      ConcatItemEntity(companyItem.companyFacebook,'assets/icon/facebook.png'),
-                      ConcatItemEntity(companyItem.companyLinkedin,'assets/icon/in.png'),
-                      ConcatItemEntity(companyItem.companyYoutube,'assets/icon/video.png'),
-                      ConcatItemEntity(companyItem.companyInstagram,'assets/icon/photo_mei.png')
-                    ];
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 10, left: 18, right: 18,),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 4,),
-                          Row(
-                            children: [
-                              netImgWrap(context,
-                                width: 26,
-                                height: 26,
-                                radius: 14,
-                                url: companyItem.companyLogo,
-                                errorWidget: Container(
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(14),
-                                    color: Colors.amber,
-                                  ),
-                                  child: Image.asset('assets/image/logo.png', width: 26, height: 26,),
-                                ),
-                              ),
-                              const SizedBox(width: 12,),
-                              Expanded(child: Text(companyItem.companyName ?? '-', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500,), overflow: TextOverflow.ellipsis,),),
-                            ],
-                          ),
-                          const SizedBox(height: 14,),
-                          Text(companyItem.companyIntroduction ?? '-', style: TextStyle(fontSize: 13, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,),),
-                          const SizedBox(height: 12,),
-                          Expanded(child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(companyItem.companyWebsite ?? '-', style: TextStyle(fontSize: 13, color: Colors.amber.withAlpha(200), fontWeight: FontWeight.w300,),),
-                              Text(companyItem.companyEmail ?? '-', style: TextStyle(fontSize: 13, color: Colors.amber.withAlpha(200), fontWeight: FontWeight.w300,),),
-                            ],
-                          )),
-                          const SizedBox(height: 6,),
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            padding: const EdgeInsets.only(left: 2, right: 2,),
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 6,
-                              crossAxisSpacing: 14,
-                              mainAxisSpacing: 14,
-                            ),
-                            itemCount: _cdos.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return GestureDetector(
-                                onTap: (){
-                                  if( _cdos[index].text !=null && _cdos[index].text!.isNotEmpty){
-                                    Clipboard.setData(ClipboardData(text: _cdos[index].text));
-                                    ComFun.showToast(msg: "copy success");
-                                  }
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(14),
-                                    color: const Color(0xFFF1F1EF),
-                                  ),
-                                  child: Image.asset(_cdos[index].image, color: _cdos[index].text !=null && _cdos[index].text!.isNotEmpty ? null : Colors.grey, colorBlendMode:  _cdos[index].text !=null && _cdos[index].text!.isNotEmpty ? null : BlendMode.srcATop,),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
+          Padding(
+            padding: const EdgeInsets.only(top: 20, left: 26, right: 26,),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(AppLocalizations.of(context)!.networkPersonSimpleIntroduction, style: const TextStyle(fontSize: 17, color: Colors.black87, fontWeight: FontWeight.w500,),),
+                    const SizedBox(height: 8,),
+                    Container(
+                      width: double.infinity,
+                      height: 150,
+                      padding: const EdgeInsets.only(left: 10, right: 10,),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 0.6, color: Colors.grey.shade300,)
                       ),
-                    );
-                  },
-                  onPageChanged: (page) {
-                    _displayCompanyInfoIndex = page;
-                    _changeDisplayCompanyInfo(companies[_displayCompanyInfoIndex]);
-                    setState(() {});
-                  },
+                      child: TextFormField(
+                        controller: _introductionController,
+                        keyboardType: TextInputType.text,
+                        maxLines: 6,
+                        readOnly: true,
+                        cursorColor: Colors.blueAccent,
+                        style: const TextStyle(textBaseline: TextBaseline.alphabetic),
+                        decoration: const InputDecoration(
+                          // hintText: AppLocalizations.of(context)!.networkPersonSimpleIntroductionHint,
+                          hintStyle: TextStyle(fontSize: 14, color: Colors.black38),
+                          contentPadding: EdgeInsets.only(top: 10,),
+                          counterText: '',
+                          isDense: true,
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, left: 26, right: 26,),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(AppLocalizations.of(context)!.networkPersonGoals, style: const TextStyle(fontSize: 17, color: Colors.black87, fontWeight: FontWeight.w500,),),
+                    const SizedBox(height: 8,),
+                    Container(
+                      width: double.infinity,
+                      height: 150,
+                      padding: const EdgeInsets.only(left: 10, right: 10,),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 0.6, color: Colors.grey.shade300,)
+                      ),
+                      child: TextFormField(
+                        controller: _goalsController,
+                        keyboardType: TextInputType.text,
+                        maxLines: 6,
+                        readOnly: true,
+                        cursorColor: Colors.blueAccent,
+                        style: const TextStyle(textBaseline: TextBaseline.alphabetic),
+                        decoration: const InputDecoration(
+                          // hintText: AppLocalizations.of(context)!.networkPersonGoalsHint,
+                          hintStyle: TextStyle(fontSize: 14, color: Colors.black38),
+                          contentPadding: EdgeInsets.only(top: 10,),
+                          counterText: '',
+                          isDense: true,
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, left: 26, right: 26,),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(AppLocalizations.of(context)!.networkPersonAccomplishments, style: const TextStyle(fontSize: 17, color: Colors.black87, fontWeight: FontWeight.w500,),),
+                    const SizedBox(height: 8,),
+                    Container(
+                      width: double.infinity,
+                      height: 150,
+                      padding: const EdgeInsets.only(left: 10, right: 10,),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 0.6, color: Colors.grey.shade300,)
+                      ),
+                      child: TextFormField(
+                        controller: _accomplishmentController,
+                        keyboardType: TextInputType.text,
+                        maxLines: 6,
+                        readOnly: true,
+                        cursorColor: Colors.blueAccent,
+                        style: const TextStyle(textBaseline: TextBaseline.alphabetic),
+                        decoration: const InputDecoration(
+                          // hintText: AppLocalizations.of(context)!.networkPersonAccomplishmentsHint,
+                          hintStyle: TextStyle(fontSize: 14, color: Colors.black38),
+                          contentPadding: EdgeInsets.only(top: 10,),
+                          counterText: '',
+                          isDense: true,
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, left: 26, right: 26,),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(AppLocalizations.of(context)!.networkPersonInterests, style: const TextStyle(fontSize: 17, color: Colors.black87, fontWeight: FontWeight.w500,),),
+                    const SizedBox(height: 8,),
+                    Container(
+                      width: double.infinity,
+                      height: 150,
+                      padding: const EdgeInsets.only(left: 10, right: 10,),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 0.6, color: Colors.grey.shade300,)
+                      ),
+                      child: TextFormField(
+                        controller: _interestController,
+                        keyboardType: TextInputType.text,
+                        maxLines: 6,
+                        readOnly: true,
+                        cursorColor: Colors.blueAccent,
+                        style: const TextStyle(textBaseline: TextBaseline.alphabetic),
+                        decoration: const InputDecoration(
+                          // hintText: AppLocalizations.of(context)!.networkPersonInterestsHint,
+                          hintStyle: TextStyle(fontSize: 14, color: Colors.black38),
+                          contentPadding: EdgeInsets.only(top: 10,),
+                          counterText: '',
+                          isDense: true,
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, left: 26, right: 26,),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(AppLocalizations.of(context)!.networkPersonProduct, style: const TextStyle(fontSize: 17, color: Colors.black87, fontWeight: FontWeight.w500,),),
+                    const SizedBox(height: 8,),
+                    Container(
+                      width: double.infinity,
+                      height: 150,
+                      padding: const EdgeInsets.only(left: 10, right: 10,),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 0.6, color: Colors.grey.shade300,)
+                      ),
+                      child: TextFormField(
+                        controller: _productController,
+                        keyboardType: TextInputType.text,
+                        maxLines: 6,
+                        readOnly: true,
+                        cursorColor: Colors.blueAccent,
+                        style: const TextStyle(textBaseline: TextBaseline.alphabetic),
+                        decoration: const InputDecoration(
+                          // hintText: AppLocalizations.of(context)!.networkPersonProductHint,
+                          hintStyle: TextStyle(fontSize: 14, color: Colors.black38),
+                          contentPadding: EdgeInsets.only(top: 10,),
+                          counterText: '',
+                          isDense: true,
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),),
+              ],
+            ),
+          ),
+          if(companies.isNotEmpty && companies[_displayCompanyInfoIndex].producePictures.isNotEmpty) ListView.builder(
+            padding: const EdgeInsets.only(left: 24, right: 24,),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: companies[_displayCompanyInfoIndex].producePictures.length,
+            itemBuilder: (BuildContext context, int index) {
+              PersonalProfileInfoCompanyVosProducePictures item = companies[_displayCompanyInfoIndex].producePictures[index];
+              return Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: netImgWrap(context,
+                    width: MediaQuery.of(context).size.width,
+                    height: (MediaQuery.of(context).size.width - 2 * 24) * 9 / 16,
+                    url: item.producePicture,
+                    errorWidget: Container(color: Colors.grey.shade300,),
+                  ),
                 ),
-              ),
-              if (_displayCompanyInfoIndex > 0) Positioned(
-                child: GestureDetector(
-                  child: Container(
-                    width: 20,
-                    height: 20,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(60),
-                    ),
-                    child: const Icon(Icons.navigate_before_rounded, size: 18, color: Color(0xFF013B7B),),
-                  ),
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {
-                    _companyPageViewController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.linear);
-                  },
-                ),
-                left: -10,
-              ),
-              if (_displayCompanyInfoIndex < companies.length - 1) Positioned(
-                child: GestureDetector(
-                  child: Container(
-                    width: 20,
-                    height: 20,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(60),
-                    ),
-                    child: const Icon(Icons.navigate_next_rounded, size: 18, color: Color(0xFF013B7B),),
-                  ),
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {
-                    _companyPageViewController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.linear);
-                  },
-                ),
-                right: -10,
-              ),
-            ],
+              );
+            },
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20, left: 26, right: 26,),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(AppLocalizations.of(context)!.networkPersonSimpleIntroduction, style: const TextStyle(fontSize: 17, color: Colors.black87, fontWeight: FontWeight.w500,),),
-                  const SizedBox(height: 8,),
-                  Container(
-                    width: double.infinity,
-                    height: 150,
-                    padding: const EdgeInsets.only(left: 10, right: 10,),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 0.6, color: Colors.grey.shade300,)
-                    ),
-                    child: TextFormField(
-                      controller: _introductionController,
-                      keyboardType: TextInputType.text,
-                      maxLines: 6,
-                      readOnly: true,
-                      cursorColor: Colors.blueAccent,
-                      style: const TextStyle(textBaseline: TextBaseline.alphabetic),
-                      decoration: const InputDecoration(
-                        // hintText: AppLocalizations.of(context)!.networkPersonSimpleIntroductionHint,
-                        hintStyle: TextStyle(fontSize: 14, color: Colors.black38),
-                        contentPadding: EdgeInsets.only(top: 10,),
-                        counterText: '',
-                        isDense: true,
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ],
-              ),),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20, left: 26, right: 26,),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(AppLocalizations.of(context)!.networkPersonGoals, style: const TextStyle(fontSize: 17, color: Colors.black87, fontWeight: FontWeight.w500,),),
-                  const SizedBox(height: 8,),
-                  Container(
-                    width: double.infinity,
-                    height: 150,
-                    padding: const EdgeInsets.only(left: 10, right: 10,),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 0.6, color: Colors.grey.shade300,)
-                    ),
-                    child: TextFormField(
-                      controller: _goalsController,
-                      keyboardType: TextInputType.text,
-                      maxLines: 6,
-                      readOnly: true,
-                      cursorColor: Colors.blueAccent,
-                      style: const TextStyle(textBaseline: TextBaseline.alphabetic),
-                      decoration: const InputDecoration(
-                        // hintText: AppLocalizations.of(context)!.networkPersonGoalsHint,
-                        hintStyle: TextStyle(fontSize: 14, color: Colors.black38),
-                        contentPadding: EdgeInsets.only(top: 10,),
-                        counterText: '',
-                        isDense: true,
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ],
-              ),),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20, left: 26, right: 26,),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(AppLocalizations.of(context)!.networkPersonAccomplishments, style: const TextStyle(fontSize: 17, color: Colors.black87, fontWeight: FontWeight.w500,),),
-                  const SizedBox(height: 8,),
-                  Container(
-                    width: double.infinity,
-                    height: 150,
-                    padding: const EdgeInsets.only(left: 10, right: 10,),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 0.6, color: Colors.grey.shade300,)
-                    ),
-                    child: TextFormField(
-                      controller: _accomplishmentController,
-                      keyboardType: TextInputType.text,
-                      maxLines: 6,
-                      readOnly: true,
-                      cursorColor: Colors.blueAccent,
-                      style: const TextStyle(textBaseline: TextBaseline.alphabetic),
-                      decoration: const InputDecoration(
-                        // hintText: AppLocalizations.of(context)!.networkPersonAccomplishmentsHint,
-                        hintStyle: TextStyle(fontSize: 14, color: Colors.black38),
-                        contentPadding: EdgeInsets.only(top: 10,),
-                        counterText: '',
-                        isDense: true,
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ],
-              ),),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20, left: 26, right: 26,),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(AppLocalizations.of(context)!.networkPersonInterests, style: const TextStyle(fontSize: 17, color: Colors.black87, fontWeight: FontWeight.w500,),),
-                  const SizedBox(height: 8,),
-                  Container(
-                    width: double.infinity,
-                    height: 150,
-                    padding: const EdgeInsets.only(left: 10, right: 10,),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 0.6, color: Colors.grey.shade300,)
-                    ),
-                    child: TextFormField(
-                      controller: _interestController,
-                      keyboardType: TextInputType.text,
-                      maxLines: 6,
-                      readOnly: true,
-                      cursorColor: Colors.blueAccent,
-                      style: const TextStyle(textBaseline: TextBaseline.alphabetic),
-                      decoration: const InputDecoration(
-                        // hintText: AppLocalizations.of(context)!.networkPersonInterestsHint,
-                        hintStyle: TextStyle(fontSize: 14, color: Colors.black38),
-                        contentPadding: EdgeInsets.only(top: 10,),
-                        counterText: '',
-                        isDense: true,
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ],
-              ),),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20, left: 26, right: 26,),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(AppLocalizations.of(context)!.networkPersonProduct, style: const TextStyle(fontSize: 17, color: Colors.black87, fontWeight: FontWeight.w500,),),
-                  const SizedBox(height: 8,),
-                  Container(
-                    width: double.infinity,
-                    height: 150,
-                    padding: const EdgeInsets.only(left: 10, right: 10,),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 0.6, color: Colors.grey.shade300,)
-                    ),
-                    child: TextFormField(
-                      controller: _productController,
-                      keyboardType: TextInputType.text,
-                      maxLines: 6,
-                      readOnly: true,
-                      cursorColor: Colors.blueAccent,
-                      style: const TextStyle(textBaseline: TextBaseline.alphabetic),
-                      decoration: const InputDecoration(
-                        // hintText: AppLocalizations.of(context)!.networkPersonProductHint,
-                        hintStyle: TextStyle(fontSize: 14, color: Colors.black38),
-                        contentPadding: EdgeInsets.only(top: 10,),
-                        counterText: '',
-                        isDense: true,
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ],
-              ),),
-            ],
-          ),
-        ),
-        ListView.builder(
-          padding: const EdgeInsets.only(left: 24, right: 24,),
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: companies[_displayCompanyInfoIndex].producePictures.length,
-          itemBuilder: (BuildContext context, int index) {
-            PersonalProfileInfoCompanyVosProducePictures item = companies[_displayCompanyInfoIndex].producePictures[index];
-            return Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: netImgWrap(context,
-                  width: MediaQuery.of(context).size.width,
-                  height: (MediaQuery.of(context).size.width - 2 * 24) * 9 / 16,
-                  url: item.producePicture,
-                  errorWidget: Container(color: Colors.grey.shade300,),
-                ),
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 120,),
-      ],
-    );
+          const SizedBox(height: 120,),
+        ],
+      );
+    }else{
+      return Container(
+        alignment: Alignment.center,
+        child: Text(AppLocalizations.of(context)!.noCompanyInformation),
+      );
+    }
+
   }
 }

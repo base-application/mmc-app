@@ -1,7 +1,7 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class WebPage extends StatefulWidget {
   final String title;
@@ -13,7 +13,7 @@ class WebPage extends StatefulWidget {
 }
 
 class _WebPageState extends State<WebPage> {
-  bool loading = false;
+  bool loading = true;
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +24,19 @@ class _WebPageState extends State<WebPage> {
       ),
       body: Stack(
         children: [
-          Offstage(
-            offstage: loading,
-            child: const Center(child: CircularProgressIndicator()),
-          ),
-          WebView(
-            initialUrl: widget.initUrl,
-            onPageFinished: (_){
-              loading = true;
-              setState(() {});
+          InAppWebView(
+            initialUrlRequest: URLRequest(url: Uri.parse(widget.initUrl)),
+            onLoadStop: (c, u) {
+              log("stop webview");
+              setState(() => loading = false);
             },
-            gestureRecognizers: <Factory<VerticalDragGestureRecognizer>>{}..add(Factory<VerticalDragGestureRecognizer>(() => VerticalDragGestureRecognizer())),
+            androidOnPermissionRequest: (controller, origin, resources) async {
+              return PermissionRequestResponse(
+                  resources: resources,
+                  action: PermissionRequestResponseAction.GRANT);
+            },
           ),
+          Visibility(visible: loading, child: const LinearProgressIndicator()),
         ],
       ),
     );

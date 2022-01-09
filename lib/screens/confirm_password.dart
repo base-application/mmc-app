@@ -172,6 +172,15 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
     );
   }
   _signUpOrForgotConfirm(){
+    if(_registerPasswordController.text.length < 8){
+      ComFun.showToast(msg: AppLocalizations.of(context)!.tipLoginKeyPasswordDescribe);
+      return ;
+    }
+
+    if(_registerPasswordController.text != _registerPasswordAgainController.text){
+      ComFun.showToast(msg: AppLocalizations.of(context)!.passwordsInconsistent);
+      return ;
+    }
     if(widget.type == 1){
       register(context, countryCode: widget.countryCode, phoneNumber: widget.phoneNumber, verificationCode: widget.verificationCode, password: _registerPasswordController.text.trim(), result: () {
         ComFun.showToast(msg: AppLocalizations.of(context)!.registerSuccessTip);
@@ -179,7 +188,6 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
       });
     }
     if(widget.type == 2){
-
       forgotPassword(context, phoneNumber: widget.phoneNumber,  verificationCode: widget.verificationCode, password: _registerPasswordController.text.trim(), result: () {
         ComFun.showToast(msg: AppLocalizations.of(context)!.passwordResetSuccessTip);
         AutoRouter.of(context).replaceAll([const SignInRoute()]);

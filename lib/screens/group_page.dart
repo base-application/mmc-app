@@ -165,7 +165,7 @@ class _GroupPageState extends State<GroupPage> {
                     behavior: HitTestBehavior.opaque,
                     onTap: () {
                       FocusScope.of(context).requestFocus(FocusNode());
-                      if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token == null){
+                      if(context.read<AuthService>().getLoginInfo?.token == null){
                         AutoRouter.of(context).push(SignUpRoute(type: 1));
                       }else{
                         AutoRouter.of(context).push(GroupDetailRoute(info: itemInfo));

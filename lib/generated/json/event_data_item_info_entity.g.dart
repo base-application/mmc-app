@@ -205,6 +205,22 @@ EventDataItemInfoAttendance $EventDataItemInfoAttendanceFromJson(Map<String, dyn
 	if (facebookComment != null) {
 		eventDataItemInfoAttendance.facebookComment = facebookComment;
 	}
+	final String? industry = jsonConvert.convert<String>(json['industry']);
+	if (industry != null) {
+		eventDataItemInfoAttendance.industry = industry;
+	}
+	final String? occupation = jsonConvert.convert<String>(json['occupation']);
+	if (occupation != null) {
+		eventDataItemInfoAttendance.occupation = occupation;
+	}
+	final String? agentRole = jsonConvert.convert<String>(json['agentRole']);
+	if (agentRole != null) {
+		eventDataItemInfoAttendance.agentRole = agentRole;
+	}
+	final String? agent = jsonConvert.convert<String>(json['agent']);
+	if (agent != null) {
+		eventDataItemInfoAttendance.agent = agent;
+	}
 	return eventDataItemInfoAttendance;
 }
 
@@ -222,5 +238,9 @@ Map<String, dynamic> $EventDataItemInfoAttendanceToJson(EventDataItemInfoAttenda
 	data['concatNumber'] = entity.concatNumber;
 	data['absentReason'] = entity.absentReason;
 	data['facebookComment'] = entity.facebookComment;
+	data['industry'] = entity.industry;
+	data['occupation'] = entity.occupation;
+	data['agentRole'] = entity.agentRole;
+	data['agent'] = entity.agent;
 	return data;
 }

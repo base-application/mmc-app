@@ -22,7 +22,7 @@ class _GuidelineDetailPageState extends State<GuidelineDetailPage> {
         title: Text(widget.guideLineEntity.guideLineTitle),
       ),
       body: Image.network(
-        Provider.of(context).read<SystemSetService>().baseUrl + widget.guideLineEntity.guideLineImage,
+        context.read<SystemSetService>().baseUrl + widget.guideLineEntity.guideLineImage,
         width: MediaQuery.of(context).size.width,
         fit: BoxFit.fitWidth,
       ),

@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:mmc/bean/notification_entity.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:mmc/utils/comfun.dart';
+import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'my_inbox_page.dart';
@@ -72,7 +73,17 @@ class _InboxDetailPageState extends State<InboxDetailPage> {
           Expanded(
               child: Column(
                 children: [
-                  Html(data: widget.notification.notificationContent,),
+                  Html(
+                    data: widget.notification.notificationContent,
+                    customRender:{
+                      "img":(contextre, child){
+                        final attrs = contextre.tree.element?.attributes;
+                        return Container(
+                          child: netImgWrap(context,url: attrs!['src'],errorWidget: const Text("load error")),
+                        );
+                      }
+                    }
+                  ),
                   if(widget.notification.registrationName!=null)
                     Container(
                       padding: const EdgeInsets.only(left: 16,right: 16),

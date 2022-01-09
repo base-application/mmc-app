@@ -90,7 +90,7 @@ class _CountryChooseState extends State<CountryChoose> {
   }
 
   String getName(CountryCodeInfo e) {
-    if(Provider.of(context).read<SystemSetService>().appLanguage == "en"){
+    if(context.read<SystemSetService>().appLanguage == "en"){
       return e.name + "(" +e.phonecode+")";
     }else{
       return (e.translations.cn??"") + "(" +e.phonecode+")";

@@ -619,19 +619,19 @@ class _EventListingPageState extends State<EventListingPage> {
                   child: netImgWrap(context,
                     width: 40,
                     height: 40,
-                    url: Provider.of(context).watch<AuthService>().getLoginInfo?.avatar,
+                    url: Provider.of<AuthService>(context,listen: false).getLoginInfo?.avatar,
                     errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 40, height: 40, fit: BoxFit.fitWidth,),
                   ),
                 ),
               ),
-              if (Provider.of(context).read<AuthService>().getLoginInfo?.createEvent??false) Positioned(
+              if (context.read<AuthService>().getLoginInfo?.createEvent??false) Positioned(
                 child: Image.asset('assets/icon/change.png', width: 18, height: 18,),
                 bottom: 0,
                 right: 3,
               ),
             ],
           ): (ctx) {
-            if (Provider.of(context).read<AuthService>().getLoginInfo!.createEvent) {
+            if (context.read<AuthService>().getLoginInfo!.createEvent) {
               _data.clear();
               _isCreate = !_isCreate;
               setState(() {});

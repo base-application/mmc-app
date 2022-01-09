@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mmc/utils/comfun.dart';
 
 class InputSelect extends StatefulWidget {
   final List<String> name;
-  const InputSelect({Key? key, required this.name}) : super(key: key);
+  final String hitText;
+  const InputSelect({Key? key, required this.name, required this.hitText}) : super(key: key);
 
   @override
   _InputSelectState createState() => _InputSelectState();
@@ -33,6 +35,7 @@ class _InputSelectState extends State<InputSelect> {
                     controller: _controller,
                     style:  const TextStyle(fontSize: 14),
                     decoration: InputDecoration(
+                      hintText: widget.hitText,
                       contentPadding: const EdgeInsets.all(16),
                       isDense: true,
                       border: OutlineInputBorder(
@@ -52,7 +55,13 @@ class _InputSelectState extends State<InputSelect> {
               ),
               const SizedBox(width: 10,),
               TextButton(
-                  onPressed: (){ AutoRouter.of(context).pop(_controller.text);},
+                  onPressed: (){ 
+                    if(_controller.text.isEmpty) {
+                      ComFun.showToast(msg: "Please select");
+                      return;
+                    }
+                    AutoRouter.of(context).pop(_controller.text);
+                    },
                   child:  Text(AppLocalizations.of(context)!.hintLoginConfirmBtn,style:  const TextStyle(fontWeight: FontWeight.bold),)
               )
             ],

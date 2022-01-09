@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/event_data_item_info_entity.dart';
@@ -348,7 +349,8 @@ class _EventListingDetailPageState extends State<EventListingDetailPage> {
                       const Text('Participants', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
                     ],
                   ),
-                  Container(
+                  ///查看参加的用户
+                  if(widget.source == 1) Container(
                     width: MediaQuery.of(context).size.width,
                     margin: const EdgeInsets.only(top: 18, left: 24, right: 24,),
                     child: GridView.builder(
@@ -385,6 +387,61 @@ class _EventListingDetailPageState extends State<EventListingDetailPage> {
                       },
                     ),
                   ),
+                  ///操作参加的用
+                  if(widget.source == 2) ListView.builder(
+                    padding: const EdgeInsets.only(left: 24, right: 24,),
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: widget.eventInfo.attendance?.length ?? 0,
+                    itemBuilder: (BuildContext context, int index) {
+                      EventDataItemInfoAttendance attendanceItem = (widget.eventInfo.attendance ?? []).elementAt(index);
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50)
+                        ),
+                        padding: const EdgeInsets.only(left: 25,right: 25,top: 12,bottom: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(attendanceItem.name ?? 'Mr/Ms', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Color(0xff013B7B)), overflow: TextOverflow.ellipsis,),
+                                    Text("("+(attendanceItem.occupation??"")+")", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Color(0xff013B7B)), overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,),
+                                  ],
+                                ),
+                                if(attendanceItem.absentReason!=null) Row(
+                                  children: [
+                                    Text("Absent's reason:"+attendanceItem.absentReason!, style: const TextStyle(fontSize: 12,color: Color(0xff999999)), overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,),
+                                  ],
+                                ),
+                                if(attendanceItem.agent!=null) Row(
+                                  children: [
+                                    Text("Representative:"+attendanceItem.agent!, style: const TextStyle(fontSize: 12,color: Color(0xff999999)), overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,),
+                                    if(attendanceItem.agentRole !=null) Text("("+attendanceItem.agentRole!+")", style: const TextStyle(fontSize: 12,color: Color(0xff999999)), overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,),
+                                  ],
+                                )
+                              ],
+                            ),
+                            IconButton(
+                                onPressed: (){
+                                  confirmCheckIn(context,widget.eventInfo.eventId,attendanceItem.userId,!(attendanceItem.attendance??false)).then((value) {
+                                    if(value == true){
+                                      attendanceItem.attendance = !(attendanceItem.attendance??false);
+                                      setState(() {});
+                                    }
+                                  });
+                                },
+                                icon: attendanceItem.attendance == true ? const Icon(CupertinoIcons.check_mark_circled,color: Color(0xffF1B944),) : const Icon(CupertinoIcons.circle,color: Color(0xffF1B944))
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                   const SizedBox(height: 140,),
                 ],
               ),
@@ -401,7 +458,7 @@ class _EventListingDetailPageState extends State<EventListingDetailPage> {
           style: const TextStyle(fontSize: 20, color: Colors.black87, fontWeight: FontWeight.bold,),
         ),
         actions: [
-          if(widget.eventInfo.createId == Provider.of<AuthService>(context, listen: false).getLoginInfo?.id
+          if(widget.eventInfo.createId == context.read<AuthService>().getLoginInfo?.id
           && widget.eventInfo.eventStartTime! > DateTime.now().millisecondsSinceEpoch
           ) IconButton(onPressed: (){ AutoRouter.of(context).push(CreateEventRoute(entity: widget.eventInfo));}, icon: const Icon(Icons.edit))
         ],

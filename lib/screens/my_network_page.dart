@@ -109,6 +109,7 @@ class _MyNetworkPageState extends State<MyNetworkPage> {
                         height: 66,
                         radius: 66,
                         url: itemInfo.picture,
+                        fit: BoxFit.cover,
                         errorWidget: Image.asset('assets/image/personal_head_empty.png', fit: BoxFit.fitWidth, width: 66, height: 66,),
                       ),
                       GestureDetector(

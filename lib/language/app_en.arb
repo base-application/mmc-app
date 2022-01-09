@@ -21,7 +21,7 @@
   "tipLoginKeyOTP": "Please key in OTP",
   "tipLoginKeyOTPDescribe": "We have sent you a 6 digit OTP.",
   "tipLoginKeyPassword": "Please key in Password",
-  "tipLoginKeyPasswordDescribe": "Password must be at least 8 characters and a mixture of letters and numbers.",
+  "tipLoginKeyPasswordDescribe": "Passwords must be at least 8 characters.",
   "hintLoginConfirmBtn": "Confirm",
   "hintLoginNextBtn": "Next",
   "inputRegisterPasswordTip": "Please set the login password",
@@ -95,7 +95,7 @@
   "cancel": "Cancel",
   "save": "Save",
   "submit": "Submit",
-  "loginOut": "Login Out",
+  "loginOut": "Log Out",
   "delete": "Delete",
   "personalProfileFormYourName": "Your Name",
   "personalProfileFormYourNameHint": "Please key in your name",
@@ -227,5 +227,10 @@
   "netWorkError": "Network Error please retry",
   "clickRegister": "Click Register",
   "joinOnStart": "Join before the event",
-  "position": "[\"Business\",\"owner\",\"Manager\",\"Founder\",\"Co-Founder\",\"CEO\",\"CFO\",\"CMO\"]"
+  "passwordsInconsistent": "The passwords entered twice are inconsistent",
+  "noCompanyInformation": "No company information",
+  "keyIndustryHit": "Key in your industry if none of the following",
+  "keyPositionHit": "Key in your position if none of the following",
+  "notFilled": "Not filled",
+  "position": "[\"Business\",\"Owner\",\"Manager\",\"Founder\",\"Co-Founder\",\"CEO\",\"CFO\",\"CMO\"]"
 }

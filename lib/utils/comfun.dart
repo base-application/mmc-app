@@ -175,7 +175,7 @@ class ComFun {
   }
 
   static bool isPerfect(BuildContext context){
-    PersonalProfileInfoEntity? profileInfo = Provider.of<PersonalProfileService>(context, listen: false).getPersonalProfileInfo;
+    PersonalProfileInfoEntity? profileInfo = context.read<PersonalProfileService>().getPersonalProfileInfo;
     return profileInfo?.country == null || profileInfo?.state == null || profileInfo?.name == null|| profileInfo?.occupation ==null || profileInfo?.introduction ==null || profileInfo?.concatNumber == null;
   }
 }

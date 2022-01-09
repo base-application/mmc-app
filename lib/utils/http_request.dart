@@ -301,7 +301,7 @@ Future userFollowAdd(BuildContext context, { required int userId, bool silence =
 Future userInfoUpdate(BuildContext context, {
   required String picture,
   required String name,
-  required int birthday,
+  int? birthday,
   int? country,
   int? state,
   String? industry, // 行业
@@ -583,6 +583,19 @@ Future<bool> checkIn(BuildContext context,int eventId) async {
     return false;
   }
 }
+
+/// 管理员修改签到状态
+Future<bool> confirmCheckIn(BuildContext context,int eventId,int userId,bool isAttendance) async {
+  BaseBean? res = await httpPut(context,
+      url: '/event/attendance/checkin/confirm',
+      queryParameters: {"eventId": eventId,"userId":userId,"isAttendance":isAttendance});
+  if(res!=null){
+    return res.code == 200;
+  }else{
+    return false;
+  }
+}
+
 
 /// 用户签到
 Future<bool> checkOut(BuildContext context,int eventId) async {

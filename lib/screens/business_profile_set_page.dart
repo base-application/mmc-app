@@ -273,7 +273,7 @@ class _BusinessProfileSetPageState extends State<BusinessProfileSetPage> {
 
   /// 获取公司列表数据
   Future _getDataList({ bool silence = false }) async {
-    PersonalProfileInfoEntity info = await getUserDetailData(context, userId: Provider.of(context).read<AuthService>().getLoginInfo!.id, silence: silence);
+    PersonalProfileInfoEntity info = await getUserDetailData(context, userId: context.read<AuthService>().getLoginInfo!.id, silence: silence);
 
     savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, info);
     companyVos = info.companyVos;

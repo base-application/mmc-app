@@ -46,7 +46,7 @@ class _PosterViewState extends State<PosterView> {
           scrollPhysics: const BouncingScrollPhysics(),
           builder: (BuildContext context, int index) {
             return PhotoViewGalleryPageOptions(
-              imageProvider: Image.network(Provider.of(context).read<SystemSetService>().baseUrl + widget.images[index].url,width: MediaQuery.of(context).size.width,fit: BoxFit.fitWidth,).image,
+              imageProvider: Image.network(context.read<SystemSetService>().baseUrl + widget.images[index].url,width: MediaQuery.of(context).size.width,fit: BoxFit.fitWidth,).image,
               initialScale: PhotoViewComputedScale.contained,
               heroAttributes: PhotoViewHeroAttributes(tag: index),
             );

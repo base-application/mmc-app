@@ -984,7 +984,7 @@ class _BusinessProfileCreatePageState extends State<BusinessProfileCreatePage> {
       companyInterests: _companyInterestsLookingForController.text.trim(),
       serviceIntroduction: _companyProductServiceController.text.trim(),
       producePictures: _formProducts.map((e) => { 'companyId': _companyId, 'producePicture': e }).toList(),
-      userId: Provider.of(context).read<AuthService>().getLoginInfo!.id,
+      userId: Provider.of<AuthService>(context).getLoginInfo!.id,
       result: (int companyId) {
         _companyId = companyId;
         ComFun.showToast(msg: AppLocalizations.of(context)!.updateProfileInfoSuccessToast);

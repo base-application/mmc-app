@@ -36,8 +36,7 @@ class _YourPicPageState extends State<YourPicPage> {
                     width: 64,
                     height: 64,
                     radius: 50,
-                    url: Provider.of(context)
-                        .watch<AuthService>().getLoginInfo?.avatar,
+                    url: Provider.of<AuthService>(context,listen: true).getLoginInfo?.avatar,
                     errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 64,height: 64, fit: BoxFit.fitWidth,),
                   ),
                   const SizedBox(width: 10,),
@@ -59,8 +58,7 @@ class _YourPicPageState extends State<YourPicPage> {
                     children: [
                       const Icon(Icons.email,color: Color(0xff013B7B),),
                       const SizedBox(width: 10,),
-                      Text(Provider.of(context)
-                          .watch<PersonalProfileService>().getPersonalProfileInfo?.email??"-",style:  const TextStyle(color: Color(0xff013B7B),fontSize: 14))
+                      Text(Provider.of<PersonalProfileService>(context,listen: true).getPersonalProfileInfo?.email??"-",style:  const TextStyle(color: Color(0xff013B7B),fontSize: 14))
                     ],
                   ),
                   const Divider(color: Colors.white,height: 20,),
@@ -68,8 +66,7 @@ class _YourPicPageState extends State<YourPicPage> {
                     children: [
                       const Icon(Icons.phone,color: Color(0xff013B7B)),
                       const SizedBox(width: 10,),
-                      Text(Provider.of(context)
-                          .watch<PersonalProfileService>().getPersonalProfileInfo?.concatNumber??"-",style:  const TextStyle(color: Color(0xff013B7B),fontSize: 14))
+                      Text(Provider.of<PersonalProfileService>(context,listen: true).getPersonalProfileInfo?.concatNumber??"-",style:  const TextStyle(color: Color(0xff013B7B),fontSize: 14))
                     ],
                   ),
                   const Divider(color: Colors.white,height: 20,),
@@ -77,8 +74,7 @@ class _YourPicPageState extends State<YourPicPage> {
                     children: [
                       const  Icon(CupertinoIcons.chat_bubble_2,color: Color(0xff013B7B)),
                       const SizedBox(width: 10,),
-                      Text(Provider.of(context)
-                          .watch<PersonalProfileService>().getPersonalProfileInfo?.whatsapp ??"-",style:  const TextStyle(color: Color(0xff013B7B),fontSize: 14))
+                      Text(Provider.of<PersonalProfileService>(context,listen: true).getPersonalProfileInfo?.whatsapp ??"-",style:  const TextStyle(color: Color(0xff013B7B),fontSize: 14))
                     ],
                   )
                 ],

@@ -1,5 +1,6 @@
 class ConcatItemEntity {
 	String? text;
 	late String image;
-  ConcatItemEntity(this.text, this.image);
+	late String operation;
+  ConcatItemEntity(this.text, this.image,this.operation);
 }

@@ -86,7 +86,7 @@ class _LanguageSetPageState extends State<LanguageSetPage> {
   }
 
   getMark(String language) {
-    if(Provider.of(context).read<SystemSetService>().appLanguage == language){
+    if(context.read<SystemSetService>().appLanguage == language){
       return const Icon(CupertinoIcons.check_mark_circled,color: Colors.white,);
     }else{
       return const Icon(CupertinoIcons.check_mark_circled,color: Colors.transparent,);

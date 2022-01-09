@@ -51,6 +51,8 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
 
   List<StateItemInfoEntity> _aboutState = []; // 所选国家相关城市
 
+  bool edit = false;
+
   @override
   void initState() {
     super.initState();
@@ -79,7 +81,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                         width: 120,
                         height: 162,
                         radius: 14,
-                        url: _formUserHead ?? Provider.of(context).watch<AuthService>().getLoginInfo?.avatar,
+                        url: _formUserHead ?? context.watch<AuthService>().getLoginInfo?.avatar,
                         errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 100, fit: BoxFit.cover,),
                       ),
                       const SizedBox(width: 12,),
@@ -132,8 +134,9 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                           keyboardType: TextInputType.text,
                           cursorColor: Colors.blueAccent,
                           style: const TextStyle(textBaseline: TextBaseline.alphabetic),
+                          readOnly: !edit,
                           decoration: InputDecoration(
-                            hintText: AppLocalizations.of(context)!.personalProfileFormYourNameHint,
+                            hintText: getHit(AppLocalizations.of(context)!.personalProfileFormYourNameHint),
                             hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
                             contentPadding: const EdgeInsets.only(top: 12,),
                             counterText: '',
@@ -176,14 +179,15 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                child: Text(_formDateOfBirth ?? AppLocalizations.of(context)!.personalProfileFormDateOfBirthHint, style: TextStyle(fontSize: 14, color: _formDateOfBirth == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
+                                child: Text(_formDateOfBirth ?? getHit(AppLocalizations.of(context)!.personalProfileFormDateOfBirthHint), style: TextStyle(fontSize: 14, color: _formDateOfBirth == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
                               ),
-                              const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
+                              if(edit) const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
                             ],
                           ),
                         ),
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
+                          if(!edit) return;
                           FocusScope.of(context).requestFocus(FocusNode());
                           Pickers.showDatePicker(context,
                             mode: DateMode.YMD,
@@ -237,14 +241,15 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                child: Text(getName() ?? AppLocalizations.of(context)!.personalProfileFormCountryHint, style: TextStyle(fontSize: 14, color: _formCountry == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
+                                child: Text(getName() ?? getHit(AppLocalizations.of(context)!.personalProfileFormCountryHint), style: TextStyle(fontSize: 14, color: _formCountry == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
                               ),
-                              const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
+                              if(edit)const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
                             ],
                           ),
                         ),
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
+                          if(!edit) return ;
                           FocusScope.of(context).requestFocus(FocusNode());
                           getCountryCodeData(context,silence: false, result: (List<CountryCodeInfo> list) {
                             List<CountryCodeInfo> countryCodeDataList = list.where((element) => element.phonecode != '' && element.nativeName != '').toList();
@@ -260,6 +265,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                                 }).then((country) {
                               if(country!=null){
                                 _formCountry = country;
+                                _formState = null;
                                 _getStateData();
                                 setState(() {});
                               }
@@ -301,14 +307,15 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                child: Text(_formState?.name ?? AppLocalizations.of(context)!.personalProfileFormStateHint, style: TextStyle(fontSize: 14, color: _formState == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
+                                child: Text(_formState?.name ?? getHit(AppLocalizations.of(context)!.personalProfileFormStateHint), style: TextStyle(fontSize: 14, color: _formState == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
                               ),
-                              const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
+                              if(edit)const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
                             ],
                           ),
                         ),
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
+                          if(!edit) return;
                           FocusScope.of(context).requestFocus(FocusNode());
                           if (_formCountry != null && _aboutState.isNotEmpty) {
                             _chooseState();
@@ -349,14 +356,15 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                child: Text(_formIndustry ?? AppLocalizations.of(context)!.personalProfileFormIndustryHint, style: TextStyle(fontSize: 14, color: _formIndustry == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
+                                child: Text(_formIndustry ?? getHit(AppLocalizations.of(context)!.personalProfileFormIndustryHint), style: TextStyle(fontSize: 14, color: _formIndustry == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
                               ),
-                              const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
+                              if(edit) const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
                             ],
                           ),
                         ),
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
+                          if(!edit) return;
                           FocusScope.of(context).requestFocus(FocusNode());
                           _chooseIndustry();
                         },
@@ -395,14 +403,15 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                child: Text(_formOccupation ?? AppLocalizations.of(context)!.personalProfileFormYourOccupationHint, style: TextStyle(fontSize: 14, color: _formOccupation == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
+                                child: Text(_formOccupation ?? getHit(AppLocalizations.of(context)!.personalProfileFormYourOccupationHint), style: TextStyle(fontSize: 14, color: _formOccupation == null ? Colors.black38 : Colors.black87,), overflow: TextOverflow.ellipsis,),
                               ),
-                              const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
+                              if(edit) const Icon(Icons.arrow_drop_down_rounded, size: 22, color: Colors.black54,),
                             ],
                           ),
                         ),
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
+                          if(!edit) return;
                           FocusScope.of(context).requestFocus(FocusNode());
                           _chooseOccupation();
                         },
@@ -434,10 +443,11 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                           keyboardType: TextInputType.text,
                           maxLength: 100,
                           maxLines: 4,
+                          readOnly: !edit,
                           cursorColor: Colors.blueAccent,
                           style: const TextStyle(textBaseline: TextBaseline.alphabetic),
                           decoration: InputDecoration(
-                            hintText: AppLocalizations.of(context)!.personalProfileFormSelfIntroductionHint,
+                            hintText: getHit(AppLocalizations.of(context)!.personalProfileFormSelfIntroductionHint),
                             hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
                             contentPadding: const EdgeInsets.only(top: 10,),
                             counterText: '',
@@ -478,9 +488,10 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                           controller: _yourPhoneNumberController,
                           keyboardType: TextInputType.phone,
                           cursorColor: Colors.blueAccent,
+                          readOnly: !edit,
                           style: const TextStyle(textBaseline: TextBaseline.alphabetic),
                           decoration: InputDecoration(
-                            hintText: AppLocalizations.of(context)!.personalProfileFormYourPhoneNumberHint,
+                            hintText: getHit(AppLocalizations.of(context)!.personalProfileFormYourPhoneNumberHint),
                             hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
                             contentPadding: const EdgeInsets.only(top: 12,),
                             counterText: '',
@@ -521,9 +532,10 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                           controller: _yourWhatsAppController,
                           keyboardType: TextInputType.text,
                           cursorColor: Colors.blueAccent,
+                          readOnly: !edit,
                           style: const TextStyle(textBaseline: TextBaseline.alphabetic),
                           decoration: InputDecoration(
-                            hintText: AppLocalizations.of(context)!.personalProfileFormYourWhatsappHint,
+                            hintText: getHit(AppLocalizations.of(context)!.personalProfileFormYourWhatsappHint),
                             hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
                             contentPadding: const EdgeInsets.only(top: 12,),
                             counterText: '',
@@ -564,9 +576,10 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                           controller: _yourFacebookController,
                           keyboardType: TextInputType.text,
                           cursorColor: Colors.blueAccent,
+                          readOnly: !edit,
                           style: const TextStyle(textBaseline: TextBaseline.alphabetic),
                           decoration: InputDecoration(
-                            hintText: AppLocalizations.of(context)!.personalProfileFormYourFacebookHint,
+                            hintText: getHit(AppLocalizations.of(context)!.personalProfileFormYourFacebookHint),
                             hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
                             contentPadding: const EdgeInsets.only(top: 12,),
                             counterText: '',
@@ -604,12 +617,13 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                             border: Border.all(width: 0.6, color: Colors.grey.shade300,)
                         ),
                         child: TextFormField(
+                          readOnly: !edit,
                           controller: _yourLinkedInController,
                           keyboardType: TextInputType.text,
                           cursorColor: Colors.blueAccent,
                           style: const TextStyle(textBaseline: TextBaseline.alphabetic),
                           decoration: InputDecoration(
-                            hintText: AppLocalizations.of(context)!.personalProfileFormYourLinkedInHint,
+                            hintText: getHit(AppLocalizations.of(context)!.personalProfileFormYourLinkedInHint),
                             hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
                             contentPadding: const EdgeInsets.only(top: 12,),
                             counterText: '',
@@ -647,12 +661,13 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                             border: Border.all(width: 0.6, color: Colors.grey.shade300,)
                         ),
                         child: TextFormField(
+                          readOnly: !edit,
                           controller: _yourYoutubeChannelController,
                           keyboardType: TextInputType.text,
                           cursorColor: Colors.blueAccent,
                           style: const TextStyle(textBaseline: TextBaseline.alphabetic),
                           decoration: InputDecoration(
-                            hintText: AppLocalizations.of(context)!.personalProfileFormYourYoutubeChannelHint,
+                            hintText: getHit(AppLocalizations.of(context)!.personalProfileFormYourYoutubeChannelHint),
                             hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
                             contentPadding: const EdgeInsets.only(top: 12,),
                             counterText: '',
@@ -690,12 +705,13 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                             border: Border.all(width: 0.6, color: Colors.grey.shade300,)
                         ),
                         child: TextFormField(
+                          readOnly: !edit,
                           controller: _yourInstagramController,
                           keyboardType: TextInputType.text,
                           cursorColor: Colors.blueAccent,
                           style: const TextStyle(textBaseline: TextBaseline.alphabetic),
                           decoration: InputDecoration(
-                            hintText: AppLocalizations.of(context)!.personalProfileFormYourInstagramHint,
+                            hintText: getHit(AppLocalizations.of(context)!.personalProfileFormYourInstagramHint),
                             hintStyle: const TextStyle(fontSize: 14, color: Colors.black38),
                             contentPadding: const EdgeInsets.only(top: 12,),
                             counterText: '',
@@ -708,33 +724,32 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                   ),),
                 ],
               ),
-              const SizedBox(height: 40,),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 46,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
-                    elevation: MaterialStateProperty.all(0),
-                  ),
-                  child: Text(AppLocalizations.of(context)!.save, style: const TextStyle(color: Color(0xFF013B7B), fontSize: 16, fontWeight: FontWeight.bold,),),
-                  onPressed: () async {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    _doSave();
-                  },
-                ),
-              ),
-              const SizedBox(height: 80,),
+              const SizedBox(height: 30,),
             ],
           ),
         ),
       );
     }
 
-    return PageContainer(
-      title: 'Personal Profile',
+    return  Scaffold(
       resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+        title: const Text("Personal Profile"),
+        actions: [
+          if(!edit) IconButton(onPressed: (){
+            edit = true;
+            setState(() {});
+          }, icon: ImageIcon(Image.asset("assets/icon/edit.png").image)),
+          if(edit) TextButton(
+              onPressed: () async {
+                FocusScope.of(context).requestFocus(FocusNode());
+                await _doSave();
+                setState(() {});
+              },
+              child: Text(AppLocalizations.of(context)!.save,style: const TextStyle(color: Color(0xffFBB714),fontWeight: FontWeight.bold),)
+          )
+        ],
+      ),
       body: ScrollConfiguration(
         behavior: CusBehavior(),
         child: _scroll(),
@@ -743,8 +758,8 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
   }
 
   _initFormData() {
-    _formUserHead = Provider.of(context).read<AuthService>().getLoginInfo!.avatar;
-    PersonalProfileInfoEntity personalProfileInfo = Provider.of(context).read<PersonalProfileService>().getPersonalProfileInfo!;
+    _formUserHead = context.read<AuthService>().getLoginInfo!.avatar;
+    PersonalProfileInfoEntity personalProfileInfo = context.read<PersonalProfileService>().getPersonalProfileInfo!;
     if (personalProfileInfo.name != null) _yourNameController.text = personalProfileInfo.name!;
     if (personalProfileInfo.birthday != null) _formDateOfBirth = DateUtil.formatDate(DateTime.fromMillisecondsSinceEpoch(personalProfileInfo.birthday!), format: 'yyyy-MM-dd');
     developer.log("国家代码");
@@ -813,7 +828,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
 
   /// 选择行业
   _chooseIndustry() {
-    getIndustryData(context, result: (List<String> industryList) {
+    getIndustryData(context, silence: false, result: (List<String> industryList) {
       showModalBottomSheet<String?>(
           context: context,
           isScrollControlled: true,
@@ -822,7 +837,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
             minHeight: MediaQuery.of(context).size.height * .4,
           ),
           builder: (BuildContext context) {
-            return InputSelect(name: industryList,);
+            return InputSelect(name: industryList,hitText: AppLocalizations.of(context)!.keyIndustryHit,);
           }).then((industry) {
         if(industry!=null){
           _formIndustry = industry;
@@ -841,7 +856,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
           minHeight: MediaQuery.of(context).size.height * .4,
         ),
         builder: (BuildContext context) {
-          return InputSelect(name: json.decode(AppLocalizations.of(context)!.position).cast<String>(),);
+          return InputSelect(name: json.decode(AppLocalizations.of(context)!.position).cast<String>(), hitText: AppLocalizations.of(context)!.keyPositionHit,);
         }).then((industry) {
       if(industry!=null){
         _formOccupation = industry;
@@ -851,7 +866,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
   }
 
   /// 保存个人资料
-  _doSave() {
+  _doSave() async {
     if (_formUserHead == null) {
       ComFun.showToast(msg: 'Please choose your profile picture');
       return;
@@ -877,10 +892,10 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
       ComFun.showToast(msg: 'Please fill your phone number');
       return;
     }
-    userInfoUpdate(context,
+    await userInfoUpdate(context,
       picture: _formUserHead!,
       name: _yourNameController.text.trim(),
-      birthday: DateTime.parse(_formDateOfBirth!).millisecondsSinceEpoch,
+      birthday:(_formDateOfBirth!=null ? DateTime.parse(_formDateOfBirth!).millisecondsSinceEpoch : null),
       country: _formCountry?.id,
       state: _formState?.id,
       industry: _formIndustry, // 行业
@@ -892,21 +907,31 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
       linkedin: _yourLinkedInController.text.trim(),
       youtube: _yourYoutubeChannelController.text.trim(),
       instagram: _yourInstagramController.text.trim(),
-      userId: Provider.of(context).read<AuthService>().getLoginInfo!.id,
+      userId: context.read<AuthService>().getLoginInfo!.id,
       result: (PersonalProfileInfoEntity info) {
         ComFun.showToast(msg: AppLocalizations.of(context)!.updateProfileInfoSuccessToast);
-        Provider.of(context).read<AuthService>().setAvatar(_formUserHead);
-        savePersonalProfileInfo(context, Provider.of(context).read<AuthService>().getLoginInfo!.id, info);
+        context.read<AuthService>().setAvatar(_formUserHead);
+        saveLoginInfo(context, context.read<AuthService>().getLoginInfo);
+        savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, info);
         AutoRouter.of(context).pop();
       },
     );
+    edit = false;
   }
 
   getName() {
-    if(Provider.of(context).read<SystemSetService>().appLanguage == "en"){
+    if(context.read<SystemSetService>().appLanguage == "en"){
      return _formCountry?.name;
     }else{
       return _formCountry?.translations.cn??"";
+    }
+  }
+
+  getHit(String text){
+    if(edit){
+      return text;
+    }else{
+      return  AppLocalizations.of(context)!.notFilled;
     }
   }
 

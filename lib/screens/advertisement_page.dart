@@ -46,7 +46,7 @@ class _AdvertisementPageState extends State<AdvertisementPage> {
           width: MediaQuery.of(context).size.width,
           child: _advertisementEntity!=null ?
           Image.network(
-            Provider.of<SystemSetService>(context, listen: false).baseUrl + _advertisementEntity!.advertisementPoster,
+            context.read<SystemSetService>().baseUrl + _advertisementEntity!.advertisementPoster,
             fit: BoxFit.cover,
             errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace,){
               return Image.asset("assets/image/app_launch.png",fit: BoxFit.cover);
@@ -137,6 +137,7 @@ class _AdvertisementPageState extends State<AdvertisementPage> {
                           ),
                           child: Text(AppLocalizations.of(context)!.yes, style: const TextStyle(color: Color(0xFF002A67), fontSize: 17, fontWeight: FontWeight.w600, letterSpacing: 0.2),),
                           onPressed: () {
+                            Navigator.of(context).pop();
                             checkAppVersion();
                           },
                         ),
@@ -252,7 +253,7 @@ class _AdvertisementPageState extends State<AdvertisementPage> {
 
   next(){
     initLoginInfo(context).then((value){
-      if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token != null){
+      if(context.read<AuthService>().getLoginInfo?.token != null){
         ///完善资料
         if(ComFun.isPerfect(context)){
           AutoRouter.of(context).replaceAll([const HomeRoute(),const PersonalProfileSetRoute()]);

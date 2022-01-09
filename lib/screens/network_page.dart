@@ -215,7 +215,7 @@ class _NetworkPageState extends State<NetworkPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (itemInfo.industry != null) Text(itemInfo.industry ?? '', style: const TextStyle(fontSize: 13, color: Colors.white,), maxLines: 3, overflow: TextOverflow.ellipsis,),
+                        if (itemInfo.industry != null) Text(itemInfo.industry ?? '', style: const TextStyle(fontSize: 13, color: Colors.white,), maxLines: 2, overflow: TextOverflow.ellipsis,),
                         if (itemInfo.industry != null) const SizedBox(height: 6,),
                         Text(itemInfo.occupation ?? '', style: const TextStyle(fontSize: 12, color: Colors.white,), maxLines: 3, overflow: TextOverflow.ellipsis,),
                       ],

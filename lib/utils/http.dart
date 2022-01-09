@@ -458,10 +458,10 @@ Future requestAuthHead(BuildContext context, BaseOptions options, String path) a
   options.headers.addAll({ 'Accept-Language': context.read<SystemSetService>().appLanguage == 'en' ? 'en-US' : 'zh-CN' });
   List<String> excludePaths = ['app/history/last', 'login'];
   if (!excludePaths.contains(path)) {
-    var token = Provider.of<AuthService>(context, listen: false).token ?? '';
+    var token = context.read<AuthService>().token ?? '';
     if (token.isEmpty) {
       await initLoginInfo(context);
-      token = Provider.of<AuthService>(context, listen: false).token ?? '';
+      token = context.read<AuthService>().token ?? '';
       if (token.isEmpty) {
         options.headers.removeWhere((key, value) => key == 'Authorization');
         return null;

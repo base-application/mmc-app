@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lottie/lottie.dart';
 
 class BannerWidget extends StatefulWidget {
   const BannerWidget({ Key? key, required this.imageList, this.loopDuration = const Duration(seconds: 3), this.bg, this.width, this.height = 140, this.whRadio, this.topGradientHeight = 30, this.topGradientColor = const Color.fromRGBO(63, 68, 72, 1), this.padding, this.showIndicator = true, this.isNetImg = false, this.netImgLoadOrErr }): super(key: key);
@@ -126,8 +127,14 @@ class _BannerWidgetState extends State<BannerWidget> {
                   padding: widget.padding ?? const EdgeInsets.all(0),
                   child: CachedNetworkImage(
                     imageUrl: image,
-                    placeholder: (BuildContext context, String url,) {
-                      return widget.netImgLoadOrErr ?? Center(child: Text(AppLocalizations.of(context)!.imgLoadingTip, style: const TextStyle(color: Colors.black54, fontSize: 13),),);
+                    progressIndicatorBuilder:(BuildContext context, String url, DownloadProgress progress,){
+                      return SizedBox(
+                        width: 20, height: 20,
+                        child: LottieBuilder.asset(
+                          'assets/lottie/5039-planet.json',
+                          fit: BoxFit.contain,
+                        ),
+                      );
                     },
                     fit: BoxFit.fill,
                     errorWidget: (BuildContext context, String url, dynamic error,) {

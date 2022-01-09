@@ -78,7 +78,7 @@ class _ReferralReceivedContactedPageState extends State<ReferralReceivedContacte
                           borderRadius: BorderRadius.circular(14),
                         ),
                         child: CachedNetworkImage(
-                          imageUrl: Provider.of(context).read<SystemSetService>().baseUrl + widget.referralEntity.picture![index].url,
+                          imageUrl: context.read<SystemSetService>().baseUrl + widget.referralEntity.picture![index].url,
                           placeholder: (BuildContext context, String url,) {
                             return Container(color: Colors.grey.shade300,);
                           },

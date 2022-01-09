@@ -281,8 +281,7 @@ class _SignInPageState extends State<SignInPage> {
       }
 
     },err: (){
-      savePersonalProfileInfo(context, Provider.of(context)
-          .read<AuthService>().getLoginInfo!.id, null);
+      savePersonalProfileInfo(context, context.read<AuthService>().getLoginInfo!.id, null);
       saveLoginInfo(context, null);
     });
   }

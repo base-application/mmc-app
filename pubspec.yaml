@@ -49,7 +49,7 @@ dependencies:
   firebase_messaging: ^11.2.4
   firebase_core: ^1.10.6
   firebase_analytics: ^9.0.4
-  webview_flutter: ^2.3.1
+  flutter_inappwebview: ^5.3.2
   flutter_html: ^2.1.5
   photo_view: ^0.13.0
   package_info: ^2.0.2
@@ -166,10 +166,11 @@ flutter:
    - assets/icon/notic_mony.png
    - assets/icon/notic_new.png
    - assets/icon/notic_system.png
+   - assets/icon/edit.png
+   - assets/icon/message.png
    # lottie动画
    - assets/lottie/loading.json
-   # json
-   - assets/json/countries.json
+   - assets/lottie/5039-planet.json
 # 生成app图标 flutter clean && flutter pub get && flutter pub run flutter_launcher_icons:main
 flutter_icons:
   android: true
@@ -182,11 +183,11 @@ flutter_icons:
 flutter_native_splash:
   color: "#ffffff"
   #background_image: "assets/background.png"
-  image: assets/image/app_launch.png
+  image: assets/image/logo.png
   android: true
   ios: true
   #web: false
-  android_gravity: fill
-  ios_content_mode: scaleToFill
+  android_gravity: center
+  ios_content_mode: center
   fullscreen: true
 

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mmc/router/auth_guard.dart';
 import 'package:provider/provider.dart';
 
@@ -81,12 +82,18 @@ Widget netImgWrap(BuildContext context, { String? url, String? assets, double? w
     return errorWidget;
   }
   Widget _img = CachedNetworkImage(
-    imageUrl: '${Provider.of(context).read<SystemSetService>().baseUrl}$url',
+    imageUrl: '${context.read<SystemSetService>().baseUrl}$url',
+    progressIndicatorBuilder:(BuildContext context, String url, DownloadProgress progress,){
+      return SizedBox(
+        width: 20, height: 20,
+        child: LottieBuilder.asset(
+          'assets/lottie/5039-planet.json',
+          fit: BoxFit.contain,
+        ),
+      );
+    },
     width: width,
     height: height,
-    placeholder: (BuildContext context, String url,) {
-      return errorWidget;
-    },
     fit: fit ?? BoxFit.fill,
     errorWidget: (BuildContext context, String url, dynamic error,) {
       return errorWidget;

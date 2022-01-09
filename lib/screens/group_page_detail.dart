@@ -91,9 +91,12 @@ class _GroupDetailPageState extends State<GroupDetailPage> {
       ),
       body: Container(
         padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          gradient: const LinearGradient(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+          gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [

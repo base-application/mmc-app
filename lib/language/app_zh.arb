@@ -22,7 +22,7 @@
   "tipLoginKeyOTP": "请输入短信验证码",
   "tipLoginKeyOTPDescribe": "我们已经给你发送了6位短信验证码",
   "tipLoginKeyPassword": "请输入登录密码",
-  "tipLoginKeyPasswordDescribe": "密码必须至少包含8个字符，并且由字母和数字组成",
+  "tipLoginKeyPasswordDescribe": "密码必须至少包含8个字符",
   "hintLoginConfirmBtn": "确认",
   "hintLoginNextBtn": "下一步",
   "inputRegisterPasswordTip": "请设置登录密码",
@@ -228,5 +228,10 @@
   "netWorkError": "网络链接出错,点击重试",
   "clickRegister": "点击注册",
   "joinOnStart": "活动开始前加入",
-  "position": "[\"Business\",\"owner\",\"Manager\",\"Founder\",\"Co-Founder\",\"CEO\",\"CFO\",\"CMO\"]"
+  "passwordsInconsistent": "两次输入的密码不一致",
+  "noCompanyInformation": "暂无公司信息",
+  "keyIndustryHit": "如果以下没有，请输入您的行业",
+  "keyPositionHit": "如果以下没有，请输入您的职位",
+  "notFilled": "未完善",
+  "position": "[\"Business\",\"Owner\",\"Manager\",\"Founder\",\"Co-Founder\",\"CEO\",\"CFO\",\"CMO\"]"
 }

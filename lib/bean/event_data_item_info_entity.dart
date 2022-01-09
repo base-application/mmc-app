@@ -82,4 +82,8 @@ class EventDataItemInfoAttendance {
 	String? concatNumber;
 	String? absentReason;
 	bool? facebookComment;
+	String? industry;
+	String? occupation;
+	String? agentRole;
+	String? agent;
 }

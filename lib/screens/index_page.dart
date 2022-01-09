@@ -47,7 +47,7 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
   late Future<HomeIndexInfoEntity> _homeIndexInfoEntity;
 
   getMessage(){
-    if(Provider.of<AuthService>(context, listen: false).getLoginInfo?.token!=null){
+    if(context.read<AuthService>().getLoginInfo?.token!=null){
       noReadMessage(context).then((value) {
         _messageNoReadEntity = value;
         setState(() {});
@@ -223,7 +223,7 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                     isNetImg: true,
                     topGradientHeight: 0,
                     showIndicator: false,
-                    imageList: snapshot.data!.slider!.map((e) => '${Provider.of(context).read<SystemSetService>().baseUrl}${e.sliderPoster}').toList(),
+                    imageList: snapshot.data!.slider!.map((e) => '${context.read<SystemSetService>().baseUrl}${e.sliderPoster}').toList(),
                   ),
                   Container(
                     height: 70,
@@ -479,7 +479,7 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                         ],
                       ),
                       Offstage(
-                        offstage: Provider.of<AuthService>(context, listen: false).getLoginInfo?.token == null,
+                        offstage: context.read<AuthService>().getLoginInfo?.token == null,
                         child: SizedBox(
                           height: 150,
                           child:  ScrollConfiguration(
@@ -678,7 +678,7 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                         ),
                       ),
                       Offstage(
-                        offstage: Provider.of<AuthService>(context, listen: false).getLoginInfo?.token != null,
+                        offstage: context.read<AuthService>().getLoginInfo?.token != null,
                         child: GestureDetector(
                           onTap: (){
                             AutoRouter.of(context).push(SignUpRoute(type: 1));

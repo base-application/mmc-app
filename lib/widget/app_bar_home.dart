@@ -1,10 +1,12 @@
 
 import 'dart:convert';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/router/auth_guard.dart';
+import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/comm_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -45,20 +47,23 @@ class _HomeAppBarState extends State<HomeAppBar> {
               GestureDetector(
                 onTap: (){
                 },
-                child: Text(Provider.of(context)
-                    .watch<PersonalProfileService>().getPersonalProfileInfo?.name ?? '-', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black87,),),
+                child: Text(context.watch<PersonalProfileService>().getPersonalProfileInfo?.name ?? '-', style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black87,),),
               ),
             ],
           ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: netImgWrap(context,
-              width: 50,
-              height: 50,
-              fit: BoxFit.cover,
-              url: Provider.of(context)
-                  .watch<AuthService>().getLoginInfo?.avatar,
-              errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 50, height: 50, fit: BoxFit.fitWidth,),
+          GestureDetector(
+            onTap: (){
+              AutoRouter.of(context).push(const PersonalProfileSetRoute());
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: netImgWrap(context,
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+                url: context.watch<AuthService>().getLoginInfo?.avatar,
+                errorWidget: Image.asset('assets/image/personal_head_empty.png', width: 50, height: 50, fit: BoxFit.fitWidth,),
+              ),
             ),
           )
         ],
