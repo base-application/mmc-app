@@ -64,7 +64,7 @@ class _EventListingPageState extends State<EventListingPage> {
   @override
   Widget build(BuildContext context) {
     return PageContainer(
-      title: 'Events Listing',
+      title: AppLocalizations.of(context)!.eventsListing,
       bodyTop: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -543,7 +543,7 @@ class _EventListingPageState extends State<EventListingPage> {
               children: [
                 const SizedBox(width: 4,),
                 SizedBox(
-                  width: 55,
+                  width: 70,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

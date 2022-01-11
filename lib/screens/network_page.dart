@@ -10,6 +10,7 @@ import 'package:mmc/bean/network_item_info_entity.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/bean/state_item_info_entity.dart';
 import 'package:mmc/router/router.gr.dart';
+import 'package:mmc/screens/state_choose.dart';
 import 'package:mmc/utils/comfun.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,6 +18,8 @@ import 'package:mmc/utils/comm_widget.dart';
 import 'package:mmc/utils/dialog.dart';
 import 'package:mmc/utils/http_request.dart';
 import 'package:mmc/widget/app_bar_home.dart';
+import 'package:mmc/widget/country_choose.dart';
+import 'package:mmc/widget/input_select.dart';
 
 class NetworkPage extends StatefulWidget {
   final bool onlyMy;
@@ -515,68 +518,65 @@ class _NetworkPageState extends State<NetworkPage> {
   }
   /// 选择城市
   _chooseState() {
-    if (_aboutCity.isNotEmpty) {
-      Pickers.showSinglePicker(context,
-        data: _aboutCity.map((e) => e.name).toList(),
-        selectData: _filterCity?.name,
-        pickerStyle: PickerStyle(
-          backgroundColor: Colors.white,
-          textColor: Colors.black87,
-          pickerHeight: MediaQuery.of(context).size.height * 0.4,
-          menuHeight: MediaQuery.of(context).size.height * 0.4,
+    showModalBottomSheet<StateItemInfoEntity?>(
+        context: context,
+        isScrollControlled: true,
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * .8,
+          minHeight: MediaQuery.of(context).size.height * .4,
         ),
-        onConfirm: (res, position) {
-          setState(() {
-            _filterCity = _aboutCity[position];
-          });
-        },
-      );
-    }
+        builder: (BuildContext context) {
+          return StateChoose(states: _aboutCity,);
+        }).then((country) {
+      if(country!=null){
+        _filterCity = country;
+        setState(() {});
+      }
+    });
   }
 
   /// 选择行业
   _chooseIndustry() {
     getIndustryData(context, silence: false, result: (List<String> industryList) {
-      Pickers.showSinglePicker(context,
-        data: industryList,
-        selectData: _filterIndustry,
-        pickerStyle: PickerStyle(
-          backgroundColor: Colors.white,
-          textColor: Colors.black87,
-          pickerHeight: MediaQuery.of(context).size.height * 0.4,
-          menuHeight: MediaQuery.of(context).size.height * 0.4,
-        ),
-        onConfirm: (res, position) {
-          setState(() {
-            _filterIndustry = res;
-          });
-        },
-      );
+      showModalBottomSheet<String?>(
+          context: context,
+          isScrollControlled: true,
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * .8,
+            minHeight: MediaQuery.of(context).size.height * .4,
+          ),
+          builder: (BuildContext context) {
+            return InputSelect(name: industryList,hitText: AppLocalizations.of(context)!.keyIndustryHit,);
+          }).then((industry) {
+        if(industry!=null){
+          _filterIndustry = industry;
+          setState(() {});
+        }
+      });
     });
   }
 
 
   /// 选择国家
   _chooseCountry() {
-    getCountryCodeData(context, silence: false, result: (List<CountryCodeInfo> list) {
-      Pickers.showSinglePicker(context,
-        data: list.map((e) => e.nativeName).toList(),
-        selectData: _filterCountry?.nativeName,
-        pickerStyle: PickerStyle(
-          showTitleBar: true,
-          backgroundColor: Colors.white,
-          textColor: Colors.black87,
-          pickerHeight: MediaQuery.of(context).size.height * 0.4,
-          menuHeight: MediaQuery.of(context).size.height * 0.4,
-        ),
-        onConfirm: (res, position) {
-          setState(() {
-            _filterCountry = list[position];
-            _filterCity = null;
-          });
+    getCountryCodeData(context,silence: false, result: (List<CountryCodeInfo> list) {
+      showModalBottomSheet<CountryCodeInfo?>(
+          context: context,
+          isScrollControlled: true,
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * .8,
+            minHeight: MediaQuery.of(context).size.height * .4,
+          ),
+          builder: (BuildContext context) {
+            return CountryChoose(curLocalData: list,);
+          }).then((country) {
+        if(country!=null){
+          _filterCountry = country;
+          _filterCity = null;
           _getStateData();
-        },
-      );
+          setState(() {});
+        }
+      });
     });
   }
   _getStateData() {

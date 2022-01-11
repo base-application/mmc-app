@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mmc/bean/concat_item_entity.dart';
@@ -327,6 +328,7 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
 
   company(List<PersonalProfileInfoCompanyVos> companies) {
     if(companies.isNotEmpty){
+      _changeDisplayCompanyInfo(companies[_displayCompanyInfoIndex]);
       return Column(
         children: [
           const SizedBox(height: 16,),
@@ -342,7 +344,7 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
                 ),
               ),
               const SizedBox(width: 12,),
-              const Text('My Business Profile', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
+              Text(AppLocalizations.of(context)!.businessProfile, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
             ],
           ),
           const SizedBox(height: 8,),
@@ -405,8 +407,8 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
                                 Expanded(child: Text(companyItem.companyName ?? '-', style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500,), overflow: TextOverflow.ellipsis,),),
                               ],
                             ),
-                            const SizedBox(height: 14,),
-                            Text(companyItem.companyIntroduction ?? '-', style: TextStyle(fontSize: 13, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,),),
+                            const SizedBox(height: 6,),
+                            Text(companyItem.companyIntroduction ?? '-', style: TextStyle(fontSize: 13, color: Colors.white.withAlpha(180), fontWeight: FontWeight.w300,),maxLines: 2,overflow: TextOverflow.ellipsis,),
                             const SizedBox(height: 12,),
                             Expanded(child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

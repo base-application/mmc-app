@@ -885,7 +885,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
       return;
     }
     if (_formOccupation==null || _formOccupation == '') {
-      ComFun.showToast(msg: 'Please fill your occupation');
+      ComFun.showToast(msg: 'Please fill your position');
       return;
     }
     if (_yourPhoneNumberController.text.trim() == '') {
