@@ -2,6 +2,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/bean/message_no_read_entity.dart';
 import 'package:mmc/router/auth_guard.dart';
@@ -86,6 +87,8 @@ class _SettingPageState extends State<SettingPage> {
         iconAssets: 'assets/icon/set_term_of_service.png',
         label:AppLocalizations.of(context)!.termService,
         onTap: () {
+          AutoRouter.of(context).push(WebRoute(title: AppLocalizations.of(context)!.termService, initUrl: 'https://themastermindcouncil.com/term-of-service/'));
+
           // AutoRouter.of(context).push(const GuidelineRoute());
         },
       ),
@@ -223,6 +226,7 @@ class _SettingPageState extends State<SettingPage> {
   getNoReadMessage(){
     if(context.read<AuthService>().getLoginInfo?.token != null){
       noReadMessage(context).then((value) {
+        FlutterAppBadger.updateBadgeCount(_messageNoReadEntity?.count??0);
         _messageNoReadEntity = value;
         if(mounted){
           setState(() {});

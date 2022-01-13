@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:mmc/bean/message_no_read_entity.dart';
 import 'package:mmc/bean/personal_profile_info_entity.dart';
@@ -67,6 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
     if(context.read<AuthService>().getLoginInfo?.token != null){
       noReadMessage(context).then((value) {
         _messageNoReadEntity = value;
+        FlutterAppBadger.updateBadgeCount(_messageNoReadEntity?.count??0);
         if(mounted){
           setState(() {});
         }
@@ -299,7 +301,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 26),
-                      child: Text(AppLocalizations.of(context)!.myQRCode, style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 18),),
+                      child: Text(AppLocalizations.of(context)!.myQRCode, style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 18),),
                     ),
                     const SizedBox(height: 20,),
                     Container(
@@ -313,7 +315,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Column(
                         children: [
                           const SizedBox(height: 30,),
-                          Text(AppLocalizations.of(context)!.forEventCheckIn, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white,),),
+                          Text(AppLocalizations.of(context)!.forEventCheckIn, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white,),),
                           const SizedBox(height: 36,),
                           Container(
                             width: MediaQuery.of(context).size.width * 0.7,
@@ -425,7 +427,7 @@ class MonthlyAchievement extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(AppLocalizations.of(context)!.joinedEvent, style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+              Text(AppLocalizations.of(context)!.joinedEvent, style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
                   Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.joinEvent??0).toString(), style:  const  TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
@@ -446,7 +448,7 @@ class MonthlyAchievement extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(AppLocalizations.of(context)!.referralSent, style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+              Text(AppLocalizations.of(context)!.referralSent, style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
                   Text((Provider.of<PersonalProfileService>(context).getPersonalProfileInfo?.achievement.referralSend??0).toString(), style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
@@ -467,7 +469,7 @@ class MonthlyAchievement extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(AppLocalizations.of(context)!.referralReceived, style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+              Text(AppLocalizations.of(context)!.referralReceived, style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
                   Text((Provider.of<PersonalProfileService>(context,listen: true).getPersonalProfileInfo?.achievement.referralReceived??0).toString(), style: const  TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
@@ -488,7 +490,7 @@ class MonthlyAchievement extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(AppLocalizations.of(context)!.thankYouNote, style: TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
+              Text(AppLocalizations.of(context)!.thankYouNote, style: const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
               Row(
                 children: [
                   Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.thankYouNoteReceived??0).toString(), style:  const TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),

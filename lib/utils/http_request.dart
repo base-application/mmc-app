@@ -23,8 +23,10 @@ import 'package:mmc/bean/personal_profile_info_entity.dart';
 import 'package:mmc/bean/referral_entity.dart';
 import 'package:mmc/bean/state_item_info_entity.dart';
 import 'package:mmc/bean/thank_note_entity.dart';
+import 'package:mmc/router/auth_guard.dart';
 import 'package:mmc/widget/app_bar_home.dart';
 import 'package:package_info/package_info.dart';
+import 'package:provider/src/provider.dart';
 
 import 'http.dart';
 
@@ -131,7 +133,12 @@ Future<PersonalProfileInfoEntity> getUserDetailData(BuildContext context, { requ
 
 /// 获取首页主体数据
 Future<HomeIndexInfoEntity> getIndexData(BuildContext context, { bool silence = false}) async {
-  BaseBean? bean = await httpGet(context, url: 'user/info/index', queryParameters: {}, silence: silence);
+  BaseBean? bean;
+  if(context.read<AuthService>().getLoginInfo?.token!=null){
+    bean = await httpGet(context, url: 'user/info/index', queryParameters: {}, silence: silence);
+  }else{
+    bean = await httpGet(context, url: 'user/info/tourist', queryParameters: {}, silence: silence);
+  }
   return HomeIndexInfoEntity.fromJson(bean?.data);
 }
 

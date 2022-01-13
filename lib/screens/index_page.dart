@@ -4,6 +4,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/event_data_item_info_entity.dart';
 import 'package:mmc/bean/home_index_info_entity.dart';
@@ -50,6 +52,7 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
     if(context.read<AuthService>().getLoginInfo?.token!=null){
       noReadMessage(context).then((value) {
         _messageNoReadEntity = value;
+        FlutterAppBadger.updateBadgeCount(_messageNoReadEntity?.count??0);
         setState(() {});
       });
     }
@@ -200,7 +203,16 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
         future: _homeIndexInfoEntity,
         builder: (BuildContext context, AsyncSnapshot<HomeIndexInfoEntity> snapshot) {
           if(snapshot.connectionState == ConnectionState.done && !snapshot.hasError){
-            return SingleChildScrollView(
+            return EasyRefresh(
+                onRefresh: () async {
+                  _homeIndexInfoEntity = getIndexData(context, silence: false);
+                  getMessage();
+                  setState(() {});
+                },
+                header: MaterialHeader(
+                    backgroundColor: const Color(0xFF095BD4)
+                ),
+                child: SingleChildScrollView(
               controller: _pageScrollController,
               child: Column(
                 children: [
@@ -678,26 +690,27 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                         ),
                       ),
                       Offstage(
-                        offstage: context.read<AuthService>().getLoginInfo?.token != null,
-                        child: GestureDetector(
-                          onTap: (){
-                            AutoRouter.of(context).push(SignUpRoute(type: 1));
-                          },
-                          child: SizedBox(
-                              height: 100,
-                              child:  Container(
-                                color: Colors.white,
-                                alignment: Alignment.center,
-                                child: Text(AppLocalizations.of(context)!.clickRegister),
-                              )
-                          ),
-                        )
+                          offstage: context.read<AuthService>().getLoginInfo?.token != null,
+                          child: GestureDetector(
+                            onTap: (){
+                              AutoRouter.of(context).push(SignUpRoute(type: 1));
+                            },
+                            child: SizedBox(
+                                height: 100,
+                                child:  Container(
+                                  color: Colors.white,
+                                  alignment: Alignment.center,
+                                  child: Text(AppLocalizations.of(context)!.clickRegister),
+                                )
+                            ),
+                          )
                       ),
                       const SizedBox(height: 120,),
                     ],
                   ),
                 ],
               ),
+            )
             );
           }else{
             return stateNoDate();

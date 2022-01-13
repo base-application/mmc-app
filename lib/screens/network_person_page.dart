@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mmc/bean/concat_item_entity.dart';
@@ -30,11 +29,11 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
 
   final Map<String, String> _groupZ = {
     'Crystal': 'assets/image/profile_z.png',
-    'Elite': 'assets/image/profile_z.png',
-    'Premiere': 'assets/image/profile_z.png',
-    'MMC': 'assets/image/profile_z.png',
-    'Platinum': 'assets/image/profile_z.png',
-    'Titanium': 'assets/image/profile_z.png',
+    'Elite': 'assets/image/profile_e.png',
+    'Premiere': 'assets/image/profile_p.png',
+    'MMC': 'assets/image/profile_m.png',
+    'Platinum': 'assets/image/profile_pla.png',
+    'Titanium': 'assets/image/profile_t.png',
   };
   String? _getGroupZ(String? gradeName) {
     if (gradeName == null) {
@@ -344,7 +343,7 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
                 ),
               ),
               const SizedBox(width: 12,),
-              Text(AppLocalizations.of(context)!.businessProfile, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
+              Text(AppLocalizations.of(context)!.businessProfile, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600,),),
             ],
           ),
           const SizedBox(height: 8,),
