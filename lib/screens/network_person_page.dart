@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mmc/bean/concat_item_entity.dart';
@@ -150,6 +151,7 @@ class _NetworkPersonPageState extends State<NetworkPersonPage> {
                                           width: 120,
                                           height: double.infinity,
                                           url: info.picture,
+                                          fit: BoxFit.cover,
                                           errorWidget: Image.asset('assets/image/personal_head_empty.png', fit: BoxFit.fitWidth,),
                                         ),
                                       ),

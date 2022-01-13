@@ -88,13 +88,13 @@ Widget netImgWrap(BuildContext context, { String? url, String? assets, double? w
         width: 20, height: 20,
         child: LottieBuilder.asset(
           'assets/lottie/5039-planet.json',
-          fit: BoxFit.contain,
+          fit: BoxFit.cover,
         ),
       );
     },
     width: width,
     height: height,
-    fit: fit ?? BoxFit.fill,
+    fit: fit ?? BoxFit.cover,
     errorWidget: (BuildContext context, String url, dynamic error,) {
       return errorWidget;
     },

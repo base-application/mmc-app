@@ -23,20 +23,23 @@ class _NewestDetailPageState extends State<NewestDetailPage> {
 
   int _imgBannerIndex = 0;
   ChewieController? chewieController;
+  bool isPlay = false;
   @override
   void initState() {
     newestRead(context,widget.info.storyId);
     super.initState();
     if (widget.info.link != null) {
-      _controller = VideoPlayerController.network(widget.info.link!,videoPlayerOptions: VideoPlayerOptions())
-        ..initialize().then((_) {
-          setState(() {});
-        });
+      _controller = VideoPlayerController.network(widget.info.link!,videoPlayerOptions: VideoPlayerOptions());
       chewieController = ChewieController(
         videoPlayerController: _controller!,
         autoPlay: true,
         looping: true,
       );
+      _controller!.addListener(() {
+        if(_controller!.value.isInitialized){
+          setState(() {});
+        }
+      });
     }
   }
 
@@ -73,19 +76,7 @@ class _NewestDetailPageState extends State<NewestDetailPage> {
                             ),
                           ],
                         ): Container(),
-                      ),
-                      if (!_controller!.value.isPlaying) Center(
-                        child: Container(
-                          width: 46,
-                          height: 46,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(46),
-                            color: Colors.black87.withAlpha(60),
-                          ),
-                          child: const Icon(Icons.play_arrow, size: 26, color: Colors.white,),
-                        ),
-                      ),
+                      )
                     ],
                   ),
                 ),

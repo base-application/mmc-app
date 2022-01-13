@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mmc/bean/advertisement_entity.dart';
 import 'package:mmc/bean/app_version_entity.dart';
@@ -45,14 +46,23 @@ class _AdvertisementPageState extends State<AdvertisementPage> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: _advertisementEntity!=null ?
-          Image.network(
-            context.read<SystemSetService>().baseUrl + _advertisementEntity!.advertisementPoster,
+          CachedNetworkImage(
+            imageUrl:context.read<SystemSetService>().baseUrl + _advertisementEntity!.advertisementPoster,
             fit: BoxFit.cover,
-            errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace,){
-              return Image.asset("assets/image/app_launch.png",fit: BoxFit.cover);
+            errorWidget: (BuildContext context, String url, dynamic error,){
+              return Center(
+                child: Image.asset("assets/image/logo.png",fit: BoxFit.cover,width: 80,height: 90,),
+              );
             },
+            progressIndicatorBuilder:(BuildContext context, String url, DownloadProgress progress,){
+              return Center(
+                child: Image.asset("assets/image/logo.png",fit: BoxFit.cover,width: 80,height: 90,),
+              );
+            }
           ) :
-          Image.asset("assets/image/app_launch.png",fit: BoxFit.cover),
+          Center(
+            child: Image.asset("assets/image/logo.png",fit: BoxFit.cover,width: 80,height: 90,),
+          ),
         ),
         Positioned(
             top: MediaQuery.of(context).padding.top,
