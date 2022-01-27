@@ -58,7 +58,10 @@ class _WelcomePageState extends State<WelcomePage> {
                     height: 16,
                     width: MediaQuery.of(context).size.width,
                   ),
-                  SizedBox(
+                  SafeArea(
+                    bottom: true,
+                    top: false,
+                    child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.9,
                     height: 50,
                     child: ElevatedButton(
@@ -72,20 +75,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         AutoRouter.of(context).push(SignUpRoute(type: 1));
                       },
                     ),
-                  ),
-                  SizedBox(
-                    height: 16,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  GestureDetector(
-                    onTap: (){
-                      AutoRouter.of(context).push( const HomeRoute());
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom+30),
-                      child: Text(AppLocalizations.of(context)!.inputLoginSurfAsAGuestTip, style: const TextStyle(fontSize: 13, color: Colors.white,),),
-                    ),
-                  )
+                  ),)
                 ],
               ),
             )

@@ -241,5 +241,15 @@
   "myQRCode": "我的二维码",
   "forEventCheckIn": "运用在活动签到",
   "eventsListing": "活动",
+  "newsfeed": "新闻",
+  "masterClass": "大师课程",
+  "mostReferralSent": "成为转介绍的人或单位",
+  "mostReferralSentDesc": "一个完美符合我们创造“内部经济及超越”目标的介绍空间及推荐空间 - #KitaSupportKita。分享是一种关怀，因此通过将我们商业社区的成员推荐给任何需要他/她的商业服务的人来发送尽可能多的推荐并创造更多的商业机会。",
+  "mostReferralReceived": "收到最多的推荐",
+  "mostReferralReceivedDesc": "没有什么比从其他成员那里获得好的推荐更有价值的了。确保认真完成每一次推荐，为取得更大的成功铺平道路；更重要的是，我们在专业圈中拥有出色的产品/服务。",
+  "eventSupporter": "活动支持者",
+  "eventSupporterDesc": "- 尽可能多地参加和支持活动，因为这是不断学习新想法和磨砺思想的最佳方式。你的奉献精神不会被忽视。是时候在旅途中不断学习了！",
+  "mostThankYouNote": "感谢函",
+  "mostThankYouNoteDesc": "通过发送一封衷心的感谢函来表达您对收到的每个推荐的感谢。感恩有很长的路要走，所以要慷慨地写下“谢谢”！",
   "position": "[\"Business\",\"Owner\",\"Manager\",\"Founder\",\"Co-Founder\",\"CEO\",\"CFO\",\"CMO\"]"
 }

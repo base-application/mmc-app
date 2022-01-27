@@ -139,6 +139,13 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
     _menus.clear();
     _menus.addAll([
       MenuDoItem(
+        iconAssets: 'assets/icon/master_class.png',
+        label: AppLocalizations.of(context)!.masterClass,
+        onTap: () {
+          AutoRouter.of(context).push(const MasterClassListRoute());
+        },
+      ),
+      MenuDoItem(
         iconAssets: 'assets/icon/menu_group.png',
         label: AppLocalizations.of(context)!.homeIndexMenuGroupBtn,
         onTap: () {
@@ -153,13 +160,6 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
           AutoRouter.of(context).push(const EventListingRoute()).then((value) {
             getMessage();
           });
-        },
-      ),
-      MenuDoItem(
-        iconAssets: 'assets/icon/menu_shining_board.png',
-        label: AppLocalizations.of(context)!.homeIndexMenuShiningBoardBtn,
-        onTap: () {
-          AutoRouter.of(context).push(const ShiningBoardRoute());
         },
       ),
       MenuDoItem(
@@ -184,6 +184,13 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
         label: AppLocalizations.of(context)!.homeIndexMenuThankNoteReceivedBtn,
         onTap: () {
           AutoRouter.of(context).push(const ThankYouNoteReceivedRoute());
+        },
+      ),
+      MenuDoItem(
+        iconAssets: 'assets/icon/menu_shining_board.png',
+        label: AppLocalizations.of(context)!.homeIndexMenuShiningBoardBtn,
+        onTap: () {
+          AutoRouter.of(context).push(const ShiningBoardRoute());
         },
       ),
       ///todo
@@ -257,7 +264,7 @@ class _IndexPageState extends State<IndexPage> with TickerProviderStateMixin {
                         itemCount: _menus.length,
                         itemBuilder: (BuildContext context, int index) {
                           MenuDoItem menuItem = _menus[index];
-                          if(index == 1){
+                          if(index == 2){
                             return GestureDetector(
                               child: Container(
                                 alignment: Alignment.center,

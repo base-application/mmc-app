@@ -8,18 +8,18 @@
 // AutoRouteGenerator
 // **************************************************************************
 
-import 'package:auto_route/auto_route.dart' as _i41;
-import 'package:flutter/cupertino.dart' as _i46;
-import 'package:flutter/material.dart' as _i42;
-import 'package:flutter/rendering.dart' as _i52;
+import 'package:auto_route/auto_route.dart' as _i43;
+import 'package:flutter/material.dart' as _i44;
+import 'package:flutter/rendering.dart' as _i53;
 
-import '../bean/event_data_item_info_entity.dart' as _i49;
-import '../bean/group_item_info_entity.dart' as _i47;
-import '../bean/guide_line_entity.dart' as _i50;
-import '../bean/newest_item_info_entity.dart' as _i48;
-import '../bean/notification_entity.dart' as _i51;
-import '../bean/personal_profile_info_entity.dart' as _i44;
-import '../bean/referral_entity.dart' as _i45;
+import '../bean/event_data_item_info_entity.dart' as _i50;
+import '../bean/group_item_info_entity.dart' as _i48;
+import '../bean/guide_line_entity.dart' as _i51;
+import '../bean/master_class_entity.dart' as _i54;
+import '../bean/newest_item_info_entity.dart' as _i49;
+import '../bean/notification_entity.dart' as _i52;
+import '../bean/personal_profile_info_entity.dart' as _i46;
+import '../bean/referral_entity.dart' as _i47;
 import '../screens/advertisement_page.dart' as _i1;
 import '../screens/business_profile_create_page.dart' as _i23;
 import '../screens/business_profile_set_page.dart' as _i22;
@@ -36,6 +36,8 @@ import '../screens/guideline_detail_page.dart' as _i26;
 import '../screens/guideline_page.dart' as _i25;
 import '../screens/home.dart' as _i2;
 import '../screens/language_set_page.dart' as _i27;
+import '../screens/master_detail_page.dart' as _i42;
+import '../screens/master_list_page.dart' as _i41;
 import '../screens/most_referral_sent_page.dart' as _i17;
 import '../screens/my_inbox_detail_page.dart' as _i32;
 import '../screens/my_inbox_page.dart' as _i19;
@@ -60,183 +62,183 @@ import '../screens/web_page.dart' as _i30;
 import '../screens/welcome_page.dart' as _i35;
 import '../screens/your_pic_page.dart' as _i28;
 import '../utils/qr_view.dart' as _i29;
-import 'auth_guard.dart' as _i43;
+import 'auth_guard.dart' as _i45;
 
-class AppRouter extends _i41.RootStackRouter {
+class AppRouter extends _i43.RootStackRouter {
   AppRouter(
-      {_i42.GlobalKey<_i42.NavigatorState>? navigatorKey,
+      {_i44.GlobalKey<_i44.NavigatorState>? navigatorKey,
       required this.authGuard})
       : super(navigatorKey);
 
-  final _i43.AuthGuard authGuard;
+  final _i45.AuthGuard authGuard;
 
   @override
-  final Map<String, _i41.PageFactory> pagesMap = {
+  final Map<String, _i43.PageFactory> pagesMap = {
     AdvertisementRoute.name: (routeData) {
-      return _i41.MaterialPageX<dynamic>(
+      return _i43.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.AdvertisementPage());
     },
     HomeRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i2.HomePage());
     },
     GroupRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i3.GroupPage());
     },
     GroupDetailRoute.name: (routeData) {
       final args = routeData.argsAs<GroupDetailRouteArgs>();
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData,
           child: _i4.GroupDetailPage(key: args.key, info: args.info));
     },
     SendingReferralRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i5.SendingReferralPage());
     },
     NetworkPersonRoute.name: (routeData) {
       final args = routeData.argsAs<NetworkPersonRouteArgs>();
-      return _i41.MaterialPageX<_i44.PersonalProfileInfoEntity>(
+      return _i43.MaterialPageX<_i46.PersonalProfileInfoEntity>(
           routeData: routeData,
           child: _i6.NetworkPersonPage(key: args.key, userId: args.userId));
     },
     TodayNewestRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i7.TodayNewestPage());
     },
     NewestDetailRoute.name: (routeData) {
       final args = routeData.argsAs<NewestDetailRouteArgs>();
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData,
           child: _i8.NewestDetailPage(key: args.key, info: args.info));
     },
     EventListingRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i9.EventListingPage());
     },
     EventListingDetailRoute.name: (routeData) {
       final args = routeData.argsAs<EventListingDetailRouteArgs>();
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData,
           child: _i10.EventListingDetailPage(
               key: args.key, eventInfo: args.eventInfo, source: args.source));
     },
     ReferralReceivedRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i11.ReferralReceivedPage());
     },
     ReferralReceivedContactedRoute.name: (routeData) {
       final args = routeData.argsAs<ReferralReceivedContactedRouteArgs>();
-      return _i41.MaterialPageX<_i45.ReferralEntity>(
+      return _i43.MaterialPageX<_i47.ReferralEntity>(
           routeData: routeData,
           child: _i12.ReferralReceivedContactedPage(
               key: args.key, referralEntity: args.referralEntity));
     },
     SendThankYouNoteRoute.name: (routeData) {
       final args = routeData.argsAs<SendThankYouNoteRouteArgs>();
-      return _i41.MaterialPageX<bool>(
+      return _i43.MaterialPageX<bool>(
           routeData: routeData,
           child: _i13.SendThankYouNotePage(
               key: args.key, referralId: args.referralId));
     },
     ThankYouNoteReceivedRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i14.ThankYouNoteReceivedPage());
     },
     ShiningBoardRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i15.ShiningBoardPage());
     },
     ShiningBoardDetailRoute.name: (routeData) {
       final args = routeData.argsAs<ShiningBoardDetailRouteArgs>();
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData,
           child: _i16.ShiningBoardDetailPage(key: args.key, about: args.about));
     },
     MostReferralSentRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i17.MostReferralSentPage());
     },
     CreateEventRoute.name: (routeData) {
       final args = routeData.argsAs<CreateEventRouteArgs>();
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData,
           child: _i18.CreateEventPage(key: args.key, entity: args.entity));
     },
     MyInboxRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i19.MyInboxPage());
     },
     SettingRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i20.SettingPage());
     },
     PersonalProfileSetRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i21.PersonalProfileSetPage());
     },
     BusinessProfileSetRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i22.BusinessProfileSetPage());
     },
     BusinessProfileCreateRoute.name: (routeData) {
       final args = routeData.argsAs<BusinessProfileCreateRouteArgs>(
           orElse: () => const BusinessProfileCreateRouteArgs());
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData,
           child:
               _i23.BusinessProfileCreatePage(key: args.key, info: args.info));
     },
     ChangePasswordRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i24.ChangePasswordPage());
     },
     GuidelineRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i25.GuidelinePage());
     },
     GuidelineDetailRoute.name: (routeData) {
       final args = routeData.argsAs<GuidelineDetailRouteArgs>();
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData,
           child: _i26.GuidelineDetailPage(
               key: args.key, guideLineEntity: args.guideLineEntity));
     },
     LanguageSetRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i27.LanguageSetPage());
     },
     YourPicRoute.name: (routeData) {
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData, child: const _i28.YourPicPage());
     },
     QrViewRoute.name: (routeData) {
       final args = routeData.argsAs<QrViewRouteArgs>();
-      return _i41.MaterialPageX<String>(
+      return _i43.MaterialPageX<String>(
           routeData: routeData,
           child: _i29.QrViewPage(key: args.key, type: args.type));
     },
     WebRoute.name: (routeData) {
       final args = routeData.argsAs<WebRouteArgs>();
-      return _i41.MaterialPageX<dynamic>(
+      return _i43.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i30.WebPage(
               key: args.key, title: args.title, initUrl: args.initUrl));
     },
     CheckHistoryRoute.name: (routeData) {
-      return _i41.MaterialPageX<dynamic>(
+      return _i43.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i31.CheckHistoryPage());
     },
     InboxDetailRoute.name: (routeData) {
       final args = routeData.argsAs<InboxDetailRouteArgs>();
-      return _i41.MaterialPageX<dynamic>(
+      return _i43.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i32.InboxDetailPage(
               key: args.key, notification: args.notification));
     },
     NetworkRoute.name: (routeData) {
       final args = routeData.argsAs<NetworkRouteArgs>();
-      return _i41.MaterialPageX<dynamic>(
+      return _i43.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i33.NetworkPage(
               key: args.key,
@@ -245,26 +247,26 @@ class AppRouter extends _i41.RootStackRouter {
               title: args.title));
     },
     MyNetworkRoute.name: (routeData) {
-      return _i41.MaterialPageX<dynamic>(
+      return _i43.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i34.MyNetworkPage());
     },
     WelcomeRoute.name: (routeData) {
-      return _i41.MaterialPageX<dynamic>(
+      return _i43.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i35.WelcomePage());
     },
     SignInRoute.name: (routeData) {
-      return _i41.MaterialPageX<dynamic>(
+      return _i43.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i36.SignInPage());
     },
     SignUpRoute.name: (routeData) {
       final args = routeData.argsAs<SignUpRouteArgs>();
-      return _i41.MaterialPageX<dynamic>(
+      return _i43.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i37.SignUpPage(key: args.key, type: args.type));
     },
     ConfirmPasswordRoute.name: (routeData) {
       final args = routeData.argsAs<ConfirmPasswordRouteArgs>();
-      return _i41.MaterialPageX<dynamic>(
+      return _i43.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i38.ConfirmPasswordPage(
               key: args.key,
@@ -275,7 +277,7 @@ class AppRouter extends _i41.RootStackRouter {
     },
     PhoneNumberVerificationRoute.name: (routeData) {
       final args = routeData.argsAs<PhoneNumberVerificationRouteArgs>();
-      return _i41.MaterialPageX<dynamic>(
+      return _i43.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i39.PhoneNumberVerificationPage(
               key: args.key,
@@ -286,87 +288,102 @@ class AppRouter extends _i41.RootStackRouter {
     CheckInRoute.name: (routeData) {
       final args = routeData.argsAs<CheckInRouteArgs>(
           orElse: () => const CheckInRouteArgs());
-      return _i41.MaterialPageX<dynamic>(
+      return _i43.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i40.CheckInPage(
               key: args.key,
               pageScrollDirectionChange: args.pageScrollDirectionChange));
+    },
+    MasterClassListRoute.name: (routeData) {
+      return _i43.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i41.MasterClassListPage());
+    },
+    MasterDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<MasterDetailRouteArgs>();
+      return _i43.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i42.MasterDetailPage(
+              key: args.key, masterClassEntity: args.masterClassEntity));
     }
   };
 
   @override
-  List<_i41.RouteConfig> get routes => [
-        _i41.RouteConfig('/#redirect',
+  List<_i43.RouteConfig> get routes => [
+        _i43.RouteConfig('/#redirect',
             path: '/', redirectTo: '/advertisement', fullMatch: true),
-        _i41.RouteConfig(AdvertisementRoute.name, path: '/advertisement'),
-        _i41.RouteConfig(HomeRoute.name, path: '/home'),
-        _i41.RouteConfig(GroupRoute.name, path: '/group', guards: [authGuard]),
-        _i41.RouteConfig(GroupDetailRoute.name,
+        _i43.RouteConfig(AdvertisementRoute.name, path: '/advertisement'),
+        _i43.RouteConfig(HomeRoute.name, path: '/home'),
+        _i43.RouteConfig(GroupRoute.name, path: '/group', guards: [authGuard]),
+        _i43.RouteConfig(GroupDetailRoute.name,
             path: '/groupDetail', guards: [authGuard]),
-        _i41.RouteConfig(SendingReferralRoute.name,
+        _i43.RouteConfig(SendingReferralRoute.name,
             path: '/sendingReferral', guards: [authGuard]),
-        _i41.RouteConfig(NetworkPersonRoute.name,
+        _i43.RouteConfig(NetworkPersonRoute.name,
             path: '/networkPerson', guards: [authGuard]),
-        _i41.RouteConfig(TodayNewestRoute.name, path: '/todayNewest'),
-        _i41.RouteConfig(NewestDetailRoute.name, path: '/newestDetail'),
-        _i41.RouteConfig(EventListingRoute.name,
+        _i43.RouteConfig(TodayNewestRoute.name, path: '/todayNewest'),
+        _i43.RouteConfig(NewestDetailRoute.name, path: '/newestDetail'),
+        _i43.RouteConfig(EventListingRoute.name,
             path: '/eventListing', guards: [authGuard]),
-        _i41.RouteConfig(EventListingDetailRoute.name,
+        _i43.RouteConfig(EventListingDetailRoute.name,
             path: '/eventListingDetail', guards: [authGuard]),
-        _i41.RouteConfig(ReferralReceivedRoute.name,
+        _i43.RouteConfig(ReferralReceivedRoute.name,
             path: '/referralReceived', guards: [authGuard]),
-        _i41.RouteConfig(ReferralReceivedContactedRoute.name,
+        _i43.RouteConfig(ReferralReceivedContactedRoute.name,
             path: '/referralReceivedContacted', guards: [authGuard]),
-        _i41.RouteConfig(SendThankYouNoteRoute.name,
+        _i43.RouteConfig(SendThankYouNoteRoute.name,
             path: '/sendThankYouNote', guards: [authGuard]),
-        _i41.RouteConfig(ThankYouNoteReceivedRoute.name,
+        _i43.RouteConfig(ThankYouNoteReceivedRoute.name,
             path: '/thankYouNoteReceived', guards: [authGuard]),
-        _i41.RouteConfig(ShiningBoardRoute.name, path: '/shiningBoardPage'),
-        _i41.RouteConfig(ShiningBoardDetailRoute.name,
+        _i43.RouteConfig(ShiningBoardRoute.name, path: '/shiningBoardPage'),
+        _i43.RouteConfig(ShiningBoardDetailRoute.name,
             path: '/shiningBoardDetail', guards: [authGuard]),
-        _i41.RouteConfig(MostReferralSentRoute.name, path: '/mostReferralSent'),
-        _i41.RouteConfig(CreateEventRoute.name,
+        _i43.RouteConfig(MostReferralSentRoute.name, path: '/mostReferralSent'),
+        _i43.RouteConfig(CreateEventRoute.name,
             path: '/createEvent', guards: [authGuard]),
-        _i41.RouteConfig(MyInboxRoute.name,
+        _i43.RouteConfig(MyInboxRoute.name,
             path: '/myInbox', guards: [authGuard]),
-        _i41.RouteConfig(SettingRoute.name, path: '/setting'),
-        _i41.RouteConfig(PersonalProfileSetRoute.name,
+        _i43.RouteConfig(SettingRoute.name, path: '/setting'),
+        _i43.RouteConfig(PersonalProfileSetRoute.name,
             path: '/personalProfileSet', guards: [authGuard]),
-        _i41.RouteConfig(BusinessProfileSetRoute.name,
+        _i43.RouteConfig(BusinessProfileSetRoute.name,
             path: '/businessProfileSet', guards: [authGuard]),
-        _i41.RouteConfig(BusinessProfileCreateRoute.name,
+        _i43.RouteConfig(BusinessProfileCreateRoute.name,
             path: '/businessProfileCreate', guards: [authGuard]),
-        _i41.RouteConfig(ChangePasswordRoute.name,
+        _i43.RouteConfig(ChangePasswordRoute.name,
             path: '/changePassword', guards: [authGuard]),
-        _i41.RouteConfig(GuidelineRoute.name, path: '/guideline'),
-        _i41.RouteConfig(GuidelineDetailRoute.name, path: '/guidelineDetail'),
-        _i41.RouteConfig(LanguageSetRoute.name, path: '/languageSet'),
-        _i41.RouteConfig(YourPicRoute.name,
+        _i43.RouteConfig(GuidelineRoute.name, path: '/guideline'),
+        _i43.RouteConfig(GuidelineDetailRoute.name, path: '/guidelineDetail'),
+        _i43.RouteConfig(LanguageSetRoute.name, path: '/languageSet'),
+        _i43.RouteConfig(YourPicRoute.name,
             path: '/yourPic', guards: [authGuard]),
-        _i41.RouteConfig(QrViewRoute.name,
+        _i43.RouteConfig(QrViewRoute.name,
             path: '/qrview', guards: [authGuard]),
-        _i41.RouteConfig(WebRoute.name, path: '/webpage'),
-        _i41.RouteConfig(CheckHistoryRoute.name,
+        _i43.RouteConfig(WebRoute.name, path: '/webpage'),
+        _i43.RouteConfig(CheckHistoryRoute.name,
             path: '/checkHistory', guards: [authGuard]),
-        _i41.RouteConfig(InboxDetailRoute.name,
+        _i43.RouteConfig(InboxDetailRoute.name,
             path: '/inboxDetail', guards: [authGuard]),
-        _i41.RouteConfig(NetworkRoute.name, path: '/network'),
-        _i41.RouteConfig(MyNetworkRoute.name,
+        _i43.RouteConfig(NetworkRoute.name, path: '/network'),
+        _i43.RouteConfig(MyNetworkRoute.name,
             path: '/myNetwork', guards: [authGuard]),
-        _i41.RouteConfig(WelcomeRoute.name, path: '/welcome'),
-        _i41.RouteConfig(SignInRoute.name, path: '/signIn'),
-        _i41.RouteConfig(SignUpRoute.name, path: '/signUp'),
-        _i41.RouteConfig(ConfirmPasswordRoute.name, path: '/confirmPassword'),
-        _i41.RouteConfig(PhoneNumberVerificationRoute.name,
+        _i43.RouteConfig(WelcomeRoute.name, path: '/welcome'),
+        _i43.RouteConfig(SignInRoute.name, path: '/signIn'),
+        _i43.RouteConfig(SignUpRoute.name, path: '/signUp'),
+        _i43.RouteConfig(ConfirmPasswordRoute.name, path: '/confirmPassword'),
+        _i43.RouteConfig(PhoneNumberVerificationRoute.name,
             path: 'phoneNumberVerification'),
-        _i41.RouteConfig(CheckInRoute.name,
-            path: 'CheckIn', guards: [authGuard])
+        _i43.RouteConfig(CheckInRoute.name,
+            path: 'CheckIn', guards: [authGuard]),
+        _i43.RouteConfig(MasterClassListRoute.name,
+            path: 'masterClassList', guards: [authGuard]),
+        _i43.RouteConfig(MasterDetailRoute.name,
+            path: 'masterDetail', guards: [authGuard])
       ];
 }
 
 /// generated route for
 /// [_i1.AdvertisementPage]
-class AdvertisementRoute extends _i41.PageRouteInfo<void> {
+class AdvertisementRoute extends _i43.PageRouteInfo<void> {
   const AdvertisementRoute()
       : super(AdvertisementRoute.name, path: '/advertisement');
 
@@ -375,7 +392,7 @@ class AdvertisementRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.HomePage]
-class HomeRoute extends _i41.PageRouteInfo<void> {
+class HomeRoute extends _i43.PageRouteInfo<void> {
   const HomeRoute() : super(HomeRoute.name, path: '/home');
 
   static const String name = 'HomeRoute';
@@ -383,7 +400,7 @@ class HomeRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.GroupPage]
-class GroupRoute extends _i41.PageRouteInfo<void> {
+class GroupRoute extends _i43.PageRouteInfo<void> {
   const GroupRoute() : super(GroupRoute.name, path: '/group');
 
   static const String name = 'GroupRoute';
@@ -391,8 +408,8 @@ class GroupRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.GroupDetailPage]
-class GroupDetailRoute extends _i41.PageRouteInfo<GroupDetailRouteArgs> {
-  GroupDetailRoute({_i46.Key? key, required _i47.GroupItemInfoEntity info})
+class GroupDetailRoute extends _i43.PageRouteInfo<GroupDetailRouteArgs> {
+  GroupDetailRoute({_i44.Key? key, required _i48.GroupItemInfoEntity info})
       : super(GroupDetailRoute.name,
             path: '/groupDetail',
             args: GroupDetailRouteArgs(key: key, info: info));
@@ -403,9 +420,9 @@ class GroupDetailRoute extends _i41.PageRouteInfo<GroupDetailRouteArgs> {
 class GroupDetailRouteArgs {
   const GroupDetailRouteArgs({this.key, required this.info});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
-  final _i47.GroupItemInfoEntity info;
+  final _i48.GroupItemInfoEntity info;
 
   @override
   String toString() {
@@ -415,7 +432,7 @@ class GroupDetailRouteArgs {
 
 /// generated route for
 /// [_i5.SendingReferralPage]
-class SendingReferralRoute extends _i41.PageRouteInfo<void> {
+class SendingReferralRoute extends _i43.PageRouteInfo<void> {
   const SendingReferralRoute()
       : super(SendingReferralRoute.name, path: '/sendingReferral');
 
@@ -424,8 +441,8 @@ class SendingReferralRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.NetworkPersonPage]
-class NetworkPersonRoute extends _i41.PageRouteInfo<NetworkPersonRouteArgs> {
-  NetworkPersonRoute({_i46.Key? key, required int userId})
+class NetworkPersonRoute extends _i43.PageRouteInfo<NetworkPersonRouteArgs> {
+  NetworkPersonRoute({_i44.Key? key, required int userId})
       : super(NetworkPersonRoute.name,
             path: '/networkPerson',
             args: NetworkPersonRouteArgs(key: key, userId: userId));
@@ -436,7 +453,7 @@ class NetworkPersonRoute extends _i41.PageRouteInfo<NetworkPersonRouteArgs> {
 class NetworkPersonRouteArgs {
   const NetworkPersonRouteArgs({this.key, required this.userId});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
   final int userId;
 
@@ -448,7 +465,7 @@ class NetworkPersonRouteArgs {
 
 /// generated route for
 /// [_i7.TodayNewestPage]
-class TodayNewestRoute extends _i41.PageRouteInfo<void> {
+class TodayNewestRoute extends _i43.PageRouteInfo<void> {
   const TodayNewestRoute() : super(TodayNewestRoute.name, path: '/todayNewest');
 
   static const String name = 'TodayNewestRoute';
@@ -456,8 +473,8 @@ class TodayNewestRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.NewestDetailPage]
-class NewestDetailRoute extends _i41.PageRouteInfo<NewestDetailRouteArgs> {
-  NewestDetailRoute({_i46.Key? key, required _i48.NewestItemInfoEntity info})
+class NewestDetailRoute extends _i43.PageRouteInfo<NewestDetailRouteArgs> {
+  NewestDetailRoute({_i44.Key? key, required _i49.NewestItemInfoEntity info})
       : super(NewestDetailRoute.name,
             path: '/newestDetail',
             args: NewestDetailRouteArgs(key: key, info: info));
@@ -468,9 +485,9 @@ class NewestDetailRoute extends _i41.PageRouteInfo<NewestDetailRouteArgs> {
 class NewestDetailRouteArgs {
   const NewestDetailRouteArgs({this.key, required this.info});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
-  final _i48.NewestItemInfoEntity info;
+  final _i49.NewestItemInfoEntity info;
 
   @override
   String toString() {
@@ -480,7 +497,7 @@ class NewestDetailRouteArgs {
 
 /// generated route for
 /// [_i9.EventListingPage]
-class EventListingRoute extends _i41.PageRouteInfo<void> {
+class EventListingRoute extends _i43.PageRouteInfo<void> {
   const EventListingRoute()
       : super(EventListingRoute.name, path: '/eventListing');
 
@@ -490,10 +507,10 @@ class EventListingRoute extends _i41.PageRouteInfo<void> {
 /// generated route for
 /// [_i10.EventListingDetailPage]
 class EventListingDetailRoute
-    extends _i41.PageRouteInfo<EventListingDetailRouteArgs> {
+    extends _i43.PageRouteInfo<EventListingDetailRouteArgs> {
   EventListingDetailRoute(
-      {_i46.Key? key,
-      required _i49.EventDataItemInfoEntity eventInfo,
+      {_i44.Key? key,
+      required _i50.EventDataItemInfoEntity eventInfo,
       required int source})
       : super(EventListingDetailRoute.name,
             path: '/eventListingDetail',
@@ -507,9 +524,9 @@ class EventListingDetailRouteArgs {
   const EventListingDetailRouteArgs(
       {this.key, required this.eventInfo, required this.source});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
-  final _i49.EventDataItemInfoEntity eventInfo;
+  final _i50.EventDataItemInfoEntity eventInfo;
 
   final int source;
 
@@ -521,7 +538,7 @@ class EventListingDetailRouteArgs {
 
 /// generated route for
 /// [_i11.ReferralReceivedPage]
-class ReferralReceivedRoute extends _i41.PageRouteInfo<void> {
+class ReferralReceivedRoute extends _i43.PageRouteInfo<void> {
   const ReferralReceivedRoute()
       : super(ReferralReceivedRoute.name, path: '/referralReceived');
 
@@ -531,9 +548,9 @@ class ReferralReceivedRoute extends _i41.PageRouteInfo<void> {
 /// generated route for
 /// [_i12.ReferralReceivedContactedPage]
 class ReferralReceivedContactedRoute
-    extends _i41.PageRouteInfo<ReferralReceivedContactedRouteArgs> {
+    extends _i43.PageRouteInfo<ReferralReceivedContactedRouteArgs> {
   ReferralReceivedContactedRoute(
-      {_i46.Key? key, required _i45.ReferralEntity referralEntity})
+      {_i44.Key? key, required _i47.ReferralEntity referralEntity})
       : super(ReferralReceivedContactedRoute.name,
             path: '/referralReceivedContacted',
             args: ReferralReceivedContactedRouteArgs(
@@ -546,9 +563,9 @@ class ReferralReceivedContactedRouteArgs {
   const ReferralReceivedContactedRouteArgs(
       {this.key, required this.referralEntity});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
-  final _i45.ReferralEntity referralEntity;
+  final _i47.ReferralEntity referralEntity;
 
   @override
   String toString() {
@@ -559,8 +576,8 @@ class ReferralReceivedContactedRouteArgs {
 /// generated route for
 /// [_i13.SendThankYouNotePage]
 class SendThankYouNoteRoute
-    extends _i41.PageRouteInfo<SendThankYouNoteRouteArgs> {
-  SendThankYouNoteRoute({_i46.Key? key, required int referralId})
+    extends _i43.PageRouteInfo<SendThankYouNoteRouteArgs> {
+  SendThankYouNoteRoute({_i44.Key? key, required int referralId})
       : super(SendThankYouNoteRoute.name,
             path: '/sendThankYouNote',
             args: SendThankYouNoteRouteArgs(key: key, referralId: referralId));
@@ -571,7 +588,7 @@ class SendThankYouNoteRoute
 class SendThankYouNoteRouteArgs {
   const SendThankYouNoteRouteArgs({this.key, required this.referralId});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
   final int referralId;
 
@@ -583,7 +600,7 @@ class SendThankYouNoteRouteArgs {
 
 /// generated route for
 /// [_i14.ThankYouNoteReceivedPage]
-class ThankYouNoteReceivedRoute extends _i41.PageRouteInfo<void> {
+class ThankYouNoteReceivedRoute extends _i43.PageRouteInfo<void> {
   const ThankYouNoteReceivedRoute()
       : super(ThankYouNoteReceivedRoute.name, path: '/thankYouNoteReceived');
 
@@ -592,7 +609,7 @@ class ThankYouNoteReceivedRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.ShiningBoardPage]
-class ShiningBoardRoute extends _i41.PageRouteInfo<void> {
+class ShiningBoardRoute extends _i43.PageRouteInfo<void> {
   const ShiningBoardRoute()
       : super(ShiningBoardRoute.name, path: '/shiningBoardPage');
 
@@ -602,8 +619,8 @@ class ShiningBoardRoute extends _i41.PageRouteInfo<void> {
 /// generated route for
 /// [_i16.ShiningBoardDetailPage]
 class ShiningBoardDetailRoute
-    extends _i41.PageRouteInfo<ShiningBoardDetailRouteArgs> {
-  ShiningBoardDetailRoute({_i46.Key? key, required _i15.ShiningBoardInfo about})
+    extends _i43.PageRouteInfo<ShiningBoardDetailRouteArgs> {
+  ShiningBoardDetailRoute({_i44.Key? key, required _i15.ShiningBoardInfo about})
       : super(ShiningBoardDetailRoute.name,
             path: '/shiningBoardDetail',
             args: ShiningBoardDetailRouteArgs(key: key, about: about));
@@ -614,7 +631,7 @@ class ShiningBoardDetailRoute
 class ShiningBoardDetailRouteArgs {
   const ShiningBoardDetailRouteArgs({this.key, required this.about});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
   final _i15.ShiningBoardInfo about;
 
@@ -626,7 +643,7 @@ class ShiningBoardDetailRouteArgs {
 
 /// generated route for
 /// [_i17.MostReferralSentPage]
-class MostReferralSentRoute extends _i41.PageRouteInfo<void> {
+class MostReferralSentRoute extends _i43.PageRouteInfo<void> {
   const MostReferralSentRoute()
       : super(MostReferralSentRoute.name, path: '/mostReferralSent');
 
@@ -635,9 +652,9 @@ class MostReferralSentRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i18.CreateEventPage]
-class CreateEventRoute extends _i41.PageRouteInfo<CreateEventRouteArgs> {
+class CreateEventRoute extends _i43.PageRouteInfo<CreateEventRouteArgs> {
   CreateEventRoute(
-      {_i46.Key? key, required _i49.EventDataItemInfoEntity? entity})
+      {_i44.Key? key, required _i50.EventDataItemInfoEntity? entity})
       : super(CreateEventRoute.name,
             path: '/createEvent',
             args: CreateEventRouteArgs(key: key, entity: entity));
@@ -648,9 +665,9 @@ class CreateEventRoute extends _i41.PageRouteInfo<CreateEventRouteArgs> {
 class CreateEventRouteArgs {
   const CreateEventRouteArgs({this.key, required this.entity});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
-  final _i49.EventDataItemInfoEntity? entity;
+  final _i50.EventDataItemInfoEntity? entity;
 
   @override
   String toString() {
@@ -660,7 +677,7 @@ class CreateEventRouteArgs {
 
 /// generated route for
 /// [_i19.MyInboxPage]
-class MyInboxRoute extends _i41.PageRouteInfo<void> {
+class MyInboxRoute extends _i43.PageRouteInfo<void> {
   const MyInboxRoute() : super(MyInboxRoute.name, path: '/myInbox');
 
   static const String name = 'MyInboxRoute';
@@ -668,7 +685,7 @@ class MyInboxRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i20.SettingPage]
-class SettingRoute extends _i41.PageRouteInfo<void> {
+class SettingRoute extends _i43.PageRouteInfo<void> {
   const SettingRoute() : super(SettingRoute.name, path: '/setting');
 
   static const String name = 'SettingRoute';
@@ -676,7 +693,7 @@ class SettingRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i21.PersonalProfileSetPage]
-class PersonalProfileSetRoute extends _i41.PageRouteInfo<void> {
+class PersonalProfileSetRoute extends _i43.PageRouteInfo<void> {
   const PersonalProfileSetRoute()
       : super(PersonalProfileSetRoute.name, path: '/personalProfileSet');
 
@@ -685,7 +702,7 @@ class PersonalProfileSetRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i22.BusinessProfileSetPage]
-class BusinessProfileSetRoute extends _i41.PageRouteInfo<void> {
+class BusinessProfileSetRoute extends _i43.PageRouteInfo<void> {
   const BusinessProfileSetRoute()
       : super(BusinessProfileSetRoute.name, path: '/businessProfileSet');
 
@@ -695,9 +712,9 @@ class BusinessProfileSetRoute extends _i41.PageRouteInfo<void> {
 /// generated route for
 /// [_i23.BusinessProfileCreatePage]
 class BusinessProfileCreateRoute
-    extends _i41.PageRouteInfo<BusinessProfileCreateRouteArgs> {
+    extends _i43.PageRouteInfo<BusinessProfileCreateRouteArgs> {
   BusinessProfileCreateRoute(
-      {_i46.Key? key, _i44.PersonalProfileInfoCompanyVos? info})
+      {_i44.Key? key, _i46.PersonalProfileInfoCompanyVos? info})
       : super(BusinessProfileCreateRoute.name,
             path: '/businessProfileCreate',
             args: BusinessProfileCreateRouteArgs(key: key, info: info));
@@ -708,9 +725,9 @@ class BusinessProfileCreateRoute
 class BusinessProfileCreateRouteArgs {
   const BusinessProfileCreateRouteArgs({this.key, this.info});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
-  final _i44.PersonalProfileInfoCompanyVos? info;
+  final _i46.PersonalProfileInfoCompanyVos? info;
 
   @override
   String toString() {
@@ -720,7 +737,7 @@ class BusinessProfileCreateRouteArgs {
 
 /// generated route for
 /// [_i24.ChangePasswordPage]
-class ChangePasswordRoute extends _i41.PageRouteInfo<void> {
+class ChangePasswordRoute extends _i43.PageRouteInfo<void> {
   const ChangePasswordRoute()
       : super(ChangePasswordRoute.name, path: '/changePassword');
 
@@ -729,7 +746,7 @@ class ChangePasswordRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i25.GuidelinePage]
-class GuidelineRoute extends _i41.PageRouteInfo<void> {
+class GuidelineRoute extends _i43.PageRouteInfo<void> {
   const GuidelineRoute() : super(GuidelineRoute.name, path: '/guideline');
 
   static const String name = 'GuidelineRoute';
@@ -738,9 +755,9 @@ class GuidelineRoute extends _i41.PageRouteInfo<void> {
 /// generated route for
 /// [_i26.GuidelineDetailPage]
 class GuidelineDetailRoute
-    extends _i41.PageRouteInfo<GuidelineDetailRouteArgs> {
+    extends _i43.PageRouteInfo<GuidelineDetailRouteArgs> {
   GuidelineDetailRoute(
-      {_i46.Key? key, required _i50.GuideLineEntity guideLineEntity})
+      {_i44.Key? key, required _i51.GuideLineEntity guideLineEntity})
       : super(GuidelineDetailRoute.name,
             path: '/guidelineDetail',
             args: GuidelineDetailRouteArgs(
@@ -752,9 +769,9 @@ class GuidelineDetailRoute
 class GuidelineDetailRouteArgs {
   const GuidelineDetailRouteArgs({this.key, required this.guideLineEntity});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
-  final _i50.GuideLineEntity guideLineEntity;
+  final _i51.GuideLineEntity guideLineEntity;
 
   @override
   String toString() {
@@ -764,7 +781,7 @@ class GuidelineDetailRouteArgs {
 
 /// generated route for
 /// [_i27.LanguageSetPage]
-class LanguageSetRoute extends _i41.PageRouteInfo<void> {
+class LanguageSetRoute extends _i43.PageRouteInfo<void> {
   const LanguageSetRoute() : super(LanguageSetRoute.name, path: '/languageSet');
 
   static const String name = 'LanguageSetRoute';
@@ -772,7 +789,7 @@ class LanguageSetRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i28.YourPicPage]
-class YourPicRoute extends _i41.PageRouteInfo<void> {
+class YourPicRoute extends _i43.PageRouteInfo<void> {
   const YourPicRoute() : super(YourPicRoute.name, path: '/yourPic');
 
   static const String name = 'YourPicRoute';
@@ -780,8 +797,8 @@ class YourPicRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i29.QrViewPage]
-class QrViewRoute extends _i41.PageRouteInfo<QrViewRouteArgs> {
-  QrViewRoute({_i46.Key? key, required int type})
+class QrViewRoute extends _i43.PageRouteInfo<QrViewRouteArgs> {
+  QrViewRoute({_i44.Key? key, required int type})
       : super(QrViewRoute.name,
             path: '/qrview', args: QrViewRouteArgs(key: key, type: type));
 
@@ -791,7 +808,7 @@ class QrViewRoute extends _i41.PageRouteInfo<QrViewRouteArgs> {
 class QrViewRouteArgs {
   const QrViewRouteArgs({this.key, required this.type});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
   final int type;
 
@@ -803,8 +820,8 @@ class QrViewRouteArgs {
 
 /// generated route for
 /// [_i30.WebPage]
-class WebRoute extends _i41.PageRouteInfo<WebRouteArgs> {
-  WebRoute({_i46.Key? key, required String title, required String initUrl})
+class WebRoute extends _i43.PageRouteInfo<WebRouteArgs> {
+  WebRoute({_i44.Key? key, required String title, required String initUrl})
       : super(WebRoute.name,
             path: '/webpage',
             args: WebRouteArgs(key: key, title: title, initUrl: initUrl));
@@ -815,7 +832,7 @@ class WebRoute extends _i41.PageRouteInfo<WebRouteArgs> {
 class WebRouteArgs {
   const WebRouteArgs({this.key, required this.title, required this.initUrl});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
   final String title;
 
@@ -829,7 +846,7 @@ class WebRouteArgs {
 
 /// generated route for
 /// [_i31.CheckHistoryPage]
-class CheckHistoryRoute extends _i41.PageRouteInfo<void> {
+class CheckHistoryRoute extends _i43.PageRouteInfo<void> {
   const CheckHistoryRoute()
       : super(CheckHistoryRoute.name, path: '/checkHistory');
 
@@ -838,9 +855,9 @@ class CheckHistoryRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i32.InboxDetailPage]
-class InboxDetailRoute extends _i41.PageRouteInfo<InboxDetailRouteArgs> {
+class InboxDetailRoute extends _i43.PageRouteInfo<InboxDetailRouteArgs> {
   InboxDetailRoute(
-      {_i46.Key? key, required _i51.NotificationEntity notification})
+      {_i44.Key? key, required _i52.NotificationEntity notification})
       : super(InboxDetailRoute.name,
             path: '/inboxDetail',
             args: InboxDetailRouteArgs(key: key, notification: notification));
@@ -851,9 +868,9 @@ class InboxDetailRoute extends _i41.PageRouteInfo<InboxDetailRouteArgs> {
 class InboxDetailRouteArgs {
   const InboxDetailRouteArgs({this.key, required this.notification});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
-  final _i51.NotificationEntity notification;
+  final _i52.NotificationEntity notification;
 
   @override
   String toString() {
@@ -863,10 +880,10 @@ class InboxDetailRouteArgs {
 
 /// generated route for
 /// [_i33.NetworkPage]
-class NetworkRoute extends _i41.PageRouteInfo<NetworkRouteArgs> {
+class NetworkRoute extends _i43.PageRouteInfo<NetworkRouteArgs> {
   NetworkRoute(
-      {_i46.Key? key,
-      dynamic Function(_i52.ScrollDirection)? pageScrollDirectionChange,
+      {_i44.Key? key,
+      dynamic Function(_i53.ScrollDirection)? pageScrollDirectionChange,
       required bool onlyMy,
       required String title})
       : super(NetworkRoute.name,
@@ -887,9 +904,9 @@ class NetworkRouteArgs {
       required this.onlyMy,
       required this.title});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
-  final dynamic Function(_i52.ScrollDirection)? pageScrollDirectionChange;
+  final dynamic Function(_i53.ScrollDirection)? pageScrollDirectionChange;
 
   final bool onlyMy;
 
@@ -903,7 +920,7 @@ class NetworkRouteArgs {
 
 /// generated route for
 /// [_i34.MyNetworkPage]
-class MyNetworkRoute extends _i41.PageRouteInfo<void> {
+class MyNetworkRoute extends _i43.PageRouteInfo<void> {
   const MyNetworkRoute() : super(MyNetworkRoute.name, path: '/myNetwork');
 
   static const String name = 'MyNetworkRoute';
@@ -911,7 +928,7 @@ class MyNetworkRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i35.WelcomePage]
-class WelcomeRoute extends _i41.PageRouteInfo<void> {
+class WelcomeRoute extends _i43.PageRouteInfo<void> {
   const WelcomeRoute() : super(WelcomeRoute.name, path: '/welcome');
 
   static const String name = 'WelcomeRoute';
@@ -919,7 +936,7 @@ class WelcomeRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i36.SignInPage]
-class SignInRoute extends _i41.PageRouteInfo<void> {
+class SignInRoute extends _i43.PageRouteInfo<void> {
   const SignInRoute() : super(SignInRoute.name, path: '/signIn');
 
   static const String name = 'SignInRoute';
@@ -927,8 +944,8 @@ class SignInRoute extends _i41.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i37.SignUpPage]
-class SignUpRoute extends _i41.PageRouteInfo<SignUpRouteArgs> {
-  SignUpRoute({_i46.Key? key, required int type})
+class SignUpRoute extends _i43.PageRouteInfo<SignUpRouteArgs> {
+  SignUpRoute({_i44.Key? key, required int type})
       : super(SignUpRoute.name,
             path: '/signUp', args: SignUpRouteArgs(key: key, type: type));
 
@@ -938,7 +955,7 @@ class SignUpRoute extends _i41.PageRouteInfo<SignUpRouteArgs> {
 class SignUpRouteArgs {
   const SignUpRouteArgs({this.key, required this.type});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
   final int type;
 
@@ -951,9 +968,9 @@ class SignUpRouteArgs {
 /// generated route for
 /// [_i38.ConfirmPasswordPage]
 class ConfirmPasswordRoute
-    extends _i41.PageRouteInfo<ConfirmPasswordRouteArgs> {
+    extends _i43.PageRouteInfo<ConfirmPasswordRouteArgs> {
   ConfirmPasswordRoute(
-      {_i46.Key? key,
+      {_i44.Key? key,
       required String phoneNumber,
       required String countryCode,
       required String verificationCode,
@@ -978,7 +995,7 @@ class ConfirmPasswordRouteArgs {
       required this.verificationCode,
       required this.type});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
   final String phoneNumber;
 
@@ -997,9 +1014,9 @@ class ConfirmPasswordRouteArgs {
 /// generated route for
 /// [_i39.PhoneNumberVerificationPage]
 class PhoneNumberVerificationRoute
-    extends _i41.PageRouteInfo<PhoneNumberVerificationRouteArgs> {
+    extends _i43.PageRouteInfo<PhoneNumberVerificationRouteArgs> {
   PhoneNumberVerificationRoute(
-      {_i46.Key? key,
+      {_i44.Key? key,
       required String phoneNumber,
       required String countryCode,
       required int type})
@@ -1021,7 +1038,7 @@ class PhoneNumberVerificationRouteArgs {
       required this.countryCode,
       required this.type});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
   final String phoneNumber;
 
@@ -1037,10 +1054,10 @@ class PhoneNumberVerificationRouteArgs {
 
 /// generated route for
 /// [_i40.CheckInPage]
-class CheckInRoute extends _i41.PageRouteInfo<CheckInRouteArgs> {
+class CheckInRoute extends _i43.PageRouteInfo<CheckInRouteArgs> {
   CheckInRoute(
-      {_i46.Key? key,
-      dynamic Function(_i52.ScrollDirection)? pageScrollDirectionChange})
+      {_i44.Key? key,
+      dynamic Function(_i53.ScrollDirection)? pageScrollDirectionChange})
       : super(CheckInRoute.name,
             path: 'CheckIn',
             args: CheckInRouteArgs(
@@ -1053,12 +1070,47 @@ class CheckInRoute extends _i41.PageRouteInfo<CheckInRouteArgs> {
 class CheckInRouteArgs {
   const CheckInRouteArgs({this.key, this.pageScrollDirectionChange});
 
-  final _i46.Key? key;
+  final _i44.Key? key;
 
-  final dynamic Function(_i52.ScrollDirection)? pageScrollDirectionChange;
+  final dynamic Function(_i53.ScrollDirection)? pageScrollDirectionChange;
 
   @override
   String toString() {
     return 'CheckInRouteArgs{key: $key, pageScrollDirectionChange: $pageScrollDirectionChange}';
+  }
+}
+
+/// generated route for
+/// [_i41.MasterClassListPage]
+class MasterClassListRoute extends _i43.PageRouteInfo<void> {
+  const MasterClassListRoute()
+      : super(MasterClassListRoute.name, path: 'masterClassList');
+
+  static const String name = 'MasterClassListRoute';
+}
+
+/// generated route for
+/// [_i42.MasterDetailPage]
+class MasterDetailRoute extends _i43.PageRouteInfo<MasterDetailRouteArgs> {
+  MasterDetailRoute(
+      {_i44.Key? key, required _i54.MasterClassEntity masterClassEntity})
+      : super(MasterDetailRoute.name,
+            path: 'masterDetail',
+            args: MasterDetailRouteArgs(
+                key: key, masterClassEntity: masterClassEntity));
+
+  static const String name = 'MasterDetailRoute';
+}
+
+class MasterDetailRouteArgs {
+  const MasterDetailRouteArgs({this.key, required this.masterClassEntity});
+
+  final _i44.Key? key;
+
+  final _i54.MasterClassEntity masterClassEntity;
+
+  @override
+  String toString() {
+    return 'MasterDetailRouteArgs{key: $key, masterClassEntity: $masterClassEntity}';
   }
 }

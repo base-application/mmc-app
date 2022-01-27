@@ -16,6 +16,8 @@ import 'package:mmc/bean/guide_line_entity.dart';
 import 'package:mmc/bean/home_index_info_entity.dart';
 import 'package:mmc/bean/image_vo_entity.dart';
 import 'package:mmc/bean/login_info_entity.dart';
+import 'package:mmc/bean/master_class_entity.dart';
+import 'package:mmc/bean/master_class_videos_entity.dart';
 import 'package:mmc/bean/message_no_read_entity.dart';
 import 'package:mmc/bean/network_item_info_entity.dart';
 import 'package:mmc/bean/newest_item_info_entity.dart';
@@ -166,6 +168,12 @@ class JsonConvert {
 		if(type == (LoginInfoEntity).toString()){
 			return LoginInfoEntity.fromJson(json) as M;
 		}
+		if(type == (MasterClassEntity).toString()){
+			return MasterClassEntity.fromJson(json) as M;
+		}
+		if(type == (MasterClassVideosEntity).toString()){
+			return MasterClassVideosEntity.fromJson(json) as M;
+		}
 		if(type == (MessageNoReadEntity).toString()){
 			return MessageNoReadEntity.fromJson(json) as M;
 		}
@@ -206,111 +214,117 @@ class JsonConvert {
 }
 
   //list is returned by type
-	static M? _getListChildType<M>(List<dynamic> data) {
+	static M? _getListChildType<M>(List<Map<String, dynamic>> data) {
 		if(<AchievementEntity>[] is M){
-			return data.map<AchievementEntity>((e) => AchievementEntity.fromJson(e)).toList() as M;
+			return data.map<AchievementEntity>((Map<String, dynamic> e) => AchievementEntity.fromJson(e)).toList() as M;
 		}
 		if(<AdvertisementEntity>[] is M){
-			return data.map<AdvertisementEntity>((e) => AdvertisementEntity.fromJson(e)).toList() as M;
+			return data.map<AdvertisementEntity>((Map<String, dynamic> e) => AdvertisementEntity.fromJson(e)).toList() as M;
 		}
 		if(<AppVersionEntity>[] is M){
-			return data.map<AppVersionEntity>((e) => AppVersionEntity.fromJson(e)).toList() as M;
+			return data.map<AppVersionEntity>((Map<String, dynamic> e) => AppVersionEntity.fromJson(e)).toList() as M;
 		}
 		if(<CheckLogEntity>[] is M){
-			return data.map<CheckLogEntity>((e) => CheckLogEntity.fromJson(e)).toList() as M;
+			return data.map<CheckLogEntity>((Map<String, dynamic> e) => CheckLogEntity.fromJson(e)).toList() as M;
 		}
 		if(<EventDataItemInfoEntity>[] is M){
-			return data.map<EventDataItemInfoEntity>((e) => EventDataItemInfoEntity.fromJson(e)).toList() as M;
+			return data.map<EventDataItemInfoEntity>((Map<String, dynamic> e) => EventDataItemInfoEntity.fromJson(e)).toList() as M;
 		}
 		if(<EventDataItemInfoEventPoster>[] is M){
-			return data.map<EventDataItemInfoEventPoster>((e) => EventDataItemInfoEventPoster.fromJson(e)).toList() as M;
+			return data.map<EventDataItemInfoEventPoster>((Map<String, dynamic> e) => EventDataItemInfoEventPoster.fromJson(e)).toList() as M;
 		}
 		if(<EventDataItemInfoGroups>[] is M){
-			return data.map<EventDataItemInfoGroups>((e) => EventDataItemInfoGroups.fromJson(e)).toList() as M;
+			return data.map<EventDataItemInfoGroups>((Map<String, dynamic> e) => EventDataItemInfoGroups.fromJson(e)).toList() as M;
 		}
 		if(<EventDataItemInfoAttendance>[] is M){
-			return data.map<EventDataItemInfoAttendance>((e) => EventDataItemInfoAttendance.fromJson(e)).toList() as M;
+			return data.map<EventDataItemInfoAttendance>((Map<String, dynamic> e) => EventDataItemInfoAttendance.fromJson(e)).toList() as M;
 		}
 		if(<EventDetailInfoEntity>[] is M){
-			return data.map<EventDetailInfoEntity>((e) => EventDetailInfoEntity.fromJson(e)).toList() as M;
+			return data.map<EventDetailInfoEntity>((Map<String, dynamic> e) => EventDetailInfoEntity.fromJson(e)).toList() as M;
 		}
 		if(<EventDetailInfoEventPoster>[] is M){
-			return data.map<EventDetailInfoEventPoster>((e) => EventDetailInfoEventPoster.fromJson(e)).toList() as M;
+			return data.map<EventDetailInfoEventPoster>((Map<String, dynamic> e) => EventDetailInfoEventPoster.fromJson(e)).toList() as M;
 		}
 		if(<EventDetailInfoGroups>[] is M){
-			return data.map<EventDetailInfoGroups>((e) => EventDetailInfoGroups.fromJson(e)).toList() as M;
+			return data.map<EventDetailInfoGroups>((Map<String, dynamic> e) => EventDetailInfoGroups.fromJson(e)).toList() as M;
 		}
 		if(<GradeLevelInfoEntity>[] is M){
-			return data.map<GradeLevelInfoEntity>((e) => GradeLevelInfoEntity.fromJson(e)).toList() as M;
+			return data.map<GradeLevelInfoEntity>((Map<String, dynamic> e) => GradeLevelInfoEntity.fromJson(e)).toList() as M;
 		}
 		if(<GroupItemEntity>[] is M){
-			return data.map<GroupItemEntity>((e) => GroupItemEntity.fromJson(e)).toList() as M;
+			return data.map<GroupItemEntity>((Map<String, dynamic> e) => GroupItemEntity.fromJson(e)).toList() as M;
 		}
 		if(<GroupItemInfoEntity>[] is M){
-			return data.map<GroupItemInfoEntity>((e) => GroupItemInfoEntity.fromJson(e)).toList() as M;
+			return data.map<GroupItemInfoEntity>((Map<String, dynamic> e) => GroupItemInfoEntity.fromJson(e)).toList() as M;
 		}
 		if(<GroupItemInfoUserInfoVos>[] is M){
-			return data.map<GroupItemInfoUserInfoVos>((e) => GroupItemInfoUserInfoVos.fromJson(e)).toList() as M;
+			return data.map<GroupItemInfoUserInfoVos>((Map<String, dynamic> e) => GroupItemInfoUserInfoVos.fromJson(e)).toList() as M;
 		}
 		if(<GroupItemInfoUserInfoVosCompanyVos>[] is M){
-			return data.map<GroupItemInfoUserInfoVosCompanyVos>((e) => GroupItemInfoUserInfoVosCompanyVos.fromJson(e)).toList() as M;
+			return data.map<GroupItemInfoUserInfoVosCompanyVos>((Map<String, dynamic> e) => GroupItemInfoUserInfoVosCompanyVos.fromJson(e)).toList() as M;
 		}
 		if(<GroupItemInfoUserInfoVosCompanyVosProducePictures>[] is M){
-			return data.map<GroupItemInfoUserInfoVosCompanyVosProducePictures>((e) => GroupItemInfoUserInfoVosCompanyVosProducePictures.fromJson(e)).toList() as M;
+			return data.map<GroupItemInfoUserInfoVosCompanyVosProducePictures>((Map<String, dynamic> e) => GroupItemInfoUserInfoVosCompanyVosProducePictures.fromJson(e)).toList() as M;
 		}
 		if(<GuideLineEntity>[] is M){
-			return data.map<GuideLineEntity>((e) => GuideLineEntity.fromJson(e)).toList() as M;
+			return data.map<GuideLineEntity>((Map<String, dynamic> e) => GuideLineEntity.fromJson(e)).toList() as M;
 		}
 		if(<HomeIndexInfoEntity>[] is M){
-			return data.map<HomeIndexInfoEntity>((e) => HomeIndexInfoEntity.fromJson(e)).toList() as M;
+			return data.map<HomeIndexInfoEntity>((Map<String, dynamic> e) => HomeIndexInfoEntity.fromJson(e)).toList() as M;
 		}
 		if(<HomeIndexInfoSlider>[] is M){
-			return data.map<HomeIndexInfoSlider>((e) => HomeIndexInfoSlider.fromJson(e)).toList() as M;
+			return data.map<HomeIndexInfoSlider>((Map<String, dynamic> e) => HomeIndexInfoSlider.fromJson(e)).toList() as M;
 		}
 		if(<HomeIndexInfoSliderGroup>[] is M){
-			return data.map<HomeIndexInfoSliderGroup>((e) => HomeIndexInfoSliderGroup.fromJson(e)).toList() as M;
+			return data.map<HomeIndexInfoSliderGroup>((Map<String, dynamic> e) => HomeIndexInfoSliderGroup.fromJson(e)).toList() as M;
 		}
 		if(<HomeIndexInfoSliderGrades>[] is M){
-			return data.map<HomeIndexInfoSliderGrades>((e) => HomeIndexInfoSliderGrades.fromJson(e)).toList() as M;
+			return data.map<HomeIndexInfoSliderGrades>((Map<String, dynamic> e) => HomeIndexInfoSliderGrades.fromJson(e)).toList() as M;
 		}
 		if(<ImageVoEntity>[] is M){
-			return data.map<ImageVoEntity>((e) => ImageVoEntity.fromJson(e)).toList() as M;
+			return data.map<ImageVoEntity>((Map<String, dynamic> e) => ImageVoEntity.fromJson(e)).toList() as M;
 		}
 		if(<LoginInfoEntity>[] is M){
-			return data.map<LoginInfoEntity>((e) => LoginInfoEntity.fromJson(e)).toList() as M;
+			return data.map<LoginInfoEntity>((Map<String, dynamic> e) => LoginInfoEntity.fromJson(e)).toList() as M;
+		}
+		if(<MasterClassEntity>[] is M){
+			return data.map<MasterClassEntity>((Map<String, dynamic> e) => MasterClassEntity.fromJson(e)).toList() as M;
+		}
+		if(<MasterClassVideosEntity>[] is M){
+			return data.map<MasterClassVideosEntity>((Map<String, dynamic> e) => MasterClassVideosEntity.fromJson(e)).toList() as M;
 		}
 		if(<MessageNoReadEntity>[] is M){
-			return data.map<MessageNoReadEntity>((e) => MessageNoReadEntity.fromJson(e)).toList() as M;
+			return data.map<MessageNoReadEntity>((Map<String, dynamic> e) => MessageNoReadEntity.fromJson(e)).toList() as M;
 		}
 		if(<NetworkItemInfoEntity>[] is M){
-			return data.map<NetworkItemInfoEntity>((e) => NetworkItemInfoEntity.fromJson(e)).toList() as M;
+			return data.map<NetworkItemInfoEntity>((Map<String, dynamic> e) => NetworkItemInfoEntity.fromJson(e)).toList() as M;
 		}
 		if(<NewestItemInfoEntity>[] is M){
-			return data.map<NewestItemInfoEntity>((e) => NewestItemInfoEntity.fromJson(e)).toList() as M;
+			return data.map<NewestItemInfoEntity>((Map<String, dynamic> e) => NewestItemInfoEntity.fromJson(e)).toList() as M;
 		}
 		if(<NewestItemInfoPoster>[] is M){
-			return data.map<NewestItemInfoPoster>((e) => NewestItemInfoPoster.fromJson(e)).toList() as M;
+			return data.map<NewestItemInfoPoster>((Map<String, dynamic> e) => NewestItemInfoPoster.fromJson(e)).toList() as M;
 		}
 		if(<NotificationEntity>[] is M){
-			return data.map<NotificationEntity>((e) => NotificationEntity.fromJson(e)).toList() as M;
+			return data.map<NotificationEntity>((Map<String, dynamic> e) => NotificationEntity.fromJson(e)).toList() as M;
 		}
 		if(<PersonalProfileInfoEntity>[] is M){
-			return data.map<PersonalProfileInfoEntity>((e) => PersonalProfileInfoEntity.fromJson(e)).toList() as M;
+			return data.map<PersonalProfileInfoEntity>((Map<String, dynamic> e) => PersonalProfileInfoEntity.fromJson(e)).toList() as M;
 		}
 		if(<PersonalProfileInfoCompanyVos>[] is M){
-			return data.map<PersonalProfileInfoCompanyVos>((e) => PersonalProfileInfoCompanyVos.fromJson(e)).toList() as M;
+			return data.map<PersonalProfileInfoCompanyVos>((Map<String, dynamic> e) => PersonalProfileInfoCompanyVos.fromJson(e)).toList() as M;
 		}
 		if(<PersonalProfileInfoCompanyVosProducePictures>[] is M){
-			return data.map<PersonalProfileInfoCompanyVosProducePictures>((e) => PersonalProfileInfoCompanyVosProducePictures.fromJson(e)).toList() as M;
+			return data.map<PersonalProfileInfoCompanyVosProducePictures>((Map<String, dynamic> e) => PersonalProfileInfoCompanyVosProducePictures.fromJson(e)).toList() as M;
 		}
 		if(<ReferralEntity>[] is M){
-			return data.map<ReferralEntity>((e) => ReferralEntity.fromJson(e)).toList() as M;
+			return data.map<ReferralEntity>((Map<String, dynamic> e) => ReferralEntity.fromJson(e)).toList() as M;
 		}
 		if(<StateItemInfoEntity>[] is M){
-			return data.map<StateItemInfoEntity>((e) => StateItemInfoEntity.fromJson(e)).toList() as M;
+			return data.map<StateItemInfoEntity>((Map<String, dynamic> e) => StateItemInfoEntity.fromJson(e)).toList() as M;
 		}
 		if(<ThankNoteEntity>[] is M){
-			return data.map<ThankNoteEntity>((e) => ThankNoteEntity.fromJson(e)).toList() as M;
+			return data.map<ThankNoteEntity>((Map<String, dynamic> e) => ThankNoteEntity.fromJson(e)).toList() as M;
 		}
 
 		print("${M.toString()} not found");
@@ -321,9 +335,8 @@ class JsonConvert {
   static M? fromJsonAsT<M>(dynamic json) {
 		if(json == null){
 			return null;
-		}
-		if (json is List) {
-			return _getListChildType<M>(json);
+		}		if (json is List) {
+			return _getListChildType<M>(json.map((e) => e as Map<String, dynamic>).toList());
 		} else {
 			return _fromJsonSingle<M>(json as Map<String, dynamic>);
 		}

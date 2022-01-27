@@ -306,7 +306,7 @@ Future userFollowAdd(BuildContext context, { required int userId, bool silence =
 
 /// 保存用户个人数据
 Future userInfoUpdate(BuildContext context, {
-  required String picture,
+  String? picture,
   required String name,
   int? birthday,
   int? country,

@@ -220,8 +220,8 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                     children: [
                       Row(
                         children: [
-                          Image.asset('assets/icon/form_required.png', width: 8, height: 8,),
-                          const SizedBox(width: 6,),
+                          // Image.asset('assets/icon/form_required.png', width: 8, height: 8,),
+                          // const SizedBox(width: 6,),
                           Text(AppLocalizations.of(context)!.personalProfileFormCountry, style: TextStyle(fontSize: 15, color: Colors.black87.withAlpha(220),),),
                         ],
                       ),
@@ -286,8 +286,8 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                     children: [
                       Row(
                         children: [
-                          Image.asset('assets/icon/form_required.png', width: 8, height: 8,),
-                          const SizedBox(width: 6,),
+                          // Image.asset('assets/icon/form_required.png', width: 8, height: 8,),
+                          // const SizedBox(width: 6,),
                           Text(AppLocalizations.of(context)!.personalProfileFormState, style: TextStyle(fontSize: 15, color: Colors.black87.withAlpha(220),),),
                         ],
                       ),
@@ -335,8 +335,8 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
                     children: [
                       Row(
                         children: [
-                          // Image.asset('assets/icon/form_required.png', width: 8, height: 8,),
-                          // const SizedBox(width: 6,),
+                          Image.asset('assets/icon/form_required.png', width: 8, height: 8,),
+                          const SizedBox(width: 6,),
                           Text(AppLocalizations.of(context)!.personalProfileFormIndustry, style: TextStyle(fontSize: 15, color: Colors.black87.withAlpha(220),),),
                         ],
                       ),
@@ -731,28 +731,34 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
       );
     }
 
-    return  Scaffold(
-      resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        title: const Text("Personal Profile"),
-        actions: [
-          if(!edit) IconButton(onPressed: (){
-            edit = true;
-            setState(() {});
-          }, icon: ImageIcon(Image.asset("assets/icon/edit.png").image)),
-          if(edit) TextButton(
-              onPressed: () async {
-                FocusScope.of(context).requestFocus(FocusNode());
-                await _doSave();
-                setState(() {});
-              },
-              child: Text(AppLocalizations.of(context)!.save,style: const TextStyle(color: Color(0xffFBB714),fontWeight: FontWeight.bold),)
-          )
-        ],
-      ),
-      body: ScrollConfiguration(
-        behavior: CusBehavior(),
-        child: _scroll(),
+    return  WillPopScope(
+      onWillPop: () async {
+        bool save =  await _doSave();
+        return Future.value(save);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          title: const Text("Personal Profile"),
+          actions: [
+            if(!edit) IconButton(onPressed: (){
+              edit = true;
+              setState(() {});
+            }, icon: ImageIcon(Image.asset("assets/icon/edit.png").image)),
+            if(edit) TextButton(
+                onPressed: () async {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  await _doSave();
+                  setState(() {});
+                },
+                child: Text(AppLocalizations.of(context)!.save,style: const TextStyle(color: Color(0xffFBB714),fontWeight: FontWeight.bold),)
+            )
+          ],
+        ),
+        body: ScrollConfiguration(
+          behavior: CusBehavior(),
+          child: _scroll(),
+        ),
       ),
     );
   }
@@ -866,34 +872,39 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
   }
 
   /// 保存个人资料
-  _doSave() async {
-    if (_formUserHead == null) {
-      ComFun.showToast(msg: 'Please choose your profile picture');
-      return;
-    }
+  Future<bool> _doSave() async {
+    // if (_formUserHead == null) {
+    //   ComFun.showToast(msg: 'Please choose your profile picture');
+    //   return false;
+    // }
     if (_yourNameController.text.trim() == '') {
       ComFun.showToast(msg: 'Please fill your name');
-      return;
+      return false;
     }
 
-    if (_formCountry == null) {
-      ComFun.showToast(msg: 'Please choose your country');
-      return;
+    if (_formIndustry ==null || _formIndustry == '') {
+      ComFun.showToast(msg: 'Please fill your name');
+      return false;
     }
-    if(_formState == null){
-      ComFun.showToast(msg: 'Please choose your state');
-      return;
-    }
+
+    // if (_formCountry == null) {
+    //   ComFun.showToast(msg: 'Please choose your country');
+    //   return false;
+    // }
+    // if(_formState == null){
+    //   ComFun.showToast(msg: 'Please choose your state');
+    //   return false;
+    // }
     if (_formOccupation==null || _formOccupation == '') {
       ComFun.showToast(msg: 'Please fill your position');
-      return;
+      return false;
     }
     if (_yourPhoneNumberController.text.trim() == '') {
       ComFun.showToast(msg: 'Please fill your phone number');
-      return;
+      return false;
     }
     await userInfoUpdate(context,
-      picture: _formUserHead!,
+      picture: _formUserHead,
       name: _yourNameController.text.trim(),
       birthday:(_formDateOfBirth!=null ? DateTime.parse(_formDateOfBirth!).millisecondsSinceEpoch : null),
       country: _formCountry?.id,
@@ -917,6 +928,7 @@ class _PersonalProfileSetPageState extends State<PersonalProfileSetPage> {
       },
     );
     edit = false;
+    return true;
   }
 
   getName() {

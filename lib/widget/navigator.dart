@@ -117,7 +117,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
   String _homeTitle(int index) {
     switch (index) {
       case 0:
-        return AppLocalizations.of(context)!.appNavigatorHome;
+        return AppLocalizations.of(context)!.newsfeed;
       case 1:
         return AppLocalizations.of(context)!.appNavigatorNetwork;
       case 2:
@@ -125,7 +125,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
       case 3:
         return AppLocalizations.of(context)!.appNavigatorProfile;
     }
-    return AppLocalizations.of(context)!.appNavigatorHome;
+    return AppLocalizations.of(context)!.newsfeed;
   }
 
   Widget _getItem(int index) {

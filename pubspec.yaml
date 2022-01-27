@@ -168,6 +168,12 @@ flutter:
    - assets/icon/notic_system.png
    - assets/icon/edit.png
    - assets/icon/message.png
+   - assets/icon/master_class.png
+   - assets/icon/shining_board.png
+   - assets/icon/shind_board1.png
+   - assets/icon/shind_board2.png
+   - assets/icon/shind_board3.png
+   - assets/icon/shind_board4.png
    # lottie动画
    - assets/lottie/loading.json
    - assets/lottie/5039-planet.json
