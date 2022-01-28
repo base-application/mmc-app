@@ -196,7 +196,12 @@ class MasterData{
           poster: "https://system.themastermindcouncil.com/mmc/api/image/img/Final-41_1643358237307.jpg",
           introduction: "3天线上-房地产冠军方程式 什么是房地产冠军方程式? 买入可以立刻套现50K ++房地产的方式！ 第一天：Ready 准备给3中不同阶段的人，如何策略性以零头期钱， 在3年内轻松赚取至少20万的策略 第二天： Set 哪一种的房地产才适合你？ 每个人都在不同的领域和地点，老师给你一套计算方程式， 让你自己也能轻松评估出最适合你的房地产。 第三天： Go 学习了策略，就是落地的时候了！ 正式购买的时候，Banker 的考量时什么？ 购买前、购买时、购买后要注意什么？很多购屋者 都忽略的细节。。。",
           type: 1,
-          videos: []
+          videos: [
+            MasterClassVideosEntity(
+                title: "房地产冠军方程式",
+                url: "https://vod-progressive.akamaized.net/exp=1643217055~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F2929%2F26%2F664646767%2F3057440034.mp4~hmac=3b58437cd832933e9341c9ba9ec4b233f6ed3c6c07da478978da328c7f863528/vimeo-prod-skyfire-std-us/01/2929/26/664646767/3057440034.mp4?filename=PCSS+Trailer.mp4.mp4"
+            )
+          ]
       ),
       MasterClassEntity(
           title: "3 Hours DWMD 5.0",
@@ -205,7 +210,7 @@ class MasterData{
           type: 1,
           videos: [
             MasterClassVideosEntity(
-                title: "视频",
+                title: "3 Hours DWMD 5.0",
                 url: "https://player.vimeo.com/external/664642565.sd.mp4?s=1183104d8d40aa4b06f7517277903cafc0be3e04&profile_id=165"
             )
           ]
@@ -236,12 +241,7 @@ class MasterData{
           poster: "https://system.themastermindcouncil.com/mmc/api/image/img/Final-25_1643358487264.jpg",
           introduction: "4  Days 3 Nights - Performance Creator Intensive (PCI) 4天三夜-企业商业莫斯 生意的27个基础，倍增生意额的首要条件，这里是专门为每个中小型企业家所设的资料库。 3 Days Workshop - 10X Performance 3天课程 - 10X绩效增长 10倍增收入，倍增减低不必要的花费。这里没有空口说白话，只有最落地和已经被超过100家企业证实的有效方案。 2 Days Workshop - Performance KPI 2天课程 - 关键绩效指标 最难搞的‘人’，这边给你答案！有效倍增工作效率，把人才通通留在身边，减低离职效率，还能省下不必要的费用。",
           type: 1,
-          videos: [
-            MasterClassVideosEntity(
-                title: "盈利大会",
-                url: "https://player.vimeo.com/external/664654985.sd.mp4?s=453f0e7f7a1901629efea01e7177dcc9eaa755ab&profile_id=165"
-            )
-          ]
+          videos: []
       ),
       MasterClassEntity(
           title: "7R",
@@ -262,12 +262,7 @@ class MasterData{
           poster: "https://system.themastermindcouncil.com/mmc/api/image/img/Final-35_1643358600825.jpg",
           introduction: "3小时打造人与人之间的沟通桥梁，了解人性 一种米养百种人，那我们可以怎么样才能最有效地跟身边的人沟通？ -更有效的沟通 -提升团队留职力 -准确聘请对的人在对的岗位 -提升生产力 -提升销售训练和有效性 -提升管理素质",
           type: 1,
-          videos: [
-            MasterClassVideosEntity(
-                title: "7R",
-                url: "https://player.vimeo.com/external/664650416.sd.mp4?s=3e9325a7bbee4128f13ffdbab6bf225ab6b42996&profile_id=165"
-            )
-          ]
+          videos: []
       )
     ]
   };

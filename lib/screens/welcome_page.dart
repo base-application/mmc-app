@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mmc/router/router.gr.dart';
+import 'package:mmc/widget/bottom_button.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -31,8 +32,9 @@ class _WelcomePageState extends State<WelcomePage> {
           children: [
             Padding(
               padding:  const EdgeInsets.only(top: 200),
-              child: Text(AppLocalizations.of(context)!.loginPageWelcome, style: const TextStyle(fontSize: 34, fontWeight: FontWeight.bold, color: Colors.white,), textAlign: TextAlign.center,),
+              child: Text(AppLocalizations.of(context)!.loginPageWelcome, style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Color(0XFFFBB714),), textAlign: TextAlign.center,),
             ),
+            const SizedBox(height: 20),
             Image.asset('assets/image/logo.png', width: MediaQuery.of(context).size.width * 0.36, height: MediaQuery.of(context).size.width * 0.36,),
             Expanded(
               child: Column(
@@ -54,14 +56,8 @@ class _WelcomePageState extends State<WelcomePage> {
                       },
                     ),
                   ),
+                  const SizedBox(height: 16,),
                   SizedBox(
-                    height: 16,
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  SafeArea(
-                    bottom: true,
-                    top: false,
-                    child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.9,
                     height: 50,
                     child: ElevatedButton(
@@ -75,7 +71,8 @@ class _WelcomePageState extends State<WelcomePage> {
                         AutoRouter.of(context).push(SignUpRoute(type: 1));
                       },
                     ),
-                  ),)
+                  ),
+                  BottomButton(child: Container(),)
                 ],
               ),
             )

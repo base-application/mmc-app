@@ -68,15 +68,15 @@ class _SignInPageState extends State<SignInPage> {
                 },
               ),
             ),
-            GestureDetector(
-              onTap: (){
-                checkVersion(context);
-              },
-              child: Container(
-                alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(top: 30,bottom: MediaQuery.of(context).size.height *.2),
-                child: Text(AppLocalizations.of(context)!.loginPageWelcome, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFFFBB714),), textAlign: TextAlign.start,),
-              ),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.only(top: 30),
+              child: Text(AppLocalizations.of(context)!.loginPageWelcomeTo, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xFFFBB714),), textAlign: TextAlign.start,),
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.only(top: 30,bottom: 50),
+              child: Text(AppLocalizations.of(context)!.masterMind, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xFFFBB714),), textAlign: TextAlign.start,),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
