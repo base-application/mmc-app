@@ -14,19 +14,19 @@ class MasterData{
         videos: [
           MasterClassVideosEntity(
             title: "90天企业危机处理 Q1",
-            url: "https://youtu.be/UqVkH1ftIjg?list=PL8ctfChTZiKo2qhFeW6WETbvXWLD6Mn8U"
+            url: "https://player.vimeo.com/progressive_redirect/playback/440566563/rendition/540p/540p.mp4?loc=external&signature=4b3166e24c96db98abcef5e64aa2ed9ab7314751b706f053e937d0a7b3d4b0ca"
           ),
           MasterClassVideosEntity(
               title: "90天企业危机处理 Q1 b",
-              url: "https://www.youtube.com/watch?v=qiu2IWBccoA&list=PL8ctfChTZiKo2qhFeW6WETbvXWLD6Mn8U&index=20"
+              url: "https://player.vimeo.com/progressive_redirect/playback/440576802/rendition/540p/540p.mp4?loc=external&signature=de5b4148b9b4fd27c885862f53d94415f2c2a61c53de0751bdaf1152cfeee477"
           ),
           MasterClassVideosEntity(
               title: "90天企业危机处理 Q2",
-              url: "https://www.youtube.com/watch?v=oVYFLe9DEek&list=PL8ctfChTZiKo2qhFeW6WETbvXWLD6Mn8U&index=18"
+              url: "https://player.vimeo.com/progressive_redirect/playback/440577304/rendition/540p/540p.mp4?loc=external&signature=30de82bf30738cfe164be3e5a45a762132600c565ec199b3e1fc4a84b77cf877"
           ),
           MasterClassVideosEntity(
               title: "90天企业危机处理 Q3",
-              url: "https://www.youtube.com/watch?v=VtgmQ9wu17A&list=PL8ctfChTZiKo2qhFeW6WETbvXWLD6Mn8U&index=16"
+              url: "https://player.vimeo.com/progressive_redirect/playback/440577682/rendition/540p/540p.mp4?loc=external&signature=6d15d90094895dbb9853debe51cc365a9729fa8fcb9a19abc4c8ea1c3e14579d"
           )
         ],
       ),
@@ -62,19 +62,19 @@ class MasterData{
           videos: [
             MasterClassVideosEntity(
                 title: "O2O - Session 1",
-                url: "https://www.youtube.com/watch?v=r978RUwAv6c&list=PL8ctfChTZiKo-4FBZHmoEwJznX6F_WiqT&index=46"
+                url: "https://player.vimeo.com/progressive_redirect/playback/670511490/rendition/540p/540p.mp4?loc=external&signature=33fb4efb30193290e9336ccb24ab89ae65af3b62b12d2958592a8fe6a6b10012"
             ),
             MasterClassVideosEntity(
                 title: "O2O - Session 2",
-                url: "https://www.youtube.com/watch?v=515GoIt2Y1Q&list=PL8ctfChTZiKo-4FBZHmoEwJznX6F_WiqT&index=45&t=2758s"
+                url: "https://player.vimeo.com/progressive_redirect/playback/670525296/rendition/540p/540p.mp4?loc=external&signature=3593ee1d5cd5e6bed97f7c2e7177d3cfa7eae84f8425f57cc9c4ea4069fe8628"
             ),
             MasterClassVideosEntity(
                 title: "O2O - Session 3",
-                url: "https://www.youtube.com/watch?v=XnCssBURNHY&list=PL8ctfChTZiKo-4FBZHmoEwJznX6F_WiqT&index=44&t=929s"
+                url: "https://player.vimeo.com/progressive_redirect/playback/670532324/rendition/540p/540p.mp4?loc=external&signature=414110f990aae12dfee60e59bc2e5e3adbeb49874388ce6d67e1363cd6e69ba8"
             ),
             MasterClassVideosEntity(
                 title: "O2O - Session 3 Part 2",
-                url: "https://www.youtube.com/watch?v=zpHXHx6vNq8&list=PL8ctfChTZiKo-4FBZHmoEwJznX6F_WiqT&index=2&t=26s"
+                url: "https://player.vimeo.com/progressive_redirect/playback/670536848/rendition/360p/360p.mp4?loc=external&signature=51df0b582c97ca4291b93a9d41b94a661ae7d57844dbc04fa2e1643c7f076c0d"
             ),
             MasterClassVideosEntity(
                 title: "O2O - Session 7",
@@ -90,23 +90,23 @@ class MasterData{
           videos: [
             MasterClassVideosEntity(
                 title: "Intro to DISC",
-                url: "https://www.youtube.com/watch?v=h_B2ZylH61Y&list=PL8ctfChTZiKozqRKnJzrVlKkdY1EAhB0u&index=1"
+                url: "https://player.vimeo.com/progressive_redirect/playback/670511618/rendition/540p/540p.mp4?loc=external&signature=f07eb9ce73aa60f7b148b1fb90971d0377109e1f224a003761a5211f09dffe91"
             ),
             MasterClassVideosEntity(
                 title: "D Dominance",
-                url: "https://www.youtube.com/watch?v=TJ7JBiq45oo&list=PL8ctfChTZiKozqRKnJzrVlKkdY1EAhB0u&index=2"
+                url: "https://player.vimeo.com/progressive_redirect/playback/670513387/rendition/540p/540p.mp4?loc=external&signature=735b895f54a3d66d53c67e40aea7f0976eb2c0a7f53853d514aa03eee31247ec"
             ),
             MasterClassVideosEntity(
                 title: "I Influence",
-                url: "https://www.youtube.com/watch?v=uce_wzEKBQs&list=PL8ctfChTZiKozqRKnJzrVlKkdY1EAhB0u&index=3"
+                url: "https://player.vimeo.com/progressive_redirect/playback/670515631/rendition/540p/540p.mp4?loc=external&signature=ed471294ee2f87e6af936919820ad67dab9ccf064f49f6f8a321642742a87aa8"
             ),
             MasterClassVideosEntity(
                 title: "S Steadiness",
-                url: "https://www.youtube.com/watch?v=zi32zmMveOQ&list=PL8ctfChTZiKozqRKnJzrVlKkdY1EAhB0u&index=4"
+                url: "https://player.vimeo.com/progressive_redirect/playback/670517198/rendition/540p/540p.mp4?loc=external&signature=534d86b2a44ebc8160667c616afbbde43735de56baf9709be6a9e1ed7d241514"
             ),
             MasterClassVideosEntity(
                 title: "C Compliance",
-                url: "https://www.youtube.com/watch?v=stCgvMO9BEQ&list=PL8ctfChTZiKozqRKnJzrVlKkdY1EAhB0u&index=5"
+                url: "https://player.vimeo.com/progressive_redirect/playback/670519664/rendition/540p/540p.mp4?loc=external&signature=49b7da312758c2d49ac8f4abb3087c249bca3a472316ba1b905856f4683cdffa"
             )
           ]
       ),
@@ -136,7 +136,12 @@ class MasterData{
           title: "SCICD",
           poster: "https://drive.google.com/file/d/1Aw5942JkD4x1eBfqgxUj5V9Gh8xHRc99/view?usp=sharing",
           introduction: "3天线上课程- SCICD破解收入之秘 升级版【富债为王 5.0】3天线上课程【破解收入之谜】来了！ 该怎么做、做什么，才能符合银行的“胃口”，轻松拿到贷款？ 原来贷款成功过与否，竟然是看这些这么简单，又最 常被忽略的小事。 只送给3天富债为王课程的学生。",
-          videos: [],
+          videos: [
+            MasterClassVideosEntity(
+                title: "SCICD",
+                url: "https://player.vimeo.com/external/664645329.sd.mp4?s=7b5fe81c4c49b92e486486a65e83f2a04d4c072f&profile_id=165"
+            )
+          ],
           type: 1
       ),
       MasterClassEntity(

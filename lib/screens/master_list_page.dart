@@ -16,6 +16,7 @@ class _MasterClassListPageState extends State<MasterClassListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.masterClass),
       ),
@@ -26,7 +27,9 @@ class _MasterClassListPageState extends State<MasterClassListPage> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(MasterData.category[index]),
+              const SizedBox(height: 12,),
+              Text(MasterData.category[index],style: const TextStyle(color:  Color(0xffFBB714),fontSize: 22,fontWeight: FontWeight.bold),),
+              const SizedBox(height: 12,),
               Wrap(
                 spacing: 20,
                 runSpacing: 12,
@@ -62,20 +65,30 @@ class MasterCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        AutoRouter.of(context).push(MasterDetailRoute(masterClassEntity: masterClassEntity));
+        if(masterClassEntity.type == 1){
+          AutoRouter.of(context).push(MasterDetailRoute(masterClassEntity: masterClassEntity));
+        }
       },
       child: Container(
         alignment: Alignment.bottomLeft,
         decoration: BoxDecoration(
+           borderRadius: BorderRadius.circular(18),
             image: DecorationImage(
               image: Image.network("https://alifei05.cfp.cn/creative/vcg/800/version23/VCG41175510742.jpg").image,
               fit: BoxFit.cover
             )
         ),
         child: Container(
+          padding: const EdgeInsets.only(bottom: 12,top: 10,left: 10,right: 10),
           width: MediaQuery.of(context).size.width,
-          color: Colors.black38,
-          child:  Text(masterClassEntity.title!),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(18),
+              bottomRight: Radius.circular(18),
+            ),
+            color: Colors.black38,
+          ),
+          child:  Text(masterClassEntity.title!,style: const TextStyle(color: Color(0xffFBB714),fontSize: 18,fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis,textAlign: TextAlign.center,),
         ),
       ),
     );
