@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mmc/bean/master_class_entity.dart';
 import 'package:mmc/bean/master_class_videos_entity.dart';
@@ -42,6 +43,7 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
       videoPlayerController: _controller!,
       autoPlay: true,
       looping: true,
+      deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]
     );
     _controller!.addListener(_listenerInit);
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:mmc/bean/newest_item_info_entity.dart';
 import 'package:mmc/utils/comfun.dart';
@@ -34,6 +35,7 @@ class _NewestDetailPageState extends State<NewestDetailPage> {
         videoPlayerController: _controller!,
         autoPlay: true,
         looping: true,
+        deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]
       );
       _controller!.addListener(() {
         if(_controller!.value.isInitialized){
@@ -47,6 +49,7 @@ class _NewestDetailPageState extends State<NewestDetailPage> {
   void dispose() {
     super.dispose();
     _controller?.dispose();
+    chewieController?.dispose();
   }
 
   @override

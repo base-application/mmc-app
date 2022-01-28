@@ -19,7 +19,7 @@ class _MasterClassListPageState extends State<MasterClassListPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.masterClass),
+        title: Text(AppLocalizations.of(context)!.masterClassLower),
       ),
       body: SafeArea(
         top: false,
