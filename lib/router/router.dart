@@ -7,6 +7,7 @@ import 'package:mmc/screens/business_profile_set_page.dart';
 import 'package:mmc/screens/change_password_page.dart';
 import 'package:mmc/screens/check_history.dart';
 import 'package:mmc/screens/checkin_page.dart';
+import 'package:mmc/screens/coming_soon_page.dart';
 import 'package:mmc/screens/confirm_password.dart';
 import 'package:mmc/screens/create_event_page.dart';
 import 'package:mmc/screens/event_listing_page.dart';
@@ -17,6 +18,7 @@ import 'package:mmc/screens/guideline_detail_page.dart';
 import 'package:mmc/screens/guideline_page.dart';
 import 'package:mmc/screens/home.dart';
 import 'package:mmc/screens/language_set_page.dart';
+import 'package:mmc/screens/master_class_list_page.dart';
 import 'package:mmc/screens/master_detail_page.dart';
 import 'package:mmc/screens/master_list_page.dart';
 import 'package:mmc/screens/most_referral_sent_page.dart';
@@ -94,6 +96,8 @@ import 'auth_guard.dart';
     AutoRoute(page: CheckInPage, path: 'CheckIn', guards: [AuthGuard]),
     AutoRoute(page: MasterClassListPage, path: 'masterClassList', guards: [AuthGuard]),
     AutoRoute(page: MasterDetailPage, path: 'masterDetail', guards: [AuthGuard]),
+    AutoRoute(page: MasterClassItemPage, path: 'masterDetail', guards: [AuthGuard]),
+    AutoRoute(page: ComingSoonPage, path: 'masterDetail', guards: [AuthGuard]),
   ],
 )
 class $AppRouter {}

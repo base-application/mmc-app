@@ -435,7 +435,10 @@ class _CheckEventItemState extends State<CheckEventItem> {
                   return Padding(
                     padding: MediaQuery.of(context).viewInsets,
                     child: SingleChildScrollView(
-                      child: ConfirmAttend(entity: data,),
+                      child: SafeArea(
+                        top: false,
+                        child: ConfirmAttend(entity: data,),
+                      ),
                     ),
                   );
                 },

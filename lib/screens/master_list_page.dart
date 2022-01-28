@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mmc/bean/master_class_entity.dart';
 import 'package:mmc/router/router.gr.dart';
 import 'package:mmc/utils/master_data.dart';
@@ -20,24 +21,28 @@ class _MasterClassListPageState extends State<MasterClassListPage> {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.masterClass),
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: MasterData.category.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 12,),
-              Text(MasterData.category[index],style: const TextStyle(color:  Color(0xffFBB714),fontSize: 22,fontWeight: FontWeight.bold),),
-              const SizedBox(height: 12,),
-              Wrap(
-                spacing: 20,
-                runSpacing: 12,
-                children: classChild(MasterData.category[index]),
-              ),
-            ],
-          );
-        },
+      body: SafeArea(
+        top: false,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children:  MasterData.category.map((e) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 12,),
+                Text(e,style: const TextStyle(color:  Color(0xffFBB714),fontSize: 22,fontWeight: FontWeight.bold),),
+                const SizedBox(height: 12,),
+                SizedBox(
+                  height: (MediaQuery.of(context).size.width/2-26)*1.2,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: classChild(e),
+                  ),
+                ),
+              ],
+            )).toList(),
+          ),
+        ),
       ),
     );
   }
@@ -46,7 +51,8 @@ class _MasterClassListPageState extends State<MasterClassListPage> {
     List<MasterClassEntity>? claes = MasterData.masterData[key];
     List<Widget> child = [];
     claes?.forEach((aClass) {
-      child.add(SizedBox(
+      child.add(Container(
+        margin: const EdgeInsets.only(right: 16),
         width:  MediaQuery.of(context).size.width/2-26,
         height: (MediaQuery.of(context).size.width/2-26)*1.2,
         child: MasterCard(masterClassEntity: aClass,),
@@ -65,16 +71,32 @@ class MasterCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        if(masterClassEntity.type == 1){
+        if(masterClassEntity.type == 1 &&( masterClassEntity.videos == null  || masterClassEntity.videos!.isEmpty)){
+          AutoRouter.of(context).push(ComingSoonRoute(title: masterClassEntity.title!));
+        }
+        if(masterClassEntity.type == 1 && masterClassEntity.videos != null  && masterClassEntity.videos!.isNotEmpty){
           AutoRouter.of(context).push(MasterDetailRoute(masterClassEntity: masterClassEntity));
+        }
+        if(masterClassEntity.type == 2){
+          AutoRouter.of(context).push(MasterClassItemRoute(clazz: MasterData.paid[masterClassEntity.title]!, title: masterClassEntity.title!,));
         }
       },
       child: Container(
         alignment: Alignment.bottomLeft,
         decoration: BoxDecoration(
            borderRadius: BorderRadius.circular(18),
+            color: Colors.white,
             image: DecorationImage(
-              image: Image.network("https://alifei05.cfp.cn/creative/vcg/800/version23/VCG41175510742.jpg").image,
+              image: Image.network(
+                masterClassEntity.poster!,
+                loadingBuilder: (
+                    BuildContext context,
+                    Widget child,
+                    ImageChunkEvent? loadingProgress,
+                ){
+                    return const CircularProgressIndicator();
+                },
+              ).image,
               fit: BoxFit.cover
             )
         ),

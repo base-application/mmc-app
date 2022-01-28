@@ -1,10 +1,13 @@
 
+import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:chewie/chewie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mmc/bean/master_class_entity.dart';
+import 'package:mmc/bean/master_class_videos_entity.dart';
 import 'package:video_player/video_player.dart';
 
 class MasterDetailPage extends StatefulWidget {
@@ -20,25 +23,39 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
   ChewieController? chewieController;
   final PageController _pageController = PageController();
   int pageIndex = 0;
+  bool isInit = false;
 
+  MasterClassVideosEntity? currVideo;
   @override
   void initState() {
-    _controller = VideoPlayerController.network(widget.masterClassEntity.videos![0].url!,videoPlayerOptions: VideoPlayerOptions());
+    _initVideos( widget.masterClassEntity.videos!.first);
+    super.initState();
+  }
+
+  _initVideos(MasterClassVideosEntity video){
+    chewieController?.pause();
+    isInit = false;
+    currVideo = video;
+    setState(() {});
+    _controller = VideoPlayerController.network(currVideo!.url!,videoPlayerOptions: VideoPlayerOptions());
     chewieController = ChewieController(
       videoPlayerController: _controller!,
       autoPlay: true,
       looping: true,
     );
-    _controller!.addListener(() {
-      if(_controller!.value.isInitialized){
-        setState(() {});
-      }
-    });
-    super.initState();
+    _controller!.addListener(_listenerInit);
+  }
+
+  _listenerInit(){
+    if(!isInit && _controller!.value.isInitialized){
+      isInit = true;
+      setState(() {});
+    }
   }
 
   @override
   void dispose() {
+    _controller!.removeListener(_listenerInit);
     _controller?.dispose();
     chewieController?.dispose();
     super.dispose();
@@ -55,9 +72,23 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
            Container(
              width: MediaQuery.of(context).size.width,
              color: Colors.black,
-             child:  AspectRatio(
-               aspectRatio: 9/5.5,
+             child: isInit ? AspectRatio(
+               aspectRatio:  _controller!.value.aspectRatio,
                child: Chewie(controller: chewieController!,),
+             ) :  AspectRatio(
+               aspectRatio: 9/5.5,
+               child:Container(
+                 alignment: Alignment.center,
+                 color: Colors.black,
+                 child: SizedBox(
+                   width: 40,
+                   height: 40,
+                   child:  LottieBuilder.asset(
+                     'assets/lottie/5039-planet.json',
+                     fit: BoxFit.cover
+                   ),
+                 ),
+               ),
              ),
            ),
           Padding(
@@ -65,7 +96,7 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
             child: Text(widget.masterClassEntity.title??"",style:const TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 16),
+            padding: const EdgeInsets.only(left: 16,top: 12),
             child: Row(
               children: [
                 const Icon(Icons.video_settings,size: 14,color: Color(0xff999999),),
@@ -106,15 +137,20 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
                          child: ListView(
                            scrollDirection: Axis.horizontal,
                            children: widget.masterClassEntity.videos!.map((e) =>
-                               Container(
-                                 margin: EdgeInsets.only(left: 12,top: 20),
-                                 padding: EdgeInsets.all(12),
-                                 alignment: Alignment.center,
-                                 decoration: BoxDecoration(
-                                     border: Border.all(color: Color(0xffFBB714)),
-                                   borderRadius: BorderRadius.circular(18)
+                               GestureDetector(
+                                 onTap: (){
+                                   _initVideos(e);
+                                 },
+                                 child: Container(
+                                   margin: const EdgeInsets.only(left: 12,top: 20),
+                                   padding: const EdgeInsets.all(12),
+                                   alignment: Alignment.center,
+                                   decoration: BoxDecoration(
+                                       border: Border.all(color: currVideo?.url == e.url  ?  const Color(0xffFBB714) : const Color(0xff999999)),
+                                       borderRadius: BorderRadius.circular(18)
+                                   ),
+                                   child: Text(e.title!,style: TextStyle(color:currVideo?.url == e.url  ?  const Color(0xffFBB714) : const Color(0xff999999),fontSize: 12),),
                                  ),
-                                 child: Text(e.title!,style: TextStyle(color: Color(0xffFBB714),fontSize: 12),),
                                )
                            ).toList(),
                          ),
@@ -122,7 +158,7 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
                      ],
                    ),
                    Padding(
-                     padding: EdgeInsets.all(16),
+                     padding: const EdgeInsets.all(16),
                      child: ClassDescription(desc: widget.masterClassEntity.introduction!,),
                    )
                  ],
@@ -145,6 +181,7 @@ class TabIndicator extends StatelessWidget {
     return Column(
       children: [
         Text(title),
+        SizedBox(height: 5,),
         Container(
           margin: EdgeInsets.only(left: 5,right: 5),
           decoration: BoxDecoration(

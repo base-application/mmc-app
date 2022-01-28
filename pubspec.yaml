@@ -101,6 +101,7 @@ flutter:
    - assets/image/profile_p.png
    - assets/image/profile_pla.png
    - assets/image/profile_t.png
+   - assets/image/coming_soon.png
    # icon图标
    - assets/icon/home.png
    - assets/icon/network.png
