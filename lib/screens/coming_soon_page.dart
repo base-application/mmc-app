@@ -18,7 +18,7 @@ class _ComingSoonPageState extends State<ComingSoonPage> {
       ),
       body: SafeArea(
         child: Center(
-          child: Image.asset("assets/image/coming_soon.png",width: 100,height: 100,),
+          child: Image.asset("assets/image/coming_soon1.png",width: MediaQuery.of(context).size.width*0.8,height:  MediaQuery.of(context).size.width*0.8,),
         ),
       ),
     );

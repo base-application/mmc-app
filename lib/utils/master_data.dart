@@ -162,34 +162,34 @@ class MasterData{
 //            )
           ]
       ),
-      MasterClassEntity(
-          title: "Talent DNA",
-          poster: "https://system.themastermindcouncil.com/mmc/api/image/img/Workfile-13_1643443218308.jpg",
-          introduction: "DNA DISC “我们最大的资产就是我们的人” 我们如何把合适的人放在合适的位置上？我们如何释放他们的潜力？我们如何为团队找到合适的人选？ 团队领导者不断地一次又一次地问这些问题，以评估他们的员工队伍。不用再烦恼了，因为我们向您展示了一个人才突破公式，它将确保您以高生产率释放团队的真正潜力。准备好探索如何建立沟通桥梁，以更有效地作为团队合作。 业内的每个人都应该探索这个系列，因为您最终会很好地掌握自己的真正才能，并朝着更“满足、充实和快乐”的方向努力！ 加入我们，让您或您的团队成员重新获得资本，因为我们带来了人力资本发展的振兴前景，并踏上了发现自己真正潜力的旅程。",
-          type: 1,
-          videos: [
-//            MasterClassVideosEntity(
-//                title: "Intro to DISC",
-//                url: "https://player.vimeo.com/progressive_redirect/playback/670511618/rendition/540p/540p.mp4?loc=external&signature=f07eb9ce73aa60f7b148b1fb90971d0377109e1f224a003761a5211f09dffe91"
-//            ),
-//            MasterClassVideosEntity(
-//                title: "D Dominance",
-//                url: "https://player.vimeo.com/progressive_redirect/playback/670513387/rendition/540p/540p.mp4?loc=external&signature=735b895f54a3d66d53c67e40aea7f0976eb2c0a7f53853d514aa03eee31247ec"
-//            ),
-//            MasterClassVideosEntity(
-//                title: "I Influence",
-//                url: "https://player.vimeo.com/progressive_redirect/playback/670515631/rendition/540p/540p.mp4?loc=external&signature=ed471294ee2f87e6af936919820ad67dab9ccf064f49f6f8a321642742a87aa8"
-//            ),
-//            MasterClassVideosEntity(
-//                title: "S Steadiness",
-//                url: "https://player.vimeo.com/progressive_redirect/playback/670517198/rendition/540p/540p.mp4?loc=external&signature=534d86b2a44ebc8160667c616afbbde43735de56baf9709be6a9e1ed7d241514"
-//            ),
-//            MasterClassVideosEntity(
-//                title: "C Compliance",
-//                url: "https://player.vimeo.com/progressive_redirect/playback/670519664/rendition/540p/540p.mp4?loc=external&signature=49b7da312758c2d49ac8f4abb3087c249bca3a472316ba1b905856f4683cdffa"
-//            )
-          ]
-      ),
+//      MasterClassEntity(
+//          title: "Talent DNA",
+//          poster: "https://system.themastermindcouncil.com/mmc/api/image/img/Workfile-13_1643443218308.jpg",
+//          introduction: "DNA DISC “我们最大的资产就是我们的人” 我们如何把合适的人放在合适的位置上？我们如何释放他们的潜力？我们如何为团队找到合适的人选？ 团队领导者不断地一次又一次地问这些问题，以评估他们的员工队伍。不用再烦恼了，因为我们向您展示了一个人才突破公式，它将确保您以高生产率释放团队的真正潜力。准备好探索如何建立沟通桥梁，以更有效地作为团队合作。 业内的每个人都应该探索这个系列，因为您最终会很好地掌握自己的真正才能，并朝着更“满足、充实和快乐”的方向努力！ 加入我们，让您或您的团队成员重新获得资本，因为我们带来了人力资本发展的振兴前景，并踏上了发现自己真正潜力的旅程。",
+//          type: 1,
+//          videos: [
+////            MasterClassVideosEntity(
+////                title: "Intro to DISC",
+////                url: "https://player.vimeo.com/progressive_redirect/playback/670511618/rendition/540p/540p.mp4?loc=external&signature=f07eb9ce73aa60f7b148b1fb90971d0377109e1f224a003761a5211f09dffe91"
+////            ),
+////            MasterClassVideosEntity(
+////                title: "D Dominance",
+////                url: "https://player.vimeo.com/progressive_redirect/playback/670513387/rendition/540p/540p.mp4?loc=external&signature=735b895f54a3d66d53c67e40aea7f0976eb2c0a7f53853d514aa03eee31247ec"
+////            ),
+////            MasterClassVideosEntity(
+////                title: "I Influence",
+////                url: "https://player.vimeo.com/progressive_redirect/playback/670515631/rendition/540p/540p.mp4?loc=external&signature=ed471294ee2f87e6af936919820ad67dab9ccf064f49f6f8a321642742a87aa8"
+////            ),
+////            MasterClassVideosEntity(
+////                title: "S Steadiness",
+////                url: "https://player.vimeo.com/progressive_redirect/playback/670517198/rendition/540p/540p.mp4?loc=external&signature=534d86b2a44ebc8160667c616afbbde43735de56baf9709be6a9e1ed7d241514"
+////            ),
+////            MasterClassVideosEntity(
+////                title: "C Compliance",
+////                url: "https://player.vimeo.com/progressive_redirect/playback/670519664/rendition/540p/540p.mp4?loc=external&signature=49b7da312758c2d49ac8f4abb3087c249bca3a472316ba1b905856f4683cdffa"
+////            )
+//          ]
+//      ),
     ],
     "Paid Education":[
       MasterClassEntity(
