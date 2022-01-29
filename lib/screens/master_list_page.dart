@@ -85,7 +85,7 @@ class MasterCard extends StatelessWidget {
         alignment: Alignment.bottomLeft,
         decoration: BoxDecoration(
            borderRadius: BorderRadius.circular(18),
-            color: Colors.white,
+            color: Colors.black12,
             image: DecorationImage(
               image: Image.network(
                 masterClassEntity.poster!,
