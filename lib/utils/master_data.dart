@@ -310,7 +310,12 @@ class MasterData{
           poster: "https://system.themastermindcouncil.com/mmc/api/image/img/Final-25_1643358487264.jpg",
           introduction: "4  Days 3 Nights - Performance Creator Intensive (PCI) 4天三夜-企业商业莫斯 生意的27个基础，倍增生意额的首要条件，这里是专门为每个中小型企业家所设的资料库。 3 Days Workshop - 10X Performance 3天课程 - 10X绩效增长 10倍增收入，倍增减低不必要的花费。这里没有空口说白话，只有最落地和已经被超过100家企业证实的有效方案。 2 Days Workshop - Performance KPI 2天课程 - 关键绩效指标 最难搞的‘人’，这边给你答案！有效倍增工作效率，把人才通通留在身边，减低离职效率，还能省下不必要的费用。",
           type: 1,
-          videos: []
+          videos: [
+            MasterClassVideosEntity(
+                title: "MMC Platinum Education",
+                url: "https://player.vimeo.com/progressive_redirect/playback/671453455/rendition/360p/360p.mp4?loc=external&signature=ba772a67fff7ddd6536a02f2a0e4a5effc2f89f7cd14fd9f06fa7d4f28bcadc3"
+            )
+          ]
       ),
       MasterClassEntity(
           title: "7R",

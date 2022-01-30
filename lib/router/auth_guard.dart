@@ -61,8 +61,8 @@ class PersonalProfileService extends ChangeNotifier {
 class SystemSetService extends ChangeNotifier {
   // String baseUrl = 'http://47.250.49.83/mmc/api/';
   // String baseUrl = 'http://wanghuiwen.com:9090/mock/122/mmc/';
-  String baseUrl = 'http://47.107.84.246/mmc/api/';
-  // String baseUrl = 'https://system.themastermindcouncil.com/mmc/api/';
+  // String baseUrl = 'http://47.107.84.246/mmc/api/';
+  String baseUrl = 'https://system.themastermindcouncil.com/mmc/api/';
   // String baseUrl = 'http://192.168.0.9:8005/mmc/';
 
   String appLanguage = 'en';
