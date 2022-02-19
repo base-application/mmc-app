@@ -1,15 +1,14 @@
 
-import 'dart:ffi';
-import 'dart:ui';
-
 import 'package:chewie/chewie.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mmc/bean/master_class_entity.dart';
 import 'package:mmc/bean/master_class_videos_entity.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class MasterDetailPage extends StatefulWidget {
   final MasterClassEntity masterClassEntity;
@@ -103,7 +102,7 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
               children: [
                 const Icon(Icons.video_settings,size: 14,color: Color(0xff999999),),
                 const SizedBox(width: 6,),
-                Text(widget.masterClassEntity.videos!.length.toString(),style: const TextStyle(color: Color(0xff999999),fontSize: 12),)
+                Text(widget.masterClassEntity.videos!.length.toString(),style: const TextStyle(color: Color(0xff999999),fontSize: 12),),
               ],
             ),
           ),
@@ -168,6 +167,23 @@ class _MasterDetailPageState extends State<MasterDetailPage> {
          )
         ],
       ) ,
+      bottomNavigationBar: widget.masterClassEntity.concat != null ?  SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 16,right: 16),
+          child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(const Color(0xFFFBB714)),
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+              elevation: MaterialStateProperty.all(0),
+            ),
+            onPressed: () {
+              launch(widget.masterClassEntity.concat!);
+            },
+            child: Text(AppLocalizations.of(context)!.contactUsNow),
+
+          ),
+        ),
+      ) : null,
     );
   }
 }

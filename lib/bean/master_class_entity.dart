@@ -10,10 +10,11 @@ class MasterClassEntity {
 	String? title;
 	String? poster;
 	String? introduction;
+	String? concat;
 	int? type;
 	List<MasterClassVideosEntity>? videos;
 
-  MasterClassEntity({this.category, this.title, this.poster, this.introduction, this.videos, this.type});
+  MasterClassEntity({this.category, this.title, this.poster, this.introduction, this.videos, this.type,this.concat});
 
   factory MasterClassEntity.fromJson(Map<String, dynamic> json) => $MasterClassEntityFromJson(json);
 

@@ -30,7 +30,12 @@ class _MasterClassListPageState extends State<MasterClassListPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 12,),
-                Text(e,style: const TextStyle(color:  Color(0xffFBB714),fontSize: 22,fontWeight: FontWeight.bold),),
+                Row(
+                  children: [
+                    Text(e,style: const TextStyle(color:  Color(0xffFBB714),fontSize: 20,fontWeight: FontWeight.bold),),
+                    const Text("  (Slide LEFT)",style: TextStyle(color:  Color(0xffFBB714),fontSize: 12,fontWeight: FontWeight.bold))
+                  ],
+                ),
                 const SizedBox(height: 12,),
                 SizedBox(
                   height: (MediaQuery.of(context).size.width/2-26)*1.2,

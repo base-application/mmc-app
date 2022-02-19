@@ -21,6 +21,10 @@ MasterClassEntity $MasterClassEntityFromJson(Map<String, dynamic> json) {
 	if (introduction != null) {
 		masterClassEntity.introduction = introduction;
 	}
+	final String? concat = jsonConvert.convert<String>(json['concat']);
+	if (concat != null) {
+		masterClassEntity.concat = concat;
+	}
 	final int? type = jsonConvert.convert<int>(json['type']);
 	if (type != null) {
 		masterClassEntity.type = type;
@@ -38,6 +42,7 @@ Map<String, dynamic> $MasterClassEntityToJson(MasterClassEntity entity) {
 	data['title'] = entity.title;
 	data['poster'] = entity.poster;
 	data['introduction'] = entity.introduction;
+	data['concat'] = entity.concat;
 	data['type'] = entity.type;
 	data['videos'] =  entity.videos?.map((v) => v.toJson()).toList();
 	return data;
