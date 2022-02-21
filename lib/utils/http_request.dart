@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:mmc/bean/advertisement_entity.dart';
 import 'package:mmc/bean/app_version_entity.dart';
 import 'package:mmc/bean/check_log_entity.dart';
+import 'package:mmc/bean/course_detail_entity.dart';
 import 'package:mmc/bean/event_data_item_info_entity.dart';
 import 'package:mmc/bean/event_detail_info_entity.dart';
 import 'package:mmc/bean/grade_level_info_entity.dart';
@@ -15,6 +16,7 @@ import 'package:mmc/bean/guide_line_entity.dart';
 import 'package:mmc/bean/home_index_info_entity.dart';
 import 'package:mmc/bean/image_vo_entity.dart';
 import 'package:mmc/bean/login_info_entity.dart';
+import 'package:mmc/bean/master_category_entity.dart';
 import 'package:mmc/bean/message_no_read_entity.dart';
 import 'package:mmc/bean/network_item_info_entity.dart';
 import 'package:mmc/bean/newest_item_info_entity.dart';
@@ -700,3 +702,24 @@ Future<AdvertisementEntity> advertisementPull(BuildContext context) async {
   return AdvertisementEntity.fromJson(res!.data);
 }
 
+
+/// masterclass
+Future<List<MasterCategoryEntity>> masterClass(BuildContext context) async {
+  BaseBean? res = await httpPost(context, url: '/master/course/app/list', silence: true);
+  return  res!.data.map<MasterCategoryEntity>((e) => MasterCategoryEntity.fromJson(e)).toList();
+}
+
+
+/// master class detail
+Future<CourseDetailEntity> masterClassDetail(BuildContext context,int id) async {
+  BaseBean? res = await httpPost(context, url: '/master/course/detail', silence: true,queryParameters: {"id":id});
+  return  CourseDetailEntity.fromJson(res!.data);
+}
+
+
+
+/// master child class detail
+Future<List<MasterCategoryCourses>> masterChild(BuildContext context,int id) async {
+  BaseBean? res = await httpPost(context, url: '/master/course/app/course', silence: true,queryParameters: {"courseId":id});
+  return  res!.data.map<MasterCategoryCourses>((e) => MasterCategoryCourses.fromJson(e)).toList();
+}

@@ -35,9 +35,8 @@ StateItemInfoEntity $StateItemInfoEntityFromJson(Map<String, dynamic> json) {
 	if (longitude != null) {
 		stateItemInfoEntity.longitude = longitude;
 	}
-	final dynamic? cities = jsonConvert.convert<dynamic>(json['cities']);
-	if (cities != null) {
-		stateItemInfoEntity.cities = cities;
+	if (json['cities'] != null) {
+		stateItemInfoEntity.cities = json['cities'].toInt();
 	}
 	final String? translations = jsonConvert.convert<String>(json['translations']);
 	if (translations != null) {

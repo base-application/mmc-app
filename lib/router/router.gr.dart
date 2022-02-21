@@ -7,8 +7,6 @@
 // **************************************************************************
 // AutoRouteGenerator
 // **************************************************************************
-//
-// ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i45;
 import 'package:flutter/cupertino.dart' as _i50;
@@ -18,7 +16,6 @@ import 'package:flutter/rendering.dart' as _i56;
 import '../bean/event_data_item_info_entity.dart' as _i53;
 import '../bean/group_item_info_entity.dart' as _i51;
 import '../bean/guide_line_entity.dart' as _i54;
-import '../bean/master_class_entity.dart' as _i57;
 import '../bean/newest_item_info_entity.dart' as _i52;
 import '../bean/notification_entity.dart' as _i55;
 import '../bean/personal_profile_info_entity.dart' as _i48;
@@ -307,15 +304,14 @@ class AppRouter extends _i45.RootStackRouter {
       final args = routeData.argsAs<MasterDetailRouteArgs>();
       return _i45.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i42.MasterDetailPage(
-              key: args.key, masterClassEntity: args.masterClassEntity));
+          child: _i42.MasterDetailPage(key: args.key, classId: args.classId));
     },
     MasterClassItemRoute.name: (routeData) {
       final args = routeData.argsAs<MasterClassItemRouteArgs>();
       return _i45.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i43.MasterClassItemPage(
-              key: args.key, title: args.title, clazz: args.clazz));
+              key: args.key, title: args.title, classId: args.classId));
     },
     ComingSoonRoute.name: (routeData) {
       final args = routeData.argsAs<ComingSoonRouteArgs>();
@@ -1114,26 +1110,24 @@ class MasterClassListRoute extends _i45.PageRouteInfo<void> {
 /// generated route for
 /// [_i42.MasterDetailPage]
 class MasterDetailRoute extends _i45.PageRouteInfo<MasterDetailRouteArgs> {
-  MasterDetailRoute(
-      {_i50.Key? key, required _i57.MasterClassEntity masterClassEntity})
+  MasterDetailRoute({_i50.Key? key, required int classId})
       : super(MasterDetailRoute.name,
             path: 'masterDetail',
-            args: MasterDetailRouteArgs(
-                key: key, masterClassEntity: masterClassEntity));
+            args: MasterDetailRouteArgs(key: key, classId: classId));
 
   static const String name = 'MasterDetailRoute';
 }
 
 class MasterDetailRouteArgs {
-  const MasterDetailRouteArgs({this.key, required this.masterClassEntity});
+  const MasterDetailRouteArgs({this.key, required this.classId});
 
   final _i50.Key? key;
 
-  final _i57.MasterClassEntity masterClassEntity;
+  final int classId;
 
   @override
   String toString() {
-    return 'MasterDetailRouteArgs{key: $key, masterClassEntity: $masterClassEntity}';
+    return 'MasterDetailRouteArgs{key: $key, classId: $classId}';
   }
 }
 
@@ -1142,30 +1136,28 @@ class MasterDetailRouteArgs {
 class MasterClassItemRoute
     extends _i45.PageRouteInfo<MasterClassItemRouteArgs> {
   MasterClassItemRoute(
-      {_i50.Key? key,
-      required String title,
-      required List<_i57.MasterClassEntity> clazz})
+      {_i50.Key? key, required String title, required int classId})
       : super(MasterClassItemRoute.name,
             path: 'masterDetail',
-            args:
-                MasterClassItemRouteArgs(key: key, title: title, clazz: clazz));
+            args: MasterClassItemRouteArgs(
+                key: key, title: title, classId: classId));
 
   static const String name = 'MasterClassItemRoute';
 }
 
 class MasterClassItemRouteArgs {
   const MasterClassItemRouteArgs(
-      {this.key, required this.title, required this.clazz});
+      {this.key, required this.title, required this.classId});
 
   final _i50.Key? key;
 
   final String title;
 
-  final List<_i57.MasterClassEntity> clazz;
+  final int classId;
 
   @override
   String toString() {
-    return 'MasterClassItemRouteArgs{key: $key, title: $title, clazz: $clazz}';
+    return 'MasterClassItemRouteArgs{key: $key, title: $title, classId: $classId}';
   }
 }
 

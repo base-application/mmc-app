@@ -117,19 +117,7 @@ class MasterData{
                url: "https://player.vimeo.com/progressive_redirect/playback/671847120/rendition/360p/360p.mp4?loc=external&signature=8701295808982a7a35fc25d53b0879e00ea1343d55767e86556a115d7ae65c98"
            ),
           ]
-      ),
-      MasterClassEntity(
-          title: "O2O",
-          poster: "https://system.themastermindcouncil.com/mmc/api/image/img/Workfile-03_1643443187264.jpg",
-          introduction: "O2O 盈利大会 “线下传统业务变得非常具有挑战性。立即前往#ONLINE 并获得奖励” Adrian Wee老师带你发掘线上生意模式，帮你的生意转型。 8大支柱包含： - O2O 探讨整合流程 - O2O 系统整合 - O2O 品牌整合 - O2O 内容与媒体整合 -O2O 营销与销售整合 （上） - O2O 营销与销售整合 （下） - O2O 团体与管理整合 - O2O 生意模式整合",
-          type: 1,
-          videos: [
-            MasterClassVideosEntity(
-                title: "O2O Team Formation",
-                url: "https://player.vimeo.com/progressive_redirect/playback/671847120/rendition/360p/360p.mp4?loc=external&signature=8701295808982a7a35fc25d53b0879e00ea1343d55767e86556a115d7ae65c98"
-            ),
-          ]
-      ),
+      )
     ],
     "PAID EDUCATION":[
       MasterClassEntity(
