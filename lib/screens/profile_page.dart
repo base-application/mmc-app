@@ -432,7 +432,7 @@ class MonthlyAchievement extends StatelessWidget {
                 children: [
                   Text((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.joinEvent??0).toString(), style:  const  TextStyle(color: Color(0xFF013B7B), fontWeight: FontWeight.bold, fontSize: 17),),
                   const SizedBox(width: 4,),
-                  getIsUp((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.joinEvent??0).compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo!.achievement.joinEventPre??0)),
+                  getIsUp((context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.joinEvent??0).compareTo(context.watch<PersonalProfileService>().getPersonalProfileInfo?.achievement.joinEventPre??0)),
                 ],
               ),
             ],
